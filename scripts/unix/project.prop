@@ -1,0 +1,13 @@
+#change project code names
+project.shortform	= osi
+project.shortform.small = osi
+project.codename	= osi
+
+# Version
+build.version 	= 0.0.1
+#build.number	= Will be created dynamically
+
+# Output settings
+file.package		= ${project.shortform}
+file.compression	= gzip
+file.extension		= zip
