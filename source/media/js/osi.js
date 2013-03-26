@@ -6,8 +6,8 @@
 * @contact 		team@readybytes.in
 */
 
-if (typeof(xiec)=='undefined'){
-	var xiec 	= {};
+if (typeof(osi)=='undefined'){
+	var osi 	= {};
 	osi.$ 		= osi.jQuery = rb.jQuery;
 	osi.ajax	= rb.ajax;
 }

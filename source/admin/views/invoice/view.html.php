@@ -20,4 +20,21 @@ if(!defined( '_JEXEC' )){
 require_once dirname(__FILE__).'/view.php';
 class OsiAdminViewInvoice extends OsiAdminBaseViewInvoice
 {	
+	function edit($tpl= null, $itemId = null)
+	{
+		$itemId  = ($itemId === null) ? $this->getModel()->getState('id') : $itemId ;
+		$invoice = OsiInvoice::getInstance($itemId);
+		$form 	 = $invoice->getModelform()->getForm($invoice);
+		$this->assign('input', $invoice);
+		$this->assign('form',  $form);
+						
+		$xiee_invoice_fieldset = $form->getFieldset('xiee_invoice');
+		$xiee_invoice_fields = array();
+		foreach ($xiee_invoice_fieldset as $field){
+			$xiee_invoice_fields[$field->fieldname] = $field;
+		}
+		
+		$this->assign('xiee_invoice_fields', $xiee_invoice_fields);
+		return true;
+	}
 }
