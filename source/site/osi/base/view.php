@@ -36,7 +36,7 @@ class OsiView extends OsiViewbase
 		
 		// intialize input
 		$this->input = OsiFactory::getApplication()->input;
-		self::addSubmenus(array('dashboard', 'invoice', 'transaction', 'user'));
+		self::addSubmenus(array('dashboard', 'invoice', 'transaction', 'buyer'));
 		return $this;
 	}
 	

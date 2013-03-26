@@ -20,4 +20,13 @@ if(!defined( '_JEXEC' )){
 class OsiController extends Rb_Controller
 {
 	public $_component = OSI_COMPONENT_NAME;	
+	
+	function __construct($options = array())
+	{
+		parent::__construct();
+		
+		if(!isset($this->input)){
+			$this->input = OsiFactory::getApplication()->input; 
+		}
+	}
 }

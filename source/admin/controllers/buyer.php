@@ -14,10 +14,10 @@ if(!defined( '_JEXEC' )){
 }
 
 /** 
- * Invoice Table
+ * Buyer Controller
  * @author Gaurav Jain
  */
-class OsiTableDashboard extends OsiTable
+class OsiAdminControllerBuyer extends OsiController
 {
 	
 }

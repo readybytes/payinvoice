@@ -13,3 +13,14 @@ if(!defined( '_JEXEC' )){
 	die( 'Restricted access' );
 }
 
+$fieldSets = $form->getFieldsets($fieldset_name); ?>
+<?php foreach ($fieldSets as $name => $fieldSet) : ?>
+
+	<?php foreach ($form->getFieldset($name) as $field):?>
+		<div class="control-group">
+			<div class="control-label"><?php echo $field->label; ?> </div>
+			<div class="controls"><?php echo $field->input; ?></div>								
+		</div>
+	<?php endforeach;?>
+<?php endforeach;
+

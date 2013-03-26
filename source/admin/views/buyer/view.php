@@ -14,10 +14,10 @@ if(!defined( '_JEXEC' )){
 }
 
 /** 
- * Invoice Table
- * @author Gaurav Jain
+ * Buyer Base View
+ * @author Manisha Ranawat
  */
-class OsiTableDashboard extends OsiTable
+class OsiAdminBaseViewBuyer extends OsiView
 {
 	
 }

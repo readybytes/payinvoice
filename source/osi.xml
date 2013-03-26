@@ -46,7 +46,7 @@
 		<submenu>			
 			<menu view="invoice">COM_OSI_INVOICE</menu>			
 			<menu view="transaction">COM_OSI_TRANSACTION</menu>			
-			<menu view="user">COM_OSI_USER</menu>			
+			<menu view="buyer">COM_OSI_BUYER</menu>			
 		</submenu>
 
 		<!-- Back-end files -->

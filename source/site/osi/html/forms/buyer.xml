@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+
+  <fildset addfieldpath="/components/com_osi/osi/html/fields">
+
+				
+  		<field 	name="buyer_id" 
+				type="hidden"
+				default="0"
+				readonly="true"
+				/>
+				
+  		<field 	name="name" 
+				type="text"
+				label="COM_OSI_BUYER_NAME"
+				description="COM_OSI_BUYER_NAME_DESC"	
+				class="required"			 
+				/>
+				
+		<field 	name="username" 
+				type="text"
+				label="COM_OSI_BUYER_USERNAME"
+				description="COM_OSI_BUYER_USERNAME_DESC"	
+				class="required"			 
+				/>
+		
+		<field 	name="email" 
+				type="text"
+				label="COM_OSI_BUYER_EMAIL"
+				description="COM_OSI_BUYER_EMAIL_DESC"
+				class="required" 
+				/>
+				
+		<field 	name="password" 
+				type="password"
+				label="COM_OSI_BUYER_PASSWORD"
+				description="COM_OSI_BUYER_PASSWORD_DESC"		 
+				/>
+				
+		<field 	name="currency" 
+				type="text"
+				label="COM_OSI_BUYER_CURRENCY"
+				description="COM_OSI_BUYER_CURRENCY_DESC"	
+				class="required"			 
+				/>
+		
+		<field 	name="address" 
+				type="textarea"
+				label="COM_OSI_BUYER_ADDRESS"
+				description="COM_OSI_BUYER_ADDRESS_DESC" 
+				/>
+				
+		<field 	name="city" 
+				type="text"
+				label="COM_OSI_BUYER_CITY"
+				description="COM_OSI_BUYER_CITY_DESC"				 
+				/>
+		
+		<field 	name="state" 
+				type="text"
+				label="COM_OSI_BUYER_STATE"
+				description="COM_OSI_BUYER_STATE_DESC"
+				/>
+				
+		<field 	name="country" 
+				type="text"
+				label="COM_OSI_BUYER_COUNTRY"
+				description="COM_OSI_BUYER_COUNTRY_DESC"
+				/>
+				
+		<field 	name="zipcode" 
+				type="text"
+				label="COM_OSI_BUYER_ZIPCODE"
+				description="COM_OSI_BUYER_ZIPCODE_DESC"
+				/>
+		
+  </fildset>
+	
+</form>

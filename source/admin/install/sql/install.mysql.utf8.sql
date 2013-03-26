@@ -28,15 +28,16 @@ CREATE TABLE IF NOT EXISTS `#__osi_item` (
   INDEX `idx_title` (`title`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
 
-CREATE TABLE IF NOT EXISTS `#__osi_user` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `#__osi_buyer` (
+  `buyer_id` int(11) NOT NULL AUTO_INCREMENT,
   `currency` char(3) NOT NULL,
   `address` text,
   `city` varchar(50) DEFAULT NULL,
   `state` varchar(50) DEFAULT NULL,
   `country` varchar(50) DEFAULT NULL,
   `zipcode` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`user_id`),
+  `params`  text,
+  PRIMARY KEY (`buyer_id`),
   INDEX `idx_city` (`city`),
   INDEX `idx_state` (`state`),
   INDEX `idx_country` (`country`),

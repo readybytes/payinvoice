@@ -17,7 +17,6 @@ if(!defined( '_JEXEC' )){
  * Invoice Table
  * @author Gaurav Jain
  */
-class OsiTableDashboard extends OsiTable
+class OsiTableBuyer extends OsiTable
 {
-	
 }
