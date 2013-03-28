@@ -3,7 +3,7 @@
 /**
 * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
-* @package 		OSI
+* @package 		OSINVOICE
 * @subpackage	Back-end
 * @contact		team@readybytes.in
 */
@@ -18,12 +18,12 @@ if(!defined( '_JEXEC' )){
  * @author Gaurav Jain
  */
 require_once dirname(__FILE__).'/view.php';
-class OsiAdminViewInvoice extends OsiAdminBaseViewInvoice
+class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 {	
 	function edit($tpl= null, $itemId = null)
 	{
 		$itemId  = ($itemId === null) ? $this->getModel()->getState('id') : $itemId ;
-		$invoice = OsiInvoice::getInstance($itemId);
+		$invoice = OSInvoiceInvoice::getInstance($itemId);
 		$form 	 = $invoice->getModelform()->getForm($invoice);
 		$this->assign('input', $invoice);
 		$this->assign('form',  $form);

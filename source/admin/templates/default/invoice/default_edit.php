@@ -3,7 +3,7 @@
 /**
 * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
-* @package 		OSI
+* @package 		OSINVOICE
 * @subpackage	Back-end
 * @contact		team@readybytes.in
 */
@@ -27,7 +27,7 @@ JHtml::_('formbehavior.chosen', 'select');
 </script>	
 
 <form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm">
-	<h2><?php echo Rb_Text::_('COM_OSI_INVOICE_DETAILS' ); ?></h2>
+	<h2><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_DETAILS' ); ?></h2>
 	<fieldset class="form-horizontal">	
 		<div class="row-fluid">
 			<div class="span8">
@@ -74,7 +74,7 @@ JHtml::_('formbehavior.chosen', 'select');
 					</div>
 					<div class="span5">
 						<div class="control-group">
-							<label class="control-label"><?php echo Rb_Text::_('COM_OSI_INVOICE_EDIT_ITEM_SUBTOTAL');?></label>
+							<label class="control-label"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_SUBTOTAL');?></label>
 				  			<div class="controls">
 				  				<div class="input-prepend">              			
 									<span class="add-on">$</span>
@@ -83,7 +83,7 @@ JHtml::_('formbehavior.chosen', 'select');
 				  			</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label"><?php echo Rb_Text::_('COM_OSI_INVOICE_EDIT_ITEM_DISCOUNT');?></label>
+							<label class="control-label"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_DISCOUNT');?></label>
 				  			<div class="controls">
 				  				<div class="input-prepend">
 									<span class="add-on">$</span>
@@ -92,7 +92,7 @@ JHtml::_('formbehavior.chosen', 'select');
 				  			</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label"><?php echo Rb_Text::_('COM_OSI_INVOICE_EDIT_ITEM_TAX');?></label>
+							<label class="control-label"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_TAX');?></label>
 				  			<div class="controls">
 				  				<div class="input-prepend">
 									<span class="add-on">$</span>
@@ -102,7 +102,7 @@ JHtml::_('formbehavior.chosen', 'select');
 						</div>
 						<hr>
 						<div class="control-group">
-							<label class="control-label"><?php echo Rb_Text::_('COM_OSI_INVOICE_EDIT_ITEM_TOTAL');?></label>
+							<label class="control-label"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_TOTAL');?></label>
 				  			<div class="controls">
 				  				<div class="input-prepend">
 									<span class="add-on">$</span>

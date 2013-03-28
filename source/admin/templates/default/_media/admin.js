@@ -1,18 +1,18 @@
 /**
 * @copyright	Copyright (C) 2009-2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
-* @package		OSI
+* @package		OSINVOICE
 * @contact 		team@readybytes.in
 */
 
 //define osi, if not defined.
-if (typeof(osi)=='undefined'){
-	var osi = {}
+if (typeof(osinvoice)=='undefined'){
+	var osinvoice = {}
 }
 
 // all admin function should be in admin scope 
-if(typeof(osi.admin)=='undefined'){
-	osi.admin = {};
+if(typeof(osinvoice.admin)=='undefined'){
+	osinvoice.admin = {};
 }
 
 //all admin function should be in admin scope 
@@ -28,11 +28,11 @@ if(typeof(Joomla)=='undefined'){
 	
 	
 /*--------------------------------------------------------------
-osi.admin.grid
+osinvoice.admin.grid
 	submit
 	filters
 --------------------------------------------------------------*/
-osi.admin.grid = {
+osinvoice.admin.grid = {
 		
 		//default submit function
 		submit : function( view, action, validActions){
@@ -102,4 +102,4 @@ $(document).ready(function(){
 //ENDING :
 //Scoping code for easy and non-conflicting access to $.
 //Should be last line, write code above this line.
-})(osi.jQuery);
+})(osinvoice.jQuery);

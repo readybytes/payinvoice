@@ -3,7 +3,7 @@
 /**
 * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
-* @package 		OSI
+* @package 		OSINVOICE
 * @subpackage	Back-end
 * @contact		team@readybytes.in
 */
@@ -24,12 +24,12 @@ JHtml::_('behavior.framework');
 					<input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count($records); ?>);" />
 				</th>		
 				<th class="default-grid-sno">
-          			<?php echo Rb_Text::_("COM_OSI_BUYER_NUM"); ?>
+          			<?php echo Rb_Text::_("COM_OSINVOICE_BUYER_NUM"); ?>
         		</th> 
-				<th><?php echo Rb_Html::_('grid.sort', "COM_OSI_BUYER_ID", 'buyer_id', $filter_order_Dir, $filter_order);?></th>
-				<th><?php echo Rb_Html::_('grid.sort', "COM_OSI_BUYER_NAME", 'name', $filter_order_Dir, $filter_order);?></th>
-				<th><?php echo Rb_Html::_('grid.sort', "COM_OSI_BUYER_EMAIL",'email', $filter_order_Dir, $filter_order);?></th>
-				<th><?php echo Rb_Text::_("COM_OSI_BUYER_INVOICES");?></th>				
+				<th><?php echo Rb_Html::_('grid.sort', "COM_OSINVOICE_BUYER_ID", 'buyer_id', $filter_order_Dir, $filter_order);?></th>
+				<th><?php echo Rb_Html::_('grid.sort', "COM_OSINVOICE_BUYER_NAME", 'name', $filter_order_Dir, $filter_order);?></th>
+				<th><?php echo Rb_Html::_('grid.sort', "COM_OSINVOICE_BUYER_EMAIL",'email', $filter_order_Dir, $filter_order);?></th>
+				<th><?php echo Rb_Text::_("COM_OSINVOICE_BUYER_INVOICES");?></th>				
 			</tr>
 		<!-- TABLE HEADER END -->
 		</thead>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="Copying OSI data to GIT" basedir="." default="copy_to_git">
+<project name="Copying OSINVOICE data to GIT" basedir="." default="copy_to_git">
 
 	<property name="target" 		value="@local.repository.location@" 	override="true" />
 	<property name="source" 		value="${project.basedir}" 	override="true" />
@@ -15,8 +15,8 @@
 
 	<target name="copy_osi">
 		<phingcall target="copy_component">
-			<property name="args.comname" value="com_osi" />
-			<property name="args.name" value="osi" />
+			<property name="args.comname" value="com_osinvoice" />
+			<property name="args.name" value="osinvoice" />
         	</phingcall>	
 		
 		<copy file="${source}/build.xml"  tofile="${target}/scripts/reverse-build/build.xml" />

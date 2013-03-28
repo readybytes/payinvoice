@@ -3,7 +3,7 @@
 /**
 * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
-* @package 		OSI
+* @package 		OSINVOICE
 * @subpackage	Back-end
 * @contact		team@readybytes.in
 */
@@ -30,17 +30,17 @@ JHtml::_('behavior.formvalidation');
 <form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm">
      
 <fieldset class="form-horizontal">
-         <h2><?php echo Rb_Text::_('COM_OSI_BUYER_EDIT_DETAILS' ); ?></h2>
+         <h2><?php echo Rb_Text::_('COM_OSINVOICE_BUYER_EDIT_DETAILS' ); ?></h2>
          <hr>
 		      <div class="row-fluid">
 					<div class="span3">
-					  	<img src="../administrator/components/com_osi/templates/default/buyer/avtar.jpeg" class="img-polaroid">
+					  	<img src="../administrator/components/com_osinvoice/templates/default/buyer/avtar.jpeg" class="img-polaroid">
 			  		</div>  
 			 
 		    
 			    	<div class="span9">
 			    		    <div class="span6">
-			    		          <h3><?php echo Rb_Text::_('COM_OSI_BUYER_LOGIN_DETAILS')?></h3><hr>
+			    		          <h3><?php echo Rb_Text::_('COM_OSINVOICE_BUYER_LOGIN_DETAILS')?></h3><hr>
 			    		          
 			    		          	<div class="control-group">
 										<div class="control-label"><?php echo $form->getLabel('name'); ?> </div>
@@ -63,7 +63,7 @@ JHtml::_('behavior.formvalidation');
 									 </div>	
 									 <br>
 									 
-									<h3><?php echo Rb_Text::_('COM_OSI_BUYER_BASIC_DETAILS')?></h3><hr>
+									<h3><?php echo Rb_Text::_('COM_OSINVOICE_BUYER_BASIC_DETAILS')?></h3><hr>
 									   
 									   <div class="control-group">
 											<div class="control-label"><?php echo $form->getLabel('currency'); ?> </div>
