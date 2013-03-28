@@ -5,7 +5,7 @@
 * @contact 		team@readybytes.in
 */
 
-//define osi, if not defined.
+//define osinvoice, if not defined.
 if (typeof(osinvoice)=='undefined'){
 	var osinvoice = {}
 }

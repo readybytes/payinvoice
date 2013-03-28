@@ -12,7 +12,7 @@ if (typeof(osinvoice)=='undefined'){
 	osinvoice.ajax	= rb.ajax;
 }
 
-if (typeof(osi.element)=='undefined'){
+if (typeof(osinvoice.element)=='undefined'){
 	osinvoice.element = {}
 }
 

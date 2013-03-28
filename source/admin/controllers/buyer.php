@@ -19,5 +19,12 @@ if(!defined( '_JEXEC' )){
  */
 class OSInvoiceAdminControllerBuyer extends OSInvoiceController
 {
-	
+	public function _save(array $data, $itemId=null, $type=null)
+	{
+		if(empty($data['username'])){
+		   $data['username'] = $data['email'];
+		}
+
+		return parent::_save($data, $itemId, $type);
+	}	
 }

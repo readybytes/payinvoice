@@ -34,7 +34,7 @@ JHtml::_('behavior.formvalidation');
          <hr>
 		      <div class="row-fluid">
 					<div class="span3">
-					  	<img src="../administrator/components/com_osinvoice/templates/default/buyer/avtar.jpeg" class="img-polaroid">
+					  	<img src="<?php echo $user->getAvatar('large'); ?>" class="img-polaroid">
 			  		</div>  
 			 
 		    
@@ -47,11 +47,6 @@ JHtml::_('behavior.formvalidation');
 										<div class="controls"><?php echo $form->getInput('name'); ?></div>	
 									 </div>		
 									 
-				    		        <div class="control-group">
-										<div class="control-label"><?php echo $form->getLabel('username'); ?> </div>
-										<div class="controls"><?php echo $form->getInput('username'); ?></div>	
-									 </div>			
-								
 								    <div class="control-group">
 										<div class="control-label"><?php echo $form->getLabel('email'); ?> </div>
 										<div class="controls"><?php echo $form->getInput('email'); ?></div>	
@@ -106,6 +101,7 @@ JHtml::_('behavior.formvalidation');
 </fieldset>
 	
 	<?php echo $form->getInput('buyer_id'); ?>
+	<?php echo $form->getInput('username'); ?>
 	<input type="hidden" name="task" value="save" />
 	<input type="hidden" name="boxchecked" value="1" />
 </form>

@@ -28,6 +28,7 @@ class OSInvoiceAdminViewBuyer extends OSInvoiceAdminBaseViewBuyer
 		
 		$this->assign('buyer', $buyer);
 		$this->assign('form',  $buyer->getModelform()->getForm($buyer));
+        $this->assign('user', $buyer->getbuyer(true));
 		
 		return true;
 		

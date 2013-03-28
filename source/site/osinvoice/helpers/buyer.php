@@ -3,7 +3,7 @@
 /**
 * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
-* @package 		OSI
+* @package 		OSINVOICE
 * @subpackage	Front-end
 * @contact		team@readybytes.in
 */
@@ -56,9 +56,7 @@ class OSInvoiceHelperBuyer extends JObject
 		// Load the users plugin group.
 		JPluginHelper::importPlugin('user');
 
-		$isNew 	= $data->buyer_id;
-		if($isNew == 0){
-			unset($data->buyer_id);
+		if(!$data->buyer_id){			
 			$updateonly = false;
 		}else {
 			$updateonly = true;
@@ -70,6 +68,8 @@ class OSInvoiceHelperBuyer extends JObject
 			JFactory::getApplication()->enqueueMessage(JText::sprintf('COM_OSINVOICE_BUYER_REGISTRATION_FAILED', $user->getError()));
 			return false;
 		}
+		
+		return $user->id;
 	}
 
 }

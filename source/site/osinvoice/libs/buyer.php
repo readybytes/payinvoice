@@ -66,11 +66,35 @@ class OSInvoiceBuyer extends OSInvoiceLib
 		$data->buyer_id 	= $this->buyer_id;
 			
 		$helper = $this->getHelper();
-		$helper->storeUser($data);
+		$id = $helper->storeUser($data);
 
+		if(!$id){
+			JFactory::getApplication()->enqueueMessage(JText::sprintf('COM_OSINVOICE_BUYER_NOT_SAVED'));
+			return true;
+		}
+
+		$this->buyer_id = $id;
 		return parent::save(true);
 		
 	}
 	
+	public function getEmail()
+	{
+		return $this->email;
+	}
 	
+	public function getBuyer($requireinstance=false)
+	{
+		if($requireinstance == true){
+			return OSInvoiceBuyer::getInstance($this->buyer_id);
+		}
+
+		return $this->buyer_id;
+	}
+	
+	public function getAvatar($size="default")
+	{
+		// You can set size as Default, Small, Medium, Large
+        return "http://avatars.io/gravatar/" . md5( strtolower( trim( $this->getEmail() ) ) ) . "?size=" . $size;
+	}
 }
