@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `#__osi_invoice` (
+CREATE TABLE IF NOT EXISTS `#__osinvoice_invoice` (
   `invoice_id` 	int(11) NOT NULL AUTO_INCREMENT,
   `type` 	varchar(25) NOT NULL,
   `template` 	varchar(25) NOT NULL,
@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS `#__osi_invoice` (
   INDEX `idx_type` (`type`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
 
-CREATE TABLE IF NOT EXISTS `#__osi_invoiceitem` (
+CREATE TABLE IF NOT EXISTS `#__osinvoice_invoiceitem` (
   `invoiceitem_id` int(11) NOT NULL AUTO_INCREMENT,
   `invoice_id` int(11) NOT NULL,
   `item_id` int(11) NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `#__osi_invoiceitem` (
   INDEX `idx_item_id` (`item_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
 
-CREATE TABLE IF NOT EXISTS `#__osi_item` (
+CREATE TABLE IF NOT EXISTS `#__osinvoice_item` (
   `item_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
   `description` text,
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `#__osi_item` (
   INDEX `idx_title` (`title`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
 
-CREATE TABLE IF NOT EXISTS `#__osi_buyer` (
+CREATE TABLE IF NOT EXISTS `#__osinvoice_buyer` (
   `buyer_id` int(11) NOT NULL AUTO_INCREMENT,
   `currency` char(3) NOT NULL,
   `address` text,
