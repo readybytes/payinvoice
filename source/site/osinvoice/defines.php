@@ -19,7 +19,7 @@ if(defined('OSINVOICE_SITE_DEFINED')){
 
 //mark core loaded
 define('OSINVOICE_SITE_DEFINED', true);
-define('OSINVOICE_COMPONENT_NAME','OSINVOICE');
+define('OSINVOICE_COMPONENT_NAME','osinvoice');
 
 
 // define versions

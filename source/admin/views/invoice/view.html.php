@@ -25,7 +25,8 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 		$itemId  = ($itemId === null) ? $this->getModel()->getState('id') : $itemId ;
 		$invoice = OSInvoiceInvoice::getInstance($itemId);
 		$form 	 = $invoice->getModelform()->getForm($invoice);
-		$this->assign('input', $invoice);
+
+		$this->assign('invoice', $invoice);
 		$this->assign('form',  $form);
 						
 		$xiee_invoice_fieldset = $form->getFieldset('xiee_invoice');

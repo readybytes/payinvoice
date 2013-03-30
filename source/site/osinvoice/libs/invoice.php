@@ -19,6 +19,15 @@ if(!defined( '_JEXEC' )){
  */
 class OSInvoiceInvoice extends OSInvoiceLib
 {
+	protected $invoice_id 	= 0;
+	protected $type			= '';
+	protected $template		= '';
+	
+	/**
+	 * @var Rb_Registry
+	 */
+	protected $params		= null;
+	
 	/**
 	 * Gets the instance of OsiInvoice with provide form identifier
 	 * 
@@ -40,6 +49,20 @@ class OSInvoiceInvoice extends OSInvoiceLib
 	 */
 	function reset()
 	{
+		$this->invoice_id 	= 0;
+		$this->type			= 'invoice';
+		$this->template		= '';
+		$this->params		= new Rb_Registry();
+	
 		return $this;
 	}
+	
+	public function getParams($object = true)
+	{
+		if($object){
+			return $this->params->toObject();
+		}
+		
+		return $this->params->toArray();
+	} 
 }

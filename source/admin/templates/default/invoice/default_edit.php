@@ -26,6 +26,8 @@ JHtml::_('formbehavior.chosen', 'select');
 	}
 </script>	
 
+<?php echo $this->loadTemplate('edit_item');?>
+
 <form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm">
 	<h2><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_DETAILS' ); ?></h2>
 	<fieldset class="form-horizontal">	
@@ -124,5 +126,7 @@ JHtml::_('formbehavior.chosen', 'select');
 	</fieldset>
 	
 	<!--  HIDDEN -->
+	<input type="hidden" name="task" value="save" />
 	<?php echo $form->getInput('type');?>
+	<?php echo $form->getInput('invoice_id');?>
 </form>
