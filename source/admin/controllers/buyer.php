@@ -25,6 +25,13 @@ class OSInvoiceAdminControllerBuyer extends OSInvoiceController
 		   $data['username'] = $data['email'];
 		}
 
+		$id = OSInvoiceHelperBuyer::storeUser($data);
+		if(!$id){
+			JFactory::getApplication()->enqueueMessage(JText::sprintf('COM_OSINVOICE_BUYER_NOT_SAVED'));
+			return true;
+		}
+		$data['buyer_id'] = $id;
+
 		return parent::_save($data, $itemId, $type);
 	}	
 }

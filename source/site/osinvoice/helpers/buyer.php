@@ -27,14 +27,14 @@ class OSInvoiceHelperBuyer extends JObject
 		
 		// load user helper
 		jimport('joomla.user.helper');
-		$temp = array(	'username'=>$data->username,'name'=>$data->name,'email1'=>$data->email,
-						'password1'=>$data->password, 'password2'=>$data->password, 'block'=>0 );
+		$temp = array(	'username'=>$data['username'],'name'=>$data['name'],'email1'=>$data['email'],
+						'password1'=>$data['password'], 'password2'=>$data['password'], 'block'=>0 );
 				
 		$config = JFactory::getConfig();
 		$params = JComponentHelper::getParams('com_users');
 
 		// Initialise the table with JUser.
-		$user = new JUser($data->buyer_id);
+		$user = new JUser($data['buyer_id']);
 		
 		$userData = (array)$model->getData();
 		// Merge in the registration data.
@@ -56,7 +56,7 @@ class OSInvoiceHelperBuyer extends JObject
 		// Load the users plugin group.
 		JPluginHelper::importPlugin('user');
 
-		if(!$data->buyer_id){			
+		if(!$data['buyer_id']){			
 			$updateonly = false;
 		}else {
 			$updateonly = true;

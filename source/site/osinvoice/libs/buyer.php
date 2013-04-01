@@ -56,28 +56,6 @@ class OSInvoiceBuyer extends OSInvoiceLib
 		return parent::getInstance('buyer', $id, $data);
 	}
 	
-	public function save()
-	{
-		$data 			 	= new stdClass();
-		$data->name         = $this->name;
-		$data->username 	= $this->username;
-		$data->email 	    = $this->email;
-		$data->password 	= $this->password;
-		$data->buyer_id 	= $this->buyer_id;
-			
-		$helper = $this->getHelper();
-		$id = $helper->storeUser($data);
-
-		if(!$id){
-			JFactory::getApplication()->enqueueMessage(JText::sprintf('COM_OSINVOICE_BUYER_NOT_SAVED'));
-			return true;
-		}
-
-		$this->buyer_id = $id;
-		return parent::save(true);
-		
-	}
-	
 	public function getEmail()
 	{
 		return $this->email;
