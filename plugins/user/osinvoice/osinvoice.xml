@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="user" method="upgrade">
+	<name>User - OSInvoice Users</name>
+	<creationDate>April 2013</creationDate>
+	<copyright>GNU GPL</copyright>
+	<license>GPL License</license>
+	<authorEmail>team@readybytes.in</authorEmail>
+	<authorUrl>http://www.readybytes.in</authorUrl>
+	<description>This Plugin is used to create and delete user in OSInvoice Buyer while creating from joomla user manager</description>
+	<files>
+		<filename plugin="osinvoice">osinvoice.php</filename>
+	</files>
+	<params/>
+</extension>
