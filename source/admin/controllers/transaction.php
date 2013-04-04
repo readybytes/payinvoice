@@ -19,4 +19,9 @@ if(!defined( '_JEXEC' )){
  */
 class OSInvoiceAdminControllerTransaction extends OSInvoiceController
 {
+	public function getModel()
+	{
+        return XiEEAPI::transaction_get_model();
+	}
+
 }

@@ -33,6 +33,9 @@ Rb_HelperLoader::addAutoLoadFolder(OSINVOICE_PATH_CORE.'/libs',			'',			 'OSInvo
 Rb_HelperLoader::addAutoLoadFolder(OSINVOICE_PATH_CORE.'/helpers',		'Helper',	 'OSInvoice');
 Rb_HelperLoader::addAutoLoadFolder(OSINVOICE_PATH_CORE.'/payment',		'',	 		 'OSInvoice');
 
+// load the xiee plugin
+JPluginHelper::importPlugin('rb', 'xiee');
+
 //html
 Rb_HelperLoader::addAutoLoadFolder(OSINVOICE_PATH_CORE.'/html/html',		'Html',		 'OSInvoice');
 Rb_HelperLoader::addAutoLoadFolder(OSINVOICE_PATH_CORE.'/html/fields',	'FormField', 'OSInvoice');

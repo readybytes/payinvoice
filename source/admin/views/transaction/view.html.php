@@ -20,5 +20,19 @@ if(!defined( '_JEXEC' )){
 require_once dirname(__FILE__).'/view.php';
 class OSInvoiceAdminViewTransaction extends OSInvoiceAdminBaseViewTransaction
 {	
+	function _displayGrid($records)
+	{
+		$buyerIds = array();
+		foreach($records as $record){
+			$buyerIds[] = $record->buyer_id;
+		}
+		
+		$buyer = OSInvoiceHelperBuyer::get($buyerIds);
+        $statusList = XiEEAPI::response_get_status();
+		$this->assign('buyer', $buyer);
+		$this->assign('statusList', $statusList);
+		
+		return parent::_displayGrid($records);
+	}
 	
 }

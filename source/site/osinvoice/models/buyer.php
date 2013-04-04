@@ -170,7 +170,7 @@ class OSInvoiceModelBuyer extends OSInvoiceModel
 				
 				// first value is condition, second one is value
 				list($operator, $val)= $condition;
-				$tmpQuery->where("`tbl`.`$key` $operator ".$this->_db->Quote($val));
+				$tmpQuery->where("`tbl`.`$key` $operator ".$val);
 			}
 			
 		}

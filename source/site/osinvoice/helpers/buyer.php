@@ -72,4 +72,15 @@ class OSInvoiceHelperBuyer extends JObject
 		return $user->id;
 	}
 
+	public function get($buyerIds)
+	{
+		if(!is_array($buyerIds)){
+			$buyerIds = array($buyerIds);
+		}
+		
+		$buyerIds  = array_unique($buyerIds);
+		
+		$filter = array('buyer_id' => array(array('IN', '('.implode(",", $buyerIds).')')));
+		return OSInvoiceFactory::getInstance('buyer', 'model')->loadRecords($filter);
+	}
 }
