@@ -36,6 +36,7 @@ CREATE TABLE IF NOT EXISTS `#__osinvoice_buyer` (
   `state` varchar(50) DEFAULT NULL,
   `country` varchar(50) DEFAULT NULL,
   `zipcode` varchar(10) DEFAULT NULL,
+  `tax_number` varchar(255),
   `params`  text,
   PRIMARY KEY (`buyer_id`),
   INDEX `idx_city` (`city`),

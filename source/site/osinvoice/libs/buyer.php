@@ -31,6 +31,7 @@ class OSInvoiceBuyer extends OSInvoiceLib
 	protected $state 				= '';
 	protected $country				= '';
 	protected $zipcode 		        = '';
+	protected $tax_number 		    = '';
 	protected $params               = '';
 
 
@@ -46,6 +47,7 @@ class OSInvoiceBuyer extends OSInvoiceLib
 		$this->state                = '';
 		$this->country              = '';
 		$this->zipcode              = '';
+		$this->tax_number           = '';
 		$this->params 				= new Rb_Registry();
 		
 		return $this;

@@ -51,6 +51,7 @@ class OSInvoiceModelBuyer extends OSInvoiceModel
     			   ->select(' t.`city` ')
     			   ->select(' t.`country` ')
     			   ->select(' t.`zipcode` ')
+    			   ->select(' t.`tax_number`')
     			   ->select(' t.`params` ')
     			   ->leftJoin($join);
     			   

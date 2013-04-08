@@ -84,6 +84,11 @@ JHtml::_('behavior.formvalidation');
 											<div class="control-label"><?php echo $form->getLabel('country'); ?> </div>
 											<div class="controls"><?php echo $form->getInput('country'); ?></div>	
 										 </div>
+
+										<div class="control-group">
+											<div class="control-label"><?php echo $form->getLabel('tax_number'); ?> </div>
+											<div class="controls"><?php echo $form->getInput('tax_number'); ?></div>	
+										 </div>
 										 
 										 <div class="control-group">
 											<div class="control-label"><?php echo $form->getLabel('zipcode'); ?> </div>
