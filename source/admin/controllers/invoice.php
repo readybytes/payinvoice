@@ -19,4 +19,24 @@ if(!defined( '_JEXEC' )){
  */
 class OSInvoiceAdminControllerInvoice extends OSInvoiceController
 {
+	public function _save(array $data, $itemId=null, $type=null)
+	{
+		//create new lib instance
+		$invoice = Rb_Lib::getInstance($this->_component->getPrefixClass(), $this->getName(), $itemId, $data)
+						->save();
+						
+		// create invoice in XiEE, in $itemId is null
+		if(!$itemId){		
+			$data['xiee_invoice']['object_type'] 	 = 'OSInvoiceInvoice';
+			$data['xiee_invoice']['object_id'] 	 	 = $invoice->getId();
+			$data['xiee_invoice']['expiration_type'] = XIEE_EXPIRATION_TYPE_FIXED;
+			$data['xiee_invoice']['time_price'] = array('time' => array('000000000000'), 'price' => array('0.00'));
+			$invoice_id = XiEEAPI::invoice_create($data['xiee_invoice'], true); 
+		}	
+		else{
+			$invoice_id = XiEEAPI::invoice_update($data['xiee_invoice']['invoice_id'], $data['xiee_invoice'], true);
+		} 	
+		
+		return $invoice;
+	}
 }

@@ -12,12 +12,14 @@
 if(!defined( '_JEXEC' )){
 	die( 'Restricted access' );
 }
+
+$params = $invoice->getParams();;
 ?>
 <script type="text/javascript">
 (function($){
 
-	<?php if($invoice->getId()) :?>
-		var osi_invoice_items = <?php echo json_encode($invoice->getParams()->items);?>;
+	<?php if($invoice->getId() && isset($params->items)) :?>
+		var osi_invoice_items = <?php echo json_encode($params->items);?>;
 	<?php else : ?>
 		var osi_invoice_items = [];
 	<?php endif;?>
@@ -28,42 +30,60 @@ if(!defined( '_JEXEC' )){
 
 		for(var e in osi_invoice_items){
 			if(osi_invoice_items.hasOwnProperty(e)){
-				manipulate(osi_invoice_items[e].title, osi_invoice_items[e].quantity, osi_invoice_items[e].price, osi_invoice_items[e].total);
+				osinvoice.admin.invoice.item.add(osi_invoice_items[e].title, osi_invoice_items[e].quantity, osi_invoice_items[e].price, osi_invoice_items[e].total);
 			}
 		}
-
-		// XITODO : move to admin.js
-		function manipulate(item_description, quantity, price, total)
-		{
-			var counter = $('#osi-invoice-item-add').attr('counter'); 
-			var html = $('.osi-invoice-item:first').html();
-			html = html.replace(/##counter##/g, counter);
-			html = html.replace(/##item_description##/g, item_description);
-			html = html.replace(/##quantity##/g, quantity);
-			html = html.replace(/##price##/g, price);
-
-			if(total == ''){
-				total = '0.00';
-			}
-			
-			html = html.replace(/##total##/g, total);
-			$('<div class="osi-invoice-item">' + html + '</div>').appendTo('.osi-invoice-items').show();
-			$('#osi-invoice-item-add').attr('counter', parseInt(counter) + 1);
-			return false;
-		}
+		osinvoice.admin.invoice.item.calculate_total();
 		
-		$('#osi-invoice-item-add').click(function(){
-			
-			manipulate('', '', '' , '0.00');
-			return false;
-						
+		$('#osi-invoice-item-add').click(function(){			
+			osinvoice.admin.invoice.item.add('', '', '' , '0.00');
+			return false;						
 		});
 
 		$('.osi-invoice-item_remove').live('click', function(){
-
 			$(this).parents('.osi-invoice-item').remove();
-			return false;
+			osinvoice.admin.invoice.item.calculate_total();
+			return false;			
+		});
+
+		$('.osi-item-quantity').live('blur', function(){
+			var quantity = parseFloat($(this).val());
+			var price 	 = parseFloat($(this).parents('.osi-invoice-item').find('.osi-item-price').val());
+			var total 	 = quantity * price;
+
+			if(!isNaN(parseFloat(total))){
+				total = parseFloat(total).toFixed(2)
+			}
+			else{
+				total = '0.00';
+			}
 			
+			$(this).parents('.osi-invoice-item').find('.osi-item-total').val(total);
+			osinvoice.admin.invoice.item.calculate_total();
+		});
+
+		$('.osi-item-price').live('blur', function(){
+			var price	 = parseFloat($(this).val());
+			var quantity = parseFloat($(this).parents('.osi-invoice-item').find('.osi-item-quantity').val());
+			var total 	 = quantity * price;
+
+			if(!isNaN(parseFloat(total))){
+				total = parseFloat(total).toFixed(2)
+			}
+			else{
+				total = '0.00';
+			}
+			
+			$(this).parents('.osi-invoice-item').find('.osi-item-total').val(total);
+			osinvoice.admin.invoice.item.calculate_total();
+		});
+
+		$('#osi-invoice-discount').blur(function(){
+			osinvoice.admin.invoice.item.calculate_total();
+		});
+
+		$('#osi-invoice-tax').blur(function(){
+			osinvoice.admin.invoice.item.calculate_total();
 		});
 	});
 	

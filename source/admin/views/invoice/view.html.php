@@ -28,7 +28,12 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 
 		$this->assign('invoice', $invoice);
 		$this->assign('form',  $form);
-						
+		
+		if($itemId){
+			$xiee_invoice = XiEEAPI::invoice_get(array('object_type' => 'OSInvoiceInvoice', 'object_id' => $itemId));			
+			$form->bind(array('xiee_invoice' => $xiee_invoice)); 
+		}		
+		
 		$xiee_invoice_fieldset = $form->getFieldset('xiee_invoice');
 		$xiee_invoice_fields = array();
 		foreach ($xiee_invoice_fieldset as $field){

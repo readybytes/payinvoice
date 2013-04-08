@@ -80,7 +80,7 @@ JHtml::_('formbehavior.chosen', 'select');
 				  			<div class="controls">
 				  				<div class="input-prepend">              			
 									<span class="add-on">$</span>
-									<input type="text" name="" class="input-small" readonly="readonly">		
+									<input type="text" name="" class="input-small" readonly="readonly" id="osi-invoice-subtotal">		
 								</div>
 				  			</div>
 						</div>
@@ -89,16 +89,16 @@ JHtml::_('formbehavior.chosen', 'select');
 				  			<div class="controls">
 				  				<div class="input-prepend">
 									<span class="add-on">$</span>
-									<input type="text" name="" class="input-small">
+									<input type="text" name="" class="input-small" id="osi-invoice-discount" value="0.00">
 								</div>
 				  			</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_TAX');?></label>
 				  			<div class="controls">
-				  				<div class="input-prepend">
-									<span class="add-on">$</span>
-									<input type="text" name="" class="input-small">
+				  				<div class="input-append">									
+									<input type="text" name="" class="input-small" id="osi-invoice-tax">
+									<span class="add-on">%</span>
 								</div>
 				  			</div>
 						</div>
@@ -108,7 +108,7 @@ JHtml::_('formbehavior.chosen', 'select');
 				  			<div class="controls">
 				  				<div class="input-prepend">
 									<span class="add-on">$</span>
-									<input type="text" name="" class="input-small">
+									<input type="text" name="" class="input-small" readonly="readonly" id="osi-invoice-total" >
 								</div>
 				  			</div>
 						</div>

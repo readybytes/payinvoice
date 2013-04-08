@@ -23,11 +23,11 @@ if(!defined( '_JEXEC' )){
 				</th>
 				
 				<th>
-					<?php echo OsiHtml::_('grid.sort', "COM_OSINVOICE_INVOICE_ID", 'invoice_id', 	$filter_order_Dir, $filter_order);?>
+					<?php echo OSInvoiceHtml::_('grid.sort', "COM_OSINVOICE_INVOICE_ID", 'invoice_id', 	$filter_order_Dir, $filter_order);?>
 				</th>
-				<th><?php echo OsiHtml::_('grid.sort', "COM_OSINVOICE_INVOICE_TITLE", 'title', 	$filter_order_Dir, $filter_order);?></th>
-				<th><?php echo OsiHtml::_('grid.sort', "COM_OSINVOICE_INVOICE_BUYER", 'buyer_id', $filter_order_Dir, $filter_order);?></th>
-				<th><?php echo OsiHtml::_('grid.sort', "COM_OSINVOICE_INVOICE_ISSUE_DATE", 'issue_date', $filter_order_Dir, $filter_order);?></th>
+				<th><?php echo OSInvoiceHtml::_('grid.sort', "COM_OSINVOICE_INVOICE_TITLE", 'title', 	$filter_order_Dir, $filter_order);?></th>
+				<th><?php echo OSInvoiceHtml::_('grid.sort', "COM_OSINVOICE_INVOICE_BUYER", 'buyer_id', $filter_order_Dir, $filter_order);?></th>
+				<th><?php echo OSInvoiceHtml::_('grid.sort', "COM_OSINVOICE_INVOICE_ISSUE_DATE", 'issue_date', $filter_order_Dir, $filter_order);?></th>
 							
 			</tr>
 		<!-- TABLE HEADER END -->
@@ -36,5 +36,6 @@ if(!defined( '_JEXEC' )){
 		<tbody>
 		</tbody>
 	</table>
+	<input type="hidden" name="task" value="edit"/>
 </form>
 
