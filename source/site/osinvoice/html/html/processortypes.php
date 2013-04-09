@@ -21,20 +21,19 @@ if(!defined( '_JEXEC' )){
 
 class OSInvoiceHtmlProcessortypes
 {
-//	function edit($name, $value, $attr=null, $ignore=array())
-//	{
-//		$helper = OsiFactory::getHelper();
-//		$processor_data = $helper->processor->getList();		
-//		
-//		$options = array();
-//		if(isset($attr['none']))
-//			$options[] = OsiHtml::_('select.option', '', Rb_Text::_('Select Action Type'));
-//			
-//		foreach($processor_data  as $type => $data){
-//			$options[] = OsiHtml::_('select.option', $type, JString::ucfirst($type));	
-//		}
-//
-//		$style = isset($attr['style']) ? $attr['style'] : '';
-//		return OsiHtml::_('select.genericlist', $options, $name, $style, 'value', 'text', $value);
-//	}
+	function edit($name, $value, $attr=null, $ignore=array())
+	{
+		$processor_data = XiEEAPI::get_processors_list();		
+		
+		$options = array();
+		if(isset($attr['none']))
+			$options[] = OSInvoiceHtml::_('select.option', '', Rb_Text::_('Select Action Type'));
+			
+		foreach($processor_data  as $type => $data){
+			$options[] = OSInvoiceHtml::_('select.option', $type, JString::ucfirst($type));	
+		}
+
+		$style = isset($attr['style']) ? $attr['style'] : '';
+		return OSInvoiceHtml::_('select.genericlist', $options, $name, $style, 'value', 'text', $value);
+	}
 }

@@ -19,7 +19,7 @@ if(!defined('RB_FRAMEWORK_LOADED')){
 
 require_once  dirname(__FILE__).'/osinvoice/includes.php';
 $option	= 'com_osinvoice';
-$view	= 'dashboard';
+$view	= 'invoice';
 $task	= null;
 $format	= 'html';
 

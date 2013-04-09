@@ -43,8 +43,9 @@
 	<administration>
 		<!-- Administration menu -->
 		<menu view="dashboard">COM_OSINVOICE</menu>
-		<submenu>			
-			<menu view="invoice">COM_OSINVOICE_INVOICE</menu>			
+		<submenu>		
+			<menu view="invoice">COM_OSINVOICE_INVOICE</menu>	
+ 			<menu view="processor">COM_OSINVOICE_PROCESSOR</menu>		
 			<menu view="transaction">COM_OSINVOICE_TRANSACTION</menu>			
 			<menu view="buyer">COM_OSINVOICE_BUYER</menu>			
 		</submenu>

@@ -44,3 +44,14 @@ CREATE TABLE IF NOT EXISTS `#__osinvoice_buyer` (
   INDEX `idx_country` (`country`),
   INDEX `idx_zipcode` (`zipcode`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
+
+CREATE TABLE IF NOT EXISTS `#__osinvoice_processor` (
+  `processor_id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `published` tinyint(1) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `params` text,  
+  PRIMARY KEY (`processor_id`),
+  INDEX `idx_type` (`type`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;

@@ -24,7 +24,7 @@ JHtml::_('behavior.framework');
 					<input type="checkbox" name="toggle" value="" onclick="checkAll(<?php echo count($records); ?>);" />
 				</th>		
 				<th class="default-grid-sno">
-          			<?php echo Rb_Text::_("COM_OSINVOICE_BUYER_NUM"); ?>
+          			<?php echo Rb_Text::_("COM_OSINVOICE_NUM"); ?>
         		</th> 
 				<th><?php echo OSInvoiceHtml::_('grid.sort', "COM_OSINVOICE_BUYER_ID", 'buyer_id', $filter_order_Dir, $filter_order);?></th>
 				<th><?php echo OSInvoiceHtml::_('grid.sort', "COM_OSINVOICE_BUYER_NAME", 'name', $filter_order_Dir, $filter_order);?></th>

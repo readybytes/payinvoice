@@ -36,7 +36,7 @@ class OSInvoiceView extends OSInvoiceViewbase
 		
 		// intialize input
 		$this->input = OSInvoiceFactory::getApplication()->input;
-		self::addSubmenus(array('dashboard', 'invoice', 'transaction', 'buyer'));
+		self::addSubmenus(array('dashboard', 'invoice', 'processor', 'transaction', 'buyer'));
 		return $this;
 	}
 	

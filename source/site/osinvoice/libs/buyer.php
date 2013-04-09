@@ -72,6 +72,51 @@ class OSInvoiceBuyer extends OSInvoiceLib
 		return $this->buyer_id;
 	}
 	
+	public function getBuyername()
+	{
+		return $this->name;
+	}
+	
+	public function getUsername()
+	{
+		return $this->username;
+	}
+	
+	public function getCurrency()
+	{
+		return $this->currency;
+	}
+	
+	public function getCity()
+	{
+		return $this->city;
+	}
+	
+	public function getAddress()
+	{
+		return $this->address;
+	}
+	
+	public function getState()
+	{
+		return $this->state;
+	}
+	
+	public function getCountry()
+	{
+		return $this->country;
+	}
+	
+	public function getZipcode()
+	{
+		return $this->zipcode;
+	}
+	
+	public function getTaxnumber()
+	{
+		return $this->tax_number;
+	}
+	
 	public function getAvatar($size="default")
 	{
 		// You can set size as Default, Small, Medium, Large
