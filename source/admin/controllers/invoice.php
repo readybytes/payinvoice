@@ -19,6 +19,10 @@ if(!defined( '_JEXEC' )){
  */
 class OSInvoiceAdminControllerInvoice extends OSInvoiceController
 {
+	/**
+	 * @var OSInvoiceHelperInvoice
+	 */
+	public $helper = null;
 	public function _save(array $data, $itemId=null, $type=null)
 	{
 		//create new lib instance
@@ -26,7 +30,7 @@ class OSInvoiceAdminControllerInvoice extends OSInvoiceController
 						->save();
 						
 		// create invoice in XiEE, in $itemId is null
-		if(!$itemId){		
+		if(!$itemId){
 			$data['xiee_invoice']['object_type'] 	 = 'OSInvoiceInvoice';
 			$data['xiee_invoice']['object_id'] 	 	 = $invoice->getId();
 			$data['xiee_invoice']['expiration_type'] = XIEE_EXPIRATION_TYPE_FIXED;
@@ -34,8 +38,15 @@ class OSInvoiceAdminControllerInvoice extends OSInvoiceController
 			$invoice_id = XiEEAPI::invoice_create($data['xiee_invoice'], true); 
 		}	
 		else{
-			$invoice_id = XiEEAPI::invoice_update($data['xiee_invoice']['invoice_id'], $data['xiee_invoice'], true);
-		} 	
+			$invoice_id = $data['xiee_invoice']['invoice_id'];
+		}
+		
+		// XITODO : use constants
+		$this->helper->create_modifier($invoice_id, 'OSInvoiceItem', $data['subtotal'], 10);
+		$this->helper->create_modifier($invoice_id, 'OSInvoiceDiscount', -$data['discount'], 20);
+		$this->helper->create_modifier($invoice_id, 'OSInvoiceTax', $data['tax'], 45, true);
+		
+		$invoice_id = XiEEAPI::invoice_update($data['xiee_invoice']['invoice_id'], $data['xiee_invoice'], true);
 		
 		return $invoice;
 	}
