@@ -34,18 +34,18 @@ if(!defined( '_JEXEC' )){
 		
 			<tbody>
 			<?php $count= $limitstart;
-				  foreach ($records as $record):?>
-					<tr class="<?php echo "row".$count%2; ?>">
-						<th class="default-grid-chkbox">
-							<?php echo OSInvoiceHtml::_('grid.id', $count, $record->{$record_key} ); ?>
-						</th>
-						<td> <?php echo $count+1; ?> </td>	
-						<td><?php echo OSInvoiceHtml::link($uri.'&task=edit&id='.$record->{$record_key}, $record->{$record_key}); ?></td>							
-						<td><?php echo $record->type;?></td>
-						<td><?php echo $record->title;?>
-							<p class="muted"><?php echo $record->description;?></p>
-						</td>
-						<td><?php echo OSInvoiceHtml::_("rb_html.boolean.grid", $record, 'published', $count, 'tick.png', 'publish_x.png', '', $langPrefix='COM_OSINVOICE');?></td>
+			  foreach ($records as $record):?>
+				<tr class="<?php echo "row".$count%2; ?>">
+				    <th class="default-grid-chkbox">
+				    	<?php echo OSInvoiceHtml::_('grid.id', $count, $record->{$record_key} ); ?>
+				    </th>
+					<td><?php echo $count+1; ?> </td>	
+					<td><?php echo $record->processor_id;?></td>
+					<td><?php echo OSInvoiceHtml::link($uri.'&task=edit&id='.$record->{$record_key}, $record->title); ?>
+						 <p class="muted"><?php echo $record->description;?></p>
+					</td>							
+					<td><?php echo $record->type;?></td>
+					<td><?php echo OSInvoiceHtml::_("rb_html.boolean.grid", $record, 'published', $count, 'tick.png', 'publish_x.png', '', $langPrefix='COM_OSINVOICE');?></td>
 			
 			<?php $count++;?>		
 			<?php endforeach;?>
