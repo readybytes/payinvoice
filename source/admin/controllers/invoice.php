@@ -36,6 +36,7 @@ class OSInvoiceAdminControllerInvoice extends OSInvoiceController
 			$data['xiee_invoice']['expiration_type'] = XIEE_EXPIRATION_TYPE_FIXED;
 			$data['xiee_invoice']['time_price'] = array('time' => array('000000000000'), 'price' => array('0.00'));
 			$invoice_id = XiEEAPI::invoice_create($data['xiee_invoice'], true); 
+			$data['xiee_invoice']['invoice_id'] = $invoice_id;
 		}	
 		else{
 			$invoice_id = $data['xiee_invoice']['invoice_id'];
@@ -46,7 +47,7 @@ class OSInvoiceAdminControllerInvoice extends OSInvoiceController
 		$this->helper->create_modifier($invoice_id, 'OSInvoiceDiscount', -$data['discount'], 20);
 		$this->helper->create_modifier($invoice_id, 'OSInvoiceTax', $data['tax'], 45, true);
 		
-		$invoice_id = XiEEAPI::invoice_update($data['xiee_invoice']['invoice_id'], $data['xiee_invoice'], true);
+		$invoice_id = XiEEAPI::invoice_update($invoice_id, $data['xiee_invoice'], true);
 		
 		return $invoice;
 	}
