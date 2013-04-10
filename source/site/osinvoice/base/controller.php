@@ -28,5 +28,9 @@ class OSInvoiceController extends Rb_Controller
 		if(!isset($this->input)){
 			$this->input = OSInvoiceFactory::getApplication()->input; 
 		}
+		
+		if(!isset($this->helper)){
+			$this->helper = OSInvoiceFactory::getHelper($this->getName());
+		}
 	}
 }

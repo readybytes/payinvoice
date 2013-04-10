@@ -38,6 +38,10 @@ JHtml::_('formbehavior.chosen', 'select');
 				<div class="row-fluid well well-large">					
 					<div class="span6">		
 						<div class="control-group">
+							<div class="control-label"><?php echo $xiee_invoice_fields['title']->label;?></div>
+							<div class="controls"><?php echo $xiee_invoice_fields['title']->input;?></div>								
+						</div>
+						<div class="control-group">
 							<div class="control-label"><?php echo $xiee_invoice_fields['buyer_id']->label;?></div>
 							<div class="controls"><?php echo $xiee_invoice_fields['buyer_id']->input;?></div>								
 						</div>
@@ -45,13 +49,13 @@ JHtml::_('formbehavior.chosen', 'select');
 							<div class="control-label"><?php echo $xiee_invoice_fields['serial']->label;?></div>
 							<div class="controls"><?php echo $xiee_invoice_fields['serial']->input;?></div>								
 						</div>
+					</div>
+					
+					<div class="span6">
 						<div class="control-group">
 							<div class="control-label"><?php echo $xiee_invoice_fields['currency']->label;?></div>
 							<div class="controls"><?php echo $xiee_invoice_fields['currency']->input;?></div>								
-						</div>																	
-					</div>
-					
-					<div class="span6">						
+						</div>						
 						<div class="control-group">
 							<div class="control-label"><?php echo $xiee_invoice_fields['issue_date']->label;?></div>
 							<div class="controls"><?php echo $xiee_invoice_fields['issue_date']->input;?></div>								
@@ -80,7 +84,7 @@ JHtml::_('formbehavior.chosen', 'select');
 				  			<div class="controls">
 				  				<div class="input-prepend">              			
 									<span class="add-on">$</span>
-									<input type="text" name="" class="input-small" readonly="readonly" id="osi-invoice-subtotal">		
+									<input type="text" name="osinvoice_form[subtotal]" class="input-small" readonly="readonly" id="osi-invoice-subtotal">		
 								</div>
 				  			</div>
 						</div>
@@ -89,7 +93,7 @@ JHtml::_('formbehavior.chosen', 'select');
 				  			<div class="controls">
 				  				<div class="input-prepend">
 									<span class="add-on">$</span>
-									<input type="text" name="" class="input-small" id="osi-invoice-discount" value="0.00">
+									<input type="text" name="osinvoice_form[discount]" class="input-small" id="osi-invoice-discount" value="<?php echo $discount;?>">
 								</div>
 				  			</div>
 						</div>
@@ -97,7 +101,7 @@ JHtml::_('formbehavior.chosen', 'select');
 							<label class="control-label"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_TAX');?></label>
 				  			<div class="controls">
 				  				<div class="input-append">									
-									<input type="text" name="" class="input-small" id="osi-invoice-tax">
+									<input type="text" name="osinvoice_form[tax]" class="input-small" id="osi-invoice-tax" value="<?php echo $tax;?>">
 									<span class="add-on">%</span>
 								</div>
 				  			</div>
@@ -108,7 +112,7 @@ JHtml::_('formbehavior.chosen', 'select');
 				  			<div class="controls">
 				  				<div class="input-prepend">
 									<span class="add-on">$</span>
-									<input type="text" name="" class="input-small" readonly="readonly" id="osi-invoice-total" >
+									<input type="text" name="osinvoice_form[total]" class="input-small" readonly="readonly" id="osi-invoice-total" >
 								</div>
 				  			</div>
 						</div>
@@ -129,4 +133,5 @@ JHtml::_('formbehavior.chosen', 'select');
 	<input type="hidden" name="task" value="save" />
 	<?php echo $form->getInput('type');?>
 	<?php echo $form->getInput('invoice_id');?>
+	<?php echo $xiee_invoice_fields['invoice_id']->input;?>
 </form>
