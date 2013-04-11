@@ -52,6 +52,11 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 		$this->assign('invoice', $invoice);
 		$this->assign('form',  $form);
 		
+		$params        = $invoice->getParams();
+		$processor_id  = 0;
+		if(isset($params->processor_id)){
+			$processor_id  = $params->processor_id;
+		}
 		$discount 	= 0.00;
 		$tax 		= 0.00;
 
@@ -81,6 +86,7 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 		$this->assign('discount', number_format($discount, 2));
 		$this->assign('tax', number_format($tax, 2));
 		$this->assign('xiee_invoice_fields', $xiee_invoice_fields);
+        $this->assign('processor_id', $processor_id);      
 		return true;
 	}
 }

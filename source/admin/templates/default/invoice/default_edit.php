@@ -116,6 +116,15 @@ JHtml::_('formbehavior.chosen', 'select');
 								</div>
 				  			</div>
 						</div>
+						
+						<div class="control-group">
+							<label class="control-label"><strong><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_PAYMENT_METHOD');?></strong></label>
+				  			<div class="controls">
+				  				<div class="input-medium">
+							    	<?php echo OSInvoiceHtml::_('osinvoicehtml.processors.edit', 'osinvoice_form[params][processor_id]' ,$processor_id ,array('none'=>true)); ?>
+								</div>
+				  			</div>
+						</div>
 					</div>
 				</div>	
 				<!-- END : Total -->

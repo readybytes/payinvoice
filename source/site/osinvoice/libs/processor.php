@@ -44,4 +44,13 @@ class OSInvoiceProcessor extends OSInvoiceLib
 	{
 		return $this->type;
 	}
+	
+	public function getProcessorconfig($object = true)
+	{
+		if($object){
+			return $this->params->toObject();
+		}
+		
+		return $this->params->toArray();
+	} 
 }

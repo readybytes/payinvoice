@@ -28,6 +28,13 @@ class OSInvoiceAdminControllerInvoice extends OSInvoiceController
 		//create new lib instance
 		$invoice = Rb_Lib::getInstance($this->_component->getPrefixClass(), $this->getName(), $itemId, $data)
 						->save();
+		
+	   if(!empty($data['params']['processor_id'])){
+		    $processor = OSInvoiceProcessor::getInstance($data['params']['processor_id']);
+	
+		    $data['xiee_invoice']['processor_type']     = $processor->getType();
+		    $data['xiee_invoice']['processor_config']   = $processor->getProcessorconfig();
+		}
 						
 		// create invoice in XiEE, in $itemId is null
 		if(!$itemId){
