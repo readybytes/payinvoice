@@ -19,7 +19,30 @@ if(!defined( '_JEXEC' )){
  */
 require_once dirname(__FILE__).'/view.php';
 class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
-{	
+{		
+	function _displayGrid($records)
+	{
+		$InvoiceIds = array();
+		foreach($records as $record){
+			$InvoiceIds[] = $record->invoice_id;
+		}
+		
+		$filter = array('object_id' => array(array('IN', '('.implode(",", $InvoiceIds).')')), 'master_invoice_id' => 0);
+		$invoices = XiEEAPI::invoice_get_records($filter, array(), '',$orderby='object_id');
+		
+		$buyerIds  = array();
+		foreach ($invoices as $invoice){
+			$buyerIds[] = $invoice->buyer_id;
+		}
+		
+		$buyer = OSInvoiceHelperBuyer::get($buyerIds);
+		
+		$this->assign('invoice', $invoices);
+		$this->assign('buyer', $buyer);
+
+		return parent::_displayGrid($records);
+	}
+	
 	function edit($tpl= null, $itemId = null)
 	{
 		$itemId  = ($itemId === null) ? $this->getModel()->getState('id') : $itemId ;
