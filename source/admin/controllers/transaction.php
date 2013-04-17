@@ -23,5 +23,10 @@ class OSInvoiceAdminControllerTransaction extends OSInvoiceController
 	{
         return XiEEAPI::transaction_get_model();
 	}
+	
+	function _remove($itemId=null, $userId=null)
+	{
+		return XiEEAPI::transaction_delete_record($itemId);	
+	}
 
 }

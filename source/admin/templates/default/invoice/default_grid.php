@@ -14,7 +14,7 @@ if(!defined( '_JEXEC' )){
 }
 ?>
 <form action="<?php echo $uri; ?>" method="post" id="adminForm" name="adminForm">
-	<table class="table table-striped">
+	<table class="table table-hover">
 		<thead>
 			<!-- TABLE HEADER START -->
 			<tr>
@@ -59,6 +59,9 @@ if(!defined( '_JEXEC' )){
 			<div class="span7"><?php echo $pagination->getListFooter();?></div>
 	 	</div>
  
-		<input type="hidden" name="task" value="edit"/>
+		<input type="hidden" name="filter_order" value="<?php echo $filter_order;?>" />
+		<input type="hidden" name="filter_order_Dir" value="<?php echo $filter_order_Dir;?>" />
+		<input type="hidden" name="task" value="" />
+		<input type="hidden" name="boxchecked" value="0" />
 </form>
 
