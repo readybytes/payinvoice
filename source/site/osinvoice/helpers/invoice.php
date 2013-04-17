@@ -54,4 +54,10 @@ class OSInvoiceHelperInvoice extends JObject
 		
 		XiEEAPI::modifier_create($modifier);
 	}
+	
+	public function get_xiee_invoice($invoice_id)
+	{
+		$filter = array('object_type' => 'OSInvoiceInvoice', 'object_id' => $invoice_id, 'master_invoice_id' => 0);
+		return XiEEAPI::invoice_get($filter);
+	}
 }

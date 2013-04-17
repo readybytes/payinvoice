@@ -35,6 +35,9 @@ class OSInvoiceProcessor extends OSInvoiceLib
 		return $this;
 	}
 	
+	/**
+	 * @return OSInvoiceProcessor
+	 */
 	public static function getInstance($id = 0, $data = null, $dummy1 = null, $dummy2 = null)
 	{
 		return parent::getInstance('processor', $id, $data);
@@ -45,7 +48,7 @@ class OSInvoiceProcessor extends OSInvoiceLib
 		return $this->type;
 	}
 	
-	public function getProcessorconfig($object = true)
+	public function getParams($object = true)
 	{
 		if($object){
 			return $this->params->toObject();

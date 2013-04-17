@@ -51,7 +51,7 @@ if(!defined( '_JEXEC' )){
 					<td><?php echo $record->invoice_id;?></td>
 					<td><?php echo $record->amount;?></td>
 					<td><?php echo Rb_Text::_($statusList[$record->payment_status]);?></td>
-					<td><?php echo $record->message;?></td>
+					<td><?php echo Rb_Text::_($record->message);?></td>
 					<td><?php echo $record->created_date;?></td>
 			
 		<?php $count++;?>		
