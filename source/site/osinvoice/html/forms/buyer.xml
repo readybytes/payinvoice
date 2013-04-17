@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form>
 
-  <fildset addfieldpath="/components/com_osinvoice/osinvoice/html/fields">
+  <fieldset addfieldpath="/components/com_osinvoice/osinvoice/html/fields">
 
 				
   		<field 	name="buyer_id" 
@@ -37,11 +37,13 @@
 				/>
 				
 		<field 	name="currency" 
-				type="text"
+				type="osinvoice.currencies"
+				default=""
 				label="COM_OSINVOICE_BUYER_CURRENCY"
 				description="COM_OSINVOICE_BUYER_CURRENCY_DESC"	
-				class="required"			 
-				/>
+				required="true">
+				<option value="">COM_OSINVOICE_SELECT_OPTION</option>
+		</field>	
 		
 		<field 	name="address" 
 				type="textarea"
@@ -62,10 +64,13 @@
 				/>
 				
 		<field 	name="country" 
-				type="text"
+				type="osinvoice.countries"
+				default=""
 				label="COM_OSINVOICE_BUYER_COUNTRY"
 				description="COM_OSINVOICE_BUYER_COUNTRY_DESC"
-				/>
+				required="true">
+				<option value="">COM_OSINVOICE_SELECT_OPTION</option>
+		</field>	
 				
 		<field 	name="tax_number" 
 				type="text"
@@ -79,6 +84,6 @@
 				description="COM_OSINVOICE_BUYER_ZIPCODE_DESC"
 				/>
 		
-  </fildset>
+  </fieldset>
 	
 </form>

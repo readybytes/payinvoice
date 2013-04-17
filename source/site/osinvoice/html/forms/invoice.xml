@@ -33,8 +33,8 @@
 			</field>
 							
 			<field 	name="currency"				 
-					type="xiec.currencies"
-					default="USD"
+					type="osinvoice.currencies"
+					default=""
 					label="COM_OSINVOICE_INVOICE_CURRENCY"
 					description="COM_OSINVOICE_INVOICE_CURRENCY_DESC"				 
 					required="true">

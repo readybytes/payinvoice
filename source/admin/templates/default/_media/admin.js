@@ -138,6 +138,19 @@ osinvoice.admin.invoice = {
 							total = total + total * tax / 100;
 						}
 						$('#osi-invoice-total').val(parseFloat(total).toFixed(2));
+			},
+		
+			on_currency_change : function(currency){
+						var currency   = {'event_args' :{'currency' : currency} };
+						var url		   = 'index.php?option=com_osinvoice&view=invoice&task=ajaxchangecurrency';
+						osinvoice.ajax.go(url,currency);
+						return false;
+			},
+			
+			on_buyer_change : function(buyer){
+					var buyer   = {'event_args' :{'buyer' : buyer} };
+					var url 	= 'index.php?option=com_osinvoice&view=invoice&task=ajaxchangebuyer';
+					osinvoice.ajax.go(url, buyer);
 			}
 		}		
 };

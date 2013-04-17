@@ -15,9 +15,27 @@ if(!defined( '_JEXEC' )){
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.keepalive');
 JHtml::_('behavior.formvalidation');
-JHtml::_('formbehavior.chosen', 'select');
+// XITODO : Javascript issue with chosen
+//JHtml::_('formbehavior.chosen', 'select');
 ?>
 <script type="text/javascript">
+(function($){
+ $(document).ready(function(){
+				
+			$('#osinvoice_form_xiee_invoice_currency').change(function(){
+				var currency   = $(this).val();
+				osinvoice.admin.invoice.item.on_currency_change(currency);
+				return false;
+			}),
+
+			$('#osinvoice_form_xiee_invoice_buyer_id').change(function(){
+			  	var buyer   = $(this).val();
+			  	osinvoice.admin.invoice.item.on_buyer_change(buyer);
+				return false;
+			});
+	});
+})(osinvoice.jQuery);
+
 	Joomla.submitbutton = function(task)
 	{		
 		if (task == 'cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
@@ -29,7 +47,7 @@ JHtml::_('formbehavior.chosen', 'select');
 <?php echo $this->loadTemplate('edit_item');?>
 
 <form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm">
-	<h2><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_DETAILS' ); ?></h2>
+	<h2><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_DETAILS' ); ?></h2><hr>
 	<fieldset class="form-horizontal">	
 		<div class="row-fluid">
 			<div class="span8">
@@ -83,7 +101,7 @@ JHtml::_('formbehavior.chosen', 'select');
 							<label class="control-label"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_SUBTOTAL');?></label>
 				  			<div class="controls">
 				  				<div class="input-prepend">              			
-									<span class="add-on">$</span>
+									<span class="add-on osi-currency"></span>
 									<input type="text" name="osinvoice_form[subtotal]" class="input-small" readonly="readonly" id="osi-invoice-subtotal">		
 								</div>
 				  			</div>
@@ -92,7 +110,7 @@ JHtml::_('formbehavior.chosen', 'select');
 							<label class="control-label"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_DISCOUNT');?></label>
 				  			<div class="controls">
 				  				<div class="input-prepend">
-									<span class="add-on">$</span>
+									<span class="add-on osi-currency"></span>
 									<input type="text" name="osinvoice_form[discount]" class="input-small" id="osi-invoice-discount" value="<?php echo $discount;?>">
 								</div>
 				  			</div>
@@ -111,7 +129,7 @@ JHtml::_('formbehavior.chosen', 'select');
 							<label class="control-label"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_TOTAL');?></label>
 				  			<div class="controls">
 				  				<div class="input-prepend">
-									<span class="add-on">$</span>
+									<span class="add-on osi-currency"></span>
 									<input type="text" name="osinvoice_form[total]" class="input-small" readonly="readonly" id="osi-invoice-total" >
 								</div>
 				  			</div>

@@ -25,7 +25,7 @@ class OSInvoiceBuyer extends OSInvoiceLib
 	protected $username             = '';
 	protected $email                = '';
 	protected $password             = '';
-	protected $currency 			= 'USD';
+	protected $currency 			= '';
 	protected $city 			    = '';
 	protected $address 				= '';
 	protected $state 				= '';
@@ -41,7 +41,7 @@ class OSInvoiceBuyer extends OSInvoiceLib
 		$this->name                 = '';
 		$this->username             = '';
 		$this->email                = '';
-		$this->currency 			= 'USD';
+		$this->currency 			= OSInvoiceHelperConfig::get('currency');
 		$this->city                 = '';
 		$this->address              = '';
 		$this->state                = '';

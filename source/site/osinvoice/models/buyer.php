@@ -46,6 +46,7 @@ class OSInvoiceModelBuyer extends OSInvoiceModel
     			   ->select(' joomlausertbl.`email` AS email ')
     			   ->select(' joomlausertbl.`registerDate` AS registerDate ')
     			   ->select(' joomlausertbl.`lastvisitDate` AS lastvisitDate ')
+    			   ->select(' t.`currency` ')
     			   ->select(' t.`address` ')
     			   ->select(' t.`state` ')
     			   ->select(' t.`city` ')

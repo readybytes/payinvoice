@@ -24,13 +24,13 @@ $component_name = $this->_component->getNameSmall();
 		</div>
 		<div class="span2">
 			<div class="input-prepend">              			
-				<span class="add-on">$</span>
+				<span class="add-on osi-currency"></span>
 				<input type="text" class="input-small osi-item-price" name="<?php echo $component_name;?>_form[params][items][##counter##][price]" value="##price##" placeholder="<?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_PRICE_PER_UNIT');?>">						
 			</div>
 		</div>	
 		<div class="span2">
 			<div class="input-prepend">              			
-				<span class="add-on">$</span>
+				<span class="add-on osi-currency"></span>
 				<input type="text" class="input-small osi-item-total" name="<?php echo $component_name;?>_form[params][items][##counter##][total]" value="##total##" readonly="readonly">													
 			</div>
 		</div>

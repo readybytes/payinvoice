@@ -58,4 +58,35 @@ class OSInvoiceAdminControllerInvoice extends OSInvoiceController
 		
 		return $invoice;
 	}
+    
+    // Show currency symbol in all price fiel when cureency change
+	function ajaxchangecurrency()
+	{
+		$args     	= $this->_getArgs();
+		$currency 	= $args['currency'];
+		
+		$filter 	= array('currency_id' => $currency);
+		$symbol     = OSInvoiceHelperFormat::getCurrency($filter, 'symbol');
+				
+		$response  = OSInvoiceFactory::getAjaxResponse();
+		$response->addScriptCall('osinvoice.jQuery(".osi-currency").html',$symbol);
+		$response->sendResponse();
+		
+	}
+	
+    // When select user then set currency of user in currency field
+	function ajaxchangebuyer()
+	{
+		$args     	= $this->_getArgs();
+		$buyer_id 	= $args['buyer'];
+		
+		$buyer 		= OSInvoiceBuyer::getInstance($buyer_id);
+		$currency   = $buyer->getCurrency();
+				
+		$response  = OSInvoiceFactory::getAjaxResponse();
+		$response->addScriptCall('osinvoice.jQuery("#osinvoice_form_xiee_invoice_currency").val',$currency);
+		$response->addScriptCall('osinvoice.admin.invoice.item.on_currency_change', $currency);
+		$response->sendResponse();
+		
+	}
 }

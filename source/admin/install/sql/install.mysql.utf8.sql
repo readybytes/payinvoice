@@ -55,3 +55,11 @@ CREATE TABLE IF NOT EXISTS `#__osinvoice_processor` (
   PRIMARY KEY (`processor_id`),
   INDEX `idx_type` (`type`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `#__osinvoice_config` (
+  `config_id` int(11) NOT NULL AUTO_INCREMENT,
+  `key` varchar(255) NOT NULL,
+  `value` text,
+  PRIMARY KEY (`config_id`),
+  UNIQUE KEY `idx_key` (`key`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;

@@ -47,6 +47,8 @@ define('OSINVOICE_PATH_ADMIN_TEMPLATE',		OSINVOICE_PATH_ADMIN.'/templates');
 define('OSINVOICE_PATH_CORE_FORMS', 			OSINVOICE_PATH_CORE.'/html/forms');
 define('OSINVOICE_PATH_CORE_FIELDS', 		OSINVOICE_PATH_CORE.'/html/fields');
 
+define('OSINVOICE_PATH_IMAGES', 		'/media/com_osinvoice/images/');
+
 // Expiration Types
 define('OSINVOICE_EXPIRATION_TYPE_FIXED', 	'fixed');
 define('OSINVOICE_EXPIRATION_TYPE_FOREVER', 	'forever');
