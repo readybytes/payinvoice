@@ -45,11 +45,16 @@ class OSInvoiceSiteViewInvoice extends OSInvoiceSiteBaseViewInvoice
 		}
 		
 		$subtotal = 0.00;
-		$items_modifier = XiEEAPI::modifier_get($itemid, 'OSInvoiceItems');
+		$items_modifier = XiEEAPI::modifier_get($itemid, 'OSInvoiceItem');
 		if($items_modifier != false){
 			$items_modifier = array_pop($items_modifier);
 			$subtotal = $items_modifier->amount;
 		}
+		
+		$currency  		= OSInvoiceHelperFormat::getCurrency($xiee_invoice['currency'], 'symbol');
+		$status 		= OSInvoiceHelperInvoice::get_invoice_status_type($xiee_invoice['status']);
+		
+		$configData     = OSInvoiceHelperConfig::get();
 			
 		$this->assign('tax', $tax);
 		$this->assign('discount', $discount);
@@ -57,6 +62,9 @@ class OSInvoiceSiteViewInvoice extends OSInvoiceSiteBaseViewInvoice
 		$this->assign('buyer', $buyer);
 		$this->assign('osi_invoice', $osi_invoice->toArray());
 		$this->assign('xiee_invoice', $xiee_invoice);
+		$this->assign('status', $status);
+		$this->assign('currency', $currency);
+		$this->assign('config_data', $configData);
 
 		return true;
 	}

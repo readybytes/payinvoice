@@ -11,20 +11,21 @@ if(defined('_JEXEC')===false) die();
 
 class OSInvoiceHelperFormat extends JObject
 {
-	public function getCurrency($itemId, $format = null)
+	public static function getCurrency($itemId, $format = null)
 	{
-	   $currencies = XiEEAPI::currency_get_records($itemId);
+	   $currencyId	= array('currency_id' => $itemId);
+	   $currencies 	= XiEEAPI::currency_get_records($currencyId);
 	   
 	   if(!isset($format) || $format == 'fullname'){
-			return $currencies[$itemId['currency_id']]->title.' ('. $currencies[$itemId['currency_id']]->currency_id .')';
+			return $currencies[$itemId]->title.' ('. $currencies[$itemId]->currency_id .')';
 		}
 		
 		if($format == 'id'){
-			return $currencies[$itemId['currency_id']]->currency_id;
+			return $currencies[$itemId]->currency_id;
 		}
 		
 		if($format == 'symbol'){
-			return $currencies[$itemId['currency_id']]->symbol;
+			return $currencies[$itemId]->symbol;
 		}
 		
 		return false;

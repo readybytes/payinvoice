@@ -65,8 +65,7 @@ class OSInvoiceAdminControllerInvoice extends OSInvoiceController
 		$args     	= $this->_getArgs();
 		$currency 	= $args['currency'];
 		
-		$filter 	= array('currency_id' => $currency);
-		$symbol     = OSInvoiceHelperFormat::getCurrency($filter, 'symbol');
+		$symbol     = OSInvoiceHelperFormat::getCurrency($currency, 'symbol');
 				
 		$response  = OSInvoiceFactory::getAjaxResponse();
 		$response->addScriptCall('osinvoice.jQuery(".osi-currency").html',$symbol);

@@ -28,7 +28,7 @@ class OSInvoiceAdminViewTransaction extends OSInvoiceAdminBaseViewTransaction
 		}
 		
 		$buyer = OSInvoiceHelperBuyer::get($buyerIds);
-        $statusList = XiEEAPI::response_get_status();
+        $statusList = XiEEAPI::response_get_status_list();
 		$this->assign('buyer', $buyer);
 		$this->assign('statusList', $statusList);
 		

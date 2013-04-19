@@ -24,14 +24,16 @@
 				/>
 		
 		<field 	name="email" 
-				type="text"
+				type="email"
 				label="COM_OSINVOICE_BUYER_EMAIL"
 				description="COM_OSINVOICE_BUYER_EMAIL_DESC"
 				class="required" 
+				validate="email"
 				/>
 				
 		<field 	name="password" 
 				type="password"
+				class="inputbox validate-password"
 				label="COM_OSINVOICE_BUYER_PASSWORD"
 				description="COM_OSINVOICE_BUYER_PASSWORD_DESC"		 
 				/>

@@ -36,9 +36,11 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 		}
 		
 		$buyer = OSInvoiceHelperBuyer::get($buyerIds);
+		$statusList = XiEEAPI::invoice_get_status_list();
 		
 		$this->assign('invoice', $invoices);
 		$this->assign('buyer', $buyer);
+		$this->assign('statusList', $statusList);
 
 		return parent::_displayGrid($records);
 	}
@@ -75,7 +77,12 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 				$tax_modifier = array_pop($tax_modifier);
 				$tax = $tax_modifier->amount;
 			}
+		 	$currency = $xiee_invoice['currency']; 	
 		}
+		else{
+			$currency = OSInvoiceHelperConfig::get('currency');
+			$form->bind(array('xiee_invoice' => array('currency' => $currency)));
+		}	
 		
 		$xiee_invoice_fieldset = $form->getFieldset('xiee_invoice');
 		$xiee_invoice_fields = array();
@@ -86,7 +93,8 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 		$this->assign('discount', number_format($discount, 2));
 		$this->assign('tax', number_format($tax, 2));
 		$this->assign('xiee_invoice_fields', $xiee_invoice_fields);
-        $this->assign('processor_id', $processor_id);      
+        $this->assign('processor_id', $processor_id);   
+        $this->assign('currency', $currency);
 		return true;
 	}
 }

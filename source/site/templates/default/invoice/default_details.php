@@ -14,7 +14,7 @@ if(!defined( '_JEXEC' )){
 
 <div class="row">
 		<div class="span9"><h5><?php echo $xiee_invoice['serial'];?> : <?php echo $xiee_invoice['title'];?></h5></div>
-		<div class="span3 label label-warning center"><h4>Pending</h4></div>		
+		<div class="span3 label <?php echo $status['class']?> center"><h4><?php  echo $status['status'];?></h4></div>	
 </div>
 	
 <div class="row">
