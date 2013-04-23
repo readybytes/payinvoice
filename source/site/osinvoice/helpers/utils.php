@@ -52,4 +52,38 @@ class OSInvoiceHelperUtils extends JObject
 			return JFile::delete($file);
 		}
 	}	
+	
+	public function sendEmail( $emails, $subject, $message, $attachments=null)
+	{
+		//when no email address exists
+		if (empty($emails)){
+			return true;
+		}
+		
+		$emails 	= is_array($emails) ? $emails : array($emails);
+		$app  		= OSinvoiceFactory::getApplication();
+		$mailfrom 	= $app->getCfg( 'mailfrom' );
+		$fromname 	= $app->getCfg( 'fromname' );
+		
+		if( !$mailfrom  || !$fromname ) {
+			throw new Exception(Rb_Text::_('COM_OSINVOCIE_EXCEPTION_UTILS_NO_EMAILFROM_AND_FROMNAME_EXISTS'));
+		}
+		
+		$message = html_entity_decode($message, ENT_QUOTES);
+		$mail 	 = OSinvoiceFactory::getMailer()->setSender( array($mailfrom, $fromname))
+											   	->addRecipient(array_shift($emails))
+									           	->setSubject($subject)
+									           	->setBody($message);
+
+		$mail->IsHTML(true);
+		if($attachments != null){
+			$mail->addAttachment($attachments);
+		}
+		
+		foreach ($emails as $email){
+			$mail->addBCC($email);
+		}
+		
+		return $mail->Send();	
+	}
 }

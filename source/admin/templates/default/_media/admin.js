@@ -61,16 +61,13 @@ osinvoice.admin.grid = {
 				}
 			}
 			
-						
-			var result = true;
-		    if (document.adminForm.onsubmit instanceof Function) {
-			    result = document.adminForm.onsubmit.apply(this, Array(isValidAction));
-				// below code is not working on IE7+, so added above line
-		        //result=document.adminForm.onsubmit(isValidAction);
-		    }
-		    if(result){
-		    	document.adminForm.submit();
-		    }
+			if(isValidAction){
+				if (document.formvalidator.isValid(document.id('adminForm'))) {
+					Joomla.submitform(action, document.getElementById('adminForm'));
+				}
+			}else{
+				Joomla.submitform(action, document.getElementById('adminForm'));
+			}
 		},
 		
 		filters : {
@@ -88,7 +85,14 @@ osinvoice.admin.grid = {
 			    }
 				this.submit(view,null,validActions);
 			}
-		}		
+		},
+		
+		invoice_email : function()
+		{
+			var invoice_id = $('#osinvoice_form_invoice_id').val();
+			osinvoice.url.modal("index.php?option=com_osinvoice&view=invoice&task=email&invoice_id="+invoice_id);
+			return false;
+		}
 };
 
 

@@ -14,13 +14,9 @@ if(!defined( '_JEXEC' )){
 }
 
 /** 
- * Invoice Base View
+ * Email Ajax View
  * @author Gaurav Jain
  */
-class OSInvoiceAdminBaseViewInvoice extends OSInvoiceView
-{	
-	/**
-	 * @var OSInvoiceHelperInvoice
-	 */
-	public $_helper = null;	
-}
+require_once dirname(__FILE__).'/view.php';
+class OSInvoiceSiteViewEmail extends OSInvoiceSiteBaseViewEmail
+{}

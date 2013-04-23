@@ -11,16 +11,5 @@
 // no direct access
 if(!defined( '_JEXEC' )){
 	die( 'Restricted access' );
-}
-
-/** 
- * Invoice Base View
- * @author Gaurav Jain
- */
-class OSInvoiceAdminBaseViewInvoice extends OSInvoiceView
-{	
-	/**
-	 * @var OSInvoiceHelperInvoice
-	 */
-	public $_helper = null;	
-}
+}?>
+Hello Hiiiii

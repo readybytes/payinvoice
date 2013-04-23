@@ -14,13 +14,10 @@ if(!defined( '_JEXEC' )){
 }
 
 /** 
- * Invoice Base View
+ * Email Base View
  * @author Gaurav Jain
  */
-class OSInvoiceAdminBaseViewInvoice extends OSInvoiceView
-{	
-	/**
-	 * @var OSInvoiceHelperInvoice
-	 */
-	public $_helper = null;	
+class OSInvoiceSiteBaseViewEmail extends OSInvoiceView
+{
+
 }

@@ -35,13 +35,6 @@ JHtml::_('behavior.formvalidation');
 			});
 	});
 })(osinvoice.jQuery);
-
-	Joomla.submitbutton = function(task)
-	{		
-		if (task == 'cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
-			Joomla.submitform(task, document.getElementById('adminForm'));
-		}
-	}
 </script>	
 
 <?php echo $this->loadTemplate('edit_item');?>

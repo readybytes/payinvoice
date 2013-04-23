@@ -20,6 +20,17 @@ if(!defined( '_JEXEC' )){
 require_once dirname(__FILE__).'/view.php';
 class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 {		
+	protected function _adminEditToolbar()
+	{	
+		Rb_HelperToolbar::apply();
+		Rb_HelperToolbar::save();
+		Rb_HelperToolbar::save2new();
+		Rb_HelperToolbar::divider();
+		Rb_HelperToolbar::cancel();
+		Rb_HelperToolbar::divider();
+		Rb_HelperToolbar::custom('email', 'envelope.png', 'envelope_f2.png', 'OSINVOCIE_TOOLBAR_EMAIL', false);
+	}
+	
 	function _displayGrid($records)
 	{
 		$InvoiceIds = array();
@@ -88,5 +99,5 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 		$this->assign('xiee_invoice_fields', $xiee_invoice_fields);
         $this->assign('processor_id', $processor_id);      
 		return true;
-	}
+	}	
 }

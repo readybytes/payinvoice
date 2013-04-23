@@ -37,8 +37,22 @@ class OSInvoiceView extends OSInvoiceViewbase
 		// intialize input
 		$this->input = OSInvoiceFactory::getApplication()->input;
 		self::addSubmenus(array('dashboard', 'config' , 'invoice', 'processor', 'transaction', 'buyer'));
+		
+		if(!isset($this->_helper)){
+			$this->_helper = $this->getHelper();
+		}
+		
 		return $this;
 	}
+	
+	public function getHelper($name = '')
+	{
+		if(empty($name)){
+			$name = $this->getName();
+		}
+		
+		return OSInvoiceFactory::getHelper($name);
+	} 
 	
 	protected function _adminGridToolbar()
 	{

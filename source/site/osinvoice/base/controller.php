@@ -30,7 +30,16 @@ class OSInvoiceController extends Rb_Controller
 		}
 		
 		if(!isset($this->helper)){
-			$this->helper = OSInvoiceFactory::getHelper($this->getName());
+			$this->helper = $this->getHelper();
 		}
+	}
+	
+	public function getHelper($name = '')
+	{
+		if(empty($name)){
+			$name = $this->getName();
+		}
+		
+		return OSInvoiceFactory::getHelper($name);
 	}
 }

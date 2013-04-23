@@ -102,4 +102,9 @@ class OSInvoiceAdminControllerInvoice extends OSInvoiceController
 	    return parent::_remove();	
 		
 	}
+	
+	public function email()
+	{
+		return true;
+	}
 }

@@ -4,7 +4,7 @@
 * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		OSINVOICE
-* @subpackage	Back-end
+* @subpackage	Front-end
 * @contact		team@readybytes.in
 */
 
@@ -14,13 +14,8 @@ if(!defined( '_JEXEC' )){
 }
 
 /** 
- * Invoice Base View
+ * Email Controller
  * @author Gaurav Jain
  */
-class OSInvoiceAdminBaseViewInvoice extends OSInvoiceView
-{	
-	/**
-	 * @var OSInvoiceHelperInvoice
-	 */
-	public $_helper = null;	
-}
+class OSInvoiceSiteControllerEmail extends OSInvoiceController
+{}
