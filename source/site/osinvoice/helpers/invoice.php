@@ -3,7 +3,7 @@
 /**
 * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
-* @package 		OSI
+* @package 		OSINVOICE
 * @subpackage	Front-end
 * @contact		team@readybytes.in
 */
@@ -59,5 +59,24 @@ class OSInvoiceHelperInvoice extends JObject
 	{
 		$filter = array('object_type' => 'OSInvoiceInvoice', 'object_id' => $invoice_id, 'master_invoice_id' => 0);
 		return XiEEAPI::invoice_get($filter);
+	}
+	
+	public function get_invoice_status_type($status)
+	{
+	   $status_list  = XiEEAPI::invoice_get_status_list();
+	   $statusType   = $status_list[$status];
+	   
+	   if($statusType == "Paid"){
+	   	$class = 'label-success';
+	   }
+	   elseif ($statusType == "Pending" || $statusType == "Checkout"){
+	   	 $class = 'label-warning';
+	   }
+	   else {
+	   	$class = 'label-info';
+	   }
+	   
+	   $status_data  = array('status' => $statusType, 'class' => $class);
+	   return $status_data;
 	}
 }

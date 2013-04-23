@@ -47,6 +47,11 @@ JHtml::_('behavior.formvalidation');
 				<div class="control-label"><?php echo $form->getLabel('currency'); ?> </div>
 				<div class="controls"><?php echo $form->getInput('currency'); ?></div>								
 			</div>	
+			
+			<div class="control-group">
+				<div class="control-label"><?php echo $form->getLabel('terms_and_conditions'); ?> </div>
+				<div class="controls"><?php echo $form->getInput('terms_and_conditions'); ?></div>								
+			</div>
 	  
 	</div>				
 			
@@ -61,7 +66,6 @@ JHtml::_('behavior.formvalidation');
 					<div><a href="#" id="osinvoice-delete-logo" class="span3">Delete</a></div>
 				</div>								
 			</div>
-			
 			
 			<div class="control-group">
 				<div class="control-label"><?php echo $form->getLabel('company_name'); ?> </div>

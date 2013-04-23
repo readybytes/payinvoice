@@ -14,13 +14,13 @@ if(!defined( '_JEXEC' )){
 <div class="row well well-small">
 	   <div class="span8">
 		   <address>
-				<strong>ReadyBytes Software Labs 59,</strong><br>
-				Ashok Nagar Bhilwara <br>
-				Bhilwara, India <br>
-				Phone : 	+91 9982231113
+				<strong><?php echo $config_data['company_name'];?></strong><br>
+				<?php echo $config_data['company_address'];?> <br>
+				<?php echo $config_data['company_city'];?><br>
+				<abbr title="Phone"><?php echo Rb_Text::_('COM_OSINVOICE_COMPANY_PHONE_NO');?></abbr> (+91) <?php echo $config_data['company_phone'];?>
 			</address>
 	  	 </div>		   
 	   	<div class="span2 offset2">
-	   		<img src="components/com_osinvoice/templates/default/invoice/logo.png" class="img-polaroid">
+	   		<img src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);?>" class="img-polaroid">
    		</div>
 </div>

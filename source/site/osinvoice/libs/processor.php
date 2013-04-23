@@ -20,7 +20,7 @@ class OSInvoiceProcessor extends OSInvoiceLib
 	protected $title        	= '';
 	protected $description 	 	= '';
 	protected $type 			= '';
-	protected $published        = 0;
+	protected $published        = 1;
     protected $params           = null;
 	
 	public function reset()
@@ -29,7 +29,7 @@ class OSInvoiceProcessor extends OSInvoiceLib
 		$this->title                = '';
 		$this->description          = '';
 		$this->type       			= '';
-		$this->published            = 0;
+		$this->published            = 1;
 		$this->params 				= new Rb_Registry();
 		
 		return $this;

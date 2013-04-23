@@ -9,6 +9,13 @@
 				required="true">
 				<option value="">COM_OSINVOICE_SELECT_OPTION</option>
 		</field>
+		
+	 	<field 	name="terms_and_conditions" 
+				type="textarea"
+				label="COM_OSINVOICE_CONFIG_TERMS_AND_CONDITIONS" 
+				description="COM_OSINVOICE_CONFIG_TERMS_AND_CONDITIONS_DESC"
+		        />
+		
 	</fieldset>
         
 	<fieldset name="company_details">

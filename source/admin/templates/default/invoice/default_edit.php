@@ -20,7 +20,14 @@ JHtml::_('behavior.formvalidation');
 ?>
 <script type="text/javascript">
 (function($){
+
+	<?php if(isset($currency)) :?>
+		var osi_invoice_currency = '<?php echo $currency;?>';
+	<?php endif;?>
+	
  $(document).ready(function(){
+	 
+			osinvoice.admin.invoice.item.on_currency_change(osi_invoice_currency);
 				
 			$('#osinvoice_form_xiee_invoice_currency').change(function(){
 				var currency   = $(this).val();

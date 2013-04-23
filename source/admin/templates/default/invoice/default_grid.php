@@ -48,7 +48,7 @@ if(!defined( '_JEXEC' )){
                    	<td><?php echo OSInvoiceHtml::link('index.php?option=com_osinvoice&view=buyer&task=edit&id='.$invoice[$record->invoice_id]->buyer_id, $invoice[$record->invoice_id]->buyer_id.'('.$buyer[$invoice[$record->invoice_id]->buyer_id]->name.')');?></td>
                     <td><?php echo $invoice[$record->invoice_id]->object_type;?></td>
                     <td><?php echo $invoice[$record->invoice_id]->total;?></td>
-                    <td><?php echo $invoice[$record->invoice_id]->status;?></td>
+                    <td><?php echo Rb_Text::_($statusList[$invoice[$record->invoice_id]->status]);?></td>
 			<?php $count++;?>		
 			<?php endforeach;?>
 			</tbody>

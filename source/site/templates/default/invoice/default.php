@@ -35,26 +35,23 @@ if(!defined( '_JEXEC' )){
 	 		<div class="span5 offset7">
 	 		 		<dl class="dl-horizontal">
 					    <dt>Sub Total</dt>
-					    <dd>$<?php echo number_format($subtotal, 2);?></dd>
+					    <dd><?php echo $currency." ". number_format($subtotal, 2);?></dd>
 					    <dt>Discount</dt>
-					    <dd>$<?php echo number_format($discount, 2);?></dd>
+					    <dd><?php echo $currency." ". number_format($discount, 2);?></dd>
 					    <dt>Tax</dt>
-					    <dd><?php echo number_format($tax, 2);?>%</dd>
+					    <dd><?php echo number_format($tax, 2)." %";?></dd>
 					 </dl><hr>
 					 <dl class="dl-horizontal">
 					    <dt>Total</dt>
-					    <dd>$<?php echo number_format($xiee_invoice['total'], 2);?></dd>
+					    <dd><?php echo $currency." ".number_format($xiee_invoice['total'], 2);?></dd>
 				    </dl>
 	 		</div>
 	 	</div>
 	 	
 	 	<div class="row">
 	 	  	<div class="span7"> 
-	 	   		<label class="checkbox"><input type="checkbox">Terms and Conditions</label>
-	 	   		<dl class="span5">
-				    <dt>Note To Recieptent	</dt>
-				    <dd style="text-align:justify;"> This is for testing purpose.Thanks for using our products.Enjoy your business...</dd>
-			    </dl>
+	 	   		<label class="checkbox"><input type="checkbox"><strong><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_TERMS');?></strong><br>
+	 	   		<textarea rows="3"><?php echo $config_data['terms_and_conditions']?></textarea></label>
     		</div>   
 	 	   <div class="span5">
 		 	   <dl class="dl-horizontal">

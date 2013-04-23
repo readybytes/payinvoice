@@ -34,8 +34,8 @@ if(!defined( '_JEXEC' )){
 			<tr>
 			    <td><?php echo $item->title;?></td>
 			    <td><?php echo $item->quantity;?></td>
-			    <td>$<?php echo number_format($item->price, 2);?></td>
-			    <td>$<?php echo number_format($item->total, 2);?></td>
+			    <td><?php echo $currency." ".number_format($item->price, 2);?></td>
+			    <td><?php echo $currency." ".number_format($item->total, 2);?></td>
 		    </tr>
 		    <?php endforeach;?>
 		</tbody>
