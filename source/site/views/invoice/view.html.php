@@ -51,10 +51,12 @@ class OSInvoiceSiteViewInvoice extends OSInvoiceSiteBaseViewInvoice
 			$subtotal = $items_modifier->amount;
 		}
 		
-		$currency  		= OSInvoiceHelperFormat::getCurrency($xiee_invoice['currency'], 'symbol');
-		$status 		= OSInvoiceHelperInvoice::get_invoice_status_type($xiee_invoice['status']);
+		$formatHelper			= $this->getHelper('format');
+		$currency  				= $formatHelper->getCurrency($xiee_invoice['currency'], 'symbol');
+		$status 				= $this->_helper->get_invoice_status_type($xiee_invoice['status']);
 		
-		$configData     = OSInvoiceHelperConfig::get();
+		$config			= $this->getHelper('config');
+		$configData     = $config->get();
 			
 		$this->assign('tax', $tax);
 		$this->assign('discount', $discount);

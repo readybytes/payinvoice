@@ -46,6 +46,7 @@
 					default="Inv-01-"
 					label="COM_OSINVOICE_INVOICE_SERIAL"
 					description="COM_OSINVOICE_INVOICE_SERIAL_DESC"
+					required="true"
 					size="45"/>
 			
 			<field 	name="status" 
@@ -114,6 +115,8 @@
 			<field 	name="created_date"
 					type="calendar"
 					default="0"
+					format="%Y-%m-%d %H:%M:%S"
+			    	filter="user_utc"
 					label="COM_OSINVOICE_INVOICE_CREATED_DATE"
 					description="COM_OSINVOICE_INVOICE_CREATED_DATE_DESC"				
 					readonly="true"/>					
@@ -133,12 +136,14 @@
 			<field 	name="due_date"
 					type="calendar"					
 					label="COM_OSINVOICE_INVOICE_DUE_DATE"
-					description="COM_OSINVOICE_INVOICE_DUE_DATE_DESC"/>
+					description="COM_OSINVOICE_INVOICE_DUE_DATE_DESC"
+					class="input-medium" />
 					
 			<field 	name="issue_date"
 					type="calendar"					
 					label="COM_OSINVOICE_INVOICE_ISSUE_DATE"
-					description="COM_OSINVOICE_INVOICE_ISSUE_DATE_DESC"/>
+					description="COM_OSINVOICE_INVOICE_ISSUE_DATE_DESC"
+					class="input-medium" />
 			</fieldset>						
 	</fields>
 </form>

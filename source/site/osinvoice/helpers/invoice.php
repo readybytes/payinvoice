@@ -79,4 +79,16 @@ class OSInvoiceHelperInvoice extends JObject
 	   $status_data  = array('status' => $statusType, 'class' => $class);
 	   return $status_data;
 	}
+	
+    // get existing serial number
+	public function exist_serial_number($serial)
+	{
+		$filter			= array('serial' => $serial);
+		$serial_number	= XiEEAPI::invoice_get_records($filter);
+		if($serial_number){
+			return true;
+		}
+		
+		return false;
+	}
 }

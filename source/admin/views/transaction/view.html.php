@@ -22,15 +22,22 @@ class OSInvoiceAdminViewTransaction extends OSInvoiceAdminBaseViewTransaction
 {	
 	function _displayGrid($records)
 	{
-		$buyerIds = array();
+		$buyerIds 	= array();
+		$InvoiceIds	= array();
 		foreach($records as $record){
 			$buyerIds[] = $record->buyer_id;
+			$InvoiceIds[] = $record->invoice_id;
 		}
 		
-		$buyer = OSInvoiceHelperBuyer::get($buyerIds);
+		$filter = array('invoice_id' => array(array('IN', '('.implode(",", $InvoiceIds).')')));
+		$invoices = XiEEAPI::invoice_get_records($filter);
+		
+		$helper		= $this->getHelper('buyer');
+		$buyer 		= $helper->get($buyerIds);
         $statusList = XiEEAPI::response_get_status_list();
 		$this->assign('buyer', $buyer);
 		$this->assign('statusList', $statusList);
+        $this->assign('invoice', $invoices);
 		
 		return parent::_displayGrid($records);
 	}

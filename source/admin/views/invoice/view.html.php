@@ -46,8 +46,9 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 			$buyerIds[] = $invoice->buyer_id;
 		}
 		
-		$buyer = OSInvoiceHelperBuyer::get($buyerIds);
-		$statusList = XiEEAPI::invoice_get_status_list();
+		$buyerHelper	= $this->getHelper('buyer');
+		$buyer 			= $buyerHelper->get($buyerIds);
+		$statusList 	= XiEEAPI::invoice_get_status_list();
 		
 		$this->assign('invoice', $invoices);
 		$this->assign('buyer', $buyer);
@@ -91,7 +92,8 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 		 	$currency = $xiee_invoice['currency']; 	
 		}
 		else{
-			$currency = OSInvoiceHelperConfig::get('currency');
+			$helper		= $this->getHelper('config');
+			$currency 	= $helper->get('currency');
 			$form->bind(array('xiee_invoice' => array('currency' => $currency)));
 		}	
 		

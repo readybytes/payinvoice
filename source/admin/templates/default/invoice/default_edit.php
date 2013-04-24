@@ -39,6 +39,12 @@ JHtml::_('behavior.formvalidation');
 			  	var buyer   = $(this).val();
 			  	osinvoice.admin.invoice.item.on_buyer_change(buyer);
 				return false;
+			}),
+
+			$('#osinvoice_form_xiee_invoice_serial').change(function(){
+				var serial 	= $(this).val();
+				osinvoice.admin.invoice.item.on_serial_change(serial);
+				return false;	
 			});
 	});
 })(osinvoice.jQuery);
@@ -65,7 +71,9 @@ JHtml::_('behavior.formvalidation');
 						</div>
 						<div class="control-group">
 							<div class="control-label"><?php echo $xiee_invoice_fields['serial']->label;?></div>
-							<div class="controls"><?php echo $xiee_invoice_fields['serial']->input;?></div>								
+							<div class="controls"><?php echo $xiee_invoice_fields['serial']->input;?><br>
+								<span class="invoice-error"></span>
+							</div>							
 						</div>
 					</div>
 					

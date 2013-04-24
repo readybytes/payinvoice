@@ -25,7 +25,7 @@ class OSInvoiceAdminControllerBuyer extends OSInvoiceController
 		   $data['username'] = $data['email'];
 		}
 
-		$id = OSInvoiceHelperBuyer::storeUser($data);
+		$id = $this->_helper->storeUser($data);
 		if(!$id){
 			JFactory::getApplication()->enqueueMessage(JText::sprintf('COM_OSINVOICE_BUYER_NOT_SAVED'));
 			return true;
@@ -34,4 +34,19 @@ class OSInvoiceAdminControllerBuyer extends OSInvoiceController
 
 		return parent::_save($data, $itemId, $type);
 	}	
+    
+  	// Check email already registere or not
+	public function ajaxvalidateemail()
+	{
+		$args     	= $this->_getArgs();
+		$email		= $args['email'];
+		
+		$exist		= $this->_helper->getjoomlaUser('email', $email);
+		$response 	 = OSInvoiceFactory::getAjaxResponse();
+		if($exist){
+			$response->addScriptCall('osinvoice.jQuery("span.osi-email-error").html', Rb_Text::_('COM_OSINVOICE_EMAIL_ALREADY_EXIST'));
+			$response->addScriptCall('osinvoice.jQuery("#osinvoice_form_email").focus()');
+		}
+		$response->sendResponse();	
+	}
 }

@@ -83,4 +83,14 @@ class OSInvoiceHelperBuyer extends JObject
 		$filter = array('buyer_id' => array(array('IN', '('.implode(",", $buyerIds).')')));
 		return OSInvoiceFactory::getInstance('buyer', 'model')->loadRecords($filter);
 	}
+	
+	public function getjoomlaUser($key, $value)
+	{
+		$query	= new Rb_Query();
+		return $query->select('`id`')
+		                ->from('`#__users`')
+		                ->where('`'.$key.'` = '."'".$value."'")
+					 	->dbLoadQuery()
+					 	->loadResult();
+	}
 }

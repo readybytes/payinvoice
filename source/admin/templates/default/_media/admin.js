@@ -155,8 +155,23 @@ osinvoice.admin.invoice = {
 					var buyer   = {'event_args' :{'buyer' : buyer} };
 					var url 	= 'index.php?option=com_osinvoice&view=invoice&task=ajaxchangebuyer';
 					osinvoice.ajax.go(url, buyer);
+			},
+			
+			on_serial_change : function(serial){
+				var serial   = {'event_args' :{'serial' : serial} };
+				var url 	= 'index.php?option=com_osinvoice&view=invoice&task=ajaxchangeserial';
+				osinvoice.ajax.go(url, serial);
 			}
 		}		
+};
+
+osinvoice.admin.buyer = {		
+		on_email_change	: function(email){
+				var email   = {'event_args' :{'email' : email} };
+				var url 	= 'index.php?option=com_osinvoice&view=buyer&task=ajaxvalidateemail';
+				osinvoice.ajax.go(url, email);
+	
+		}
 };
 
 

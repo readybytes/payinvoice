@@ -48,7 +48,7 @@ if(!defined( '_JEXEC' )){
 					<td><?php echo OSInvoiceHtml::link($uri.'&task=edit&id='.$record->{$record_key}, $record->{$record_key}); ?></td>							
 					<td><?php echo OSInvoiceHtml::link('index.php?option=com_osinvoice&view=buyer&task=edit&id='.$record->buyer_id, $record->buyer_id.'('.$buyer[$record->buyer_id]->name.')');?>
 					     </td>
-					<td><?php echo $record->invoice_id;?></td>
+					<td><?php echo OSInvoiceHtml::link('index.php?option=com_osinvoice&view=invoice&task=edit&id='.$record->invoice_id, $record->invoice_id.'('.$invoice[$record->invoice_id]->title.')');?></td>
 					<td><?php echo $record->amount;?></td>
 					<td><?php echo Rb_Text::_($statusList[$record->payment_status]);?></td>
 					<td><?php echo Rb_Text::_($record->message);?></td>

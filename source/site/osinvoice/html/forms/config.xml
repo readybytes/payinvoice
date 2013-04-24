@@ -47,6 +47,7 @@
 				type="file"
 				label="COM_OSINVOICE_CONFIG_COMPANY_LOGO" 
 				description="COM_OSINVOICE_CONFIG_COMPANY_LOGO_DESC"
+				size="12"
 		        />
 
 	</fieldset>

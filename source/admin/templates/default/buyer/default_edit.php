@@ -19,12 +19,18 @@ JHtml::_('behavior.keepalive');
 JHtml::_('behavior.formvalidation');
 ?>
 <script type="text/javascript">
-       Joomla.submitbutton = function(task)
-       {
-               if (task == 'cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
-                       Joomla.submitform(task, document.getElementById('adminForm'));
-               }
-       }
+
+(function($){
+ $(document).ready(function(){
+	 				
+			$('#osinvoice_form_email').change(function(){
+			  	var email   = $(this).val();
+			  	osinvoice.admin.buyer.on_email_change(email);
+				return false;
+			});
+			
+	});
+})(osinvoice.jQuery);
 </script>
 
 <form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm">
@@ -49,7 +55,9 @@ JHtml::_('behavior.formvalidation');
 									 
 								    <div class="control-group">
 										<div class="control-label"><?php echo $form->getLabel('email'); ?> </div>
-										<div class="controls"><?php echo $form->getInput('email'); ?></div>	
+										<div class="controls"><?php echo $form->getInput('email'); ?>
+										<span class="osi-email-error"></span></div>
+										
 									</div>	
 									
 									<div class="control-group">

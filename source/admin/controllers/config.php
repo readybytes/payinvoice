@@ -34,7 +34,8 @@ class OSInvoiceAdminControllerConfig extends OSInvoiceController
 			$companylogo_imgname 	= $_FILES['osinvoice_form']['name']['company_logo'];
 			$supported_imageExt		= array("jpg","jpeg","png","gif");
 			$storage_path     		= OSINVOICE_PATH_IMAGES;
-			$logo_image				= OSInvoiceHelperUtils::saveUploadedFile($storage_path,$companylogo_imgpath,$companylogo_imgname,$supported_imageExt,"company_logo");
+			$utils					= $this->getHelper('utils');
+			$logo_image				= $utils->saveUploadedFile($storage_path,$companylogo_imgpath,$companylogo_imgname,$supported_imageExt,"company_logo");
 		    $data['company_logo'] 	= $logo_image;
 		}
 
@@ -50,14 +51,14 @@ class OSInvoiceAdminControllerConfig extends OSInvoiceController
 	
 	public function removelogo()
 	{
-		$response       = OSInvoiceFactory::getAjaxResponse();
+		$response       		= OSInvoiceFactory::getAjaxResponse();
 
-		$image   = OSInvoiceHelperConfig::get('company_logo');
-		$data['company_logo'] = '';
+		$image   				= $this->_helper->get('company_logo');
+		$data['company_logo'] 	= '';
 			
 		$extension      = JFile::getExt($image);
-        
-        OSInvoiceHelperUtils::removeFile(JPATH_ROOT.$image);
+		
+		$this->getHelper('utils')->removeFile(JPATH_ROOT.$image);
         $model 	= $this->getModel();
 		$model->save($data);
 		

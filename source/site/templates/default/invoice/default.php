@@ -50,8 +50,10 @@ if(!defined( '_JEXEC' )){
 	 	
 	 	<div class="row">
 	 	  	<div class="span7"> 
+	 	   		<?php if(!empty($config_data['terms_and_conditions'])):?>
 	 	   		<label class="checkbox"><input type="checkbox"><strong><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_TERMS');?></strong><br>
-	 	   		<textarea rows="3"><?php echo $config_data['terms_and_conditions']?></textarea></label>
+	 	   		<textarea rows="3" readonly="true"><?php echo $config_data['terms_and_conditions']?></textarea></label>
+	 	   		<?php endif;?>
     		</div>   
 	 	   <div class="span5">
 		 	   <dl class="dl-horizontal">

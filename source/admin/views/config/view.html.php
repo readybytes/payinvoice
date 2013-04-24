@@ -33,7 +33,7 @@ class OSInvoiceAdminViewConfig extends OSInvoiceAdminBaseViewConfig
 		$form->loadFile($file, false, '//config');
 		$records = $this->getModel()->loadRecords();
 		
-		$data = OSInvoiceHelperConfig::get();
+		$data 	= $this->_helper->get();
 		$form->bind($data);		
 		$this->assign('form', $form);
 		$this->assign('config_data', $data);
