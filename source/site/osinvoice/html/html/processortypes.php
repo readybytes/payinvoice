@@ -23,7 +23,7 @@ class OSInvoiceHtmlProcessortypes
 {
 	function edit($name, $value, $attr=null, $ignore=array())
 	{
-		$processor_data = XiEEAPI::get_processors_list();		
+		$processor_data = Rb_EcommerceAPI::get_processors_list();		
 		
 		$options = array();
 		if(isset($attr['none']))

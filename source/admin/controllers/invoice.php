@@ -41,13 +41,13 @@ class OSInvoiceAdminControllerInvoice extends OSInvoiceController
 		    $data['xiee_invoice']['processor_config']   = $processor->getProcessorconfig();
 		}
 						
-		// create invoice in XiEE, in $itemId is null
+		// create invoice in Rb_Ecommerce, in $itemId is null
 		if(!$itemId){
 			$data['xiee_invoice']['object_type'] 	 = 'OSInvoiceInvoice';
 			$data['xiee_invoice']['object_id'] 	 	 = $invoice->getId();
 			$data['xiee_invoice']['expiration_type'] = XIEE_EXPIRATION_TYPE_FIXED;
 			$data['xiee_invoice']['time_price'] = array('time' => array('000000000000'), 'price' => array('0.00'));
-			$invoice_id = XiEEAPI::invoice_create($data['xiee_invoice'], true); 
+			$invoice_id = Rb_EcommerceAPI::invoice_create($data['xiee_invoice'], true); 
 			$data['xiee_invoice']['invoice_id'] = $invoice_id;
 		}	
 		else{
@@ -59,7 +59,7 @@ class OSInvoiceAdminControllerInvoice extends OSInvoiceController
 		$this->_helper->create_modifier($invoice_id, 'OSInvoiceDiscount', -$data['discount'], 20);
 		$this->_helper->create_modifier($invoice_id, 'OSInvoiceTax', $data['tax'], 45, true);
 		
-		$invoice_id = XiEEAPI::invoice_update($invoice_id, $data['xiee_invoice'], true);
+		$invoice_id = Rb_EcommerceAPI::invoice_update($invoice_id, $data['xiee_invoice'], true);
 		
 		return $invoice;
 	}
@@ -98,11 +98,11 @@ class OSInvoiceAdminControllerInvoice extends OSInvoiceController
 	function _remove($itemId=null, $userId=null)
 	{
 		$filter  = array('object_id' => $itemId); 
-		$invoice = XiEEAPI::invoice_get_records($filter, array(), '',$orderby='object_id');
+		$invoice = Rb_EcommerceAPI::invoice_get_records($filter, array(), '',$orderby='object_id');
 		
 		$invoiceId = $invoice[$itemId]->invoice_id;
 		
-	    XiEEAPI::invoice_delete_record($invoiceId);
+	    Rb_EcommerceAPI::invoice_delete_record($invoiceId);
 	    
 	    return parent::_remove($itemId, $userId);	
 		

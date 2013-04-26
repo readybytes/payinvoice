@@ -28,7 +28,7 @@ class OSInvoiceModelformProcessor extends OSInvoiceModelform
 	function preprocessForm($form, $data)
 	{		
 		if(isset($data['type'])){	
-			$processor = XiEEAPI::get_processor_instance($data['type']);
+			$processor = Rb_EcommerceAPI::get_processor_instance($data['type']);
 			$file = $processor->getLocation().'/'.$processor->getName().'.xml';
 			$form->loadFile($file, false, '//config');
 		}

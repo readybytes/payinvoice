@@ -44,7 +44,7 @@ class OSInvoiceFormFieldCountries extends JFormFieldList
 
 		$value_field  = isset($this->element['value_field']) ? $this->element['value_field'] : 'isocode3';		
 		
-		$countries = XiEEAPI::country_get_records();
+		$countries = Rb_EcommerceAPI::country_get_records();
 				
 		foreach ($countries as $country){
 			$options[] = OSInvoiceHtml::_('select.option', $country->$value_field, $country->title);

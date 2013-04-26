@@ -43,7 +43,7 @@ class OSInvoiceFormFieldCurrencies extends JFormFieldList
 
 		$value_field  = isset($this->element['value_field']) ? $this->element['value_field'] : 'isocode3';
 
-		$currencies = XiEEAPI::currency_get_records();
+		$currencies = Rb_EcommerceAPI::currency_get_records();
 		
 		foreach ($currencies as $currency){
 			$options[] = OSInvoiceHtml::_('select.option', $currency->currency_id, $currency->title.' ('.$currency->currency_id.')');

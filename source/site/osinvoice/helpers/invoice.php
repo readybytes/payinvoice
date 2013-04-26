@@ -22,7 +22,7 @@ class OSInvoiceHelperInvoice extends JObject
 	public function create_modifier($invoice_id, $type, $amount, $serial, $is_percentage = false)
 	{
 		// get modifiers of item type on the current invoice
-		$modifiers = XiEEAPI::modifier_get($invoice_id, $type);
+		$modifiers = Rb_EcommerceAPI::modifier_get($invoice_id, $type);
 		
 		$found = false;
 		// there will be only modifier of each type
@@ -38,7 +38,7 @@ class OSInvoiceHelperInvoice extends JObject
 			$modifier->percentage = $is_percentage;			
 		}
 		else{
-			$invoice = XiEEAPI::invoice_get(array('invoice_id' => $invoice_id));
+			$invoice = Rb_EcommerceAPI::invoice_get(array('invoice_id' => $invoice_id));
 			$modifier = new stdClass();
 			$modifier->modifier_id 	= 0;				
 			$modifier->invoice_id 	= $invoice_id;
@@ -52,18 +52,18 @@ class OSInvoiceHelperInvoice extends JObject
 			$modifier->frequency	= 'ONLY_THIS';	
 		}
 		
-		XiEEAPI::modifier_create($modifier);
+		Rb_EcommerceAPI::modifier_create($modifier);
 	}
 	
 	public function get_xiee_invoice($invoice_id)
 	{
 		$filter = array('object_type' => 'OSInvoiceInvoice', 'object_id' => $invoice_id, 'master_invoice_id' => 0);
-		return XiEEAPI::invoice_get($filter);
+		return Rb_EcommerceAPI::invoice_get($filter);
 	}
 	
 	public function get_invoice_status_type($status)
 	{
-	   $status_list  = XiEEAPI::invoice_get_status_list();
+	   $status_list  = Rb_EcommerceAPI::invoice_get_status_list();
 	   $statusType   = $status_list[$status];
 	   
 	   if($statusType == "Paid"){
@@ -84,7 +84,7 @@ class OSInvoiceHelperInvoice extends JObject
 	public function exist_serial_number($serial)
 	{
 		$filter			= array('serial' => $serial);
-		$serial_number	= XiEEAPI::invoice_get_records($filter);
+		$serial_number	= Rb_EcommerceAPI::invoice_get_records($filter);
 		if($serial_number){
 			return true;
 		}
@@ -96,7 +96,7 @@ class OSInvoiceHelperInvoice extends JObject
 	public function get_discount($invoice_id)
 	{
 		$discount 	= 0.00;		
-		$discount_modifier = XiEEAPI::modifier_get($invoice_id, 'OSInvoiceDiscount');
+		$discount_modifier = Rb_EcommerceAPI::modifier_get($invoice_id, 'OSInvoiceDiscount');
 		if($discount_modifier != false){
 			$discount_modifier = array_pop($discount_modifier);
 			$discount = -$discount_modifier->amount;
@@ -108,7 +108,7 @@ class OSInvoiceHelperInvoice extends JObject
 	public function get_tax($invoice_id)
 	{
 		$tax 		= 0.00;
-		$tax_modifier = XiEEAPI::modifier_get($invoice_id, 'OSInvoiceTax');
+		$tax_modifier = Rb_EcommerceAPI::modifier_get($invoice_id, 'OSInvoiceTax');
 		if($tax_modifier != false){
 			$tax_modifier = array_pop($tax_modifier);
 			$tax = $tax_modifier->amount;
@@ -120,7 +120,7 @@ class OSInvoiceHelperInvoice extends JObject
 	public function get_subtotal($invoice_id)
 	{
 		$subtotal = 0.00;
-		$items_modifier = XiEEAPI::modifier_get($invoice_id, 'OSInvoiceItem');
+		$items_modifier = Rb_EcommerceAPI::modifier_get($invoice_id, 'OSInvoiceItem');
 		if($items_modifier != false){
 			$items_modifier = array_pop($items_modifier);
 			$subtotal = $items_modifier->amount;

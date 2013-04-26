@@ -14,7 +14,7 @@ class OSInvoiceHelperFormat extends JObject
 	public static function getCurrency($itemId, $format = null)
 	{
 	   $currencyId	= array('currency_id' => $itemId);
-	   $currencies 	= XiEEAPI::currency_get_records($currencyId);
+	   $currencies 	= Rb_EcommerceAPI::currency_get_records($currencyId);
 	   
 	   if(!isset($format) || $format == 'fullname'){
 			return $currencies[$itemId]->title.' ('. $currencies[$itemId]->currency_id .')';

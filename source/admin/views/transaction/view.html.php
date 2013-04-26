@@ -30,11 +30,11 @@ class OSInvoiceAdminViewTransaction extends OSInvoiceAdminBaseViewTransaction
 		}
 		
 		$filter = array('invoice_id' => array(array('IN', '('.implode(",", $InvoiceIds).')')));
-		$invoices = XiEEAPI::invoice_get_records($filter);
+		$invoices = Rb_EcommerceAPI::invoice_get_records($filter);
 		
 		$helper		= $this->getHelper('buyer');
 		$buyer 		= $helper->get($buyerIds);
-        $statusList = XiEEAPI::response_get_status_list();
+        $statusList = Rb_EcommerceAPI::response_get_status_list();
 		$this->assign('buyer', $buyer);
 		$this->assign('statusList', $statusList);
         $this->assign('invoice', $invoices);
@@ -45,9 +45,9 @@ class OSInvoiceAdminViewTransaction extends OSInvoiceAdminBaseViewTransaction
 	function edit($tpl=null,$itemId = null)
 	{
 		$itemId  		= ($itemId === null) ? $this->getModel()->getState('id') : $itemId ;
-		$transaction   	= XiEEAPI::transaction_get_record($itemId);
+		$transaction   	= Rb_EcommerceAPI::transaction_get_record($itemId);
 		
-		$invoice		= XiEEAPI::invoice_get_records(array('invoice_id' => $transaction['invoice_id']));
+		$invoice		= Rb_EcommerceAPI::invoice_get_records(array('invoice_id' => $transaction['invoice_id']));
 		$buyer			= $this->getHelper('buyer')->get($transaction['buyer_id']);;
 		
 		$this->assign('transaction', $transaction);	

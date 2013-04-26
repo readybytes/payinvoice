@@ -27,7 +27,7 @@ class OSInvoiceSiteViewInvoice extends OSInvoiceSiteBaseViewInvoice
 
 		// XITODO : use helper function
 		$filter = array('object_type' => 'OSInvoiceInvoice', 'object_id' => $itemid, 'master_invoice_id' => 0);
-		$xiee_invoice = XiEEAPI::invoice_get($filter);
+		$xiee_invoice = Rb_EcommerceAPI::invoice_get($filter);
 		$buyer   = OSInvoiceBuyer::getInstance($xiee_invoice['buyer_id']);
 		
 		$discount	=  $this->_helper->get_discount($itemid);

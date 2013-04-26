@@ -21,12 +21,12 @@ class OSInvoiceAdminControllerTransaction extends OSInvoiceController
 {
 	public function getModel()
 	{
-        return XiEEAPI::transaction_get_model();
+        return Rb_EcommerceAPI::transaction_get_model();
 	}
 	
 	function _remove($itemId=null, $userId=null)
 	{
-		return XiEEAPI::transaction_delete_record($itemId);	
+		return Rb_EcommerceAPI::transaction_delete_record($itemId);	
 	}
 
 }

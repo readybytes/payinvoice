@@ -48,7 +48,7 @@ class OSInvoiceAdminViewProcessor extends OSInvoiceAdminBaseViewProcessor
 	
 	public function selectProcessor()
 	{
-		$processors = XiEEAPI::get_processors_list();
+		$processors = Rb_EcommerceAPI::get_processors_list();
 		$this->assign('processors', $processors);
 		
 		$this->setTpl('select_processor');

@@ -35,9 +35,9 @@ class OSInvoiceSiteControllerInvoice extends OSInvoiceController
 		// save the processor configuration
 		$xiee_invoice['processor_type'] 	= $processor->getType();
 		$xiee_invoice['processor_config'] 	= $processor->getParams();
-		XiEEApi::invoice_update($xiee_invoice['invoice_id'], $xiee_invoice);
+		Rb_EcommerceApi::invoice_update($xiee_invoice['invoice_id'], $xiee_invoice);
 		
-		$this->getView()->assign('response', XiEEApi::invoice_request('build', $xiee_invoice['invoice_id'], array()));
+		$this->getView()->assign('response', Rb_EcommerceApi::invoice_request('build', $xiee_invoice['invoice_id'], array()));
 		return true;		
 	}
 	
@@ -50,8 +50,8 @@ class OSInvoiceSiteControllerInvoice extends OSInvoiceController
 		$request_name = 'payment';
 		
 		while(true){
-			$req_response 	= XiEEApi::invoice_request($request_name, $xiee_invoice['invoice_id'], $data);
-			$response 		= XiEEApi::invoice_process($xiee_invoice['invoice_id'], $req_response);
+			$req_response 	= Rb_EcommerceApi::invoice_request($request_name, $xiee_invoice['invoice_id'], $data);
+			$response 		= Rb_EcommerceApi::invoice_process($xiee_invoice['invoice_id'], $req_response);
 						
 			if($response->get('next_request', false) == false){
 				break;
@@ -80,7 +80,7 @@ class OSInvoiceSiteControllerInvoice extends OSInvoiceController
 		}
 		
 		$processor_type   = $data['processor'];
-		$invoice_id 	  = XiEEAPI::invoice_get_from_response($processor_type, $response);		
-		$response = XiEEApi::invoice_process($invoice_id, $response);			
+		$invoice_id 	  = Rb_EcommerceAPI::invoice_get_from_response($processor_type, $response);		
+		$response 		  = Rb_EcommerceApi::invoice_process($invoice_id, $response);			
 	}
 }

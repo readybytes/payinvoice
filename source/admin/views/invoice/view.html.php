@@ -39,7 +39,7 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 		}
 		
 		$filter = array('object_id' => array(array('IN', '('.implode(",", $InvoiceIds).')')), 'master_invoice_id' => 0);
-		$invoices = XiEEAPI::invoice_get_records($filter, array(), '',$orderby='object_id');
+		$invoices = Rb_EcommerceAPI::invoice_get_records($filter, array(), '',$orderby='object_id');
 		
 		$buyerIds  = array();
 		foreach ($invoices as $invoice){
@@ -48,7 +48,7 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 		
 		$buyerHelper	= $this->getHelper('buyer');
 		$buyer 			= $buyerHelper->get($buyerIds);
-		$statusList 	= XiEEAPI::invoice_get_status_list();
+		$statusList 	= Rb_EcommerceAPI::invoice_get_status_list();
 		
 		$this->assign('invoice', $invoices);
 		$this->assign('buyer', $buyer);
@@ -75,16 +75,16 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 		$tax 		= 0.00;
 
 		if($itemId){
-			$xiee_invoice = XiEEAPI::invoice_get(array('object_type' => 'OSInvoiceInvoice', 'object_id' => $itemId, 'master_invoice_id' => 0));						
+			$xiee_invoice = Rb_EcommerceAPI::invoice_get(array('object_type' => 'OSInvoiceInvoice', 'object_id' => $itemId, 'master_invoice_id' => 0));						
 			$form->bind(array('xiee_invoice' => $xiee_invoice)); 
 			
-			$discount_modifier = XiEEAPI::modifier_get($xiee_invoice['invoice_id'], 'OSInvoiceDiscount');
+			$discount_modifier = Rb_EcommerceAPI::modifier_get($xiee_invoice['invoice_id'], 'OSInvoiceDiscount');
 			if($discount_modifier != false){
 				$discount_modifier = array_pop($discount_modifier);
 				$discount = -$discount_modifier->amount;
 			}
 			
-			$tax_modifier = XiEEAPI::modifier_get($xiee_invoice['invoice_id'], 'OSInvoiceTax');
+			$tax_modifier = Rb_EcommerceAPI::modifier_get($xiee_invoice['invoice_id'], 'OSInvoiceTax');
 			if($tax_modifier != false){
 				$tax_modifier = array_pop($tax_modifier);
 				$tax = $tax_modifier->amount;
