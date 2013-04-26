@@ -42,4 +42,18 @@ class OSInvoiceAdminViewTransaction extends OSInvoiceAdminBaseViewTransaction
 		return parent::_displayGrid($records);
 	}
 	
+	function edit($tpl=null,$itemId = null)
+	{
+		$itemId  		= ($itemId === null) ? $this->getModel()->getState('id') : $itemId ;
+		$transaction   	= XiEEAPI::transaction_get_record($itemId);
+		
+		$invoice		= XiEEAPI::invoice_get_records(array('invoice_id' => $transaction['invoice_id']));
+		$buyer			= $this->getHelper('buyer')->get($transaction['buyer_id']);;
+		
+		$this->assign('transaction', $transaction);	
+		$this->assign('invoice', $invoice);	
+		$this->assign('buyer', $buyer);	
+		return true;	
+	}
+	
 }

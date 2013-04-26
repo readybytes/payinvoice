@@ -1,0 +1,17 @@
+/**
+* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @license		GNU/GPL, see LICENSE.php
+* @package		OSINVOICE
+* @subpackage	Backend
+* @contact 		joomlaxi@readybytes.in
+*/
+
+/* Compatiblity with J2.5, radio buttons are not looking proper */
+.osinvoice fieldset.btn-group label.btn {
+	clear : none;
+}
+
+.osinvoice .error {
+   color:red;	
+}
+

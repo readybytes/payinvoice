@@ -30,26 +30,9 @@ class OSInvoiceSiteViewInvoice extends OSInvoiceSiteBaseViewInvoice
 		$xiee_invoice = XiEEAPI::invoice_get($filter);
 		$buyer   = OSInvoiceBuyer::getInstance($xiee_invoice['buyer_id']);
 		
-		$discount 	= 0.00;		
-		$discount_modifier = XiEEAPI::modifier_get($itemid, 'OSInvoiceDiscount');
-		if($discount_modifier != false){
-			$discount_modifier = array_pop($discount_modifier);
-			$discount = -$discount_modifier->amount;
-		}
-		
-		$tax 		= 0.00;
-		$tax_modifier = XiEEAPI::modifier_get($itemid, 'OSInvoiceTax');
-		if($tax_modifier != false){
-			$tax_modifier = array_pop($tax_modifier);
-			$tax = $tax_modifier->amount;
-		}
-		
-		$subtotal = 0.00;
-		$items_modifier = XiEEAPI::modifier_get($itemid, 'OSInvoiceItem');
-		if($items_modifier != false){
-			$items_modifier = array_pop($items_modifier);
-			$subtotal = $items_modifier->amount;
-		}
+		$discount	=  $this->_helper->get_discount($itemid);
+		$tax		=  $this->_helper->get_tax($itemid);
+		$subtotal	=  $this->_helper->get_subtotal($itemid);
 		
 		$formatHelper			= $this->getHelper('format');
 		$currency  				= $formatHelper->getCurrency($xiee_invoice['currency'], 'symbol');

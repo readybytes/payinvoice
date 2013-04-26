@@ -46,6 +46,8 @@ class OSInvoiceAdminControllerBuyer extends OSInvoiceController
 		if($exist){
 			$response->addScriptCall('osinvoice.jQuery("span.osi-email-error").html', Rb_Text::_('COM_OSINVOICE_EMAIL_ALREADY_EXIST'));
 			$response->addScriptCall('osinvoice.jQuery("#osinvoice_form_email").focus()');
+		}else {
+			$response->addScriptCall('osinvoice.jQuery("span.osi-email-error").html', "");
 		}
 		$response->sendResponse();	
 	}

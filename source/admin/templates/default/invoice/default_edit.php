@@ -72,7 +72,7 @@ JHtml::_('behavior.formvalidation');
 						<div class="control-group">
 							<div class="control-label"><?php echo $xiee_invoice_fields['serial']->label;?></div>
 							<div class="controls"><?php echo $xiee_invoice_fields['serial']->input;?><br>
-								<span class="invoice-error"></span>
+								<span class="invoice-error error"></span>
 							</div>							
 						</div>
 					</div>

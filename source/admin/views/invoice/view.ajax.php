@@ -33,6 +33,23 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 		$email_view->assign('xiee_invoice', $xiee_invoice);
 		$email_view->assign('invoice', OSInvoiceInvoice::getInstance($invoice_id)->toArray());
 		
+		$configData	= $this->getHelper('config')->get();
+		$email_view->assign('config_data', $configData);
+		
+		$buyer	= $this->getHelper('buyer')->get($xiee_invoice['buyer_id']);
+		$email_view->assign('buyer', $buyer);
+		
+		$currency = $this->getHelper('format')->getCurrency($xiee_invoice['currency'], 'symbol');
+		$email_view->assign('currency', $currency);
+		
+		$discount	=  $this->_helper->get_discount($invoice_id);
+		$tax		=  $this->_helper->get_tax($invoice_id);
+		$subtotal	=  $this->_helper->get_subtotal($invoice_id);
+		
+		$email_view->assign('tax', $tax);
+		$email_view->assign('discount', $discount);
+		$email_view->assign('subtotal', $subtotal);
+		
 		// email content
 		$body 	 = $email_view->loadTemplate('invoice');
 		$subject = Rb_Text::_('COM_OSINVOICE_INVOICE_SEND_EMAIL_SUBJECT');

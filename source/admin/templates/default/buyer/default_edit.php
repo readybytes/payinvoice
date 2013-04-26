@@ -55,8 +55,8 @@ JHtml::_('behavior.formvalidation');
 									 
 								    <div class="control-group">
 										<div class="control-label"><?php echo $form->getLabel('email'); ?> </div>
-										<div class="controls"><?php echo $form->getInput('email'); ?>
-										<span class="osi-email-error"></span></div>
+										<div class="controls"><?php echo $form->getInput('email'); ?><br>
+										<span class="osi-email-error error"></span></div>
 										
 									</div>	
 									

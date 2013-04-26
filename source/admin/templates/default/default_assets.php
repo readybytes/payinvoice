@@ -18,6 +18,7 @@ Rb_HelperTemplate::loadSetupScripts();
 
 Rb_Html::script(OSINVOICE_PATH_CORE_MEDIA.'/js/osinvoice.js');
 Rb_Html::script(dirname(__FILE__).'/_media/admin.js');
+Rb_Html::stylesheet(dirname(__FILE__).'/_media/css/admin.css');
 
 // load bootsrap css
 Rb_Html::_('bootstrap.loadcss');

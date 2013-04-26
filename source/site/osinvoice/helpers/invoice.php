@@ -91,4 +91,41 @@ class OSInvoiceHelperInvoice extends JObject
 		
 		return false;
 	}
+	
+	// get discount through modifiers
+	public function get_discount($invoice_id)
+	{
+		$discount 	= 0.00;		
+		$discount_modifier = XiEEAPI::modifier_get($invoice_id, 'OSInvoiceDiscount');
+		if($discount_modifier != false){
+			$discount_modifier = array_pop($discount_modifier);
+			$discount = -$discount_modifier->amount;
+		}
+		return $discount;
+	}
+	
+    // get tax through modifiers
+	public function get_tax($invoice_id)
+	{
+		$tax 		= 0.00;
+		$tax_modifier = XiEEAPI::modifier_get($invoice_id, 'OSInvoiceTax');
+		if($tax_modifier != false){
+			$tax_modifier = array_pop($tax_modifier);
+			$tax = $tax_modifier->amount;
+		}
+		return $tax;
+	}
+	
+	// get subtotal through modifiers
+	public function get_subtotal($invoice_id)
+	{
+		$subtotal = 0.00;
+		$items_modifier = XiEEAPI::modifier_get($invoice_id, 'OSInvoiceItem');
+		if($items_modifier != false){
+			$items_modifier = array_pop($items_modifier);
+			$subtotal = $items_modifier->amount;
+		}
+		return $subtotal;
+	}
+	
 }

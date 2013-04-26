@@ -122,8 +122,10 @@ class OSInvoiceAdminControllerInvoice extends OSInvoiceController
 		$serial				= $this->_helper->exist_serial_number($invoice_serial);
 		$response 		    = OSInvoiceFactory::getAjaxResponse();
 		if($serial){	
-			$response->addScriptCall('osinvoice.jQuery("span.invoice-error").html', "<div>".Rb_Text::_('COM_OSINVOICE_INVOICE_SERIAL_ALREADY_EXIST')."</div>");
+			$response->addScriptCall('osinvoice.jQuery("span.invoice-error").html',Rb_Text::_('COM_OSINVOICE_INVOICE_SERIAL_ALREADY_EXIST'));
 			$response->addScriptCall('osinvoice.jQuery("#osinvoice_form_xiee_invoice_serial").focus()');
+		}else {
+			$response->addScriptCall('osinvoice.jQuery("span.invoice-error").html', "");
 		}
 		$response->sendResponse();
 	}
