@@ -22,7 +22,7 @@ class OSInvoiceSiteControllerInvoice extends OSInvoiceController
 	/**
 	 * @var OSInvoiceHelperInvoice
 	 */
-	public $helper = null;
+	public $_helper = null;
 	
 	public function ajaxRequestBuildForm()
 	{
@@ -30,7 +30,7 @@ class OSInvoiceSiteControllerInvoice extends OSInvoiceController
 		$args 			= $this->_getArgs();
 		$processor_id 	= $args['processor_id'];		
 		$processor 		= OSInvoiceProcessor::getInstance($processor_id);
-		$rb_invoice 	= $this->helper->get_rb_invoice($itemid);
+		$rb_invoice 	= $this->_helper->get_rb_invoice($itemid);
 		
 		// save the processor configuration
 		$rb_invoice['processor_type'] 	= $processor->getType();
@@ -45,7 +45,7 @@ class OSInvoiceSiteControllerInvoice extends OSInvoiceController
 	{
 		$data 			= Rb_Factory::getApplication()->input->post->get('payment_data', array(), 'array');		
 		$itemid 		= $this->_getId();
-		$rb_invoice 	= $this->helper->get_rb_invoice($itemid);		
+		$rb_invoice 	= $this->_helper->get_rb_invoice($itemid);		
 		
 		$request_name = 'payment';
 		
