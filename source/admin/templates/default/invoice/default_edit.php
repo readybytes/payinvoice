@@ -29,19 +29,19 @@ JHtml::_('behavior.formvalidation');
 	 
 			osinvoice.admin.invoice.item.on_currency_change(osi_invoice_currency);
 				
-			$('#osinvoice_form_xiee_invoice_currency').change(function(){
+			$('#osinvoice_form_rb_invoice_currency').change(function(){
 				var currency   = $(this).val();
 				osinvoice.admin.invoice.item.on_currency_change(currency);
 				return false;
 			}),
 
-			$('#osinvoice_form_xiee_invoice_buyer_id').change(function(){
+			$('#osinvoice_form_rb_invoice_buyer_id').change(function(){
 			  	var buyer   = $(this).val();
 			  	osinvoice.admin.invoice.item.on_buyer_change(buyer);
 				return false;
 			}),
 
-			$('#osinvoice_form_xiee_invoice_serial').change(function(){
+			$('#osinvoice_form_rb_invoice_serial').change(function(){
 				var serial 	= $(this).val();
 				osinvoice.admin.invoice.item.on_serial_change(serial);
 				return false;	
@@ -62,16 +62,16 @@ JHtml::_('behavior.formvalidation');
 				<div class="row-fluid well well-large">					
 					<div class="span6">		
 						<div class="control-group">
-							<div class="control-label"><?php echo $xiee_invoice_fields['title']->label;?></div>
-							<div class="controls"><?php echo $xiee_invoice_fields['title']->input;?></div>								
+							<div class="control-label"><?php echo $rb_invoice_fields['title']->label;?></div>
+							<div class="controls"><?php echo $rb_invoice_fields['title']->input;?></div>								
 						</div>
 						<div class="control-group">
-							<div class="control-label"><?php echo $xiee_invoice_fields['buyer_id']->label;?></div>
-							<div class="controls"><?php echo $xiee_invoice_fields['buyer_id']->input;?></div>								
+							<div class="control-label"><?php echo $rb_invoice_fields['buyer_id']->label;?></div>
+							<div class="controls"><?php echo $rb_invoice_fields['buyer_id']->input;?></div>								
 						</div>
 						<div class="control-group">
-							<div class="control-label"><?php echo $xiee_invoice_fields['serial']->label;?></div>
-							<div class="controls"><?php echo $xiee_invoice_fields['serial']->input;?><br>
+							<div class="control-label"><?php echo $rb_invoice_fields['serial']->label;?></div>
+							<div class="controls"><?php echo $rb_invoice_fields['serial']->input;?><br>
 								<span class="invoice-error error"></span>
 							</div>							
 						</div>
@@ -79,16 +79,16 @@ JHtml::_('behavior.formvalidation');
 					
 					<div class="span6">
 						<div class="control-group">
-							<div class="control-label"><?php echo $xiee_invoice_fields['currency']->label;?></div>
-							<div class="controls"><?php echo $xiee_invoice_fields['currency']->input;?></div>								
+							<div class="control-label"><?php echo $rb_invoice_fields['currency']->label;?></div>
+							<div class="controls"><?php echo $rb_invoice_fields['currency']->input;?></div>								
 						</div>						
 						<div class="control-group">
-							<div class="control-label"><?php echo $xiee_invoice_fields['issue_date']->label;?></div>
-							<div class="controls"><?php echo $xiee_invoice_fields['issue_date']->input;?></div>								
+							<div class="control-label"><?php echo $rb_invoice_fields['issue_date']->label;?></div>
+							<div class="controls"><?php echo $rb_invoice_fields['issue_date']->input;?></div>								
 						</div>
 						<div class="control-group">
-							<div class="control-label"><?php echo $xiee_invoice_fields['due_date']->label;?></div>
-							<div class="controls"><?php echo $xiee_invoice_fields['due_date']->input;?></div>								
+							<div class="control-label"><?php echo $rb_invoice_fields['due_date']->label;?></div>
+							<div class="controls"><?php echo $rb_invoice_fields['due_date']->input;?></div>								
 						</div>
 					</div>			
 				</div>
@@ -156,9 +156,9 @@ JHtml::_('behavior.formvalidation');
 				<!-- END : Total -->
 				
 				
-				<?php echo $xiee_invoice_fields['notes']->label;?>
+				<?php echo $rb_invoice_fields['notes']->label;?>
 				<hr>
-				<?php echo $xiee_invoice_fields['notes']->input;?>								
+				<?php echo $rb_invoice_fields['notes']->input;?>								
 
 			</div>			
 		</div>
@@ -168,5 +168,5 @@ JHtml::_('behavior.formvalidation');
 	<input type="hidden" name="task" value="save" />
 	<?php echo $form->getInput('type');?>
 	<?php echo $form->getInput('invoice_id');?>
-	<?php echo $xiee_invoice_fields['invoice_id']->input;?>
+	<?php echo $rb_invoice_fields['invoice_id']->input;?>
 </form>

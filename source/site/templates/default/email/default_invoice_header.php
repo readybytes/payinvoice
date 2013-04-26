@@ -49,7 +49,7 @@ if(!defined( '_JEXEC' )){
 		<!-- company names -->
 		<tr>		
 			<td height="110;" valign="top">
-				<h3 style="font-family: caption;"><?php echo $buyer[$xiee_invoice['buyer_id']]->name."<br>".$buyer[$xiee_invoice['buyer_id']]->email."<br>".$buyer[$xiee_invoice['buyer_id']]->address."<br>".$buyer[$xiee_invoice['buyer_id']]->city.",".$buyer[$xiee_invoice['buyer_id']]->country;?></h3>
+				<h3 style="font-family: caption;"><?php echo $buyer[$rb_invoice['buyer_id']]->name."<br>".$buyer[$rb_invoice['buyer_id']]->email."<br>".$buyer[$rb_invoice['buyer_id']]->address."<br>".$buyer[$rb_invoice['buyer_id']]->city.",".$buyer[$rb_invoice['buyer_id']]->country;?></h3>
 			</td>
 						
 			<td  height="110;" valign="bottom">
@@ -60,7 +60,7 @@ if(!defined( '_JEXEC' )){
 								<?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_NUMBER');?>
 							</td>
 							<td style="text-align:right">
-									<?php echo $xiee_invoice['serial'];?>
+									<?php echo $rb_invoice['serial'];?>
 							</td>
 						</tr>
 						<tr>
@@ -68,15 +68,15 @@ if(!defined( '_JEXEC' )){
 									<?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_DUE_DATE');?>
 							</td>
 							<td style="text-align:right">
-									<?php echo $xiee_invoice['due_date'];?>
+									<?php echo $rb_invoice['due_date'];?>
 							</td>
 						</tr>
 						<tr>
 							<td style="background-color:#eee">
-									<?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_AMOUNT');?>
+									<?php echo Rb_Text::_('COM_OSINVOICE_AMOUNT');?>
 							</td>
 							<td style="text-align:right">
-									<?php echo $currency." ".number_format($xiee_invoice['total'], 2);?>
+									<?php echo $currency." ".number_format($rb_invoice['total'], 2);?>
 							</td>
 						</tr>
 					</tbody>

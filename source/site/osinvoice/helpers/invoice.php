@@ -55,7 +55,7 @@ class OSInvoiceHelperInvoice extends JObject
 		Rb_EcommerceAPI::modifier_create($modifier);
 	}
 	
-	public function get_xiee_invoice($invoice_id)
+	public function get_rb_invoice($invoice_id)
 	{
 		$filter = array('object_type' => 'OSInvoiceInvoice', 'object_id' => $invoice_id, 'master_invoice_id' => 0);
 		return Rb_EcommerceAPI::invoice_get($filter);

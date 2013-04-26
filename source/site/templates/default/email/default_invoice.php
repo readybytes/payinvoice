@@ -28,7 +28,7 @@ if(!defined( '_JEXEC' )){
 							<tbody>
 								<tr>
 									<td height="20px" align="center" style="background-color: #222222;">
-										<h1 style="color: #FFFFFF;font-family: arial;font-size: 15px;font-weight: bold;letter-spacing: 18px;margin: 0; padding: 5px;"><?php echo $xiee_invoice['title'];?></h1>
+										<h1 style="color: #FFFFFF;font-family: arial;font-size: 15px;font-weight: bold;letter-spacing: 18px;margin: 0; padding: 5px;"><?php echo $rb_invoice['title'];?></h1>
 									</td>
 								</tr>
 								

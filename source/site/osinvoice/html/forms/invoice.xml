@@ -11,8 +11,8 @@
 				readonly="true"/>
 	</fieldset>
 	
-	<fields name="xiee_invoice">
-		<fieldset name="xiee_invoice">
+	<fields name="rb_invoice">
+		<fieldset name="rb_invoice">
 			<field 	name="invoice_id" 
 					type="hidden"
 					default="0"

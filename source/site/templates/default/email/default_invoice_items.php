@@ -55,7 +55,7 @@ if(!defined( '_JEXEC' )){
 			<td colspan="2" style="padding:10px 5px 10px 7px;border: 0;">&nbsp;
 			</td>
 			<td align="right"  style="padding:10px 5px 10px 7px;background-color:#eee;border-right:0px"><?php echo Rb_Text::_('COM_OSINVOICE_TOTAL')?></td>
-			<td style="border-left:0px;background-color:#eee;">&nbsp;&nbsp;<?php echo $currency." ".number_format($xiee_invoice['total'], 2);?></td>
+			<td style="border-left:0px;background-color:#eee;">&nbsp;&nbsp;<?php echo $currency." ".number_format($rb_invoice['total'], 2);?></td>
 		</tr>
 																
 	</tbody>

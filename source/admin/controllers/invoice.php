@@ -26,7 +26,7 @@ class OSInvoiceAdminControllerInvoice extends OSInvoiceController
 	public function _save(array $data, $itemId=null, $type=null)
 	{
 		// If Serial number already exist then do nothing
-		$serial_exist	= $this->_helper->exist_serial_number($data['xiee_invoice']['serial']);
+		$serial_exist	= $this->_helper->exist_serial_number($data['rb_invoice']['serial']);
 		if(!$itemId && $serial_exist){
 			return true;
 		}
@@ -37,21 +37,21 @@ class OSInvoiceAdminControllerInvoice extends OSInvoiceController
 	   if(!empty($data['params']['processor_id'])){
 		    $processor = OSInvoiceProcessor::getInstance($data['params']['processor_id']);
 	
-		    $data['xiee_invoice']['processor_type']     = $processor->getType();
-		    $data['xiee_invoice']['processor_config']   = $processor->getProcessorconfig();
+		    $data['rb_invoice']['processor_type']     = $processor->getType();
+		    $data['rb_invoice']['processor_config']   = $processor->getProcessorconfig();
 		}
 						
 		// create invoice in Rb_Ecommerce, in $itemId is null
 		if(!$itemId){
-			$data['xiee_invoice']['object_type'] 	 = 'OSInvoiceInvoice';
-			$data['xiee_invoice']['object_id'] 	 	 = $invoice->getId();
-			$data['xiee_invoice']['expiration_type'] = XIEE_EXPIRATION_TYPE_FIXED;
-			$data['xiee_invoice']['time_price'] = array('time' => array('000000000000'), 'price' => array('0.00'));
-			$invoice_id = Rb_EcommerceAPI::invoice_create($data['xiee_invoice'], true); 
-			$data['xiee_invoice']['invoice_id'] = $invoice_id;
+			$data['rb_invoice']['object_type'] 	 = 'OSInvoiceInvoice';
+			$data['rb_invoice']['object_id'] 	 	 = $invoice->getId();
+			$data['rb_invoice']['expiration_type'] = RB_EXPIRATION_TYPE_FIXED;
+			$data['rb_invoice']['time_price'] = array('time' => array('000000000000'), 'price' => array('0.00'));
+			$invoice_id = Rb_EcommerceAPI::invoice_create($data['rb_invoice'], true); 
+			$data['rb_invoice']['invoice_id'] = $invoice_id;
 		}	
 		else{
-			$invoice_id = $data['xiee_invoice']['invoice_id'];
+			$invoice_id = $data['rb_invoice']['invoice_id'];
 		}
 		
 		// XITODO : use constants
@@ -59,7 +59,7 @@ class OSInvoiceAdminControllerInvoice extends OSInvoiceController
 		$this->_helper->create_modifier($invoice_id, 'OSInvoiceDiscount', -$data['discount'], 20);
 		$this->_helper->create_modifier($invoice_id, 'OSInvoiceTax', $data['tax'], 45, true);
 		
-		$invoice_id = Rb_EcommerceAPI::invoice_update($invoice_id, $data['xiee_invoice'], true);
+		$invoice_id = Rb_EcommerceAPI::invoice_update($invoice_id, $data['rb_invoice'], true);
 		
 		return $invoice;
 	}
@@ -89,7 +89,7 @@ class OSInvoiceAdminControllerInvoice extends OSInvoiceController
 		$currency   = $buyer->getCurrency();
 				
 		$response  = OSInvoiceFactory::getAjaxResponse();
-		$response->addScriptCall('osinvoice.jQuery("#osinvoice_form_xiee_invoice_currency").val',$currency);
+		$response->addScriptCall('osinvoice.jQuery("#osinvoice_form_rb_invoice_currency").val',$currency);
 		$response->addScriptCall('osinvoice.admin.invoice.item.on_currency_change', $currency);
 		$response->sendResponse();
 		
@@ -123,7 +123,7 @@ class OSInvoiceAdminControllerInvoice extends OSInvoiceController
 		$response 		    = OSInvoiceFactory::getAjaxResponse();
 		if($serial){	
 			$response->addScriptCall('osinvoice.jQuery("span.invoice-error").html',Rb_Text::_('COM_OSINVOICE_INVOICE_SERIAL_ALREADY_EXIST'));
-			$response->addScriptCall('osinvoice.jQuery("#osinvoice_form_xiee_invoice_serial").focus()');
+			$response->addScriptCall('osinvoice.jQuery("#osinvoice_form_rb_invoice_serial").focus()');
 		}else {
 			$response->addScriptCall('osinvoice.jQuery("span.invoice-error").html', "");
 		}

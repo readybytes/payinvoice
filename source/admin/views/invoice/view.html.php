@@ -75,37 +75,37 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 		$tax 		= 0.00;
 
 		if($itemId){
-			$xiee_invoice = Rb_EcommerceAPI::invoice_get(array('object_type' => 'OSInvoiceInvoice', 'object_id' => $itemId, 'master_invoice_id' => 0));						
-			$form->bind(array('xiee_invoice' => $xiee_invoice)); 
+			$rb_invoice = Rb_EcommerceAPI::invoice_get(array('object_type' => 'OSInvoiceInvoice', 'object_id' => $itemId, 'master_invoice_id' => 0));						
+			$form->bind(array('rb_invoice' => $rb_invoice)); 
 			
-			$discount_modifier = Rb_EcommerceAPI::modifier_get($xiee_invoice['invoice_id'], 'OSInvoiceDiscount');
+			$discount_modifier = Rb_EcommerceAPI::modifier_get($rb_invoice['invoice_id'], 'OSInvoiceDiscount');
 			if($discount_modifier != false){
 				$discount_modifier = array_pop($discount_modifier);
 				$discount = -$discount_modifier->amount;
 			}
 			
-			$tax_modifier = Rb_EcommerceAPI::modifier_get($xiee_invoice['invoice_id'], 'OSInvoiceTax');
+			$tax_modifier = Rb_EcommerceAPI::modifier_get($rb_invoice['invoice_id'], 'OSInvoiceTax');
 			if($tax_modifier != false){
 				$tax_modifier = array_pop($tax_modifier);
 				$tax = $tax_modifier->amount;
 			}
-		 	$currency = $xiee_invoice['currency']; 	
+		 	$currency = $rb_invoice['currency']; 	
 		}
 		else{
 			$helper		= $this->getHelper('config');
 			$currency 	= $helper->get('currency');
-			$form->bind(array('xiee_invoice' => array('currency' => $currency)));
+			$form->bind(array('rb_invoice' => array('currency' => $currency)));
 		}	
 		
-		$xiee_invoice_fieldset = $form->getFieldset('xiee_invoice');
-		$xiee_invoice_fields = array();
-		foreach ($xiee_invoice_fieldset as $field){
-			$xiee_invoice_fields[$field->fieldname] = $field;
+		$rb_invoice_fieldset = $form->getFieldset('rb_invoice');
+		$rb_invoice_fields = array();
+		foreach ($rb_invoice_fieldset as $field){
+			$rb_invoice_fields[$field->fieldname] = $field;
 		}
 		
 		$this->assign('discount', number_format($discount, 2));
 		$this->assign('tax', number_format($tax, 2));
-		$this->assign('xiee_invoice_fields', $xiee_invoice_fields);
+		$this->assign('rb_invoice_fields', $rb_invoice_fields);
         $this->assign('processor_id', $processor_id);   
         $this->assign('currency', $currency);
 		return true;

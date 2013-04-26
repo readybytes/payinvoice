@@ -43,7 +43,7 @@ if(!defined( '_JEXEC' )){
 					 </dl><hr>
 					 <dl class="dl-horizontal">
 					    <dt>Total</dt>
-					    <dd><?php echo $currency." ".number_format($xiee_invoice['total'], 2);?></dd>
+					    <dd><?php echo $currency." ".number_format($rb_invoice['total'], 2);?></dd>
 				    </dl>
 	 		</div>
 	 	</div>
@@ -69,7 +69,7 @@ if(!defined( '_JEXEC' )){
 	 		<form action="" method="post"  name="paynowForm" id="paynowForm">
 	 			<div id="osinvoice-paynow-html">
 	 			</div>
-	 			<button type="submit" class="btn btn-primary pull-right">Pay Now</button>
+	 			<button type="submit" class="btn btn-primary pull-right"><?php echo Rb_Text::_('COM_OSINVOICE_PAY_NOW');?></button>
 	 		</form>
 	 	</div>
  </div>

@@ -30,14 +30,14 @@ class OSInvoiceSiteControllerInvoice extends OSInvoiceController
 		$args 			= $this->_getArgs();
 		$processor_id 	= $args['processor_id'];		
 		$processor 		= OSInvoiceProcessor::getInstance($processor_id);
-		$xiee_invoice 	= $this->helper->get_xiee_invoice($itemid);
+		$rb_invoice 	= $this->helper->get_rb_invoice($itemid);
 		
 		// save the processor configuration
-		$xiee_invoice['processor_type'] 	= $processor->getType();
-		$xiee_invoice['processor_config'] 	= $processor->getParams();
-		Rb_EcommerceApi::invoice_update($xiee_invoice['invoice_id'], $xiee_invoice);
+		$rb_invoice['processor_type'] 	= $processor->getType();
+		$rb_invoice['processor_config'] 	= $processor->getParams();
+		Rb_EcommerceApi::invoice_update($rb_invoice['invoice_id'], $rb_invoice);
 		
-		$this->getView()->assign('response', Rb_EcommerceApi::invoice_request('build', $xiee_invoice['invoice_id'], array()));
+		$this->getView()->assign('response', Rb_EcommerceApi::invoice_request('build', $rb_invoice['invoice_id'], array()));
 		return true;		
 	}
 	
@@ -45,13 +45,13 @@ class OSInvoiceSiteControllerInvoice extends OSInvoiceController
 	{
 		$data 			= Rb_Factory::getApplication()->input->post->get('payment_data', array(), 'array');		
 		$itemid 		= $this->_getId();
-		$xiee_invoice 	= $this->helper->get_xiee_invoice($itemid);		
+		$rb_invoice 	= $this->helper->get_rb_invoice($itemid);		
 		
 		$request_name = 'payment';
 		
 		while(true){
-			$req_response 	= Rb_EcommerceApi::invoice_request($request_name, $xiee_invoice['invoice_id'], $data);
-			$response 		= Rb_EcommerceApi::invoice_process($xiee_invoice['invoice_id'], $req_response);
+			$req_response 	= Rb_EcommerceApi::invoice_request($request_name, $rb_invoice['invoice_id'], $data);
+			$response 		= Rb_EcommerceApi::invoice_process($rb_invoice['invoice_id'], $req_response);
 						
 			if($response->get('next_request', false) == false){
 				break;

@@ -29,17 +29,17 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 		$email_controller 	= OSInvoiceFactory::getInstance('email', 'controller', 'OSInvoicesite');
 		$email_view 		= $email_controller->getView();
 		
-		$xiee_invoice =  $this->_helper->get_xiee_invoice($invoice_id);
-		$email_view->assign('xiee_invoice', $xiee_invoice);
+		$rb_invoice =  $this->_helper->get_rb_invoice($invoice_id);
+		$email_view->assign('rb_invoice', $rb_invoice);
 		$email_view->assign('invoice', OSInvoiceInvoice::getInstance($invoice_id)->toArray());
 		
 		$configData	= $this->getHelper('config')->get();
 		$email_view->assign('config_data', $configData);
 		
-		$buyer	= $this->getHelper('buyer')->get($xiee_invoice['buyer_id']);
+		$buyer	= $this->getHelper('buyer')->get($rb_invoice['buyer_id']);
 		$email_view->assign('buyer', $buyer);
 		
-		$currency = $this->getHelper('format')->getCurrency($xiee_invoice['currency'], 'symbol');
+		$currency = $this->getHelper('format')->getCurrency($rb_invoice['currency'], 'symbol');
 		$email_view->assign('currency', $currency);
 		
 		$discount	=  $this->_helper->get_discount($invoice_id);
@@ -53,7 +53,7 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 		// email content
 		$body 	 = $email_view->loadTemplate('invoice');
 		$subject = Rb_Text::_('COM_OSINVOICE_INVOICE_SEND_EMAIL_SUBJECT');
-		$user 	 = OSInvoiceFactory::getUser($xiee_invoice['buyer_id']);		
+		$user 	 = OSInvoiceFactory::getUser($rb_invoice['buyer_id']);		
 		
 		$result = $this->getHelper('utils')->sendEmail($user->email, $subject, $body);
 		$msg = Rb_Text::_('COM_OSINVOICE_INVOICE_EMAIL_SENT');
