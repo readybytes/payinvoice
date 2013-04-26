@@ -30,5 +30,13 @@ class OSInvoiceHelperFormat extends JObject
 		
 		return false;
 	}
+	
+	public static function date(Rb_Date $date ,$format=null)
+	{
+		$configHelper	= OSInvoiceFactory::getHelper('config');
+		$date_format	= $configHelper->get('date_format');
+		$format 		= ($format === null) ? $date_format : $format;
+		return $date->toFormat($format);
+	}
 }
 

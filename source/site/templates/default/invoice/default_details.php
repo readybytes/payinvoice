@@ -39,9 +39,9 @@ if(!defined( '_JEXEC' )){
    	<div class="span4 offset2 well well-small">
     	<dl class="dl-horizontal">	    
 			    <dt><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_ISSUE_DATE');?></dt>
-			    <dd><?php echo $rb_invoice['issue_date'];?></dd>		    			    
+			    <dd><?php echo $created_date;?></dd>		    			    
 			    <dt><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_DUE_DATE');?></dt>
-			    <dd><?php echo $rb_invoice['due_date'];?></dd>		    
+			    <dd><?php echo $due_date;?></dd>		    
 	    </dl>
 	</div>
 </div>

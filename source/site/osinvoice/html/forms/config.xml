@@ -5,9 +5,21 @@
 				type="osinvoice.currencies"
 				default=""
 				label="COM_OSINVOICE_CONFIG_CURRENCY"
-				description="COM_OSINVOICE_CONFIG_CURRENCY_DESC"				 
-				required="true">
+				description="COM_OSINVOICE_CONFIG_CURRENCY_DESC">
 				<option value="">COM_OSINVOICE_SELECT_OPTION</option>
+		</field>
+		
+		<field name="date_format"	
+				label="COM_OSINVOICE_DATE_FORMAT"
+				description="COM_OSINVOICE_DATE_FORMAT_DESC"
+				type="list">
+				<option value="">COM_OSINVOICE_SELECT_OPTION</option>
+				<option value="Y-m-d">COM_OSINVOICE_Y-M-D</option>   
+			   	<option value="m/d/Y">COM_OSINVOICE_M/D/Y</option>
+			   	<option value="m-d-Y">COM_OSINVOICE_M-D-Y</option> 
+		   		<option value="d/m/Y">COM_OSINVOICE_D/M/Y</option>
+				<option value="d-m-Y">COM_OSINVOICE_D-M-Y</option>
+		
 		</field>
 		
 	 	<field 	name="terms_and_conditions" 

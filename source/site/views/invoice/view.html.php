@@ -34,12 +34,17 @@ class OSInvoiceSiteViewInvoice extends OSInvoiceSiteBaseViewInvoice
 		$tax		=  $this->_helper->get_tax($itemid);
 		$subtotal	=  $this->_helper->get_subtotal($itemid);
 		
-		$formatHelper			= $this->getHelper('format');
-		$currency  				= $formatHelper->getCurrency($rb_invoice['currency'], 'symbol');
-		$status 				= $this->_helper->get_invoice_status_type($rb_invoice['status']);
+		$formatHelper	= $this->getHelper('format');
+		$currency  		= $formatHelper->getCurrency($rb_invoice['currency'], 'symbol');
+		$status 		= $this->_helper->get_invoice_status_type($rb_invoice['status']);
 		
 		$config			= $this->getHelper('config');
 		$configData     = $config->get();
+		
+		$createdDate	= new Rb_Date($rb_invoice['issue_date']);
+		$dueDate		= new Rb_Date($rb_invoice['due_date']);	
+		$created_date   = $formatHelper->date($createdDate);
+		$due_date		= $formatHelper->date($dueDate);
 			
 		$this->assign('tax', $tax);
 		$this->assign('discount', $discount);
@@ -50,6 +55,8 @@ class OSInvoiceSiteViewInvoice extends OSInvoiceSiteBaseViewInvoice
 		$this->assign('status', $status);
 		$this->assign('currency', $currency);
 		$this->assign('config_data', $configData);
+		$this->assign('created_date', $created_date);
+		$this->assign('due_date', $due_date);
 
 		return true;
 	}

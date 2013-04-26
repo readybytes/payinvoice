@@ -50,6 +50,11 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 		$email_view->assign('discount', $discount);
 		$email_view->assign('subtotal', $subtotal);
 		
+        // md5 key generated for authentication		
+		$key	= md5($rb_invoice['created_date']);
+		$url	= JUri::root().'index.php?option=com_osinvoice&view=invoice&invoice_id='.$invoice_id.'&key='.$key;
+		$email_view->assign('pay_url', $url);
+		
 		// email content
 		$body 	 = $email_view->loadTemplate('invoice');
 		$subject = Rb_Text::_('COM_OSINVOICE_INVOICE_SEND_EMAIL_SUBJECT');

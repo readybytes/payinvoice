@@ -83,4 +83,20 @@ class OSInvoiceSiteControllerInvoice extends OSInvoiceController
 		$invoice_id 	  = Rb_EcommerceAPI::invoice_get_from_response($processor_type, $response);		
 		$response 		  = Rb_EcommerceApi::invoice_process($invoice_id, $response);			
 	}
+
+	public function display()
+	{
+		$key		= OSInvoiceFactory::getApplication()->input->get('key');
+		$itemid 	= $this->getModel()->getId();
+	
+		// XITODO :: pass invoice as a reference to use in invoice view
+		$rb_invoice = $this->_helper->get_rb_invoice($itemid);
+		
+		if($key != md5($rb_invoice['created_date'])){
+		   $this->setTemplate('error');
+		   return true;   
+		}
+		
+		return true;
+	}
 }

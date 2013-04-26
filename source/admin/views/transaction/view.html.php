@@ -45,7 +45,8 @@ class OSInvoiceAdminViewTransaction extends OSInvoiceAdminBaseViewTransaction
 	function edit($tpl=null,$itemId = null)
 	{
 		$itemId  		= ($itemId === null) ? $this->getModel()->getState('id') : $itemId ;
-		$transaction   	= Rb_EcommerceAPI::transaction_get_record($itemId);
+		$filter			= array('transaction_id' => $itemId);
+		$transaction   	= Rb_EcommerceAPI::transaction_get($filter);
 		
 		$invoice		= Rb_EcommerceAPI::invoice_get_records(array('invoice_id' => $transaction['invoice_id']));
 		$buyer			= $this->getHelper('buyer')->get($transaction['buyer_id']);;
