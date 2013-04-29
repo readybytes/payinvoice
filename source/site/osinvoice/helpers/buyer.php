@@ -35,8 +35,14 @@ class OSInvoiceHelperBuyer extends JObject
 
 		// Initialise the table with JUser.
 		$user = new JUser($data['buyer_id']);
-		
 		$userData = (array)$model->getData();
+		
+		// if user is already registered then get the groups otherwise do nothing
+		if(!empty($data['buyer_id'])){
+			$juser = JFactory::getUser($data['buyer_id']);
+			$userData['groups'] = $juser->groups;
+		}
+		
 		// Merge in the registration data.
 		foreach ($temp as $k => $v) {
 			$userData[$k] = $v;
