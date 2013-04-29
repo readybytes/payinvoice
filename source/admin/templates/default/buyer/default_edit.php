@@ -22,10 +22,14 @@ JHtml::_('behavior.formvalidation');
 
 (function($){
  $(document).ready(function(){
+	 var buyer_id	= '';
+	 <?php if($record_id):?>
+	       buyer_id	= '<?php echo $record_id;?>';
+	 <?php endif;?>
 	 				
 			$('#osinvoice_form_email').change(function(){
 			  	var email   = $(this).val();
-			  	osinvoice.admin.buyer.on_email_change(email);
+			  	osinvoice.admin.buyer.on_email_change(email, buyer_id);
 				return false;
 			});
 			

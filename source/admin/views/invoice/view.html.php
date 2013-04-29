@@ -71,6 +71,8 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 		if(isset($params->processor_id)){
 			$processor_id  = $params->processor_id;
 		}
+		$discount	= 0.00;
+		$tax		= 0.00;
 		
 		if($itemId){
 			$rb_invoice = $this->_helper->get_rb_invoice($itemId);
@@ -82,6 +84,10 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 
 		 	$invoice_url	= $invoice->getPayUrl();
 		 	$this->assign('invoice_url', $invoice_url);
+		 	
+		 	$status 		= $this->_helper->get_invoice_status_type($rb_invoice['status']);
+		 	$this->assign('status', $status);
+		 	$this->assign('rb_invoice', $rb_invoice);
 		}
 		else{
 			$helper		= $this->getHelper('config');
@@ -100,6 +106,7 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 		$this->assign('rb_invoice_fields', $rb_invoice_fields);
         $this->assign('processor_id', $processor_id);   
         $this->assign('currency', $currency);
+        $this->assign('itemid', $itemId);
 		return true;
 	}	
 }

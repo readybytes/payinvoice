@@ -40,10 +40,11 @@ class OSInvoiceAdminControllerBuyer extends OSInvoiceController
 	{
 		$args     	= $this->_getArgs();
 		$email		= $args['email'];
+		$buyer_id	= $args['buyer_id'];
 		
-		$exist		= $this->_helper->getjoomlaUser('email', $email);
-		$response 	 = OSInvoiceFactory::getAjaxResponse();
-		if($exist){
+		$existing_userid = $this->_helper->getjoomlaUser('email', $email);
+		$response 	 	 = OSInvoiceFactory::getAjaxResponse();
+		if($existing_userid && ($existing_userid != $buyer_id)){
 			$response->addScriptCall('osinvoice.jQuery("span.osi-email-error").html', Rb_Text::_('COM_OSINVOICE_EMAIL_ALREADY_EXIST'));
 			$response->addScriptCall('osinvoice.jQuery("#osinvoice_form_email").focus()');
 		}else {

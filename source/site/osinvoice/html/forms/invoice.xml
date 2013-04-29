@@ -28,7 +28,8 @@
 					default=""
 					label="COM_OSINVOICE_INVOICE_BUYER_ID"
 					description="COM_OSINVOICE_INVOICE_BUYER_ID_DESC"					 
-					required="true">
+					required="true"
+					class="input-medium">
 					<option value="">COM_OSINVOICE_SELECT_OPTION</option>
 			</field>
 							
@@ -37,7 +38,8 @@
 					default=""
 					label="COM_OSINVOICE_INVOICE_CURRENCY"
 					description="COM_OSINVOICE_INVOICE_CURRENCY_DESC"				 
-					required="true">
+					required="true"
+					class="input-medium">
 					<option value="">COM_OSINVOICE_SELECT_OPTION</option>
 			</field>			
 			
@@ -47,7 +49,8 @@
 					label="COM_OSINVOICE_INVOICE_SERIAL"
 					description="COM_OSINVOICE_INVOICE_SERIAL_DESC"
 					required="true"
-					size="45"/>
+					size="45"
+					class="input-medium"/>
 			
 			<field 	name="status" 
 					type="xiec.status"
@@ -63,20 +66,23 @@
 					default=""
 					label="COM_OSINVOICE_INVOICE_TITLE"
 					description="COM_OSINVOICE_INVOICE_TITLE_DESC"				 
-					required="true"/>
+					required="true"
+					class="input-medium"/>
 			
 			<field 	name="expiration_type" 
 					type="xiec.expirationtypes"
 					default=""
 					label="COM_OSINVOICE_INVOICE_EXPIRATION_TYPE"
 					description="COM_OSINVOICE_INVOICE_EXPIRATION_TYPE_DESC"				 
-					required="true">
+					required="true"
+					class="input-medium">
 					<option value="">COM_OSINVOICE_SELECT_OPTION</option>
 			</field>
 					
 			<field 	name="time_price" 
 					type="xiec.timenprice"
 					default="0"
+					class="input-medium"
 					label="COM_OSINVOICE_INVOICE_TIME_PRICE"
 					description="COM_OSINVOICE_INVOICE_TIME_PRICE_DESC"/>
 			
@@ -119,7 +125,8 @@
 			    	filter="user_utc"
 					label="COM_OSINVOICE_INVOICE_CREATED_DATE"
 					description="COM_OSINVOICE_INVOICE_CREATED_DATE_DESC"				
-					readonly="true"/>					
+					readonly="true"
+					class="input-medium"/>					
 			
 			<field 	name="paid_on"
 					type="calendar"

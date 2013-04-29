@@ -46,7 +46,7 @@ class OSInvoiceSiteViewInvoice extends OSInvoiceSiteBaseViewInvoice
 		$created_date   = $formatHelper->date($createdDate);
 		$due_date		= $formatHelper->date($dueDate);
 		
-		$valid       	= $this->getHelper('invoice')->get_valid_date($rb_invoice['issue_date'], $rb_invoice['due_date']);
+		$valid       	= $this->getHelper('invoice')->is_valid_date($rb_invoice['issue_date'], $rb_invoice['due_date']);
 		if(!empty($osi_invoice['params']['processor_id'])){
 			$processor	= OSInvoiceProcessor::getInstance($osi_invoice['params']['processor_id'])->toArray();
 			$this->assign('processor_title', $processor['title']);

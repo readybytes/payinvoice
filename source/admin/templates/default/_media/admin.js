@@ -166,8 +166,8 @@ osinvoice.admin.invoice = {
 };
 
 osinvoice.admin.buyer = {		
-		on_email_change	: function(email){
-				var email   = {'event_args' :{'email' : email} };
+		on_email_change	: function(email, buyer_id){
+				var email   = {'event_args' :{'email' : email, 'buyer_id'	: buyer_id} };
 				var url 	= 'index.php?option=com_osinvoice&view=buyer&task=ajaxvalidateemail';
 				osinvoice.ajax.go(url, email);
 	

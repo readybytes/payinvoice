@@ -54,12 +54,10 @@ JHtml::_('behavior.formvalidation');
 
 <form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm">
 	<div class="row-fluid">
-		<div class="span7"><h2><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_DETAILS' ); ?></h2></div>
-		<div class="span3">
-			<?php if(!empty($invoice_url)):?>
-				<a href="<?php echo $invoice_url;?>" class="btn btn-info"><i class="icon-search icon-white"></i>&nbsp;<?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_PREVIEW_LINK');?></a>
-			<?php endif;?>
-		</div>
+	<div class="span8"><h2><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_DETAILS' ); ?></h2></div>
+	<div class="offset1 span3 pull-right">
+		<div class="label <?php echo $status['class']?> center"><h5><?php  echo $status['status'];?></h5></div>
+	</div>
 	</div>
 	
 	<hr>
@@ -155,9 +153,7 @@ JHtml::_('behavior.formvalidation');
 						<div class="control-group">
 							<label class="control-label"><strong><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_PAYMENT_METHOD');?></strong></label>
 				  			<div class="controls">
-				  				<div class="input-medium">
-							    	<?php echo OSInvoiceHtml::_('osinvoicehtml.processors.edit', 'osinvoice_form[params][processor_id]' ,$processor_id ,array('none'=>true)); ?>
-								</div>
+							    	<?php echo OSInvoiceHtml::_('osinvoicehtml.processors.edit', 'osinvoice_form[params][processor_id]' ,$processor_id ,array('none'=>true, 'style' => 'class="input-medium"')); ?>
 				  			</div>
 						</div>
 					</div>
@@ -167,9 +163,32 @@ JHtml::_('behavior.formvalidation');
 				
 				<?php echo $rb_invoice_fields['notes']->label;?>
 				<hr>
-				<?php echo $rb_invoice_fields['notes']->input;?>								
+				<?php echo $rb_invoice_fields['notes']->input;?>
+				<div>&nbsp;</div>
+				<div class="pull-right">
+					<?php if(!empty($invoice_url)):?>
+					<a href="<?php echo $invoice_url;?>" class="btn btn-info"><i class="icon-search icon-white"></i>&nbsp;<?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_PREVIEW_LINK');?></a>					<?php endif;?>
+				</div>								
 
-			</div>			
+			</div>		
+		
+			<?php if($itemid):?>
+				<div class="pull-right span3 well well-small">
+					<h4 class="center muted"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_RELATED_DATES')?></h4><hr>
+				    <ul class="horizontal unstyled center">
+					    <li class="muted">Created On <?php echo $rb_invoice['created_date'];?></li><hr>
+					    <li class="muted">Modified On <?php echo $rb_invoice['modified_date'];?></li><hr>
+					    <?php if(!empty($rb_invoice['paid_on'])):?>
+					    <li class="muted">Paid On <?php echo $rb_invoice['paid_on'];?></li><hr>
+					    <?php endif;?>
+					    <?php if(!empty($rb_invoice['refunded_on'])):?>
+					    <li class="muted">Refunded On <?php echo $rb_invoice['refunded_on'];?></li>
+					    <?php endif;?>
+				    </ul>				
+    		</div>	
+    		<?php endif;?>
+			
+	
 		</div>
 	</fieldset>
 	
