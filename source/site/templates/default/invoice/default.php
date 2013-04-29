@@ -15,11 +15,18 @@ if(!defined( '_JEXEC' )){
 
 <script>
 (function($){
-	$(document).ready(function(){
+	$(document).ready(function(){	
+		var invoice_id	= '<?php echo $osi_invoice['invoice_id'];?>';
+		
+		<?php if(!empty($osi_invoice['params']['processor_id'])) :?>
+			var osi_invoice_processor = '<?php echo $osi_invoice['params']['processor_id'];?>';
+			osinvoice.site.invoice.on_processor_change(osi_invoice_processor, invoice_id);
+		<?php endif;?>
+        	
 		$('#osinvoice_formparamsprocessor_id').change(function(){
-			var args   = { 'event_args' : {'processor_id' : $(this).val()} };
-			var url = 'index.php?option=com_osinvoice&view=invoice&task=ajaxRequestBuildForm&invoice_id=<?php echo $osi_invoice['invoice_id'];?>';
-			osinvoice.ajax.go(url, args);
+			var processor   = $(this).val();
+			osinvoice.site.invoice.on_processor_change(processor, invoice_id);
+			return false;
 		});
 	});
 })(osinvoice.jQuery);
@@ -54,12 +61,17 @@ if(!defined( '_JEXEC' )){
 	 	   		<label class="checkbox"><input type="checkbox"><strong><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_TERMS');?></strong><br>
 	 	   		<textarea rows="3" readonly="true"><?php echo $config_data['terms_and_conditions']?></textarea></label>
 	 	   		<?php endif;?>
-    		</div>   
+    		</div>  
+    		<?php if($valid):?>  
 	 	   <div class="span5">
 		 	   <dl class="dl-horizontal">
 				    <dt>Payment Method</dt>
 				    <dd>
-				    	<?php echo OSInvoiceHtml::_('osinvoicehtml.processors.edit', 'osinvoice_form[params][processor_id]' , '',array('none'=>true, 'style' => 'class="input-medium"')); ?>
+				    	<?php 	if(!empty($processor_title)){?>
+			    				 <?php echo $processor_title;?>
+				    	 <?php	 }else {
+		    		 				echo OSInvoiceHtml::_('osinvoicehtml.processors.edit', 'osinvoice_form[params][processor_id]', '', array('none'=>true, 'style' => 'class="input-medium"'));
+		   					  	 }?>
 		   			</dd>
 		   		</dl>	 	   		
 	 	   	</div>
@@ -72,6 +84,7 @@ if(!defined( '_JEXEC' )){
 	 			<button type="submit" class="btn btn-primary pull-right"><?php echo Rb_Text::_('COM_OSINVOICE_PAY_NOW');?></button>
 	 		</form>
 	 	</div>
+	 	 <?php endif;?>
  </div>
 </div>
 <?php 

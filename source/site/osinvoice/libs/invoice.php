@@ -65,4 +65,12 @@ class OSInvoiceInvoice extends OSInvoiceLib
 		
 		return $this->params->toArray();
 	} 
+	
+	public function getPayUrl()
+	{
+		$invoice_id		= $this->invoice_id;
+		$rb_invoice 	= $this->getHelper('invoice')->get_rb_invoice($invoice_id);
+		$key			= md5($rb_invoice['created_date']);
+		retrun JUri::root().'index.php?option=com_osinvoice&view=invoice&invoice_id='.$invoice_id.'&key='.$key;
+	}
 }

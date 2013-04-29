@@ -128,4 +128,21 @@ class OSInvoiceHelperInvoice extends JObject
 		return $subtotal;
 	}
 	
+	public function is_valid_date($issue_date, $due_date)
+	{
+	    $current_date   = new Rb_Date('now');
+	    $issue_date		= new Rb_Date($issue_date);
+		$due_date      	= new Rb_Date($due_date);
+		
+		$currentDate 	= $current_date->toUnix();
+		$issueDate    	= $issue_date->toUnix();
+		$dueDate 		= $due_date->toUnix();
+		
+		if($currentDate > $issueDate && $currentDate < $dueDate){
+			return true;
+		}
+		
+		return false;
+	}
+	
 }

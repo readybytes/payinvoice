@@ -9,7 +9,13 @@
 // no direct access
 if(!defined( '_JEXEC' )){
 	die( 'Restricted access' );
-}?>
+}
+
+$config_data['company_name']	= isset($config_data['company_name']) 		? $config_data['company_name'] 		: "";
+$config_data['company_address']	= isset($config_data['company_address']) 	? $config_data['company_address']	: "";
+$config_data['company_city']	= isset($config_data['company_city'])		? $config_data['company_city']		: "";
+$config_data['company_phone']	= isset($config_data['company_phone'])		? $config_data['company_phone']		: "";
+?>
 
 <div class="row well well-small">
 	   <div class="span8">
@@ -17,7 +23,7 @@ if(!defined( '_JEXEC' )){
 				<strong><?php echo $config_data['company_name'];?></strong><br>
 				<?php echo $config_data['company_address'];?> <br>
 				<?php echo $config_data['company_city'];?><br>
-				<abbr title="Phone"><?php echo Rb_Text::_('COM_OSINVOICE_COMPANY_PHONE_NO');?></abbr> (+91) <?php echo $config_data['company_phone'];?>
+				<abbr title="Phone"><?php echo Rb_Text::_('COM_OSINVOICE_COMPANY_PHONE_NO');?></abbr>&nbsp;<?php echo $config_data['company_phone'];?>
 			</address>
 	  	 </div>		   
 	   	<div class="span2 offset2">

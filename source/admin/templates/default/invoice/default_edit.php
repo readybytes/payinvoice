@@ -53,7 +53,16 @@ JHtml::_('behavior.formvalidation');
 <?php echo $this->loadTemplate('edit_item');?>
 
 <form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm">
-	<h2><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_DETAILS' ); ?></h2><hr>
+	<div class="row-fluid">
+		<div class="span7"><h2><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_DETAILS' ); ?></h2></div>
+		<div class="span3">
+			<?php if(!empty($invoice_url)):?>
+				<a href="<?php echo $invoice_url;?>" class="btn btn-info"><i class="icon-search icon-white"></i>&nbsp;<?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_PREVIEW_LINK');?></a>
+			<?php endif;?>
+		</div>
+	</div>
+	
+	<hr>
 	<fieldset class="form-horizontal">	
 		<div class="row-fluid">
 			<div class="span8">

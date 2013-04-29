@@ -38,7 +38,7 @@ class OSInvoiceAdminControllerInvoice extends OSInvoiceController
 		    $processor = OSInvoiceProcessor::getInstance($data['params']['processor_id']);
 	
 		    $data['rb_invoice']['processor_type']     = $processor->getType();
-		    $data['rb_invoice']['processor_config']   = $processor->getProcessorconfig();
+		    $data['rb_invoice']['processor_config']   = $processor->getParams();
 		}
 						
 		// create invoice in Rb_Ecommerce, in $itemId is null

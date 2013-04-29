@@ -71,25 +71,17 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 		if(isset($params->processor_id)){
 			$processor_id  = $params->processor_id;
 		}
-		$discount 	= 0.00;
-		$tax 		= 0.00;
-
+		
 		if($itemId){
-			$rb_invoice = Rb_EcommerceAPI::invoice_get(array('object_type' => 'OSInvoiceInvoice', 'object_id' => $itemId, 'master_invoice_id' => 0));						
+			$rb_invoice = $this->_helper->get_rb_invoice($itemId);
 			$form->bind(array('rb_invoice' => $rb_invoice)); 
 			
-			$discount_modifier = Rb_EcommerceAPI::modifier_get($rb_invoice['invoice_id'], 'OSInvoiceDiscount');
-			if($discount_modifier != false){
-				$discount_modifier = array_pop($discount_modifier);
-				$discount = -$discount_modifier->amount;
-			}
-			
-			$tax_modifier = Rb_EcommerceAPI::modifier_get($rb_invoice['invoice_id'], 'OSInvoiceTax');
-			if($tax_modifier != false){
-				$tax_modifier = array_pop($tax_modifier);
-				$tax = $tax_modifier->amount;
-			}
-		 	$currency = $rb_invoice['currency']; 	
+			$discount	= $this->_helper->get_discount($rb_invoice['invoice_id']);
+			$tax		= $this->_helper->get_tax($rb_invoice['invoice_id']);
+		 	$currency 	= $rb_invoice['currency'];
+
+		 	$invoice_url	= $invoice->getPayUrl();
+		 	$this->assign('invoice_url', $invoice_url);
 		}
 		else{
 			$helper		= $this->getHelper('config');

@@ -23,7 +23,7 @@ class OSInvoiceSiteViewInvoice extends OSInvoiceSiteBaseViewInvoice
 	public function display()
 	{
 		$itemid  = $this->getModel()->getId();
-		$osi_invoice = OSInvoiceInvoice::getInstance($itemid);	
+		$osi_invoice = OSInvoiceInvoice::getInstance($itemid)->toArray();	
 
 		// XITODO : use helper function
 		$filter 	= array('object_type' => 'OSInvoiceInvoice', 'object_id' => $itemid, 'master_invoice_id' => 0);
@@ -45,18 +45,26 @@ class OSInvoiceSiteViewInvoice extends OSInvoiceSiteBaseViewInvoice
 		$dueDate		= new Rb_Date($rb_invoice['due_date']);	
 		$created_date   = $formatHelper->date($createdDate);
 		$due_date		= $formatHelper->date($dueDate);
-			
+		
+		$valid       	= $this->getHelper('invoice')->get_valid_date($rb_invoice['issue_date'], $rb_invoice['due_date']);
+		if(!empty($osi_invoice['params']['processor_id'])){
+			$processor	= OSInvoiceProcessor::getInstance($osi_invoice['params']['processor_id'])->toArray();
+			$this->assign('processor_title', $processor['title']);
+		}	
+		
+		//XITODO : Clean the code		
 		$this->assign('tax', $tax);
 		$this->assign('discount', $discount);
 		$this->assign('subtotal', $subtotal);
 		$this->assign('buyer', $buyer);
-		$this->assign('osi_invoice', $osi_invoice->toArray());
+		$this->assign('osi_invoice', $osi_invoice);
 		$this->assign('rb_invoice', $rb_invoice);
 		$this->assign('status', $status);
 		$this->assign('currency', $currency);
 		$this->assign('config_data', $configData);
 		$this->assign('created_date', $created_date);
 		$this->assign('due_date', $due_date);
+		$this->assign('valid', $valid);
 
 		return true;
 	}
