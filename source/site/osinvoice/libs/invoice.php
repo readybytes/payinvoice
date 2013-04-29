@@ -71,6 +71,6 @@ class OSInvoiceInvoice extends OSInvoiceLib
 		$invoice_id		= $this->invoice_id;
 		$rb_invoice 	= $this->getHelper('invoice')->get_rb_invoice($invoice_id);
 		$key			= md5($rb_invoice['created_date']);
-		retrun JUri::root().'index.php?option=com_osinvoice&view=invoice&invoice_id='.$invoice_id.'&key='.$key;
+		return JUri::root().'index.php?option=com_osinvoice&view=invoice&invoice_id='.$invoice_id.'&key='.$key;
 	}
 }
