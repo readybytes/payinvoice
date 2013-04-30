@@ -106,7 +106,6 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 		$this->assign('rb_invoice_fields', $rb_invoice_fields);
         $this->assign('processor_id', $processor_id);   
         $this->assign('currency', $currency);
-        $this->assign('itemid', $itemId);
 		return true;
 	}	
 }
