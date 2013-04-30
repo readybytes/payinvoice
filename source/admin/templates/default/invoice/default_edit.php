@@ -56,7 +56,7 @@ JHtml::_('behavior.formvalidation');
 
 <?php echo $this->loadTemplate('edit_item');?>
 
-<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm">
+<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
 	<div class="row-fluid">
 	<div class="span8"><h2><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_DETAILS' ); ?></h2></div>
 	<?php if($form->getValue('invoice_id')):?>

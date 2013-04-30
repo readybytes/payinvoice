@@ -16,16 +16,8 @@ JHtml::_('behavior.tooltip');
 JHtml::_('behavior.keepalive');
 JHtml::_('behavior.formvalidation');
 ?>
-<script type="text/javascript">
-       Joomla.submitbutton = function(task)
-       {
-               if (task == 'cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
-                       Joomla.submitform(task, document.getElementById('adminForm'));
-               }
-       }
-</script>
 
-<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm">
+<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
 		<div class="span6">		
 			<fieldset class="form-horizontal">
 				<h3> <?php echo ucfirst(Rb_Text::_($processor->getType()))." - ".Rb_Text::_('COM_OSINVOICE_PROCESSOR_EDIT_DETAILS' ); ?></h3><hr>

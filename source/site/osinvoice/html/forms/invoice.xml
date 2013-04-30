@@ -144,13 +144,15 @@
 					type="calendar"					
 					label="COM_OSINVOICE_INVOICE_DUE_DATE"
 					description="COM_OSINVOICE_INVOICE_DUE_DATE_DESC"
-					class="input-medium" />
+					class="input-medium" 
+					required="true"/>
 					
 			<field 	name="issue_date"
 					type="calendar"					
 					label="COM_OSINVOICE_INVOICE_ISSUE_DATE"
 					description="COM_OSINVOICE_INVOICE_ISSUE_DATE_DESC"
-					class="input-medium" />
+					class="input-medium" 
+					required="true"/>
 			</fieldset>						
 	</fields>
 </form>

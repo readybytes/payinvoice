@@ -37,7 +37,7 @@ JHtml::_('behavior.formvalidation');
 })(osinvoice.jQuery);
 </script>
 
-<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm">
+<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
      
 <fieldset class="form-horizontal">
          <h2><?php echo Rb_Text::_('COM_OSINVOICE_BUYER_EDIT_DETAILS' ); ?></h2>

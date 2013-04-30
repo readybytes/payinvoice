@@ -13,7 +13,7 @@ if(!defined( '_JEXEC' )){
 	die( 'Restricted access' );
 }
 ?>
-<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm">
+<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
      
 <fieldset class="form-horizontal">
   	<div class="row-fluid"> 

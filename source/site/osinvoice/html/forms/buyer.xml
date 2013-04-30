@@ -14,7 +14,7 @@
 				type="text"
 				label="COM_OSINVOICE_BUYER_NAME"
 				description="COM_OSINVOICE_BUYER_NAME_DESC"	
-				class="required"			 
+				required="true"			 
 				/>
 				
 		<field 	name="username" 
@@ -27,8 +27,8 @@
 				type="email"
 				label="COM_OSINVOICE_BUYER_EMAIL"
 				description="COM_OSINVOICE_BUYER_EMAIL_DESC"
-				class="required" 
-				validate="email"
+				class="validate-email"
+				required="true"
 				/>
 				
 		<field 	name="password" 
@@ -42,8 +42,7 @@
 				type="osinvoice.currencies"
 				default=""
 				label="COM_OSINVOICE_BUYER_CURRENCY"
-				description="COM_OSINVOICE_BUYER_CURRENCY_DESC"	
-				required="true">
+				description="COM_OSINVOICE_BUYER_CURRENCY_DESC">
 				<option value="">COM_OSINVOICE_SELECT_OPTION</option>
 		</field>	
 		
@@ -69,8 +68,7 @@
 				type="osinvoice.countries"
 				default=""
 				label="COM_OSINVOICE_BUYER_COUNTRY"
-				description="COM_OSINVOICE_BUYER_COUNTRY_DESC"
-				required="true">
+				description="COM_OSINVOICE_BUYER_COUNTRY_DESC">
 				<option value="">COM_OSINVOICE_SELECT_OPTION</option>
 		</field>	
 				
