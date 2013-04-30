@@ -184,8 +184,8 @@ JHtml::_('behavior.formvalidation');
 
 			</div>		
 		
-			<?php if($form->getValue('invoice_id')):?>
 				<div class="pull-right span3 ">
+				<?php if($form->getValue('invoice_id')):?>
 					<div class="row-fluid well well-small">	
 						<h4 class="center muted"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_RELATED_DATES')?></h4><hr>
 					    <ul class="horizontal unstyled center">
@@ -199,12 +199,12 @@ JHtml::_('behavior.formvalidation');
 						    <?php endif;?>
 					    </ul>
 				    </div>	
-				    
+				    <?php endif;?>
 				  	<?php echo $rb_invoice_fields['notes']->label;?>
 					<hr>
 					<?php echo $rb_invoice_fields['notes']->input;?>			
     		</div>	
-    		<?php endif;?>
+    		
 			
 	
 		</div>
