@@ -29,7 +29,6 @@ JHtml::_('behavior.framework');
 				<th><?php echo OSInvoiceHtml::_('grid.sort', "COM_OSINVOICE_BUYER_ID", 'buyer_id', $filter_order_Dir, $filter_order);?></th>
 				<th><?php echo OSInvoiceHtml::_('grid.sort', "COM_OSINVOICE_BUYER_NAME", 'name', $filter_order_Dir, $filter_order);?></th>
 				<th><?php echo OSInvoiceHtml::_('grid.sort', "COM_OSINVOICE_BUYER_EMAIL",'email', $filter_order_Dir, $filter_order);?></th>
-				<th><?php echo Rb_Text::_("COM_OSINVOICE_BUYER_INVOICES");?></th>				
 			</tr>
 		<!-- TABLE HEADER END -->
 		</thead>
@@ -45,7 +44,7 @@ JHtml::_('behavior.framework');
 					<td><?php echo OSInvoiceHtml::link($uri.'&task=edit&id='.$record->{$record_key}, $record->{$record_key}); ?></td>							
 					<td><?php echo $record->name;?></td>
 					<td><?php echo $record->email;?></td>
-					<td><?php echo ""; ?></td>
+					</tr>
 			
 		<?php $count++;?>		
 		<?php endforeach;?>

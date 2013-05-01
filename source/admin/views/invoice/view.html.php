@@ -31,6 +31,15 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 		Rb_HelperToolbar::custom('email', 'envelope.png', 'envelope_f2.png', 'OSINVOCIE_TOOLBAR_EMAIL', false);
 	}
 	
+	protected function _adminGridToolbar()
+	{
+		Rb_HelperToolbar::addNew('new');
+		Rb_HelperToolbar::editList();
+		Rb_HelperToolbar::divider();
+		Rb_HelperToolbar::divider();
+		Rb_HelperToolbar::deleteList();
+	}
+	
 	function _displayGrid($records)
 	{
 		$InvoiceIds = array();
@@ -68,8 +77,14 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 		
 		$params        = $invoice->getParams();
 		$processor_id  = 0;
-		if(isset($params->processor_id)){
+		if(!empty($params->processor_id)){
 			$processor_id  = $params->processor_id;
+		}
+		
+		if(isset($params->terms_and_conditions)){
+			$terms  = $params->terms_and_conditions;
+		}else {
+			$terms	= $this->getHelper('config')->get('terms_and_conditions');
 		}
 		$discount	= 0.00;
 		$tax		= 0.00;
@@ -106,6 +121,7 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 		$this->assign('rb_invoice_fields', $rb_invoice_fields);
         $this->assign('processor_id', $processor_id);   
         $this->assign('currency', $currency);
+        $this->assign('terms', $terms);
 		return true;
 	}	
 }

@@ -49,13 +49,13 @@ JHtml::_('behavior.formvalidation');
 			</div>	
 			
 			<div class="control-group">
-				<div class="control-label"><?php echo $form->getLabel('terms_and_conditions'); ?> </div>
-				<div class="controls"><?php echo $form->getInput('terms_and_conditions'); ?></div>								
+				<div class="control-label"><?php echo $form->getLabel('date_format'); ?> </div>
+				<div class="controls"><?php echo $form->getInput('date_format'); ?></div>								
 			</div>
 			
 			<div class="control-group">
-				<div class="control-label"><?php echo $form->getLabel('date_format'); ?> </div>
-				<div class="controls"><?php echo $form->getInput('date_format'); ?></div>								
+				<div class="control-label"><?php echo $form->getLabel('terms_and_conditions'); ?> </div>
+				<div class="controls"><?php echo $form->getInput('terms_and_conditions'); ?></div>								
 			</div>
 	  
 	</div>				

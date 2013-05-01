@@ -155,26 +155,12 @@ JHtml::_('behavior.formvalidation');
 								</div>
 				  			</div>
 						</div>
-						
-						<?php $class="";?>
-						<?php if(!isset($rb_invoice['processor_type'])):?>
-						<a href="#" id="osi-add-processor" title="<?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_ADD_PROCESSOR_TOOLTIP');?>">
-							<?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_ADD_PROCESSOR');?>
-						</a>
-						<?php $class='class="hide"';?>
-						<?php endif;?>
-						<div>&nbsp;</div>
-						<div id="osi-payment-processor" <?php echo $class;?>>
-							<div class="control-group">
-								<label class="control-label"><strong><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_PAYMENT_METHOD');?></strong></label>
-					  			<div class="controls">
-								    	<?php echo OSInvoiceHtml::_('osinvoicehtml.processors.edit', 'osinvoice_form[params][processor_id]' ,$processor_id ,array('none'=>true, 'style' => 'class="input-medium"')); ?>
-					  			</div>
-							</div>
-						</div>
 					</div>
 				</div>	
 				<!-- END : Total -->
+				
+				<?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_TERMS_AND_CONDITIONS');?><hr>
+				<textarea name="osinvoice_form[params][terms_and_conditions]" class="span12" rows="5"><?php echo $terms;?></textarea>								
 				
 				<div>&nbsp;</div>
 				<div class="pull-right">
@@ -198,9 +184,27 @@ JHtml::_('behavior.formvalidation');
 						    <li class="muted">Refunded On <?php echo $rb_invoice['refunded_on'];?></li>
 						    <?php endif;?>
 					    </ul>
-				    </div>	
-				    <?php endif;?>
-				  	<?php echo $rb_invoice_fields['notes']->label;?>
+				    </div>
+				    <?php endif;?>	
+				    
+			    	<?php $class="";?>
+					<?php if(empty($osi_invoice['params']['processor_id'])):?>
+					<a href="#" id="osi-add-processor" class="btn btn-info" title="<?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_ADD_PROCESSOR_TOOLTIP');?>">
+						<?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_ADD_PROCESSOR');?>
+					</a>
+					<?php $class='class="hide"';?>
+					<?php endif;?>
+					<div>&nbsp;</div>
+					<div id="osi-payment-processor" <?php echo $class;?>>
+						<div class="control-group">
+							<label class="control-label"><strong><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_PAYMENT_METHOD');?></strong></label>
+				  			<div class="controls">
+							    	<?php echo OSInvoiceHtml::_('osinvoicehtml.processors.edit', 'osinvoice_form[params][processor_id]' ,$processor_id ,array('none'=>true, 'style' => 'class="input-medium"')); ?>
+				  			</div>
+						</div>
+					</div>
+						
+				  	<strong><?php echo $rb_invoice_fields['notes']->label;?></strong>
 					<hr>
 					<?php echo $rb_invoice_fields['notes']->input;?>			
     		</div>	
