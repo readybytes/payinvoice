@@ -16,8 +16,7 @@
 			<field 	name="invoice_id" 
 					type="hidden"
 					default="0"
-					readonly="true"/>
-	
+					readonly="true"/>	
 			
 			<field 	name="object_type" 
 					type="hidden"
@@ -29,7 +28,8 @@
 					label="COM_OSINVOICE_INVOICE_BUYER_ID"
 					description="COM_OSINVOICE_INVOICE_BUYER_ID_DESC"					 
 					required="true"
-					class="input-medium">
+					class="input-medium"
+					labelclass="control-label">
 					<option value="">COM_OSINVOICE_SELECT_OPTION</option>
 			</field>
 							
@@ -39,7 +39,8 @@
 					label="COM_OSINVOICE_INVOICE_CURRENCY"
 					description="COM_OSINVOICE_INVOICE_CURRENCY_DESC"				 
 					required="true"
-					class="input-medium">
+					class="input-medium"
+					labelclass="control-label">
 					<option value="">COM_OSINVOICE_SELECT_OPTION</option>
 			</field>			
 			
@@ -50,7 +51,8 @@
 					description="COM_OSINVOICE_INVOICE_SERIAL_DESC"
 					required="true"
 					size="45"
-					class="input-medium"/>
+					class="input-medium"
+					labelclass="control-label"/>
 			
 			<field 	name="status" 
 					type="xiec.status"
@@ -67,7 +69,8 @@
 					label="COM_OSINVOICE_INVOICE_TITLE"
 					description="COM_OSINVOICE_INVOICE_TITLE_DESC"				 
 					required="true"
-					class="input-medium"/>
+					class="input-medium"
+					labelclass="control-label"/>
 			
 			<field 	name="expiration_type" 
 					type="xiec.expirationtypes"
@@ -145,14 +148,16 @@
 					label="COM_OSINVOICE_INVOICE_DUE_DATE"
 					description="COM_OSINVOICE_INVOICE_DUE_DATE_DESC"
 					class="input-medium" 
-					required="true"/>
+					required="true"
+					labelclass="control-label"/>
 					
 			<field 	name="issue_date"
 					type="calendar"					
 					label="COM_OSINVOICE_INVOICE_ISSUE_DATE"
 					description="COM_OSINVOICE_INVOICE_ISSUE_DATE_DESC"
 					class="input-medium" 
-					required="true"/>
+					required="true"
+					labelclass="control-label"/>
 			</fieldset>						
 	</fields>
 </form>

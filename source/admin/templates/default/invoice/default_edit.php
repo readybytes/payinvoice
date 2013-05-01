@@ -56,7 +56,7 @@ JHtml::_('behavior.formvalidation');
 
 <?php echo $this->loadTemplate('edit_item');?>
 
-<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
+<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="rb-validate-form">
 	<div class="row-fluid">
 	<div class="span8"><h2><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_DETAILS' ); ?></h2></div>
 	<?php if($form->getValue('invoice_id')):?>
@@ -75,15 +75,15 @@ JHtml::_('behavior.formvalidation');
 				<div class="row-fluid well well-large">					
 					<div class="span6">		
 						<div class="control-group">
-							<div class="control-label"><?php echo $rb_invoice_fields['title']->label;?></div>
+							<?php echo $rb_invoice_fields['title']->label;?>
 							<div class="controls"><?php echo $rb_invoice_fields['title']->input;?></div>								
 						</div>
 						<div class="control-group">
-							<div class="control-label"><?php echo $rb_invoice_fields['buyer_id']->label;?></div>
+							<?php echo $rb_invoice_fields['buyer_id']->label;?>
 							<div class="controls"><?php echo $rb_invoice_fields['buyer_id']->input;?></div>								
 						</div>
 						<div class="control-group">
-							<div class="control-label"><?php echo $rb_invoice_fields['serial']->label;?></div>
+							<?php echo $rb_invoice_fields['serial']->label;?>
 							<div class="controls"><?php echo $rb_invoice_fields['serial']->input;?><br>
 								<span class="invoice-error error"></span>
 							</div>							
@@ -92,15 +92,15 @@ JHtml::_('behavior.formvalidation');
 					
 					<div class="span6">
 						<div class="control-group">
-							<div class="control-label"><?php echo $rb_invoice_fields['currency']->label;?></div>
+							<?php echo $rb_invoice_fields['currency']->label;?>
 							<div class="controls"><?php echo $rb_invoice_fields['currency']->input;?></div>								
 						</div>						
 						<div class="control-group">
-							<div class="control-label"><?php echo $rb_invoice_fields['issue_date']->label;?></div>
+							<?php echo $rb_invoice_fields['issue_date']->label;?>
 							<div class="controls"><?php echo $rb_invoice_fields['issue_date']->input;?></div>								
 						</div>
 						<div class="control-group">
-							<div class="control-label"><?php echo $rb_invoice_fields['due_date']->label;?></div>
+							<?php echo $rb_invoice_fields['due_date']->label;?>
 							<div class="controls"><?php echo $rb_invoice_fields['due_date']->input;?></div>								
 						</div>
 					</div>			
