@@ -28,17 +28,9 @@ JHtml::_('behavior.formvalidation');
        });
 	});
 })(osinvoice.jQuery);
-
-	Joomla.submitbutton = function(task)
-	{	
-		if (task == 'cancel' || document.formvalidator.isValid(document.id('adminForm'))) {
-			Joomla.submitform(task, document.getElementById('adminForm'));
-		}
-	}	
-
 </script>
 
-<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" enctype="multipart/form-data">	
+<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" enctype="multipart/form-data" class="form-validate">	
   <fieldset class="form-horizontal">
   	<div class="span6">	
 			<h3> <?php echo Rb_Text::_('COM_OSINVOICE_CONFIG_BASIC_SETTING' ); ?> </h3><hr>	

@@ -62,8 +62,11 @@ osinvoice.admin.grid = {
 			}
 			
 			if(isValidAction){
-				if (document.formvalidator.isValid(document.id('adminForm'))) {
+				if (!$('#adminForm').find("input,textarea,select").jqBootstrapValidation("hasErrors")) {
 					Joomla.submitform(action, document.getElementById('adminForm'));
+				}
+				else{
+					$('#adminForm').submit();
 				}
 			}else{
 				Joomla.submitform(action, document.getElementById('adminForm'));
