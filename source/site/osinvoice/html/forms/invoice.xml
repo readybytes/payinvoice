@@ -131,17 +131,17 @@
 					readonly="true"
 					class="input-medium"/>					
 			
-			<field 	name="paid_on"
+			<field 	name="paid_date"
 					type="calendar"
 					default="0"
-					label="COM_OSINVOICE_INVOICE_PAID_ON"
-					description="COM_OSINVOICE_INVOICE_PAID_ON_DESC"/>
+					label="COM_OSINVOICE_INVOICE_PAID_DATE"
+					description="COM_OSINVOICE_INVOICE_PAID_DATE_DESC"/>
 					
-			<field 	name="refunded_on"
+			<field 	name="refund_date"
 					type="calendar"
 					default="0"
-					label="COM_OSINVOICE_INVOICE_REFUNDED_ON"
-					description="COM_OSINVOICE_INVOICE_REFUNDED_ON_DESC"/>
+					label="COM_OSINVOICE_INVOICE_REFUND_DATE"
+					description="COM_OSINVOICE_INVOICE_REFUND_DATE_DESC"/>
 	
 			<field 	name="due_date"
 					type="calendar"					

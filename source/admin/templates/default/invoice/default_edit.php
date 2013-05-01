@@ -191,11 +191,11 @@ JHtml::_('behavior.formvalidation');
 					    <ul class="horizontal unstyled center">
 						    <li class="muted">Created On <?php echo $rb_invoice['created_date'];?></li><hr>
 						    <li class="muted">Modified On <?php echo $rb_invoice['modified_date'];?></li><hr>
-						    <?php if(!empty($rb_invoice['paid_on'])):?>
-						    <li class="muted">Paid On <?php echo $rb_invoice['paid_on'];?></li><hr>
+						    <?php if(!empty($rb_invoice['paid_date'])):?>
+						    <li class="muted">Paid On <?php echo $rb_invoice['paid_date'];?></li><hr>
 						    <?php endif;?>
-						    <?php if(!empty($rb_invoice['refunded_on'])):?>
-						    <li class="muted">Refunded On <?php echo $rb_invoice['refunded_on'];?></li>
+						    <?php if(!empty($rb_invoice['refund_date'])):?>
+						    <li class="muted">Refunded On <?php echo $rb_invoice['refund_date'];?></li>
 						    <?php endif;?>
 					    </ul>
 				    </div>	
