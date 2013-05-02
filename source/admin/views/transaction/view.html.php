@@ -44,7 +44,7 @@ class OSInvoiceAdminViewTransaction extends OSInvoiceAdminBaseViewTransaction
 		}
 		
 		$filter 	= array('invoice_id' => array(array('IN', '('.implode(",", $InvoiceIds).')')));
-		$invoices 	= $this->_helper->get_rb_invoice_records($filter);		
+		$invoices 	= $this->getHelper('invoice')->get_rb_invoice_records($filter);				
 		$helper		= $this->getHelper('buyer');
 		$buyer 		= $helper->get($buyerIds);
         $statusList = Rb_EcommerceAPI::response_get_status_list();
