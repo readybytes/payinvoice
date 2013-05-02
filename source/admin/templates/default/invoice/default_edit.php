@@ -159,8 +159,8 @@ JHtml::_('behavior.formvalidation');
 				</div>	
 				<!-- END : Total -->
 				
-				<?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_TERMS_AND_CONDITIONS');?><hr>
-				<textarea name="osinvoice_form[params][terms_and_conditions]" class="span12" rows="5"><?php echo $terms;?></textarea>								
+				<h4><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_TERMS_AND_CONDITIONS');?></h4><hr>
+					<?php echo $invoice_params['terms_and_conditions'];?>
 				
 				<div>&nbsp;</div>
 				<div class="pull-right">
@@ -175,13 +175,13 @@ JHtml::_('behavior.formvalidation');
 					<div class="row-fluid well well-small">	
 						<h4 class="center muted"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_RELATED_DATES')?></h4><hr>
 					    <ul class="horizontal unstyled center">
-						    <li class="muted">Created On <?php echo $rb_invoice['created_date'];?></li><hr>
-						    <li class="muted">Modified On <?php echo $rb_invoice['modified_date'];?></li><hr>
-						    <?php if(!empty($rb_invoice['paid_date'])):?>
-						    <li class="muted">Paid On <?php echo $rb_invoice['paid_date'];?></li><hr>
+						    <li class="muted"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_CREATED_ON')." ".$rb_invoice['created_date'];?></li><hr>
+						    <li class="muted"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_MODIFIED_ON')." ".$rb_invoice['modified_date'];?></li><hr>
+						    <?php if(!empty($rb_invoice['paid_on'])):?>
+						    <li class="muted"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_PAID_ON')." ".$rb_invoice['paid_on'];?></li><hr>
 						    <?php endif;?>
-						    <?php if(!empty($rb_invoice['refund_date'])):?>
-						    <li class="muted">Refunded On <?php echo $rb_invoice['refund_date'];?></li>
+						    <?php if(!empty($rb_invoice['refunded_on'])):?>
+						    <li class="muted"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_REFUNDED_ON')." ".$rb_invoice['refunded_on'];?></li>
 						    <?php endif;?>
 					    </ul>
 				    </div>
@@ -204,7 +204,7 @@ JHtml::_('behavior.formvalidation');
 						</div>
 					</div>
 						
-				  	<strong><?php echo $rb_invoice_fields['notes']->label;?></strong>
+				  	<?php echo $rb_invoice_fields['notes']->label;?>
 					<hr>
 					<?php echo $rb_invoice_fields['notes']->input;?>			
     		</div>	

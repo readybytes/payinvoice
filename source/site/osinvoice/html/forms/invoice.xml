@@ -160,4 +160,17 @@
 					labelclass="control-label"/>
 			</fieldset>						
 	</fields>
+	
+	<fields name="params">
+		<fieldset name="params">
+			<field 	name="terms_and_conditions" 
+				type="editor" 
+				class="inputbox"
+				buttons="true"
+				filter="JComponentHelper::filterText"
+				label="COM_OSINVOICE_CONFIG_TERMS_AND_CONDITIONS" 
+				description="COM_OSINVOICE_CONFIG_TERMS_AND_CONDITIONS_DESC" />
+				   
+		</fieldset>
+	</fields>
 </form>

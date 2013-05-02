@@ -23,10 +23,12 @@
 		</field>
 		
 	 	<field 	name="terms_and_conditions" 
-				type="textarea"
+				type="editor" 
+				class="inputbox"
+				buttons="true"
+				filter="JComponentHelper::filterText"
 				label="COM_OSINVOICE_CONFIG_TERMS_AND_CONDITIONS" 
-				description="COM_OSINVOICE_CONFIG_TERMS_AND_CONDITIONS_DESC"
-		        />
+				description="COM_OSINVOICE_CONFIG_TERMS_AND_CONDITIONS_DESC" />
 		
 	</fieldset>
         

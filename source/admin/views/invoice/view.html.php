@@ -81,11 +81,6 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 			$processor_id  = $params->processor_id;
 		}
 		
-		if(isset($params->terms_and_conditions)){
-			$terms  = $params->terms_and_conditions;
-		}else {
-			$terms	= $this->getHelper('config')->get('terms_and_conditions');
-		}
 		$discount	= 0.00;
 		$tax		= 0.00;
 		
@@ -105,9 +100,13 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 		 	$this->assign('rb_invoice', $rb_invoice);
 		}
 		else{
-			$helper		= $this->getHelper('config');
-			$currency 	= $helper->get('currency');
-			$form->bind(array('rb_invoice' => array('currency' => $currency)));
+			$helper					= $this->getHelper('config');
+			$currency 				= $helper->get('currency');
+			$terms					= $helper->get('terms_and_conditions');
+			$binddata['rb_invoice'] = array('currency' => $currency);
+			$binddata['params'] 	=  array('terms_and_conditions' => $terms);
+			$form->bind($binddata);
+			
 		}	
 		
 		$rb_invoice_fieldset = $form->getFieldset('rb_invoice');
@@ -115,13 +114,19 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 		foreach ($rb_invoice_fieldset as $field){
 			$rb_invoice_fields[$field->fieldname] = $field;
 		}
+
+		$invoice_params_fieldset	= $form->getFieldset('params');
+		$invoice_params_fields		= array();
+		foreach ($invoice_params_fieldset as $field){		 
+				$invoice_params_fields[$field->fieldname] = $field->input;
+		}
 		
 		$this->assign('discount', number_format($discount, 2));
 		$this->assign('tax', number_format($tax, 2));
 		$this->assign('rb_invoice_fields', $rb_invoice_fields);
         $this->assign('processor_id', $processor_id);   
         $this->assign('currency', $currency);
-        $this->assign('terms', $terms);
+		$this->assign('invoice_params', $invoice_params_fields);
 		return true;
 	}	
 }
