@@ -34,7 +34,7 @@ class OSInvoiceEvent extends JEvent
 		return true;
 	}
 	
-	public function _sendEmail($new, $pre)
+	public function _sendEmail($new, $prev)
 	{
 		if($prev != null && $prev->getStatus() == $new->getStatus()){
 			return true;
