@@ -3,7 +3,7 @@
 * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		OSINVOICE
-* @subpackage	Back-end
+* @subpackage	Front-end
 * @contact		team@readybytes.in
 */
 // no direct access
@@ -22,10 +22,10 @@ if(!defined( '_JEXEC' )){
  	<table class="table table-hover">
     	<thead>
 			<tr>
-				<th>Items</th>
-				<th>Quantity</th>
-				<th>Unit Price</th>
-				<th>Amount</th>
+				<th><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEMS');?></th>
+				<th><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_QUANTITY');?></th>
+				<th><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_PRICE_PER_UNIT');?></th>
+				<th><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_PRICE_TOTAL');?></th>
 			</tr>
 		</thead>
 		

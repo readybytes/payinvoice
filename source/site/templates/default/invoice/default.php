@@ -4,7 +4,7 @@
 * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		OSINVOICE
-* @subpackage	Back-end
+* @subpackage	Front-end
 * @contact		team@readybytes.in
 */
 
@@ -43,11 +43,11 @@ if(!defined( '_JEXEC' )){
 	 		
 	 		<div class="span5">
 	 		 		<dl class="dl-horizontal">
-					    <dt>Sub Total</dt>
+					    <dt><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_SUBTOTAL');?></dt>
 					    <dd><?php echo $currency." ". number_format($subtotal, 2);?></dd>
-					    <dt>Discount</dt>
+					    <dt><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_DISCOUNT');?></dt>
 					    <dd><?php echo $currency." ". number_format($discount, 2);?></dd>
-					    <dt>Tax</dt>
+					    <dt><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_TAX');?></dt>
 					    <dd><?php echo number_format($tax, 2)." %";?></dd>
 					 </dl><hr>
 
@@ -60,7 +60,7 @@ if(!defined( '_JEXEC' )){
 	 		
 	 		<div class="span5">
 	 	 		<dl class="dl-horizontal">
-						    <dt>Total</dt>
+						    <dt><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_TOTAL');?></dt>
 						    <dd><?php echo $currency." ".number_format($rb_invoice['total'], 2);?></dd>
 			    </dl>
 		    </div>
@@ -72,7 +72,7 @@ if(!defined( '_JEXEC' )){
 	    		<?php if($valid):?>  
 		 	   <div class="span5">
 			 	   <dl class="dl-horizontal">
-					    <dt>Payment Method</dt>
+					    <dt><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_PAYMENT_METHOD');?></dt>
 					    <dd>
 					    	<?php 	if(!empty($processor_title)){?>
 				    				 <?php echo $processor_title;?>

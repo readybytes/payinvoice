@@ -48,5 +48,10 @@ Rb_HelperLoader::addAutoLoadViews(OSINVOICE_PATH_SITE.'/views', RB_REQUEST_DOCUM
 Rb_HelperLoader::addAutoLoadFolder(OSINVOICE_PATH_ADMIN.'/controllers',	'Controller',		'OSInvoiceAdmin');
 Rb_HelperLoader::addAutoLoadViews(OSINVOICE_PATH_ADMIN.'/views', RB_REQUEST_DOCUMENT_FORMAT, 'OSInvoiceAdmin');
 
+//load langauge file
+$filename = 'com_osinvoice';
+$language = JFactory::getLanguage();
+$language->load($filename, JPATH_SITE);
+
 // include the event file so that events can be registered
 require_once OSINVOICE_PATH_CORE.'/base/event.php';

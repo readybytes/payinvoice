@@ -11,19 +11,15 @@ if(!defined( '_JEXEC' )){
 	die( 'Restricted access' );
 }
 
-if($osi_invoice['params']['terms_and_conditions']){
-	$terms_and_conditions	= $osi_invoice['params']['terms_and_conditions'];
- }else {
- 	$terms_and_conditions 	= $config_data['terms_and_conditions'];
- }?>
+if(!empty($osi_invoice['params']['terms_and_conditions'])): ?>
       
 <div class="well">
      	<h5>
 			<input type="checkbox" name="terms-and-conditions" required="true">
-			<?php echo " ".Rb_Text::_('COM_OSINVOICE_INVOICE_TERMS');?>
+			<?php echo " ".Rb_Text::_('COM_OSINVOICE_INVOICE_TERMS_AND_CONDITIONS');?>
 		</h5>
 
-    	<?php echo JString::substr(strip_tags($terms_and_conditions), 0, 340); ?>	
+    	<?php echo JString::substr(strip_tags($osi_invoice['params']['terms_and_conditions']), 0, 340); ?>	
 
       	<a href="#osi-terms-and-conditions" role="button" class="" data-toggle="modal">...more</a>
 		
@@ -32,11 +28,11 @@ if($osi_invoice['params']['terms_and_conditions']){
 		<div id="osi-terms-and-conditions" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     		<div class="modal-header">
     			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    			<h3 id="myModalLabel">Terms and Conditions</h3>
+    			<h3 id="myModalLabel"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_TERMS_AND_CONDITIONS');?></h3>
     		</div>
 
    		 	<div class="modal-body">
-    			<p><?php echo $terms_and_conditions;?></p>
+    			<p><?php echo $osi_invoice['params']['terms_and_conditions'];?></p>
     		</div>
 
     		<div class="modal-footer">
@@ -44,3 +40,4 @@ if($osi_invoice['params']['terms_and_conditions']){
     		</div>
 	    </div>
 </div>
+<?php endif;
