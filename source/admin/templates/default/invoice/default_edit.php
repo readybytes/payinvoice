@@ -165,7 +165,11 @@ JHtml::_('behavior.formvalidation');
 				<div>&nbsp;</div>
 				<div class="pull-right">
 					<?php if(!empty($invoice_url)):?>
-					<a href="<?php echo $invoice_url;?>" class="btn btn-info" target="_blank"><i class="icon-search icon-white"></i>&nbsp;<?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_PREVIEW_LINK');?></a>					<?php endif;?>
+					<a href="<?php echo $invoice_url;?>" class="btn btn-info" target="_blank"><i class="icon-search icon-white"></i>&nbsp;<?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_PREVIEW_LINK');?></a>					
+					<?php endif;?>
+					<?php if(!empty($record_id)):?>
+					<a href="#" onclick="osinvoice.admin.invoice.item.send_email('<?php echo $record_id?>')" class="btn btn-info"><i class="icon-envelope icon-white"></i>&nbsp;<?php echo Rb_Text::_('OSINVOCIE_TOOLBAR_EMAIL');?></a>	
+					<?php endif;?>	
 				</div>								
 
 			</div>		

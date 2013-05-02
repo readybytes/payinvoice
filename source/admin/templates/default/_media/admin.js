@@ -164,6 +164,11 @@ osinvoice.admin.invoice = {
 				var serial   = {'event_args' :{'serial' : serial} };
 				var url 	= 'index.php?option=com_osinvoice&view=invoice&task=ajaxchangeserial';
 				osinvoice.ajax.go(url, serial);
+			},
+			
+			send_email	: function(invoice_id){
+				var url 	= 'index.php?option=com_osinvoice&view=invoice&task=email&invoice_id='+invoice_id;
+				osinvoice.url.modal(url);
 			}
 		}		
 };

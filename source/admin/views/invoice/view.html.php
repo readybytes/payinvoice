@@ -28,7 +28,6 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 		Rb_HelperToolbar::divider();
 		Rb_HelperToolbar::cancel();
 		Rb_HelperToolbar::divider();
-		Rb_HelperToolbar::custom('email', 'envelope.png', 'envelope_f2.png', 'OSINVOCIE_TOOLBAR_EMAIL', false);
 	}
 	
 	protected function _adminGridToolbar()
