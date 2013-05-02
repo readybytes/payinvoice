@@ -57,7 +57,7 @@ class OSInvoiceEvent extends JEvent
 		$email_view->assign('config_data', $config_data);
 		
 		$suffix = 'paid';
-		if($status	== Rb_EcommerceInvoice::STATUS_REFUNDED){
+		if($new->getStatus()	== Rb_EcommerceInvoice::STATUS_REFUNDED){
 			$suffix = 'refund';			
 		}
 		
