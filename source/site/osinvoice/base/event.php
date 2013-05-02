@@ -40,7 +40,7 @@ class OSInvoiceEvent extends JEvent
 			return true;
 		}
 
-		if($new->getStatus() != Rb_EcommerceInvoice::PAID && $new->getStatus() != Rb_EcommerceInvoice::STATUS_REFUND){
+		if($new->getStatus() != Rb_EcommerceInvoice::STATUS_PAID && $new->getStatus() != Rb_EcommerceInvoice::STATUS_REFUNDED){
 			return true;
 		}
 
