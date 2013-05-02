@@ -20,6 +20,11 @@ if(!defined( '_JEXEC' )){
 require_once dirname(__FILE__).'/view.php';
 class OSInvoiceAdminViewTransaction extends OSInvoiceAdminBaseViewTransaction
 {	
+	/**
+	 * @var OSInvoiceHelperInvoice
+	 */
+	public $_helper = null;
+	
 	protected function _adminGridToolbar()
 	{
 		Rb_HelperToolbar::addNew('new');
@@ -38,9 +43,8 @@ class OSInvoiceAdminViewTransaction extends OSInvoiceAdminBaseViewTransaction
 			$InvoiceIds[] = $record->invoice_id;
 		}
 		
-		$filter = array('invoice_id' => array(array('IN', '('.implode(",", $InvoiceIds).')')));
-		$invoices = Rb_EcommerceAPI::invoice_get_records($filter);
-		
+		$filter 	= array('invoice_id' => array(array('IN', '('.implode(",", $InvoiceIds).')')));
+		$invoices 	= $this->_helper->get_rb_invoice_records($filter);		
 		$helper		= $this->getHelper('buyer');
 		$buyer 		= $helper->get($buyerIds);
         $statusList = Rb_EcommerceAPI::response_get_status_list();
@@ -57,13 +61,12 @@ class OSInvoiceAdminViewTransaction extends OSInvoiceAdminBaseViewTransaction
 		$filter			= array('transaction_id' => $itemId);
 		$transaction   	= Rb_EcommerceAPI::transaction_get($filter);
 		
-		$invoice		= Rb_EcommerceAPI::invoice_get_records(array('invoice_id' => $transaction['invoice_id']));
-		$buyer			= $this->getHelper('buyer')->get($transaction['buyer_id']);;
+		$invoice		= $this->_helper->get_rb_invoice_records(array('invoice_id' => $transaction['invoice_id']));
+		$buyer			= $this->getHelper('buyer')->get($transaction['buyer_id']);
 		
 		$this->assign('transaction', $transaction);	
 		$this->assign('invoice', $invoice);	
 		$this->assign('buyer', $buyer);	
 		return true;	
-	}
-	
+	}	
 }

@@ -61,6 +61,11 @@ class OSInvoiceHelperInvoice extends JObject
 		return Rb_EcommerceAPI::invoice_get($filter);
 	}
 	
+	public function get_rb_invoice_records($filter)
+	{
+		return Rb_EcommerceAPI::invoice_get_records($filter);
+	}
+	
 	public function get_invoice_status_type($status)
 	{
 	   $status_list  = Rb_EcommerceAPI::invoice_get_status_list();
