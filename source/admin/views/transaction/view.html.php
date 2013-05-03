@@ -61,7 +61,7 @@ class OSInvoiceAdminViewTransaction extends OSInvoiceAdminBaseViewTransaction
 		$filter			= array('transaction_id' => $itemId);
 		$transaction   	= Rb_EcommerceAPI::transaction_get($filter);
 		
-		$invoice		= $this->_helper->get_rb_invoice_records(array('invoice_id' => $transaction['invoice_id']));
+		$invoice		= $this->getHelper('invoice')->get_rb_invoice_records(array('invoice_id' => $transaction['invoice_id']));
 		$buyer			= $this->getHelper('buyer')->get($transaction['buyer_id']);
 		
 		$this->assign('transaction', $transaction);	
