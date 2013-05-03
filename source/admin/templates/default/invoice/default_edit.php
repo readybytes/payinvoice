@@ -132,7 +132,7 @@ JHtml::_('behavior.formvalidation');
 				  			<div class="controls">
 				  				<div class="input-prepend">
 									<span class="add-on osi-currency"></span>
-									<input type="text" name="osinvoice_form[discount]" class="input-small" id="osi-invoice-discount" value="<?php echo $discount;?>">
+									<input type="text" name="osinvoice_form[discount]" class="input-small" min="0" id="osi-invoice-discount" value="<?php echo $discount;?>">
 								</div>
 				  			</div>
 						</div>
@@ -140,7 +140,7 @@ JHtml::_('behavior.formvalidation');
 							<label class="control-label"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_TAX');?></label>
 				  			<div class="controls">
 				  				<div class="input-append">									
-									<input type="text" name="osinvoice_form[tax]" class="input-small" id="osi-invoice-tax" value="<?php echo $tax;?>">
+									<input type="text" name="osinvoice_form[tax]" class="input-small" id="osi-invoice-tax" min="0" value="<?php echo $tax;?>">
 									<span class="add-on">%</span>
 								</div>
 				  			</div>
@@ -181,11 +181,11 @@ JHtml::_('behavior.formvalidation');
 					    <ul class="horizontal unstyled center">
 						    <li class="muted"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_CREATED_ON')." ".$rb_invoice['created_date'];?></li><hr>
 						    <li class="muted"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_MODIFIED_ON')." ".$rb_invoice['modified_date'];?></li><hr>
-						    <?php if(!empty($rb_invoice['paid_on'])):?>
-						    <li class="muted"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_PAID_ON')." ".$rb_invoice['paid_on'];?></li><hr>
+						    <?php if(!empty($rb_invoice['paid_date'])):?>
+						    <li class="muted"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_PAID_ON')." ".$rb_invoice['paid_date'];?></li><hr>
 						    <?php endif;?>
-						    <?php if(!empty($rb_invoice['refunded_on'])):?>
-						    <li class="muted"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_REFUNDED_ON')." ".$rb_invoice['refunded_on'];?></li>
+						    <?php if(!empty($rb_invoice['refunded_date'])):?>
+						    <li class="muted"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_REFUNDED_ON')." ".$rb_invoice['refunded_date'];?></li>
 						    <?php endif;?>
 					    </ul>
 				    </div>

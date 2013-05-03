@@ -11,7 +11,13 @@
 // no direct access
 if(!defined( '_JEXEC' )){
 	die( 'Restricted access' );
-}?>
+}
+
+$config_data['company_name']	= isset($config_data['company_name'])  		? $config_data['company_name'] 		: "";
+$config_data['company_address']	= isset($config_data['company_address']) 	? $config_data['company_address'] 	: "";
+$config_data['company_city']	= isset($config_data['company_city']) 		? $config_data['company_city'] 		: "";
+$config_data['company_phone']	= isset($config_data['company_phone']) 		? $config_data['company_phone']		: "";
+?>
 <table width="100%;" border="0" cellspacing="0" cellpadding="0" style="font-size: 16px;padding: 20px 0px 20px 0px">
 	<tbody>
 		<tr>

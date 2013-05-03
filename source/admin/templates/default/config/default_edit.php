@@ -30,7 +30,7 @@ JHtml::_('behavior.formvalidation');
 })(osinvoice.jQuery);
 </script>
 
-<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" enctype="multipart/form-data" class="form-validate">	
+<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" enctype="multipart/form-data" class="rb-validate-form">	
   <fieldset class="form-horizontal">
   	<div class="span6">	
 			<h3> <?php echo Rb_Text::_('COM_OSINVOICE_CONFIG_BASIC_SETTING' ); ?> </h3><hr>	

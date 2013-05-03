@@ -39,8 +39,9 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 		$buyer	= $this->getHelper('buyer')->get($rb_invoice['buyer_id']);
 		$email_view->assign('buyer', $buyer);
 		
-		$currency = $this->getHelper('format')->getCurrency($rb_invoice['currency'], 'symbol');
-		$email_view->assign('currency', $currency);
+		//XITODO : Currency Symbol not shown in email template	
+		//$currency = $this->getHelper('format')->getCurrency($rb_invoice['currency'], 'symbol');
+		//$email_view->assign('currency', $currency);
 		
 		$discount	=  $this->_helper->get_discount($invoice_id);
 		$tax		=  $this->_helper->get_tax($invoice_id);

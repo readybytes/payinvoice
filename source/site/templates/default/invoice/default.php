@@ -69,7 +69,7 @@ if(!defined( '_JEXEC' )){
 		 	<div class="row">
 		 	  	<div class="span7"> 
 		 	  	</div> 
-	    		<?php if($valid):?>  
+	    		<?php if($valid && $rb_invoice['total'] != floatval(0)):?>  
 		 	   <div class="span5">
 			 	   <dl class="dl-horizontal">
 					    <dt><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_PAYMENT_METHOD');?></dt>
@@ -86,17 +86,19 @@ if(!defined( '_JEXEC' )){
 		 	</div>
 		 		
 		 	<div class="row">
-		 		<form action="" method="post"  name="paynowForm" id="paynowForm">
+		 		<form action="" method="post"  name="paynowForm" id="paynowForm" class="rb-validate-form">
 		 			<div id="osinvoice-paynow-html">
 		 			</div>
 		 			<button type="submit" class="btn btn-primary pull-right"><?php echo Rb_Text::_('COM_OSINVOICE_PAY_NOW');?></button>
+		 			<div>&nbsp;</div>
+		 			<div>&nbsp;</div>
+					<div class="span12">
+						<?php echo $this->loadTemplate('terms');?>
+					</div>
 		 		</form>
 		 	</div>
 		 	 <?php endif;?>
-		<div>&nbsp;</div>
-		<div class="row">
-			<?php echo $this->loadTemplate('terms');?>
-		</div>
+		
  </div>
 </div>
 <?php 

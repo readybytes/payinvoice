@@ -52,7 +52,8 @@
 		        />
 		        
         <field 	name="company_phone" 
-				type="text"
+				type="number"
+				class="validate-number"
 				label="COM_OSINVOICE_CONFIG_COMPANY_PHONE" 
 				description="COM_OSINVOICE_CONFIG_COMPANY_PHONE_DESC"
 		        />

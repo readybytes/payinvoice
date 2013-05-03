@@ -29,33 +29,33 @@ if(!defined( '_JEXEC' )){
 		<tr>
 			<td style="padding:10px 5px 5px 7px"><?php echo $item->title;?></td>
 			<td style="padding:10px 5px 5px 7px"><?php echo $item->quantity;?></td>
-			<td style="padding:10px 5px 5px 7px"><?php echo $currency." ".number_format($item->price, 2);?></td>
-			<td style="padding:10px 5px 5px 7px"><?php echo $currency." ".number_format($item->total, 2);?></td>
+			<td style="padding:10px 5px 5px 7px"><?php echo $rb_invoice['currency']." ".number_format($item->price, 2);?></td>
+			<td style="padding:10px 5px 5px 7px"><?php echo $rb_invoice['currency']." ".number_format($item->total, 2);?></td>
 		</tr>
 		<?php endforeach;?>
 		
 		<tr>
 			<td colspan="2" style="padding:10px 5px 5px 7px;border: 0;">&nbsp;</td>
 			<td align="right" style="padding:10px 5px 10px 7px;border-right:0px;"><?php echo Rb_Text::_('COM_OSINVOICE_SUBTOTAL');?></td>
-			<td style="border-left:0px;">&nbsp;&nbsp;<?php echo $currency." ".number_format($subtotal, 2);?></td>
+			<td style="border-left:0px;">&nbsp;&nbsp;<?php echo $rb_invoice['currency']." ".number_format($subtotal, 2);?></td>
 		</tr>
 		<tr>
 			<td colspan="2" style="padding:10px 5px 10px 7px;border: 0;">&nbsp;
 			</td>
 			<td align="right" style="padding:10px 5px 10px 7px;border-right:0px;"><?php echo Rb_Text::_('COM_OSINVOICE_DISCOUNT');?></td>
-			<td style="border-left:0px;">&nbsp;&nbsp;<?php echo $currency." ".number_format($discount, 2);?></td>
+			<td style="border-left:0px;">&nbsp;&nbsp;<?php echo $rb_invoice['currency']." ".number_format($discount, 2);?></td>
 		</tr>
 		
 		<tr>
 			<td colspan="2" style="padding:10px 5px 5px 7px;border: 0;">&nbsp;</td>
 			<td align="right" style="padding:10px 5px 10px 7px;border-right:0px;"><?php echo Rb_Text::_('COM_OSINVOICE_TAX');?></td>
-			<td style="border-left:0px;">&nbsp;&nbsp;<?php echo $currency." ".number_format($tax, 2);?></td>
+			<td style="border-left:0px;">&nbsp;&nbsp;<?php echo $rb_invoice['currency']." ".number_format($tax, 2);?></td>
 		</tr>
 		<tr>
 			<td colspan="2" style="padding:10px 5px 10px 7px;border: 0;">&nbsp;
 			</td>
 			<td align="right"  style="padding:10px 5px 10px 7px;background-color:#eee;border-right:0px"><?php echo Rb_Text::_('COM_OSINVOICE_TOTAL')?></td>
-			<td style="border-left:0px;background-color:#eee;">&nbsp;&nbsp;<?php echo $currency." ".number_format($rb_invoice['total'], 2);?></td>
+			<td style="border-left:0px;background-color:#eee;">&nbsp;&nbsp;<?php echo $rb_invoice['currency']." ".number_format($rb_invoice['total'], 2);?></td>
 		</tr>
 																
 	</tbody>
