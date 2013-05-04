@@ -16,7 +16,7 @@ if(!defined( '_JEXEC' )){
 <div>
 	<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm">
 		<div>	
-			<span><?php echo OSInvoiceHtml::_('osinvoicehtml.processortypes.edit', 'processor_type', '', array('none'=>true)); ?></span>
+			<span><?php echo PayInvoiceHtml::_('payinvoicehtml.processortypes.edit', 'processor_type', '', array('none'=>true)); ?></span>
 			<span><input type="submit" name="submit" value="Submit"/></span>
 		</div>
 		<input type="hidden" name="task" value="new" />

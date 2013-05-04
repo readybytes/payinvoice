@@ -2,7 +2,7 @@
 /**
 * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
-* @package 		OSINVOICE
+* @package 		PAYINVOICE
 * @subpackage	Back-end
 * @contact		team@readybytes.in
 */
@@ -20,7 +20,7 @@ JHtml::_('behavior.formvalidation');
 <form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
 		<div class="span6">		
 			<fieldset class="form-horizontal">
-				<h3> <?php echo ucfirst(Rb_Text::_($processor->getType()))." - ".Rb_Text::_('COM_OSINVOICE_PROCESSOR_EDIT_DETAILS' ); ?></h3><hr>
+				<h3> <?php echo ucfirst(Rb_Text::_($processor->getType()))." - ".Rb_Text::_('COM_PAYINVOICE_PROCESSOR_EDIT_DETAILS' ); ?></h3><hr>
 				<div class="control-group">
 					<div class="control-label"><?php echo $form->getLabel('title'); ?> </div>
 					<div class="controls"><?php echo $form->getInput('title'); ?></div>				
@@ -40,7 +40,7 @@ JHtml::_('behavior.formvalidation');
 	
 		<div class="span6">
 			<fieldset class="form-horizontal">
-				<h3> <?php echo Rb_Text::_('COM_OSINVOICE_PAYMENTMETHOD_EDIT_CONFIG_PARAMS' ); ?></h3><hr>
+				<h3> <?php echo Rb_Text::_('COM_PAYINVOICE_PAYMENTMETHOD_EDIT_CONFIG_PARAMS' ); ?></h3><hr>
 					<?php $fieldset_name = 'processor_config';?>
 					<?php echo $this->loadTemplate('partial_fieldset', compact('fieldset_name', 'form'));?>
 			</fieldset>

@@ -2,7 +2,7 @@
 /**
 * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
-* @package 		OSINVOICE
+* @package 		PAYINVOICE
 * @subpackage	Front-end
 * @contact		team@readybytes.in
 */
@@ -13,8 +13,8 @@ if(!defined( '_JEXEC' )){
 
 <?php 
 	$items = array();
-	if(isset($osi_invoice['params']['items'])){
-		$items = $osi_invoice['params']['items'];
+	if(isset($payinvoice_invoice['params']['items'])){
+		$items = $payinvoice_invoice['params']['items'];
 	}
 
 ?>
@@ -22,10 +22,10 @@ if(!defined( '_JEXEC' )){
  	<table class="table table-hover">
     	<thead>
 			<tr>
-				<th><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEMS');?></th>
-				<th><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_QUANTITY');?></th>
-				<th><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_PRICE_PER_UNIT');?></th>
-				<th><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_PRICE_TOTAL');?></th>
+				<th><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEMS');?></th>
+				<th><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_QUANTITY');?></th>
+				<th><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_PRICE_PER_UNIT');?></th>
+				<th><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_PRICE_TOTAL');?></th>
 			</tr>
 		</thead>
 		

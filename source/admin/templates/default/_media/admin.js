@@ -1,18 +1,18 @@
 /**
 * @copyright	Copyright (C) 2009-2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
-* @package		OSINVOICE
+* @package		PAYINVOICE
 * @contact 		team@readybytes.in
 */
 
-//define osinvoice, if not defined.
-if (typeof(osinvoice)=='undefined'){
-	var osinvoice = {}
+//define payinvoice, if not defined.
+if (typeof(payinvoice)=='undefined'){
+	var payinvoice = {}
 }
 
 // all admin function should be in admin scope 
-if(typeof(osinvoice.admin)=='undefined'){
-	osinvoice.admin = {};
+if(typeof(payinvoice.admin)=='undefined'){
+	payinvoice.admin = {};
 }
 
 //all admin function should be in admin scope 
@@ -28,11 +28,11 @@ if(typeof(Joomla)=='undefined'){
 	
 	
 /*--------------------------------------------------------------
-osinvoice.admin.grid
+payinvoice.admin.grid
 	submit
 	filters
 --------------------------------------------------------------*/
-osinvoice.admin.grid = {
+payinvoice.admin.grid = {
 		
 		//default submit function
 		submit : function( view, action, validActions){
@@ -92,22 +92,22 @@ osinvoice.admin.grid = {
 		
 		invoice_email : function()
 		{
-			var invoice_id = $('#osinvoice_form_invoice_id').val();
-			osinvoice.url.modal("index.php?option=com_osinvoice&view=invoice&task=email&invoice_id="+invoice_id);
+			var invoice_id = $('#payinvoice_form_invoice_id').val();
+			payinvoice.url.modal("index.php?option=com_payinvoice&view=invoice&task=email&invoice_id="+invoice_id);
 			return false;
 		}
 };
 
 
-osinvoice.admin.invoice = {
+payinvoice.admin.invoice = {
 		item : {
 			add : function (item_description, quantity, price, total){
 						if(total == ''){
 							total = 0;
 						}
 									
-						var counter = $('#osi-invoice-item-add').attr('counter'); 
-						var html = $('.osi-invoice-item:first').html();
+						var counter = $('#payinvoice-invoice-item-add').attr('counter'); 
+						var html = $('.payinvoice-invoice-item:first').html();
 						html = html.replace(/##counter##/g, counter);
 						html = html.replace(/##item_description##/g, item_description);
 						html = html.replace(/##quantity##/g, quantity);
@@ -125,59 +125,59 @@ osinvoice.admin.invoice = {
 						}
 						
 						html = html.replace(/##total##/g, total);
-						$('<div class="osi-invoice-item">' + html + '</div>').appendTo('.osi-invoice-items').show();
-						$('#osi-invoice-item-add').attr('counter', parseInt(counter) + 1);
+						$('<div class="payinvoice-invoice-item">' + html + '</div>').appendTo('.payinvoice-invoice-items').show();
+						$('#payinvoice-invoice-item-add').attr('counter', parseInt(counter) + 1);
 						return false;
 			},
 			
 			calculate_total : function(){
 						var subtotal = 0;
-						$('.osi-item-total:visible').each(function(e){
+						$('.payinvoice-item-total:visible').each(function(e){
 							subtotal = subtotal + parseFloat($(this).val());
 						});
-						$('#osi-invoice-subtotal').val(parseFloat(subtotal).toFixed(2));
+						$('#payinvoice-invoice-subtotal').val(parseFloat(subtotal).toFixed(2));
 						
-						var discount = parseFloat($('#osi-invoice-discount').val());
-						var tax 	 = parseFloat($('#osi-invoice-tax').val());
+						var discount = parseFloat($('#payinvoice-invoice-discount').val());
+						var tax 	 = parseFloat($('#payinvoice-invoice-tax').val());
 						
 						var total = subtotal - discount;
 						if(tax > 0){
 							total = total + total * tax / 100;
 						}
-						$('#osi-invoice-total').val(parseFloat(total).toFixed(2));
+						$('#payinvoice-invoice-total').val(parseFloat(total).toFixed(2));
 			},
 		
 			on_currency_change : function(currency){
 						var currency   = {'event_args' :{'currency' : currency} };
-						var url		   = 'index.php?option=com_osinvoice&view=invoice&task=ajaxchangecurrency';
-						osinvoice.ajax.go(url,currency);
+						var url		   = 'index.php?option=com_payinvoice&view=invoice&task=ajaxchangecurrency';
+						payinvoice.ajax.go(url,currency);
 						return false;
 			},
 			
 			on_buyer_change : function(buyer){
 					var buyer   = {'event_args' :{'buyer' : buyer} };
-					var url 	= 'index.php?option=com_osinvoice&view=invoice&task=ajaxchangebuyer';
-					osinvoice.ajax.go(url, buyer);
+					var url 	= 'index.php?option=com_payinvoice&view=invoice&task=ajaxchangebuyer';
+					payinvoice.ajax.go(url, buyer);
 			},
 			
 			on_serial_change : function(serial){
 				var serial   = {'event_args' :{'serial' : serial} };
-				var url 	= 'index.php?option=com_osinvoice&view=invoice&task=ajaxchangeserial';
-				osinvoice.ajax.go(url, serial);
+				var url 	= 'index.php?option=com_payinvoice&view=invoice&task=ajaxchangeserial';
+				payinvoice.ajax.go(url, serial);
 			},
 			
 			send_email	: function(invoice_id){
-				var url 	= 'index.php?option=com_osinvoice&view=invoice&task=email&invoice_id='+invoice_id;
-				osinvoice.url.modal(url);
+				var url 	= 'index.php?option=com_payinvoice&view=invoice&task=email&invoice_id='+invoice_id;
+				payinvoice.url.modal(url);
 			}
 		}		
 };
 
-osinvoice.admin.buyer = {		
+payinvoice.admin.buyer = {		
 		on_email_change	: function(email, buyer_id){
 				var email   = {'event_args' :{'email' : email, 'buyer_id'	: buyer_id} };
-				var url 	= 'index.php?option=com_osinvoice&view=buyer&task=ajaxvalidateemail';
-				osinvoice.ajax.go(url, email);
+				var url 	= 'index.php?option=com_payinvoice&view=buyer&task=ajaxvalidateemail';
+				payinvoice.ajax.go(url, email);
 	
 		}
 };
@@ -194,4 +194,4 @@ $(document).ready(function(){
 //ENDING :
 //Scoping code for easy and non-conflicting access to $.
 //Should be last line, write code above this line.
-})(osinvoice.jQuery);
+})(payinvoice.jQuery);

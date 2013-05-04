@@ -3,7 +3,7 @@
 /**
 * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
-* @package 		OSINVOICE
+* @package 		PAYINVOICE
 * @subpackage	Back-end
 * @contact		team@readybytes.in
 */
@@ -18,17 +18,17 @@ if(!defined( '_JEXEC' )){
  * @author Gaurav Jain
  */
 require_once dirname(__FILE__).'/view.php';
-class OSInvoiceSiteViewInvoice extends OSInvoiceSiteBaseViewInvoice
+class PayInvoiceSiteViewInvoice extends PayInvoiceSiteBaseViewInvoice
 {	
 	public function display()
 	{
 		$itemid  = $this->getModel()->getId();
-		$osi_invoice = OSInvoiceInvoice::getInstance($itemid)->toArray();	
+		$payinvoice_invoice = PayInvoiceInvoice::getInstance($itemid)->toArray();	
 
 		// XITODO : use helper function
-		$filter 	= array('object_type' => 'OSInvoiceInvoice', 'object_id' => $itemid, 'master_invoice_id' => 0);
+		$filter 	= array('object_type' => 'PayInvoiceInvoice', 'object_id' => $itemid, 'master_invoice_id' => 0);
 		$rb_invoice = Rb_EcommerceAPI::invoice_get($filter);
-		$buyer   	= OSInvoiceBuyer::getInstance($rb_invoice['buyer_id']);
+		$buyer   	= PayInvoiceBuyer::getInstance($rb_invoice['buyer_id']);
 		
 		$discount	=  $this->_helper->get_discount($itemid);
 		$tax		=  $this->_helper->get_tax($itemid);
@@ -47,8 +47,8 @@ class OSInvoiceSiteViewInvoice extends OSInvoiceSiteBaseViewInvoice
 		$due_date		= $formatHelper->date($dueDate);
 		
 		$valid       	= $this->getHelper('invoice')->is_valid_date($rb_invoice['issue_date'], $rb_invoice['due_date']);
-		if(!empty($osi_invoice['params']['processor_id'])){
-			$processor	= OSInvoiceProcessor::getInstance($osi_invoice['params']['processor_id'])->toArray();
+		if(!empty($payinvoice_invoice['params']['processor_id'])){
+			$processor	= PayInvoiceProcessor::getInstance($payinvoice_invoice['params']['processor_id'])->toArray();
 			$this->assign('processor_title', $processor['title']);
 		}	
 		
@@ -57,7 +57,7 @@ class OSInvoiceSiteViewInvoice extends OSInvoiceSiteBaseViewInvoice
 		$this->assign('discount', $discount);
 		$this->assign('subtotal', $subtotal);
 		$this->assign('buyer', $buyer);
-		$this->assign('osi_invoice', $osi_invoice);
+		$this->assign('payinvoice_invoice', $payinvoice_invoice);
 		$this->assign('rb_invoice', $rb_invoice);
 		$this->assign('status', $status);
 		$this->assign('currency', $currency);

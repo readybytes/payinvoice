@@ -3,7 +3,7 @@
 /**
 * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
-* @package 		OSINVOICE
+* @package 		PAYINVOICE
 * @subpackage	Front-end
 * @contact		team@readybytes.in
 */
@@ -63,7 +63,7 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 					<tbody>
 						<tr>
 							<td style="background-color:#eee">
-								<?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_NUMBER');?>
+								<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_NUMBER');?>
 							</td>
 							<td style="text-align:right">
 									<?php echo $rb_invoice['serial'];?>
@@ -71,7 +71,7 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 						</tr>
 						<tr>
 							<td style="background-color:#eee">
-									<?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_DUE_DATE');?>
+									<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_DUE_DATE');?>
 							</td>
 							<td style="text-align:right">
 									<?php echo $rb_invoice['due_date'];?>
@@ -79,7 +79,7 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 						</tr>
 						<tr>
 							<td style="background-color:#eee">
-									<?php echo Rb_Text::_('COM_OSINVOICE_AMOUNT');?>
+									<?php echo Rb_Text::_('COM_PAYINVOICE_AMOUNT');?>
 							</td>
 							<td style="text-align:right">
 									<?php echo $rb_invoice['currency']." ".number_format($rb_invoice['total'], 2);?>

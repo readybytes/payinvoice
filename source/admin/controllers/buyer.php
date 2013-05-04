@@ -3,7 +3,7 @@
 /**
 * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
-* @package 		OSINVOICE
+* @package 		PAYINVOICE
 * @subpackage	Back-end
 * @contact		team@readybytes.in
 */
@@ -17,7 +17,7 @@ if(!defined( '_JEXEC' )){
  * Buyer Controller
  * @author Gaurav Jain
  */
-class OSInvoiceAdminControllerBuyer extends OSInvoiceController
+class PayInvoiceAdminControllerBuyer extends PayInvoiceController
 {
 	public function _save(array $data, $itemId=null, $type=null)
 	{
@@ -27,7 +27,7 @@ class OSInvoiceAdminControllerBuyer extends OSInvoiceController
 
 		$id = $this->_helper->storeUser($data);
 		if(!$id){
-			JFactory::getApplication()->enqueueMessage(JText::sprintf('COM_OSINVOICE_BUYER_NOT_SAVED'));
+			JFactory::getApplication()->enqueueMessage(JText::sprintf('COM_PAYINVOICE_BUYER_NOT_SAVED'));
 			return true;
 		}
 		$data['buyer_id'] = $id;
@@ -43,12 +43,12 @@ class OSInvoiceAdminControllerBuyer extends OSInvoiceController
 		$buyer_id	= $args['buyer_id'];
 		
 		$existing_userid = $this->_helper->getjoomlaUser('email', $email);
-		$response 	 	 = OSInvoiceFactory::getAjaxResponse();
+		$response 	 	 = PayInvoiceFactory::getAjaxResponse();
 		if($existing_userid && ($existing_userid != $buyer_id)){
-			$response->addScriptCall('osinvoice.jQuery("span.osi-email-error").html', Rb_Text::_('COM_OSINVOICE_EMAIL_ALREADY_EXIST'));
-			$response->addScriptCall('osinvoice.jQuery("#osinvoice_form_email").focus()');
+			$response->addScriptCall('payinvoice.jQuery("span.payinvoice-email-error").html', Rb_Text::_('COM_PAYINVOICE_EMAIL_ALREADY_EXIST'));
+			$response->addScriptCall('payinvoice.jQuery("#payinvoice_form_email").focus()');
 		}else {
-			$response->addScriptCall('osinvoice.jQuery("span.osi-email-error").html', "");
+			$response->addScriptCall('payinvoice.jQuery("span.payinvoice-email-error").html', "");
 		}
 		$response->sendResponse();	
 	}

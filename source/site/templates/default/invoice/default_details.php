@@ -2,7 +2,7 @@
 /**
 * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
-* @package 		OSINVOICE
+* @package 		PAYINVOICE
 * @subpackage	Back-end
 * @contact		team@readybytes.in
 */
@@ -25,22 +25,22 @@ if(!defined( '_JEXEC' )){
 	   	 
     <div class="span4">
         <dl class="dl-horizontal">
-		    <dt><?php echo Rb_Text::_('COM_OSINVOICE_BUYER_NAME');?></dt>
+		    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_BUYER_NAME');?></dt>
 		    <dd><?php echo $buyer->getBuyername();?></dd>
-		    <dt><?php echo Rb_Text::_('COM_OSINVOICE_BUYER_EMAIL');?></dt>
+		    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_BUYER_EMAIL');?></dt>
 		    <dd><?php echo $buyer->getEmail(); ?></dd>
-		    <dt><?php echo Rb_Text::_('COM_OSINVOICE_BUYER_ADDRESS');?></dt>
+		    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_BUYER_ADDRESS');?></dt>
 		    <dd><?php echo $buyer->getAddress().",".$buyer->getCity(); ?></dd>
-		    <dt><?php echo Rb_Text::_('COM_OSINVOICE_BUYER_TAX_NUMBER');?></dt>
+		    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_BUYER_TAX_NUMBER');?></dt>
 		    <dd><?php echo $buyer->getTaxnumber(); ?></dd>
 	    </dl>
 	</div>
    
    	<div class="span4 offset2 well well-small">
     	<dl class="dl-horizontal">	    
-			    <dt><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_ISSUE_DATE');?></dt>
+			    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_ISSUE_DATE');?></dt>
 			    <dd><?php echo $created_date;?></dd>		    			    
-			    <dt><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_DUE_DATE');?></dt>
+			    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_DUE_DATE');?></dt>
 			    <dd><?php echo $due_date;?></dd>		    
 	    </dl>
 	</div>

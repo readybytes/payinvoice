@@ -3,7 +3,7 @@
 /**
 * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
-* @package 		OSINVOICE
+* @package 		PAYINVOICE
 * @subpackage	Back-end
 * @contact		team@readybytes.in
 */
@@ -17,10 +17,10 @@ if(!defined( '_JEXEC' )){
  * Invoice Controller
  * @author Gaurav Jain
  */
-class OSInvoiceAdminControllerInvoice extends OSInvoiceController
+class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 {
 	/**
-	 * @var OSInvoiceHelperInvoice
+	 * @var PayInvoiceHelperInvoice
 	 */
 	public $_helper = null;
 	public function _save(array $data, $itemId=null, $type=null)
@@ -35,7 +35,7 @@ class OSInvoiceAdminControllerInvoice extends OSInvoiceController
 						->save();
 		
 	   if(!empty($data['params']['processor_id'])){
-		    $processor = OSInvoiceProcessor::getInstance($data['params']['processor_id']);
+		    $processor = PayInvoiceProcessor::getInstance($data['params']['processor_id']);
 	
 		    $data['rb_invoice']['processor_type']     = $processor->getType();
 		    $data['rb_invoice']['processor_config']   = $processor->getParams();
@@ -43,7 +43,7 @@ class OSInvoiceAdminControllerInvoice extends OSInvoiceController
 						
 		// create invoice in Rb_Ecommerce, in $itemId is null
 		if(!$itemId){
-			$data['rb_invoice']['object_type'] 	 	= 'OSInvoiceInvoice';
+			$data['rb_invoice']['object_type'] 	 	= 'PayInvoiceInvoice';
 			$data['rb_invoice']['object_id'] 	 	= $invoice->getId();
 			$data['rb_invoice']['expiration_type'] 	= RB_ECOMMERCE_EXPIRATION_TYPE_FIXED;
 			$data['rb_invoice']['time_price'] = array('time' => array('000000000000'), 'price' => array('0.00'));
@@ -55,9 +55,9 @@ class OSInvoiceAdminControllerInvoice extends OSInvoiceController
 		}
 		
 		// XITODO : use constants
-		$this->_helper->create_modifier($invoice_id, 'OSInvoiceItem', $data['subtotal'], 10);
-		$this->_helper->create_modifier($invoice_id, 'OSInvoiceDiscount', -$data['discount'], 20);
-		$this->_helper->create_modifier($invoice_id, 'OSInvoiceTax', $data['tax'], 45, true);
+		$this->_helper->create_modifier($invoice_id, 'PayInvoiceItem', $data['subtotal'], 10);
+		$this->_helper->create_modifier($invoice_id, 'PayInvoiceDiscount', -$data['discount'], 20);
+		$this->_helper->create_modifier($invoice_id, 'PayInvoiceTax', $data['tax'], 45, true);
 		
 		$invoice_id = Rb_EcommerceAPI::invoice_update($invoice_id, $data['rb_invoice'], true);
 		
@@ -73,8 +73,8 @@ class OSInvoiceAdminControllerInvoice extends OSInvoiceController
 		$format		 = $this->getHelper('format');
 		$symbol		 = $format->getCurrency($currency, 'symbol');
 				
-		$response  = OSInvoiceFactory::getAjaxResponse();
-		$response->addScriptCall('osinvoice.jQuery(".osi-currency").html',$symbol);
+		$response  = PayInvoiceFactory::getAjaxResponse();
+		$response->addScriptCall('payinvoice.jQuery(".payinvoice-currency").html',$symbol);
 		$response->sendResponse();
 		
 	}
@@ -85,12 +85,12 @@ class OSInvoiceAdminControllerInvoice extends OSInvoiceController
 		$args     	= $this->_getArgs();
 		$buyer_id 	= $args['buyer'];
 		
-		$buyer 		= OSInvoiceBuyer::getInstance($buyer_id);
+		$buyer 		= PayInvoiceBuyer::getInstance($buyer_id);
 		$currency   = $buyer->getCurrency();
 				
-		$response  = OSInvoiceFactory::getAjaxResponse();
-		$response->addScriptCall('osinvoice.jQuery("#osinvoice_form_rb_invoice_currency").val',$currency);
-		$response->addScriptCall('osinvoice.admin.invoice.item.on_currency_change', $currency);
+		$response  = PayInvoiceFactory::getAjaxResponse();
+		$response->addScriptCall('payinvoice.jQuery("#payinvoice_form_rb_invoice_currency").val',$currency);
+		$response->addScriptCall('payinvoice.admin.invoice.item.on_currency_change', $currency);
 		$response->sendResponse();
 		
 	}
@@ -120,12 +120,12 @@ class OSInvoiceAdminControllerInvoice extends OSInvoiceController
 		$invoice_serial 	= $args['serial'];
 	
 		$serial				= $this->_helper->exist_serial_number($invoice_serial);
-		$response 		    = OSInvoiceFactory::getAjaxResponse();
+		$response 		    = PayInvoiceFactory::getAjaxResponse();
 		if($serial){	
-			$response->addScriptCall('osinvoice.jQuery("span.invoice-error").html',Rb_Text::_('COM_OSINVOICE_INVOICE_SERIAL_ALREADY_EXIST'));
-			$response->addScriptCall('osinvoice.jQuery("#osinvoice_form_rb_invoice_serial").focus()');
+			$response->addScriptCall('payinvoice.jQuery("span.invoice-error").html',Rb_Text::_('COM_PAYINVOICE_INVOICE_SERIAL_ALREADY_EXIST'));
+			$response->addScriptCall('payinvoice.jQuery("#payinvoice_form_rb_invoice_serial").focus()');
 		}else {
-			$response->addScriptCall('osinvoice.jQuery("span.invoice-error").html', "");
+			$response->addScriptCall('payinvoice.jQuery("span.invoice-error").html', "");
 		}
 		$response->sendResponse();
 	}

@@ -2,7 +2,7 @@
 /**
 * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
-* @package 		OSINVOICE
+* @package 		PAYINVOICE
 * @subpackage	Back-end
 * @contact		team@readybytes.in
 */
@@ -16,7 +16,7 @@ if(!defined( '_JEXEC' )){
  * @author Manisha Ranawat
  */
 require_once dirname(__FILE__).'/view.php';
-class OSInvoiceAdminViewProcessor extends OSInvoiceAdminBaseViewProcessor
+class PayInvoiceAdminViewProcessor extends PayInvoiceAdminBaseViewProcessor
 {	
 	protected function _adminGridToolbar()
 	{
@@ -32,11 +32,11 @@ class OSInvoiceAdminViewProcessor extends OSInvoiceAdminBaseViewProcessor
 	function edit($tpl= null, $itemId = null, $processor_type= null)
 	{
 		$itemId  		=  ($itemId === null) ? $this->getModel()->getState('id') : $itemId ;		
-		$processorType 	=  OSInvoiceProcessor::getInstance($itemId);
+		$processorType 	=  PayInvoiceProcessor::getInstance($itemId);
 		
 		if(!$itemId){
 			$processor_type =	$this->input->get('processor_type', $processor_type);
-			Rb_Error::assert(($processor_type), Rb_Text::_('COM_OSINVOICE_NO_PROCESSOR_TYPE'));
+			Rb_Error::assert(($processor_type), Rb_Text::_('COM_PAYINVOICE_NO_PROCESSOR_TYPE'));
 			$processorType->set('type',$processor_type);
 		}
 		

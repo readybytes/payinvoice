@@ -3,7 +3,7 @@
 /**
 * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
-* @package 		OSINVOICE
+* @package 		PAYINVOICE
 * @subpackage	Front-end
 * @contact		team@readybytes.in
 */
@@ -20,16 +20,16 @@ if(!defined( '_JEXEC' )){
 		
 		<?php if(!empty($osi_invoice['params']['processor_id'])) :?>
 			var osi_invoice_processor = '<?php echo $osi_invoice['params']['processor_id'];?>';
-			osinvoice.site.invoice.on_processor_change(osi_invoice_processor, invoice_id);
+			payinvoice.site.invoice.on_processor_change(osi_invoice_processor, invoice_id);
 		<?php endif;?>
         	
-		$('#osinvoice_formparamsprocessor_id').change(function(){
+		$('#payinvoice_formparamsprocessor_id').change(function(){
 			var processor   = $(this).val();
-			osinvoice.site.invoice.on_processor_change(processor, invoice_id);
+			payinvoice.site.invoice.on_processor_change(processor, invoice_id);
 			return false;
 		});
 	});
-})(osinvoice.jQuery);
+})(payinvoice.jQuery);
 </script>
 
 <div class="container-fluid">
@@ -43,11 +43,11 @@ if(!defined( '_JEXEC' )){
 	 		
 	 		<div class="span5">
 	 		 		<dl class="dl-horizontal">
-					    <dt><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_SUBTOTAL');?></dt>
+					    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_SUBTOTAL');?></dt>
 					    <dd><?php echo $currency." ". number_format($subtotal, 2);?></dd>
-					    <dt><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_DISCOUNT');?></dt>
+					    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_DISCOUNT');?></dt>
 					    <dd><?php echo $currency." ". number_format($discount, 2);?></dd>
-					    <dt><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_TAX');?></dt>
+					    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX');?></dt>
 					    <dd><?php echo number_format($tax, 2)." %";?></dd>
 					 </dl><hr>
 
@@ -60,7 +60,7 @@ if(!defined( '_JEXEC' )){
 	 		
 	 		<div class="span5">
 	 	 		<dl class="dl-horizontal">
-						    <dt><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_TOTAL');?></dt>
+						    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TOTAL');?></dt>
 						    <dd><?php echo $currency." ".number_format($rb_invoice['total'], 2);?></dd>
 			    </dl>
 		    </div>
@@ -72,12 +72,12 @@ if(!defined( '_JEXEC' )){
 	    		<?php if($valid && $rb_invoice['total'] != floatval(0)):?>  
 		 	   <div class="span5">
 			 	   <dl class="dl-horizontal">
-					    <dt><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_PAYMENT_METHOD');?></dt>
+					    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_PAYMENT_METHOD');?></dt>
 					    <dd>
 					    	<?php 	if(!empty($processor_title)){?>
 				    				 <?php echo $processor_title;?>
 					    	 <?php	 }else {
-			    		 				echo OSInvoiceHtml::_('osinvoicehtml.processors.edit', 'osinvoice_form[params][processor_id]', '', array('none'=>true, 'style' => 'class="input-medium"'));
+			    		 				echo PayInvoiceHtml::_('payinvoicehtml.processors.edit', 'payinvoice_form[params][processor_id]', '', array('none'=>true, 'style' => 'class="input-medium"'));
 			   					  	 }?>
 			   			</dd>
 					   
@@ -87,9 +87,9 @@ if(!defined( '_JEXEC' )){
 		 		
 		 	<div class="row">
 		 		<form action="" method="post"  name="paynowForm" id="paynowForm" class="rb-validate-form">
-		 			<div id="osinvoice-paynow-html">
+		 			<div id="payinvoice-paynow-html">
 		 			</div>
-		 			<button type="submit" class="btn btn-primary pull-right"><?php echo Rb_Text::_('COM_OSINVOICE_PAY_NOW');?></button>
+		 			<button type="submit" class="btn btn-primary pull-right"><?php echo Rb_Text::_('COM_PAYINVOICE_PAY_NOW');?></button>
 		 			<div>&nbsp;</div>
 		 			<div>&nbsp;</div>
 					<div class="span12">

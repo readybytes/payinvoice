@@ -3,7 +3,7 @@
 /**
 * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
-* @package 		OSINVOICE
+* @package 		PAYINVOICE
 * @subpackage	Front-end
 * @contact		team@readybytes.in
 */
@@ -17,10 +17,10 @@ if(!defined( '_JEXEC' )){
  * Invoice Controller
  * @author Gaurav Jain
  */
-class OSInvoiceSiteControllerInvoice extends OSInvoiceController
+class PayInvoiceSiteControllerInvoice extends PayInvoiceController
 {
 	/**
-	 * @var OSInvoiceHelperInvoice
+	 * @var PayInvoiceHelperInvoice
 	 */
 	public $_helper = null;
 	
@@ -29,7 +29,7 @@ class OSInvoiceSiteControllerInvoice extends OSInvoiceController
 		$itemid 		= $this->_getId(); 
 		$args 			= $this->_getArgs();
 		$processor_id 	= $args['processor_id'];		
-		$processor 		= OSInvoiceProcessor::getInstance($processor_id);
+		$processor 		= PayInvoiceProcessor::getInstance($processor_id);
 		$rb_invoice 	= $this->_helper->get_rb_invoice($itemid);
 		
 		// save the processor configuration
@@ -86,7 +86,7 @@ class OSInvoiceSiteControllerInvoice extends OSInvoiceController
 
 	public function display()
 	{
-		$key		= OSInvoiceFactory::getApplication()->input->get('key');
+		$key		= PayInvoiceFactory::getApplication()->input->get('key');
 		$itemid 	= $this->getModel()->getId();
 	
 		// XITODO :: pass invoice as a reference to use in invoice view

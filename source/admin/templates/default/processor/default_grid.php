@@ -2,7 +2,7 @@
 /**
 * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
-* @package 		OSINVOICE
+* @package 		PAYINVOICE
 * @subpackage	Back-end
 * @contact		team@readybytes.in
 */
@@ -20,14 +20,14 @@ if(!defined( '_JEXEC' )){
 						<input type="checkbox" name="toggle" value="" onclick="Joomla.checkAll(this);" />
 					</th>
 					<th class="default-grid-sno">
-		      			<?php echo Rb_Text::_("COM_OSINVOICE_NUM"); ?>
+		      			<?php echo Rb_Text::_("COM_PAYINVOICE_NUM"); ?>
 		    		</th> 
 					<th>
-						<?php echo OSInvoiceHtml::_('grid.sort', "COM_OSINVOICE_PROCESSOR_ID", 'processor_id', 	$filter_order_Dir, $filter_order);?>
+						<?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_PROCESSOR_ID", 'processor_id', 	$filter_order_Dir, $filter_order);?>
 					</th>
-					<th><?php echo OSInvoiceHtml::_('grid.sort', "COM_OSINVOICE_PROCESSOR_TYPE", 'type', 	$filter_order_Dir, $filter_order);?></th>
-					<th><?php echo OSInvoiceHtml::_('grid.sort', "COM_OSINVOICE_PROCESSOR_TITLE", 'title', 	$filter_order_Dir, $filter_order);?></th>
-					<th><?php echo OSInvoiceHtml::_('grid.sort', "COM_OSINVOICE_PUBLISHED", 'published', $filter_order_Dir, $filter_order);?></th>
+					<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_PROCESSOR_TYPE", 'type', 	$filter_order_Dir, $filter_order);?></th>
+					<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_PROCESSOR_TITLE", 'title', 	$filter_order_Dir, $filter_order);?></th>
+					<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_PUBLISHED", 'published', $filter_order_Dir, $filter_order);?></th>
 				</tr>
 			<!-- TABLE HEADER END -->
 			</thead>
@@ -37,15 +37,15 @@ if(!defined( '_JEXEC' )){
 			  foreach ($records as $record):?>
 				<tr class="<?php echo "row".$count%2; ?>">
 				    <th class="default-grid-chkbox">
-				    	<?php echo OSInvoiceHtml::_('grid.id', $count, $record->{$record_key} ); ?>
+				    	<?php echo PayInvoiceHtml::_('grid.id', $count, $record->{$record_key} ); ?>
 				    </th>
 					<td><?php echo $count+1; ?> </td>	
 					<td><?php echo $record->processor_id;?></td>
-					<td><?php echo OSInvoiceHtml::link($uri.'&task=edit&id='.$record->{$record_key}, $record->title); ?>
+					<td><?php echo PayInvoiceHtml::link($uri.'&task=edit&id='.$record->{$record_key}, $record->title); ?>
 						 <p class="muted"><?php echo $record->description;?></p>
 					</td>							
 					<td><?php echo $record->type;?></td>
-					<td><?php echo OSInvoiceHtml::_("rb_html.boolean.grid", $record, 'published', $count, 'tick.png', 'publish_x.png', '', $langPrefix='COM_OSINVOICE');?></td>
+					<td><?php echo PayInvoiceHtml::_("rb_html.boolean.grid", $record, 'published', $count, 'tick.png', 'publish_x.png', '', $langPrefix='COM_PAYINVOICE');?></td>
 			
 			<?php $count++;?>		
 			<?php endforeach;?>

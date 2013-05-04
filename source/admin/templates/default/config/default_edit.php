@@ -2,7 +2,7 @@
 /**
 * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
-* @package		OSINVOICE
+* @package		PAYINVOICE
 * @subpackage	Backend
 * @contact 		team@readybytes.in
 */
@@ -20,20 +20,20 @@ JHtml::_('behavior.formvalidation');
 
 (function($){
 	$(document).ready(function(){
-       $('#osinvoice-delete-logo').click(function(){
+       $('#payinvoice-delete-logo').click(function(){
                var args   = { };
-               var url = 'index.php?option=com_osinvoice&view=config&task=removelogo';
-               osinvoice.ajax.go(url, args);
+               var url = 'index.php?option=com_payinvoice&view=config&task=removelogo';
+               payinvoice.ajax.go(url, args);
                return false;
        });
 	});
-})(osinvoice.jQuery);
+})(payinvoice.jQuery);
 </script>
 
 <form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" enctype="multipart/form-data" class="rb-validate-form">	
   <fieldset class="form-horizontal">
   	<div class="span6">	
-			<h3> <?php echo Rb_Text::_('COM_OSINVOICE_CONFIG_BASIC_SETTING' ); ?> </h3><hr>	
+			<h3> <?php echo Rb_Text::_('COM_PAYINVOICE_CONFIG_BASIC_SETTING' ); ?> </h3><hr>	
 			
 			<div class="control-group">
 				<div class="control-label"><?php echo $form->getLabel('currency'); ?> </div>
@@ -53,14 +53,14 @@ JHtml::_('behavior.formvalidation');
 	</div>				
 			
 		<div class="span6">
-			<h3> <?php echo Rb_Text::_('COM_OSINVOICE_CONFIG_COMPANY_SETTINGS' ); ?> </h3><hr>	
+			<h3> <?php echo Rb_Text::_('COM_PAYINVOICE_CONFIG_COMPANY_SETTINGS' ); ?> </h3><hr>	
 				
 			<div class="control-group">
 				<div class="control-label"><?php echo $form->getLabel('company_logo'); ?> </div>
 				<div class="controls">
-					<div id="osinvoice-logo-image"><img src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);; ?>" /></div>
+					<div id="payinvoice-logo-image"><img src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);; ?>" /></div>
 					<?php echo $form->getInput('company_logo'); ?>
-					<div><a href="#" id="osinvoice-delete-logo" class="span3">Delete</a></div>
+					<div><a href="#" id="payinvoice-delete-logo" class="span3">Delete</a></div>
 				</div>								
 			</div>
 			

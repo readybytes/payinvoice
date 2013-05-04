@@ -3,7 +3,7 @@
 /**
 * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
-* @package 		OSINVOICE
+* @package 		PAYINVOICE
 * @subpackage	Back-end
 * @contact		team@readybytes.in
 */
@@ -27,20 +27,20 @@ JHtml::_('behavior.formvalidation');
 	       buyer_id	= '<?php echo $record_id;?>';
 	 <?php endif;?>
 	 				
-			$('#osinvoice_form_email').change(function(){
+			$('#payinvoice_form_email').change(function(){
 			  	var email   = $(this).val();
-			  	osinvoice.admin.buyer.on_email_change(email, buyer_id);
+			  	payinvoice.admin.buyer.on_email_change(email, buyer_id);
 				return false;
 			});
 			
 	});
-})(osinvoice.jQuery);
+})(payinvoice.jQuery);
 </script>
 
 <form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="rb-validate-form">
 <div class="row-fluid">
 <fieldset class="form-horizontal">
-	<h2><?php echo Rb_Text::_('COM_OSINVOICE_BUYER_EDIT_DETAILS' ); ?></h2>
+	<h2><?php echo Rb_Text::_('COM_PAYINVOICE_BUYER_EDIT_DETAILS' ); ?></h2>
     <hr>         
     <div class="row-fluid">
 		<div class="span3">
@@ -49,7 +49,7 @@ JHtml::_('behavior.formvalidation');
     
     	<div class="span9">
     	    <div class="span6">
-    		    <h3><?php echo Rb_Text::_('COM_OSINVOICE_BUYER_LOGIN_DETAILS')?></h3>
+    		    <h3><?php echo Rb_Text::_('COM_PAYINVOICE_BUYER_LOGIN_DETAILS')?></h3>
     		    <hr>			    		          
     	        <div class="control-group">
 					<?php echo $form->getLabel('name'); ?>
@@ -59,7 +59,7 @@ JHtml::_('behavior.formvalidation');
 				<div class="control-group">
 					<?php echo $form->getLabel('email'); ?>
 					<div class="controls"><?php echo $form->getInput('email'); ?><br>
-						<span class="osi-email-error error"></span>
+						<span class="payinvoice-email-error error"></span>
 					</div>										
 				</div>	
 						
@@ -69,7 +69,7 @@ JHtml::_('behavior.formvalidation');
 				</div>	
 				<br>
 						 
-				<h3><?php echo Rb_Text::_('COM_OSINVOICE_BUYER_BASIC_DETAILS')?></h3><hr>
+				<h3><?php echo Rb_Text::_('COM_PAYINVOICE_BUYER_BASIC_DETAILS')?></h3><hr>
 						   
 				<div class="control-group">
 					<?php echo $form->getLabel('currency'); ?>

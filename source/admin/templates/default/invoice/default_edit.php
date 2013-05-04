@@ -3,7 +3,7 @@
 /**
 * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
-* @package 		OSINVOICE
+* @package 		PAYINVOICE
 * @subpackage	Back-end
 * @contact		team@readybytes.in
 */
@@ -27,23 +27,23 @@ JHtml::_('behavior.formvalidation');
 	
  $(document).ready(function(){
 	 
-			osinvoice.admin.invoice.item.on_currency_change(osi_invoice_currency);
+			payinvoice.admin.invoice.item.on_currency_change(osi_invoice_currency);
 				
-			$('#osinvoice_form_rb_invoice_currency').change(function(){
+			$('#payinvoice_form_rb_invoice_currency').change(function(){
 				var currency   = $(this).val();
-				osinvoice.admin.invoice.item.on_currency_change(currency);
+				payinvoice.admin.invoice.item.on_currency_change(currency);
 				return false;
 			}),
 
-			$('#osinvoice_form_rb_invoice_buyer_id').change(function(){
+			$('#payinvoice_form_rb_invoice_buyer_id').change(function(){
 			  	var buyer   = $(this).val();
-			  	osinvoice.admin.invoice.item.on_buyer_change(buyer);
+			  	payinvoice.admin.invoice.item.on_buyer_change(buyer);
 				return false;
 			}),
 
-			$('#osinvoice_form_rb_invoice_serial').change(function(){
+			$('#payinvoice_form_rb_invoice_serial').change(function(){
 				var serial 	= $(this).val();
-				osinvoice.admin.invoice.item.on_serial_change(serial);
+				payinvoice.admin.invoice.item.on_serial_change(serial);
 				return false;	
 			}),
 
@@ -51,14 +51,14 @@ JHtml::_('behavior.formvalidation');
 				$("#osi-payment-processor").slideToggle("fast");				
 			});
 	});
-})(osinvoice.jQuery);
+})(payinvoice.jQuery);
 </script>	
 
 <?php echo $this->loadTemplate('edit_item');?>
 
 <form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="rb-validate-form">
 	<div class="row-fluid">
-	<div class="span8"><h2><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_DETAILS' ); ?></h2></div>
+	<div class="span8"><h2><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_DETAILS' ); ?></h2></div>
 	<?php if($form->getValue('invoice_id')):?>
 	<div class="offset1 span3 pull-right">
 		<div class="label <?php echo $status['class']?> center"><h5><?php  echo $status['status'];?></h5></div>
@@ -119,39 +119,39 @@ JHtml::_('behavior.formvalidation');
 					</div>
 					<div class="span5">
 						<div class="control-group">
-							<label class="control-label"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_SUBTOTAL');?></label>
+							<label class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_SUBTOTAL');?></label>
 				  			<div class="controls">
 				  				<div class="input-prepend">              			
 									<span class="add-on osi-currency"></span>
-									<input type="text" name="osinvoice_form[subtotal]" class="input-small" readonly="readonly" id="osi-invoice-subtotal">		
+									<input type="text" name="payinvoice_form[subtotal]" class="input-small" readonly="readonly" id="osi-invoice-subtotal">		
 								</div>
 				  			</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_DISCOUNT');?></label>
+							<label class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_DISCOUNT');?></label>
 				  			<div class="controls">
 				  				<div class="input-prepend">
 									<span class="add-on osi-currency"></span>
-									<input type="text" name="osinvoice_form[discount]" class="input-small" min="0" id="osi-invoice-discount" value="<?php echo $discount;?>">
+									<input type="text" name="payinvoice_form[discount]" class="input-small" min="0" id="osi-invoice-discount" value="<?php echo $discount;?>">
 								</div>
 				  			</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_TAX');?></label>
+							<label class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX');?></label>
 				  			<div class="controls">
 				  				<div class="input-append">									
-									<input type="text" name="osinvoice_form[tax]" class="input-small" id="osi-invoice-tax" min="0" value="<?php echo $tax;?>">
+									<input type="text" name="payinvoice_form[tax]" class="input-small" id="osi-invoice-tax" min="0" value="<?php echo $tax;?>">
 									<span class="add-on">%</span>
 								</div>
 				  			</div>
 						</div>
 						<hr>
 						<div class="control-group">
-							<label class="control-label"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_TOTAL');?></label>
+							<label class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TOTAL');?></label>
 				  			<div class="controls">
 				  				<div class="input-prepend">
 									<span class="add-on osi-currency"></span>
-									<input type="text" name="osinvoice_form[total]" class="input-small" readonly="readonly" id="osi-invoice-total" >
+									<input type="text" name="payinvoice_form[total]" class="input-small" readonly="readonly" id="osi-invoice-total" >
 								</div>
 				  			</div>
 						</div>
@@ -159,16 +159,16 @@ JHtml::_('behavior.formvalidation');
 				</div>	
 				<!-- END : Total -->
 				
-				<h4><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_TERMS_AND_CONDITIONS');?></h4><hr>
+				<h4><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_TERMS_AND_CONDITIONS');?></h4><hr>
 					<?php echo $invoice_params['terms_and_conditions'];?>
 				
 				<div>&nbsp;</div>
 				<div class="pull-right">
 					<?php if(!empty($invoice_url)):?>
-					<a href="<?php echo $invoice_url;?>" class="btn btn-info" target="_blank"><i class="icon-search icon-white"></i>&nbsp;<?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_PREVIEW_LINK');?></a>					
+					<a href="<?php echo $invoice_url;?>" class="btn btn-info" target="_blank"><i class="icon-search icon-white"></i>&nbsp;<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_PREVIEW_LINK');?></a>					
 					<?php endif;?>
 					<?php if(!empty($record_id)):?>
-					<a href="#" onclick="osinvoice.admin.invoice.item.send_email('<?php echo $record_id?>')" class="btn btn-info"><i class="icon-envelope icon-white"></i>&nbsp;<?php echo Rb_Text::_('OSINVOCIE_TOOLBAR_EMAIL');?></a>	
+					<a href="#" onclick="payinvoice.admin.invoice.item.send_email('<?php echo $record_id?>')" class="btn btn-info"><i class="icon-envelope icon-white"></i>&nbsp;<?php echo Rb_Text::_('OSINVOCIE_TOOLBAR_EMAIL');?></a>	
 					<?php endif;?>	
 				</div>								
 
@@ -177,15 +177,15 @@ JHtml::_('behavior.formvalidation');
 				<div class="pull-right span3 ">
 				<?php if($form->getValue('invoice_id')):?>
 					<div class="row-fluid well well-small">	
-						<h4 class="center muted"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_RELATED_DATES')?></h4><hr>
+						<h4 class="center muted"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_RELATED_DATES')?></h4><hr>
 					    <ul class="horizontal unstyled center">
-						    <li class="muted"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_CREATED_ON')." ".$rb_invoice['created_date'];?></li><hr>
-						    <li class="muted"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_MODIFIED_ON')." ".$rb_invoice['modified_date'];?></li><hr>
+						    <li class="muted"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_CREATED_ON')." ".$rb_invoice['created_date'];?></li><hr>
+						    <li class="muted"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_MODIFIED_ON')." ".$rb_invoice['modified_date'];?></li><hr>
 						    <?php if(!empty($rb_invoice['paid_date'])):?>
-						    <li class="muted"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_PAID_ON')." ".$rb_invoice['paid_date'];?></li><hr>
+						    <li class="muted"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_PAID_ON')." ".$rb_invoice['paid_date'];?></li><hr>
 						    <?php endif;?>
 						    <?php if(!empty($rb_invoice['refunded_date'])):?>
-						    <li class="muted"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_REFUNDED_ON')." ".$rb_invoice['refunded_date'];?></li>
+						    <li class="muted"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_REFUNDED_ON')." ".$rb_invoice['refunded_date'];?></li>
 						    <?php endif;?>
 					    </ul>
 				    </div>
@@ -193,17 +193,17 @@ JHtml::_('behavior.formvalidation');
 				    
 			    	<?php $class="";?>
 					<?php if(empty($osi_invoice['params']['processor_id'])):?>
-					<a href="#" id="osi-add-processor" class="btn btn-info" title="<?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_ADD_PROCESSOR_TOOLTIP');?>">
-						<?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_ADD_PROCESSOR');?>
+					<a href="#" id="osi-add-processor" class="btn btn-info" title="<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_ADD_PROCESSOR_TOOLTIP');?>">
+						<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_ADD_PROCESSOR');?>
 					</a>
 					<?php $class='class="hide"';?>
 					<?php endif;?>
 					<div>&nbsp;</div>
 					<div id="osi-payment-processor" <?php echo $class;?>>
 						<div class="control-group">
-							<label class="control-label"><strong><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_PAYMENT_METHOD');?></strong></label>
+							<label class="control-label"><strong><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_PAYMENT_METHOD');?></strong></label>
 				  			<div class="controls">
-							    	<?php echo OSInvoiceHtml::_('osinvoicehtml.processors.edit', 'osinvoice_form[params][processor_id]' ,$processor_id ,array('none'=>true, 'style' => 'class="input-medium"')); ?>
+							    	<?php echo PayInvoiceHtml::_('payinvoicehtml.processors.edit', 'payinvoice_form[params][processor_id]' ,$processor_id ,array('none'=>true, 'style' => 'class="input-medium"')); ?>
 				  			</div>
 						</div>
 					</div>

@@ -3,7 +3,7 @@
 /**
 * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
-* @package 		OSINVOICE
+* @package 		PAYINVOICE
 * @subpackage	Front-end
 * @contact		team@readybytes.in
 */
@@ -20,10 +20,10 @@ if(!defined( '_JEXEC' )){
 <table border="1" width="100%"cellspacing="0" cellpadding="0" style="border-collapse: collapse;font:14px Georgia, Serif">
 	<tbody>
 		<tr>
-			<th style="font-size: 1em;padding-top: 12px;padding-bottom: 10px;background-color: #eee;width: 48%;"><?php echo Rb_Text::_('COM_OSINVOICE_ITEMS');?></th>
-			<th  style="font-size: 1em;padding-top: 12px;padding-bottom: 10px;background-color: #eee;"><?php echo Rb_Text::_('COM_OSINVOICE_QUANTITY');?></th>
-			<th style="font-size: 1em;padding-top: 12px;padding-bottom: 10px;background-color: #eee;"><?php echo Rb_Text::_('COM_OSINVOICE_UNIT_PRICE');?></th>
-			<th  style="font-size: 1em;padding-top: 12px;padding-bottom: 10px;background-color: #eee;"><?php echo Rb_Text::_('COM_OSINVOICE_AMOUNT');?></th>
+			<th style="font-size: 1em;padding-top: 12px;padding-bottom: 10px;background-color: #eee;width: 48%;"><?php echo Rb_Text::_('COM_PAYINVOICE_ITEMS');?></th>
+			<th  style="font-size: 1em;padding-top: 12px;padding-bottom: 10px;background-color: #eee;"><?php echo Rb_Text::_('COM_PAYINVOICE_QUANTITY');?></th>
+			<th style="font-size: 1em;padding-top: 12px;padding-bottom: 10px;background-color: #eee;"><?php echo Rb_Text::_('COM_PAYINVOICE_UNIT_PRICE');?></th>
+			<th  style="font-size: 1em;padding-top: 12px;padding-bottom: 10px;background-color: #eee;"><?php echo Rb_Text::_('COM_PAYINVOICE_AMOUNT');?></th>
 		</tr>
 		<?php foreach ($items as $item) :?>
 		<tr>
@@ -36,25 +36,25 @@ if(!defined( '_JEXEC' )){
 		
 		<tr>
 			<td colspan="2" style="padding:10px 5px 5px 7px;border: 0;">&nbsp;</td>
-			<td align="right" style="padding:10px 5px 10px 7px;border-right:0px;"><?php echo Rb_Text::_('COM_OSINVOICE_SUBTOTAL');?></td>
+			<td align="right" style="padding:10px 5px 10px 7px;border-right:0px;"><?php echo Rb_Text::_('COM_PAYINVOICE_SUBTOTAL');?></td>
 			<td style="border-left:0px;">&nbsp;&nbsp;<?php echo $rb_invoice['currency']." ".number_format($subtotal, 2);?></td>
 		</tr>
 		<tr>
 			<td colspan="2" style="padding:10px 5px 10px 7px;border: 0;">&nbsp;
 			</td>
-			<td align="right" style="padding:10px 5px 10px 7px;border-right:0px;"><?php echo Rb_Text::_('COM_OSINVOICE_DISCOUNT');?></td>
+			<td align="right" style="padding:10px 5px 10px 7px;border-right:0px;"><?php echo Rb_Text::_('COM_PAYINVOICE_DISCOUNT');?></td>
 			<td style="border-left:0px;">&nbsp;&nbsp;<?php echo $rb_invoice['currency']." ".number_format($discount, 2);?></td>
 		</tr>
 		
 		<tr>
 			<td colspan="2" style="padding:10px 5px 5px 7px;border: 0;">&nbsp;</td>
-			<td align="right" style="padding:10px 5px 10px 7px;border-right:0px;"><?php echo Rb_Text::_('COM_OSINVOICE_TAX');?></td>
+			<td align="right" style="padding:10px 5px 10px 7px;border-right:0px;"><?php echo Rb_Text::_('COM_PAYINVOICE_TAX');?></td>
 			<td style="border-left:0px;">&nbsp;&nbsp;<?php echo $rb_invoice['currency']." ".number_format($tax, 2);?></td>
 		</tr>
 		<tr>
 			<td colspan="2" style="padding:10px 5px 10px 7px;border: 0;">&nbsp;
 			</td>
-			<td align="right"  style="padding:10px 5px 10px 7px;background-color:#eee;border-right:0px"><?php echo Rb_Text::_('COM_OSINVOICE_TOTAL')?></td>
+			<td align="right"  style="padding:10px 5px 10px 7px;background-color:#eee;border-right:0px"><?php echo Rb_Text::_('COM_PAYINVOICE_TOTAL')?></td>
 			<td style="border-left:0px;background-color:#eee;">&nbsp;&nbsp;<?php echo $rb_invoice['currency']." ".number_format($rb_invoice['total'], 2);?></td>
 		</tr>
 																

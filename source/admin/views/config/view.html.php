@@ -2,7 +2,7 @@
 /**
 * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
-* @package 		OSINVOICE
+* @package 		PAYINVOICE
 * @subpackage	Back-end
 * @contact		team@readybytes.in
 */
@@ -16,7 +16,7 @@ if(!defined( '_JEXEC' )){
  * @author Manisha Ranawat
  */
 require_once dirname(__FILE__).'/view.php';
-class OSInvoiceAdminViewConfig extends OSInvoiceAdminBaseViewConfig
+class PayInvoiceAdminViewConfig extends PayInvoiceAdminBaseViewConfig
 {	
 	protected function _adminEditToolbar()
 	{
@@ -26,10 +26,10 @@ class OSInvoiceAdminViewConfig extends OSInvoiceAdminBaseViewConfig
 	
 	function edit($tpl=null)
 	{
-		$modelform  = OSInvoiceFactory::getInstance('config', 'Modelform' , 'osinvoice');
+		$modelform  = PayInvoiceFactory::getInstance('config', 'Modelform' , 'payinvoice');
 		$form		= $modelform->getForm();
 		
-		$file = OSINVOICE_PATH_CORE_FORMS.'/config.xml';
+		$file = PAYINVOICE_PATH_CORE_FORMS.'/config.xml';
 		$form->loadFile($file, false, '//config');
 		$records = $this->getModel()->loadRecords();
 		

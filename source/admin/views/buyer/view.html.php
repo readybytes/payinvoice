@@ -3,7 +3,7 @@
 /**
 * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
-* @package 		OSINVOICE
+* @package 		PAYINVOICE
 * @subpackage	Back-end
 * @contact		team@readybytes.in
 */
@@ -18,7 +18,7 @@ if(!defined( '_JEXEC' )){
  * @author Manisha Ranawat
  */
 require_once dirname(__FILE__).'/view.php';
-class OSInvoiceAdminViewBuyer extends OSInvoiceAdminBaseViewBuyer
+class PayInvoiceAdminViewBuyer extends PayInvoiceAdminBaseViewBuyer
 {	
 	protected function _adminGridToolbar()
 	{
@@ -32,7 +32,7 @@ class OSInvoiceAdminViewBuyer extends OSInvoiceAdminBaseViewBuyer
 	function edit($tpl=null,$itemId = null)
 	{
 		$itemId  =  ($itemId === null) ? $this->getModel()->getState('id') : $itemId ;
-		$buyer   =  OSInvoiceBuyer::getInstance($itemId);
+		$buyer   =  PayInvoiceBuyer::getInstance($itemId);
 		
 		$this->assign('buyer', $buyer);
 		$this->assign('form',  $buyer->getModelform()->getForm($buyer));

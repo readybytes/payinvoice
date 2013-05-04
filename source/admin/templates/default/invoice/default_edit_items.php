@@ -3,7 +3,7 @@
 /**
 * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
-* @package 		OSINVOICE
+* @package 		PAYINVOICE
 * @subpackage	Back-end
 * @contact		team@readybytes.in
 */
@@ -30,19 +30,19 @@ $params = $invoice->getParams();;
 
 		for(var e in osi_invoice_items){
 			if(osi_invoice_items.hasOwnProperty(e)){
-				osinvoice.admin.invoice.item.add(osi_invoice_items[e].title, osi_invoice_items[e].quantity, osi_invoice_items[e].price, osi_invoice_items[e].total);
+				payinvoice.admin.invoice.item.add(osi_invoice_items[e].title, osi_invoice_items[e].quantity, osi_invoice_items[e].price, osi_invoice_items[e].total);
 			}
 		}
-		osinvoice.admin.invoice.item.calculate_total();
+		payinvoice.admin.invoice.item.calculate_total();
 		
 		$('#osi-invoice-item-add').click(function(){			
-			osinvoice.admin.invoice.item.add('', '', '' , '0.00');
+			payinvoice.admin.invoice.item.add('', '', '' , '0.00');
 			return false;						
 		});
 
 		$('.osi-invoice-item_remove').live('click', function(){
 			$(this).parents('.osi-invoice-item').remove();
-			osinvoice.admin.invoice.item.calculate_total();
+			payinvoice.admin.invoice.item.calculate_total();
 			return false;			
 		});
 
@@ -59,7 +59,7 @@ $params = $invoice->getParams();;
 			}
 			
 			$(this).parents('.osi-invoice-item').find('.osi-item-total').val(total);
-			osinvoice.admin.invoice.item.calculate_total();
+			payinvoice.admin.invoice.item.calculate_total();
 		});
 
 		$('.osi-item-price').live('blur', function(){
@@ -75,24 +75,24 @@ $params = $invoice->getParams();;
 			}
 			
 			$(this).parents('.osi-invoice-item').find('.osi-item-total').val(total);
-			osinvoice.admin.invoice.item.calculate_total();
+			payinvoice.admin.invoice.item.calculate_total();
 		});
 
 		$('#osi-invoice-discount').blur(function(){
-			osinvoice.admin.invoice.item.calculate_total();
+			payinvoice.admin.invoice.item.calculate_total();
 		});
 
 		$('#osi-invoice-tax').blur(function(){
-			osinvoice.admin.invoice.item.calculate_total();
+			payinvoice.admin.invoice.item.calculate_total();
 		});
 	});
 	
-})(osinvoice.jQuery);
+})(payinvoice.jQuery);
 
 </script>
 
 <!-- START : Item Table -->				
-<h3><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEMS' ); ?></h3>
+<h3><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEMS' ); ?></h3>
 <hr>
 <!--  ONE ITEM -->
 <div class="osi-invoice-items">
@@ -100,5 +100,5 @@ $params = $invoice->getParams();;
 </div>
 
 <div class="row-fluid">
-	<button type="button" class="btn btn-small btn-success" id="osi-invoice-item-add" counter="0"><i class="icon-plus"></i><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_EDIT_ITEM_ADD')?></button>
+	<button type="button" class="btn btn-small btn-success" id="osi-invoice-item-add" counter="0"><i class="icon-plus"></i><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_ADD')?></button>
 </div>

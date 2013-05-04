@@ -3,7 +3,7 @@
 /**
 * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
-* @package 		OSINVOICE
+* @package 		PAYINVOICE
 * @subpackage	Back-end
 * @contact		team@readybytes.in
 */
@@ -17,7 +17,7 @@ if(!defined( '_JEXEC' )){
  * Email Base View
  * @author Gaurav Jain
  */
-class OSInvoiceSiteBaseViewEmail extends OSInvoiceView
+class PayInvoiceSiteBaseViewEmail extends PayInvoiceView
 {
 
 }

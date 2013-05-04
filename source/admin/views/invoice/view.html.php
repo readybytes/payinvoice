@@ -3,7 +3,7 @@
 /**
 * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
-* @package 		OSINVOICE
+* @package 		PAYINVOICE
 * @subpackage	Back-end
 * @contact		team@readybytes.in
 */
@@ -18,7 +18,7 @@ if(!defined( '_JEXEC' )){
  * @author Gaurav Jain
  */
 require_once dirname(__FILE__).'/view.php';
-class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
+class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 {		
 	protected function _adminEditToolbar()
 	{	
@@ -68,7 +68,7 @@ class OSInvoiceAdminViewInvoice extends OSInvoiceAdminBaseViewInvoice
 	function edit($tpl= null, $itemId = null)
 	{
 		$itemId  = ($itemId === null) ? $this->getModel()->getState('id') : $itemId ;
-		$invoice = OSInvoiceInvoice::getInstance($itemId);
+		$invoice = PayInvoiceInvoice::getInstance($itemId);
 		$form 	 = $invoice->getModelform()->getForm($invoice);
 
 		$this->assign('invoice', $invoice);
