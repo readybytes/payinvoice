@@ -42,23 +42,23 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 						<table class="fontlist" align="center">
 							<tbody>
 								<tr>
-									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;">Username:</span></td>
+									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo Rb_Text::_('COM_OSINVOICE_BUYER_USERNAME')." ";?></span></td>
 									<td class="col"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo $buyer->username;?></span></td>
 								</tr>								
 								<tr>
-									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;">Invoice Number:</span></td>
+									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_NUMBER')." ";?></span></td>
 									<td class="col"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo $rb_invoice['serial'];?></span></td>
 								</tr>								
 								<tr>
-									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;">Issue Date:</span></td>
+									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo Rb_Text::_('COM_OSINVOICE_INVOICE_ISSUE_DATE')." ";?></span></td>
 									<td class="col"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo $rb_invoice['issue_date'];?></span></td>
 								</tr>							
 								<tr>
-									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;">Refunded Date:</span></td>
+									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo Rb_Text::_('COM_OSINVOICE_REFUNDED_DATE')." ";?></span></td>
 									<td class="col"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo $rb_invoice['refunded_on'];?></span></td>
 								</tr>								
 								<tr>
-									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;">Amount Refunded:</span></td>
+									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo Rb_Text::_('COM_OSINVOICE_AMOUNT_REFUNDED')." ";?></span></td>
 									<td class="col"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo $rb_invoice['currency']." ".number_format($rb_invoice['total'],2);?></span></td>
 								</tr>
 								

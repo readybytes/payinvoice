@@ -82,7 +82,7 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 									<?php echo Rb_Text::_('COM_OSINVOICE_AMOUNT');?>
 							</td>
 							<td style="text-align:right">
-									<?php echo $currency." ".number_format($rb_invoice['total'], 2);?>
+									<?php echo $rb_invoice['currency']." ".number_format($rb_invoice['total'], 2);?>
 							</td>
 						</tr>
 					</tbody>
