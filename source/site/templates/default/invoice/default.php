@@ -16,11 +16,11 @@ if(!defined( '_JEXEC' )){
 <script>
 (function($){
 	$(document).ready(function(){	
-		var invoice_id	= '<?php echo $osi_invoice['invoice_id'];?>';
+		var invoice_id	= '<?php echo $payinvoice_invoice['invoice_id'];?>';
 		
-		<?php if(!empty($osi_invoice['params']['processor_id'])) :?>
-			var osi_invoice_processor = '<?php echo $osi_invoice['params']['processor_id'];?>';
-			payinvoice.site.invoice.on_processor_change(osi_invoice_processor, invoice_id);
+		<?php if(!empty($payinvoice_invoice['params']['processor_id'])) :?>
+			var payinvoice_invoice_processor = '<?php echo $payinvoice_invoice['params']['processor_id'];?>';
+			payinvoice.site.invoice.on_processor_change(payinvoice_invoice_processor, invoice_id);
 		<?php endif;?>
         	
 		$('#payinvoice_formparamsprocessor_id').change(function(){

@@ -22,12 +22,12 @@ JHtml::_('behavior.formvalidation');
 (function($){
 
 	<?php if(isset($currency)) :?>
-		var osi_invoice_currency = '<?php echo $currency;?>';
+		var payinvoice_invoice_currency = '<?php echo $currency;?>';
 	<?php endif;?>
 	
  $(document).ready(function(){
 	 
-			payinvoice.admin.invoice.item.on_currency_change(osi_invoice_currency);
+			payinvoice.admin.invoice.item.on_currency_change(payinvoice_invoice_currency);
 				
 			$('#payinvoice_form_rb_invoice_currency').change(function(){
 				var currency   = $(this).val();
@@ -47,8 +47,8 @@ JHtml::_('behavior.formvalidation');
 				return false;	
 			}),
 
-			$("#osi-add-processor").click(function () {
-				$("#osi-payment-processor").slideToggle("fast");				
+			$("#payinvoice-add-processor").click(function () {
+				$("#payinvoice-payment-processor").slideToggle("fast");				
 			});
 	});
 })(payinvoice.jQuery);
@@ -122,8 +122,8 @@ JHtml::_('behavior.formvalidation');
 							<label class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_SUBTOTAL');?></label>
 				  			<div class="controls">
 				  				<div class="input-prepend">              			
-									<span class="add-on osi-currency"></span>
-									<input type="text" name="payinvoice_form[subtotal]" class="input-small" readonly="readonly" id="osi-invoice-subtotal">		
+									<span class="add-on payinvoice-currency"></span>
+									<input type="text" name="payinvoice_form[subtotal]" class="input-small" readonly="readonly" id="payinvoice-invoice-subtotal">		
 								</div>
 				  			</div>
 						</div>
@@ -131,8 +131,8 @@ JHtml::_('behavior.formvalidation');
 							<label class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_DISCOUNT');?></label>
 				  			<div class="controls">
 				  				<div class="input-prepend">
-									<span class="add-on osi-currency"></span>
-									<input type="text" name="payinvoice_form[discount]" class="input-small" min="0" id="osi-invoice-discount" value="<?php echo $discount;?>">
+									<span class="add-on payinvoice-currency"></span>
+									<input type="text" name="payinvoice_form[discount]" class="input-small" min="0" id="payinvoice-invoice-discount" value="<?php echo $discount;?>">
 								</div>
 				  			</div>
 						</div>
@@ -140,7 +140,7 @@ JHtml::_('behavior.formvalidation');
 							<label class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX');?></label>
 				  			<div class="controls">
 				  				<div class="input-append">									
-									<input type="text" name="payinvoice_form[tax]" class="input-small" id="osi-invoice-tax" min="0" value="<?php echo $tax;?>">
+									<input type="text" name="payinvoice_form[tax]" class="input-small" id="payinvoice-invoice-tax" min="0" value="<?php echo $tax;?>">
 									<span class="add-on">%</span>
 								</div>
 				  			</div>
@@ -150,8 +150,8 @@ JHtml::_('behavior.formvalidation');
 							<label class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TOTAL');?></label>
 				  			<div class="controls">
 				  				<div class="input-prepend">
-									<span class="add-on osi-currency"></span>
-									<input type="text" name="payinvoice_form[total]" class="input-small" readonly="readonly" id="osi-invoice-total" >
+									<span class="add-on payinvoice-currency"></span>
+									<input type="text" name="payinvoice_form[total]" class="input-small" readonly="readonly" id="payinvoice-invoice-total" >
 								</div>
 				  			</div>
 						</div>
@@ -168,7 +168,7 @@ JHtml::_('behavior.formvalidation');
 					<a href="<?php echo $invoice_url;?>" class="btn btn-info" target="_blank"><i class="icon-search icon-white"></i>&nbsp;<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_PREVIEW_LINK');?></a>					
 					<?php endif;?>
 					<?php if(!empty($record_id)):?>
-					<a href="#" onclick="payinvoice.admin.invoice.item.send_email('<?php echo $record_id?>')" class="btn btn-info"><i class="icon-envelope icon-white"></i>&nbsp;<?php echo Rb_Text::_('OSINVOCIE_TOOLBAR_EMAIL');?></a>	
+					<a href="#" onclick="payinvoice.admin.invoice.item.send_email('<?php echo $record_id?>')" class="btn btn-info"><i class="icon-envelope icon-white"></i>&nbsp;<?php echo Rb_Text::_('PAYINVOCIE_TOOLBAR_EMAIL');?></a>	
 					<?php endif;?>	
 				</div>								
 
@@ -184,22 +184,22 @@ JHtml::_('behavior.formvalidation');
 						    <?php if(!empty($rb_invoice['paid_date'])):?>
 						    <li class="muted"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_PAID_ON')." ".$rb_invoice['paid_date'];?></li><hr>
 						    <?php endif;?>
-						    <?php if(!empty($rb_invoice['refunded_date'])):?>
-						    <li class="muted"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_REFUNDED_ON')." ".$rb_invoice['refunded_date'];?></li>
+						    <?php if(!empty($rb_invoice['refund_date'])):?>
+						    <li class="muted"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_REFUNDED_ON')." ".$rb_invoice['refund_date'];?></li>
 						    <?php endif;?>
 					    </ul>
 				    </div>
 				    <?php endif;?>	
 				    
 			    	<?php $class="";?>
-					<?php if(empty($osi_invoice['params']['processor_id'])):?>
-					<a href="#" id="osi-add-processor" class="btn btn-info" title="<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_ADD_PROCESSOR_TOOLTIP');?>">
+					<?php if(empty($payinvoice_invoice['params']['processor_id'])):?>
+					<a href="#" id="payinvoice-add-processor" class="btn btn-info" title="<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_ADD_PROCESSOR_TOOLTIP');?>">
 						<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_ADD_PROCESSOR');?>
 					</a>
 					<?php $class='class="hide"';?>
 					<?php endif;?>
 					<div>&nbsp;</div>
-					<div id="osi-payment-processor" <?php echo $class;?>>
+					<div id="payinvoice-payment-processor" <?php echo $class;?>>
 						<div class="control-group">
 							<label class="control-label"><strong><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_PAYMENT_METHOD');?></strong></label>
 				  			<div class="controls">

@@ -55,7 +55,7 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 								</tr>							
 								<tr>
 									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo Rb_Text::_('COM_PAYINVOICE_REFUNDED_DATE')." ";?></span></td>
-									<td class="col"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo $rb_invoice['refunded_on'];?></span></td>
+									<td class="col"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo $rb_invoice['refund_date'];?></span></td>
 								</tr>								
 								<tr>
 									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo Rb_Text::_('COM_PAYINVOICE_AMOUNT_REFUNDED')." ";?></span></td>
