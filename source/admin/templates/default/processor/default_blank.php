@@ -11,7 +11,7 @@ if(!defined( '_JEXEC' )){
 	die( 'Restricted access' );
 }?>
 
-<form action="<?php echo $uri; ?>" method="post" name="adminForm">
+<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm">
 	<div class="row-fluid">
 		<div class="span12">
 			<p class="lead center"><?php echo $heading; ?></p>
