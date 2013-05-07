@@ -20,6 +20,17 @@ if(!defined( '_JEXEC' )){
 require_once dirname(__FILE__).'/view.php';
 class PayInvoiceAdminViewBuyer extends PayInvoiceAdminBaseViewBuyer
 {	
+
+	protected function _adminEditToolbar()
+	{	
+		Rb_HelperToolbar::apply();
+		Rb_HelperToolbar::save();
+		Rb_HelperToolbar::save2new('savenew');
+		Rb_HelperToolbar::divider();
+		Rb_HelperToolbar::cancel();
+		Rb_HelperToolbar::divider();
+	}
+
 	protected function _adminGridToolbar()
 	{
 		Rb_HelperToolbar::addNew('new');

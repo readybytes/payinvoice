@@ -42,24 +42,24 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 						<table class="fontlist" align="center">
 							<tbody>
 								<tr>
-									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo Rb_Text::_('COM_PAYINVOICE_BUYER_USERNAME')." ";?></span></td>
+									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><strong><?php echo Rb_Text::_('COM_PAYINVOICE_BUYER_USERNAME')." ";?></strong></span></td>
 									<td class="col"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo $buyer->username;?></span></td>
 									</tr>
 									
 									<tr>
-									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_NUMBER')." ";?></span></td>
+									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><strong><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_NUMBER')." ";?></strong></span></td>
 									<td class="col"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo $rb_invoice['serial'];?></span></td>
 								</tr>						
 								<tr>
-									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_ISSUE_DATE')." ";?></span></td>
+									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><strong><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_ISSUE_DATE')." ";?></strong></span></td>
 									<td class="col"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo $rb_invoice['issue_date'];?></span></td>
 								</tr>
 								<tr>
-									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo Rb_Text::_('COM_PAYINVOICE_PAID_DATE')." ";?></span></td>
+									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><strong><?php echo Rb_Text::_('COM_PAYINVOICE_PAID_DATE')." ";?></strong></span></td>
 									<td class="col"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo $rb_invoice['paid_date'];?></span></td>
 								</tr>								
 								<tr>
-									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo Rb_Text::_('COM_PAYINVOICE_AMOUNT_PAID')." ";?></span></td>
+									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><strong><?php echo Rb_Text::_('COM_PAYINVOICE_AMOUNT_PAID')." ";?></strong></span></td>
 									<td class="col"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo $rb_invoice['currency']." ".number_format($rb_invoice['total'],2);?></span></td>
 								</tr>
 								
