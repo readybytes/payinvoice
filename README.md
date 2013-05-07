@@ -1,4 +1,4 @@
-osi
+Payinvoice
 ===
 
-Open Source Invoicing
+Pay Invoice

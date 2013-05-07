@@ -1,12 +1,12 @@
 <?xml version="1.0" ?>
-<project name="Open Source Invoicing builder" basedir="." default="build" description="Phing build script for Open Source Invoicing">
+<project name="Payinvoice builder" basedir="." default="build" description="Phing build script for Payinvoice">
 
 	<target name="config" description="Load configuration file">
 		<php expression="(PHP_OS == 'WINNT') ? 'win/' :'unix/'" returnProperty="IF_OS"/>
 		<property file="${IF_OS}${project.shortform.small}.prop" override="true" />
 	</target>
 
-	<target name="build" description="Building the Open Source Invoicing" depends="config">
+	<target name="build" description="Building the Payinvoice" depends="config">
 		<echo msg="Building the JoomlaXi Ecommerce" />
 	</target>
 </project>

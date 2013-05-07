@@ -30,9 +30,44 @@
 		
 		<phing phingfile="${project.shortform.small}.xml" inheritAll="true" target="build" />
 
-
-		<zip destfile="${dir.packages}/${file.package}.${build.number}.${file.extension}" 
+		<zip destfile="${dir.packages}/${file.package}.${build.version}.${build.number}.${file.extension}" 
 			basedir="${dir.tmp}" />
+
+		<!-- Copy framework fron its defined location -->
+		<phingcall target="copy_framework"/>
+		<phingcall target="copy_processor"/>
+
+		<delete dir="${dir.tmp}" includeemptydirs="true" />
+
+		<copy file="${build.package.location}/pkg.xml" tofile="${dir.packages}/${build.package.name}.xml" overwrite="true"/>
+		
+		<!-- Apply the version change to all files. -->
+		<reflexive>
+			<fileset dir="${dir.packages}">
+			     <include name="${build.package.name}.xml" />
+			</fileset>
+			 <filterchain>
+				<replacetokens>
+				    <token key="build.version" 			value="${build.version}" />
+				    <token key="build.number"   		value="${build.number}" />
+				    <token key="rbframework.name"   		value="${rbframework.name}" />
+				    <token key="rbframework.build.version"   	value="${rbframework.build.version}" />
+				    <token key="project.shortform"   		value="${project.shortform}" />				
+				</replacetokens>
+			</filterchain>
+		</reflexive>	
+
+		<zip destfile="${dir.packages}/${file.package}.${build.version}.${file.extension}" basedir="${dir.packages}">
+			<fileset dir="${dir.packages}">
+				<include name="**/*.*"></include>
+			</fileset>
+		</zip>
+
+		<delete>
+			<fileset dir="${dir.packages}">
+				<include name="*.xml" />
+			</fileset>
+		</delete>	
 	</target>
 
 	<!-- Global Target -->
@@ -56,5 +91,19 @@
 				</replacetokens>
 			</filterchain>
 		</reflexive>		
+	</target>
+
+	<target name="copy_framework">
+		<copy todir="${dir.packages}">
+			<fileset dir="${rbframework.location}">
+				<include name="${rbframework.name}.${rbframework.build.version}.${file.extension}" />
+				<include name="*.xml" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="copy_processor">
+		<mkdir dir="${dir.packages}/processor" />
+		<copy file="${processor.location}/${processor.prefix}stripe.zip" tofile="${dir.packages}/processor/stripe.zip" overwrite="true"/>		
 	</target>
 </project>

@@ -1,7 +1,7 @@
 #change project code names
-project.shortform	= osi
-project.shortform.small = osi
-project.codename	= osi
+project.shortform	= payinvoice
+project.shortform.small = payinvoice
+project.codename	= payinvoice
 
 # Version
 build.version 	= 0.0.1
@@ -11,3 +11,14 @@ build.version 	= 0.0.1
 file.package		= ${project.shortform}
 file.compression	= gzip
 file.extension		= zip
+
+# RbFramework
+rbframework.build.version = 1.0.0
+rbframework.name	  = RBSL
+rbframework.location	  = ${user.home}/Dropbox/TEAM/dev/payinvoice/rbframework
+
+processor.location	  = ${user.home}/Dropbox/TEAM/dev/payinvoice/processor
+processor.prefix	  = plg_rb_ecommerceprocessor_
+
+build.package.location	  = ${user.home}/Dropbox/TEAM/dev/payinvoice/build/
+build.package.name	  = pkg_payinvoice
