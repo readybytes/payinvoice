@@ -74,4 +74,26 @@ class PayInvoiceSiteViewInvoice extends PayInvoiceSiteBaseViewInvoice
 		return true;
 	}
 	
+	function complete()
+	{
+		$itemId 	= $this->getModel()->getId();
+		$invoice	= $this->getHelper('invoice')->get_rb_invoice($itemId);
+				
+		$action = Rb_Factory::getApplication()->input->get('action','success');
+		
+		if($action === 'success'){
+			$this->setTpl('complete_success');			
+		}else {
+			$this->setTpl('complete_error');
+		}
+			
+		return true;
+	}
+	
+	public function cancel()
+	{
+		$this->setTpl('complete_cancel');
+		return true;
+	}
+	
 }

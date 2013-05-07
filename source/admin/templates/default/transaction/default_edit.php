@@ -67,7 +67,7 @@ if(!defined( '_JEXEC' )){
 			 
 			 <div class="control-group">
 				<div class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_TRANSACTION_MESSAGE' ); ?> </div>
-				<div class="controls"><?php echo $transaction['message']; ?></div>	
+				<div class="controls"><?php echo Rb_Text::_($transaction['message']); ?></div>	
 			 </div>
 		</div>
 			

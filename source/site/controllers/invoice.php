@@ -99,4 +99,14 @@ class PayInvoiceSiteControllerInvoice extends PayInvoiceController
 		
 		return true;
 	}
+	
+	public function complete()
+	{
+		return true;
+	}
+	
+	public function cancel()
+	{
+		return true;
+	}
 }

@@ -53,5 +53,8 @@ $filename = 'com_payinvoice';
 $language = JFactory::getLanguage();
 $language->load($filename, JPATH_SITE);
 
+//load processor
+Rb_EcommerceAPI::get_processors_list();
+
 // include the event file so that events can be registered
 require_once PAYINVOICE_PATH_CORE.'/base/event.php';

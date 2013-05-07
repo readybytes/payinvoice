@@ -33,10 +33,11 @@
 		<zip destfile="${dir.packages}/${file.package}.${build.version}.${build.number}.${file.extension}" 
 			basedir="${dir.tmp}" />
 
-		<!-- Copy framework fron its defined location -->
+		<!-- Copy framework from its defined location -->
 		<phingcall target="copy_framework"/>
 		<phingcall target="copy_processor"/>
-
+		<phingcall target="copy_default_plugin"/>
+		
 		<delete dir="${dir.tmp}" includeemptydirs="true" />
 
 		<copy file="${build.package.location}/pkg.xml" tofile="${dir.packages}/${build.package.name}.xml" overwrite="true"/>
@@ -105,5 +106,13 @@
 	<target name="copy_processor">
 		<mkdir dir="${dir.packages}/processor" />
 		<copy file="${processor.location}/${processor.prefix}stripe.zip" tofile="${dir.packages}/processor/stripe.zip" overwrite="true"/>		
+	</target>
+
+	<target name="copy_default_plugin">
+		<copy todir="${dir.src}/admin/install/extensions/plg_user_payinvoice">
+			<fileset dir="${dir.root}/plugins/user/payinvoice">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
 	</target>
 </project>
