@@ -94,8 +94,8 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		 	$invoice_url	= $invoice->getPayUrl();
 		 	$this->assign('invoice_url', $invoice_url);
 		 	
-		 	$status 		= $this->_helper->get_invoice_status_type($rb_invoice['status']);
-		 	$this->assign('status', $status);
+		 	$statusbutton	= $this->_helper->get_status_button($rb_invoice['status']);
+		 	$this->assign('statusbutton', $statusbutton);
 		 	$this->assign('rb_invoice', $rb_invoice);
 		}
 		else{

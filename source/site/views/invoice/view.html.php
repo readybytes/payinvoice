@@ -36,7 +36,7 @@ class PayInvoiceSiteViewInvoice extends PayInvoiceSiteBaseViewInvoice
 		
 		$formatHelper	= $this->getHelper('format');
 		$currency  		= $formatHelper->getCurrency($rb_invoice['currency'], 'symbol');
-		$status 		= $this->_helper->get_invoice_status_type($rb_invoice['status']);
+		$statusbutton 		= $this->_helper->get_status_button($rb_invoice['status']);
 		
 		$config			= $this->getHelper('config');
 		$configData     = $config->get();
@@ -50,7 +50,9 @@ class PayInvoiceSiteViewInvoice extends PayInvoiceSiteBaseViewInvoice
 		if(!empty($payinvoice_invoice['params']['processor_id'])){
 			$processor	= PayInvoiceProcessor::getInstance($payinvoice_invoice['params']['processor_id'])->toArray();
 			$this->assign('processor_title', $processor['title']);
-		}	
+		}
+
+		$applicable	= $this->getHelper('invoice')->is_applicable_date($rb_invoice['issue_date'], $rb_invoice['due_date']);
 		
 		//XITODO : Clean the code		
 		$this->assign('tax', $tax);
@@ -59,12 +61,13 @@ class PayInvoiceSiteViewInvoice extends PayInvoiceSiteBaseViewInvoice
 		$this->assign('buyer', $buyer);
 		$this->assign('payinvoice_invoice', $payinvoice_invoice);
 		$this->assign('rb_invoice', $rb_invoice);
-		$this->assign('status', $status);
+		$this->assign('statusbutton', $statusbutton);
 		$this->assign('currency', $currency);
 		$this->assign('config_data', $configData);
 		$this->assign('created_date', $created_date);
 		$this->assign('due_date', $due_date);
 		$this->assign('valid', $valid);
+		$this->assign('applicable', $applicable);
 
 		return true;
 	}

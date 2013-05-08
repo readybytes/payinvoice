@@ -12,9 +12,13 @@ if(!defined( '_JEXEC' )){
 }
 ?>
 
-<div class="row">
-		<div class="span9"><h5><?php echo $rb_invoice['serial'];?> : <?php echo $rb_invoice['title'];?></h5></div>
-		<div class="span3 label <?php echo $status['class']?> center"><h4><?php  echo $status['status'];?></h4></div>	
+<div class="row-fluid">
+		<div class="span8"><h5><?php echo $rb_invoice['serial'];?> : <?php echo $rb_invoice['title'];?></h5></div>
+		<?php if(!$applicable){?>
+			<div class="span4"><?php echo $statusbutton;?></div>	
+		<?php }else { ?>
+			<div class="span4 label center"><h4><i class="icon-lock" title="<?php echo Rb_Text::_($applicable);?>"></i>&nbsp;<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_LOCKED');?></h4></div>	
+		<?php }?>
 </div>
 	
 <div class="row">

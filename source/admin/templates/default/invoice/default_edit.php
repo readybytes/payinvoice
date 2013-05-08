@@ -61,7 +61,7 @@ JHtml::_('behavior.formvalidation');
 	<div class="span8"><h2><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_DETAILS' ); ?></h2></div>
 	<?php if($form->getValue('invoice_id')):?>
 	<div class="offset1 span3 pull-right">
-		<div class="label <?php echo $status['class']?> center"><h5><?php  echo $status['status'];?></h5></div>
+		<?php echo $statusbutton;?>
 	</div>
 	<?php endif;?>
 	</div>

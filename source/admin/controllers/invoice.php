@@ -43,10 +43,11 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 						
 		// create invoice in Rb_Ecommerce, in $itemId is null
 		if(!$itemId){
+			$data['rb_invoice']['status'] 	 		= PayInvoiceInvoice::STATUS_DUE;
 			$data['rb_invoice']['object_type'] 	 	= 'PayInvoiceInvoice';
 			$data['rb_invoice']['object_id'] 	 	= $invoice->getId();
 			$data['rb_invoice']['expiration_type'] 	= RB_ECOMMERCE_EXPIRATION_TYPE_FIXED;
-			$data['rb_invoice']['time_price'] = array('time' => array('000000000000'), 'price' => array('0.00'));
+			$data['rb_invoice']['time_price'] 		= array('time' => array('000000000000'), 'price' => array('0.00'));
 			$invoice_id = Rb_EcommerceAPI::invoice_create($data['rb_invoice'], true); 
 			$data['rb_invoice']['invoice_id'] = $invoice_id;
 		}	

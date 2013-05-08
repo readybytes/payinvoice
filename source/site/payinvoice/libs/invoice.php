@@ -23,6 +23,13 @@ class PayInvoiceInvoice extends PayInvoiceLib
 	protected $type			= '';
 	protected $template		= '';
 	
+	const STATUS_NONE		= 0;	
+	const STATUS_DUE		= 401;
+	const STATUS_PAID 		= 402;
+	const STATUS_REFUNDED	= 403;
+	const STATUS_INPROCESS	= 404;
+	const STATUS_EXPIRED	= 405;
+	
 	/**
 	 * @var Rb_Registry
 	 */
@@ -72,5 +79,17 @@ class PayInvoiceInvoice extends PayInvoiceLib
 		$rb_invoice 	= $this->getHelper('invoice')->get_rb_invoice($invoice_id);
 		$key			= md5($rb_invoice['created_date']);
 		return JUri::root().'index.php?option=com_payinvoice&view=invoice&invoice_id='.$invoice_id.'&key='.$key;
+	}
+	
+	public static function getStatusList()
+	{
+		return array(
+            self::STATUS_NONE		=> Rb_Text::_('COM_PAYINVOICE_INVOICE_STATUS_NONE'),
+			self::STATUS_DUE 		=> Rb_Text::_('COM_PAYINVOICE_INVOICE_STATUS_DUE'),
+			self::STATUS_PAID		=> Rb_Text::_('COM_PAYINVOICE_INVOICE_STATUS_PAID'),
+			self::STATUS_REFUNDED	=> Rb_Text::_('COM_PAYINVOICE_INVOICE_STATUS_REFUNDED'),
+			self::STATUS_INPROCESS	=> Rb_Text::_('COM_PAYINVOICE_INVOICE_STATUS_INPROCESS'),
+			self::STATUS_EXPIRED	=> Rb_Text::_('COM_PAYINVOICE_INVOICE_STATUS_EXPIRED'),		
+		);
 	}
 }

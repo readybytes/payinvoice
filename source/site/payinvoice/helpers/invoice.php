@@ -66,23 +66,23 @@ class PayInvoiceHelperInvoice extends JObject
 		return Rb_EcommerceAPI::invoice_get_records($filter);
 	}
 	
-	public function get_invoice_status_type($status)
+	public function get_status_button($status)
 	{
-	   $status_list  = Rb_EcommerceAPI::invoice_get_status_list();
-	   $statusType   = $status_list[$status];
-	   
-	   if($statusType == "Paid"){
-	   	$class = 'label-success';
-	   }
-	   elseif ($statusType == "Pending" || $statusType == "Checkout"){
-	   	 $class = 'label-warning';
-	   }
-	   else {
-	   	$class = 'label-info';
+		if(in_array($status, array(PayInvoiceInvoice::STATUS_PAID, PayInvoiceInvoice::STATUS_REFUNDED))){
+	   		$class = 'label-success';
+	   	}
+	   	elseif ($status == PayInvoiceInvoice::STATUS_DUE){
+	   	 	$class = 'label-warning';
+	   	}
+	   	else {
+	   		$class = 'label-info';
 	   }
 	   
-	   $status_data  = array('status' => $statusType, 'class' => $class);
-	   return $status_data;
+	   $invoice		= PayInvoiceLib::getInstance('invoice');
+	   $statusList	= $invoice->getStatusList();
+	   
+	   $button	= "<div class='label center $class'><h4>$statusList[$status]</h4></div>";
+	   return $button;
 	}
 	
     // get existing serial number
@@ -148,6 +148,27 @@ class PayInvoiceHelperInvoice extends JObject
 		}
 		
 		return false;
+	}
+	
+	public function is_applicable_date($issue_date, $due_date)
+	{
+		$current_date   = new Rb_Date('now');
+	    $issue_date		= new Rb_Date($issue_date);
+		$due_date      	= new Rb_Date($due_date);
+		
+		$currentDate 	= $current_date->toUnix();
+		$issueDate    	= $issue_date->toUnix();
+		$dueDate 		= $due_date->toUnix();
+		
+		$message		= '';
+		if($currentDate < $issueDate){
+			$message	= 'COM_PAYINVOICE_INVOICE_LOCKED_ISSUE_DATE_MSG';
+		}elseif ($currentDate > $dueDate) {
+			$message	= 'COM_PAYINVOICE_INVOICE_LOCKED_DUE_DATE_MSG';
+		}
+		
+		return $message;
+		
 	}
 	
 }
