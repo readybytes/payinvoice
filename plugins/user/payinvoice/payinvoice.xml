@@ -9,6 +9,7 @@
 	<description>This Plugin is used to create and delete user in OSInvoice Buyer while creating from joomla user manager</description>
 	<files>
 		<filename plugin="payinvoice">payinvoice.php</filename>
+		<filename>index.html</filename>
 	</files>
 	<params/>
 </extension>
