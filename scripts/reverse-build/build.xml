@@ -61,11 +61,7 @@
 				haltonerror="false"	
 				/>
 
-		<copy todir="${target}/source/admin/install/extensions/plg_user_payinvoice">
-			<fileset dir="${source}/plugins/user/payinvoice">
-				<include name="**/*.*" />
-			</fileset>
-		</copy>
+		
 
 	</target>
 	

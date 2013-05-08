@@ -12,15 +12,12 @@
 if(!defined( '_JEXEC' )){
 	die( 'Restricted access' );
 }
+// load bootsrap css
+Rb_Html::_('bootstrap.loadcss');
 
 Rb_HelperTemplate::loadSetupEnv();
 Rb_HelperTemplate::loadSetupScripts();
 
 Rb_Html::script(PAYINVOICE_PATH_CORE_MEDIA.'/js/payinvoice.js');
-Rb_Html::script(dirname(__FILE__).'/_media/admin.js');
+Rb_Html::script(dirname(__FILE__).'/_media/js/admin.js');
 Rb_Html::stylesheet(dirname(__FILE__).'/_media/css/admin.css');
-
-// load bootsrap css
-Rb_Html::_('bootstrap.loadcss');
-Rb_Html::stylesheet(dirname(__FILE__).'/_media/admin.css');
-
