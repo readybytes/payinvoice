@@ -52,4 +52,23 @@ class PayInvoiceAdminControllerBuyer extends PayInvoiceController
 		}
 		$response->sendResponse();	
 	}
+	
+	// XITODO : Clean Code
+	// Check username already registered or not
+	public function ajaxvalidateusername()
+	{
+		$args     	= $this->_getArgs();
+		$username	= $args['username'];
+		$buyer_id	= $args['buyer_id'];
+		
+		$existing_username = $this->_helper->getjoomlaUser('username', $username);
+		$response 	 	 = PayInvoiceFactory::getAjaxResponse();
+		if($existing_username && ($existing_username != $buyer_id)){
+			$response->addScriptCall('payinvoice.jQuery("span.payinvoice-username-error").html', Rb_Text::_('COM_PAYINVOICE_USERNAME_ALREADY_EXIST'));
+			$response->addScriptCall('payinvoice.jQuery("#payinvoice_form_username").focus()');
+		}else {
+			$response->addScriptCall('payinvoice.jQuery("span.payinvoice-username-error").html', "");
+		}
+		$response->sendResponse();	
+	}
 }

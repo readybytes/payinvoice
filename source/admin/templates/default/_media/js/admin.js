@@ -179,6 +179,13 @@ payinvoice.admin.buyer = {
 				var url 	= 'index.php?option=com_payinvoice&view=buyer&task=ajaxvalidateemail';
 				payinvoice.ajax.go(url, email);
 	
+		},
+		
+		on_username_change	: function(username, buyer_id){
+			var username   = {'event_args' :{'username' : username, 'buyer_id'	: buyer_id} };
+			var url 	= 'index.php?option=com_payinvoice&view=buyer&task=ajaxvalidateusername';
+			payinvoice.ajax.go(url, username);
+
 		}
 };
 

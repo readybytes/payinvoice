@@ -31,6 +31,12 @@ JHtml::_('behavior.formvalidation');
 			  	var email   = $(this).val();
 			  	payinvoice.admin.buyer.on_email_change(email, buyer_id);
 				return false;
+			}),
+
+			$('#payinvoice_form_username').change(function(){
+			  	var username   = $(this).val();
+			  	payinvoice.admin.buyer.on_username_change(username, buyer_id);
+				return false;
 			});
 			
 	});
@@ -58,7 +64,9 @@ JHtml::_('behavior.formvalidation');
 
 				<div class="control-group">
 					<?php echo $form->getLabel('username'); ?>
-					<div class="controls"><?php echo $form->getInput('username'); ?></div>	
+					<div class="controls"><?php echo $form->getInput('username'); ?><br>
+						<span class="payinvoice-username-error "></span>
+					</div>
 				</div>		
 						 
 				<div class="control-group">
