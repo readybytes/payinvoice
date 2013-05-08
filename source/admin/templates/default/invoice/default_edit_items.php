@@ -33,7 +33,7 @@ $params = $invoice->getParams();;
 				payinvoice.admin.invoice.item.add(payinvoice_invoice_items[e].title, payinvoice_invoice_items[e].quantity, payinvoice_invoice_items[e].price, payinvoice_invoice_items[e].total);
 			}
 		}
-		payinvoice.admin.invoice.item.calculate_total();
+		payinvoice.admin.invoice.calculate_total();
 		
 		$('#payinvoice-invoice-item-add').click(function(){			
 			payinvoice.admin.invoice.item.add('', '', '' , '0.00');
@@ -42,7 +42,7 @@ $params = $invoice->getParams();;
 
 		$('.payinvoice-invoice-item_remove').live('click', function(){
 			$(this).parents('.payinvoice-invoice-item').remove();
-			payinvoice.admin.invoice.item.calculate_total();
+			payinvoice.admin.invoice.calculate_total();
 			return false;			
 		});
 
@@ -75,15 +75,15 @@ $params = $invoice->getParams();;
 			}
 			
 			$(this).parents('.payinvoice-invoice-item').find('.payinvoice-item-total').val(total);
-			payinvoice.admin.invoice.item.calculate_total();
+			payinvoice.admin.invoice.calculate_total();
 		});
 
 		$('#payinvoice-invoice-discount').blur(function(){
-			payinvoice.admin.invoice.item.calculate_total();
+			payinvoice.admin.invoice.calculate_total();
 		});
 
 		$('#payinvoice-invoice-tax').blur(function(){
-			payinvoice.admin.invoice.item.calculate_total();
+			payinvoice.admin.invoice.calculate_total();
 		});
 	});
 	

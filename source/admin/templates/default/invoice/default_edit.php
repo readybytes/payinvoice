@@ -27,23 +27,23 @@ JHtml::_('behavior.formvalidation');
 	
  $(document).ready(function(){
 	 
-			payinvoice.admin.invoice.item.on_currency_change(payinvoice_invoice_currency);
+			payinvoice.admin.invoice.on_currency_change(payinvoice_invoice_currency);
 				
 			$('#payinvoice_form_rb_invoice_currency').change(function(){
 				var currency   = $(this).val();
-				payinvoice.admin.invoice.item.on_currency_change(currency);
+				payinvoice.admin.invoice.on_currency_change(currency);
 				return false;
 			}),
 
 			$('#payinvoice_form_rb_invoice_buyer_id').change(function(){
 			  	var buyer   = $(this).val();
-			  	payinvoice.admin.invoice.item.on_buyer_change(buyer);
+			  	payinvoice.admin.invoice.on_buyer_change(buyer);
 				return false;
 			}),
 
 			$('#payinvoice_form_rb_invoice_serial').change(function(){
 				var serial 	= $(this).val();
-				payinvoice.admin.invoice.item.on_serial_change(serial);
+				payinvoice.admin.invoice.on_serial_change(serial);
 				return false;	
 			}),
 
@@ -168,7 +168,7 @@ JHtml::_('behavior.formvalidation');
 					<a href="<?php echo $invoice_url;?>" class="btn btn-info" target="_blank"><i class="icon-search icon-white"></i>&nbsp;<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_PREVIEW_LINK');?></a>					
 					<?php endif;?>
 					<?php if(!empty($record_id)):?>
-					<a href="#" onclick="payinvoice.admin.invoice.item.send_email('<?php echo $record_id?>')" class="btn btn-info"><i class="icon-envelope icon-white"></i>&nbsp;<?php echo Rb_Text::_('PAYINVOCIE_TOOLBAR_EMAIL');?></a>	
+					<a href="#" onclick="payinvoice.admin.invoice.email.confirm('<?php echo $record_id?>')" class="btn btn-info"><i class="icon-envelope icon-white"></i>&nbsp;<?php echo Rb_Text::_('PAYINVOCIE_TOOLBAR_EMAIL');?></a>	
 					<?php endif;?>	
 				</div>								
 

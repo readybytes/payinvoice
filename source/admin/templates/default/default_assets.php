@@ -21,3 +21,4 @@ Rb_HelperTemplate::loadSetupScripts();
 Rb_Html::script(PAYINVOICE_PATH_CORE_MEDIA.'/js/payinvoice.js');
 Rb_Html::script(dirname(__FILE__).'/_media/js/admin.js');
 Rb_Html::stylesheet(dirname(__FILE__).'/_media/css/admin.css');
+Rb_Html::stylesheet(PAYINVOICE_PATH_CORE_MEDIA.'/css/payinvoice.css');

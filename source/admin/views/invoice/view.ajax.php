@@ -25,6 +25,18 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		// set by controller
 		$invoice_id = $this->getModel()->getId();	
 		
+		if(!$this->get('confirmed')){
+			$this->_setAjaxWinTitle(Rb_Text::_('COM_PAYINVOICE_INVOICE_EMAIL_WINDOW_TITLE'));
+			$this->_setAjaxWinBody(Rb_Text::_('COM_PAYINVOICE_INVOICE_EMAIL_CONFIRM_MESSAGE'));
+		
+			$this->_addAjaxWinAction(Rb_Text::_('COM_PAYINVOICE_CONFIRM'), 'payinvoice.admin.invoice.email.send('.$invoice_id.');', 'btn btn-info', 'id="payinvoice-invoice-email-confirm-button"');
+			$this->_addAjaxWinAction(Rb_Text::_('COM_PAYINVOICE_CLOSE'), 'rb.ui.dialog.close();', 'btn');
+			$this->_setAjaxWinAction();		
+		
+			$ajax = Rb_Factory::getAjaxResponse();
+			$ajax->sendResponse();
+		}
+		
 		// get instance of front end email view
 		$email_controller 	= PayInvoiceFactory::getInstance('email', 'controller', 'PayInvoicesite');
 		$email_view 		= $email_controller->getView();

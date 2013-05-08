@@ -88,13 +88,6 @@ payinvoice.admin.grid = {
 			    }
 				this.submit(view,null,validActions);
 			}
-		},
-		
-		invoice_email : function()
-		{
-			var invoice_id = $('#payinvoice_form_invoice_id').val();
-			payinvoice.url.modal("index.php?option=com_payinvoice&view=invoice&task=email&invoice_id="+invoice_id);
-			return false;
 		}
 };
 
@@ -128,49 +121,59 @@ payinvoice.admin.invoice = {
 						$('<div class="payinvoice-invoice-item">' + html + '</div>').appendTo('.payinvoice-invoice-items').show();
 						$('#payinvoice-invoice-item-add').attr('counter', parseInt(counter) + 1);
 						return false;
-			},
+			}
+		},
 			
-			calculate_total : function(){
-						var subtotal = 0;
-						$('.payinvoice-item-total:visible').each(function(e){
-							subtotal = subtotal + parseFloat($(this).val());
-						});
-						$('#payinvoice-invoice-subtotal').val(parseFloat(subtotal).toFixed(2));
-						
-						var discount = parseFloat($('#payinvoice-invoice-discount').val());
-						var tax 	 = parseFloat($('#payinvoice-invoice-tax').val());
-						
-						var total = subtotal - discount;
-						if(tax > 0){
-							total = total + total * tax / 100;
-						}
-						$('#payinvoice-invoice-total').val(parseFloat(total).toFixed(2));
-			},
+		calculate_total : function(){
+					var subtotal = 0;
+					$('.payinvoice-item-total:visible').each(function(e){
+						subtotal = subtotal + parseFloat($(this).val());
+					});
+					$('#payinvoice-invoice-subtotal').val(parseFloat(subtotal).toFixed(2));
+					
+					var discount = parseFloat($('#payinvoice-invoice-discount').val());
+					var tax 	 = parseFloat($('#payinvoice-invoice-tax').val());
+					
+					var total = subtotal - discount;
+					if(tax > 0){
+						total = total + total * tax / 100;
+					}
+					$('#payinvoice-invoice-total').val(parseFloat(total).toFixed(2));
+		},
+	
+		on_currency_change : function(currency){
+					var currency   = {'event_args' :{'currency' : currency} };
+					var url		   = 'index.php?option=com_payinvoice&view=invoice&task=ajaxchangecurrency';
+					payinvoice.ajax.go(url,currency);
+					return false;
+		},
 		
-			on_currency_change : function(currency){
-						var currency   = {'event_args' :{'currency' : currency} };
-						var url		   = 'index.php?option=com_payinvoice&view=invoice&task=ajaxchangecurrency';
-						payinvoice.ajax.go(url,currency);
-						return false;
-			},
-			
-			on_buyer_change : function(buyer){
-					var buyer   = {'event_args' :{'buyer' : buyer} };
-					var url 	= 'index.php?option=com_payinvoice&view=invoice&task=ajaxchangebuyer';
-					payinvoice.ajax.go(url, buyer);
-			},
-			
-			on_serial_change : function(serial){
-				var serial   = {'event_args' :{'serial' : serial} };
-				var url 	= 'index.php?option=com_payinvoice&view=invoice&task=ajaxchangeserial';
-				payinvoice.ajax.go(url, serial);
-			},
-			
-			send_email	: function(invoice_id){
+		on_buyer_change : function(buyer){
+				var buyer   = {'event_args' :{'buyer' : buyer} };
+				var url 	= 'index.php?option=com_payinvoice&view=invoice&task=ajaxchangebuyer';
+				payinvoice.ajax.go(url, buyer);
+		},
+		
+		on_serial_change : function(serial){
+			var serial   = {'event_args' :{'serial' : serial} };
+			var url 	= 'index.php?option=com_payinvoice&view=invoice&task=ajaxchangeserial';
+			payinvoice.ajax.go(url, serial);
+		},
+		
+		email : {	
+			confirm : function(invoice_id){
 				var url 	= 'index.php?option=com_payinvoice&view=invoice&task=email&invoice_id='+invoice_id;
 				payinvoice.url.modal(url);
-			}
-		}		
+			},
+			
+			send : function(invoice_id){
+				payinvoice.ui.dialog.body('<div class="center"><span class="spinner">&nbsp;</span></div>');
+				// XITODO : use bootstarp to disable the button click
+				$('#payinvoice-invoice-email-confirm-button').attr('disabled', 'disabled');
+				var url 	= 'index.php?option=com_payinvoice&view=invoice&task=email&confirmed=1&invoice_id='+invoice_id;
+				payinvoice.ajax.go(url);
+			}			
+		}
 };
 
 payinvoice.admin.buyer = {		

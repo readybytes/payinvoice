@@ -110,6 +110,8 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 	
 	public function email()
 	{
+		$confirmed = $this->input->getBool('confirmed', 0);
+		$this->getView()->assign('confirmed', $confirmed);	
 		return true;
 	}
 
