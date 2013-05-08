@@ -54,6 +54,11 @@ JHtml::_('behavior.formvalidation');
     	        <div class="control-group">
 					<?php echo $form->getLabel('name'); ?>
 					<div class="controls"><?php echo $form->getInput('name'); ?></div>	
+				</div>	
+
+				<div class="control-group">
+					<?php echo $form->getLabel('username'); ?>
+					<div class="controls"><?php echo $form->getInput('username'); ?></div>	
 				</div>		
 						 
 				<div class="control-group">
@@ -112,7 +117,6 @@ JHtml::_('behavior.formvalidation');
 </fieldset>
 	
 <?php echo $form->getInput('buyer_id'); ?>
-<?php echo $form->getInput('username'); ?>
 <input type="hidden" name="task" value="save" />
 <input type="hidden" name="boxchecked" value="1" />
 </div>
