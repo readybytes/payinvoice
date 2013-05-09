@@ -15,7 +15,7 @@ file.extension		= zip
 # RbFramework
 rbframework.build.version = 1.0.0
 rbframework.name	  = RBSL
-rbframework.location	  = ${user.home}/Dropbox/TEAM/dev/payinvoice/rbframework
+rbframework.location	  = ${user.home}/Dropbox/TEAM/dev/rbframework
 
 processor.location	  = ${user.home}/Dropbox/TEAM/dev/payinvoice/processor
 processor.prefix	  = plg_rb_ecommerceprocessor_
