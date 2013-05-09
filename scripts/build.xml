@@ -97,8 +97,7 @@
 	<target name="copy_framework">
 		<copy todir="${dir.packages}">
 			<fileset dir="${rbframework.location}">
-				<include name="${rbframework.name}.${rbframework.build.version}.${file.extension}" />
-				<include name="*.xml" />
+				<include name="${rbframework.name}.${rbframework.build.version}.${file.extension}" />				
 			</fileset>
 		</copy>
 	</target>
