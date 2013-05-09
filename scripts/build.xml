@@ -27,7 +27,8 @@
 		<mkdir dir="${dir.packages}" />
 
 		<phingcall target="export_sourcecode" />
-		
+		<phingcall target="copy_default_plugin"/>
+
 		<phing phingfile="${project.shortform.small}.xml" inheritAll="true" target="build" />
 
 		<zip destfile="${dir.packages}/${file.package}.${build.version}.${build.number}.${file.extension}" 
@@ -36,7 +37,6 @@
 		<!-- Copy framework from its defined location -->
 		<phingcall target="copy_framework"/>
 		<phingcall target="copy_processor"/>
-		<phingcall target="copy_default_plugin"/>
 		
 		<delete dir="${dir.tmp}" includeemptydirs="true" />
 
@@ -109,7 +109,7 @@
 	</target>
 
 	<target name="copy_default_plugin">
-		<copy todir="${dir.src}/admin/install/extensions/plg_user_payinvoice">
+		<copy todir="${dir.tmp}/admin/install/extensions/plg_user_payinvoice">
 			<fileset dir="${dir.root}/plugins/user/payinvoice">
 				<include name="**/*.*" />
 			</fileset>

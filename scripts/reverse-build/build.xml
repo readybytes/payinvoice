@@ -40,6 +40,7 @@
 			<fileset dir="${source}/administrator/components/${args.comname}">
 				<include name="**/*.*" />
 				<exclude name="${args.name}.xml" />
+				<exclude name="script.php" />
 			</fileset>
 		</copy>
 
@@ -56,12 +57,17 @@
 			</fileset>
 		</copy>
 		
+		<copy 	file="${source}/administrator/components/${args.comname}/script.php" 
+				tofile="${target}/source/script.php" 
+				haltonerror="false"	
+				/>
+
 		<copy 	file="${source}/administrator/components/${args.comname}/${args.name}.xml" 
 				tofile="${target}/source/${args.name}.xml" 
 				haltonerror="false"	
 				/>
 
-		<copy todir="${target}/source/admin/install/extensions/plg_user_payinvoice">
+		<copy todir="${target}/plugins/user/payinvoice">
 			<fileset dir="${source}/plugins/user/payinvoice">
 				<include name="**/*.*" />
 			</fileset>
