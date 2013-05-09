@@ -23,6 +23,8 @@
 	<!-- Media files -->
 	<media destination="com_payinvoice" folder="media">
 		<folder>js</folder>
+		<folder>css</folder>
+		<folder>images</folder>
 		<filename>index.html</filename>
 	</media>
 
