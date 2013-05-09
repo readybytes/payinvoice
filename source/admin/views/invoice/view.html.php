@@ -56,11 +56,11 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		
 		$buyerHelper	= $this->getHelper('buyer');
 		$buyer 			= $buyerHelper->get($buyerIds);
-		$statusList 	= Rb_EcommerceAPI::invoice_get_status_list();
+		$status_list	= PayInvoiceInvoice::getStatusList();
 		
 		$this->assign('invoice', $invoices);
 		$this->assign('buyer', $buyer);
-		$this->assign('statusList', $statusList);
+		$this->assign('status_list', $status_list);
 
 		return parent::_displayGrid($records);
 	}

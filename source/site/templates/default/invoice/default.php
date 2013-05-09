@@ -69,7 +69,7 @@ if(!defined( '_JEXEC' )){
 		 	<div class="row">
 		 	  	<div class="span7"> 
 		 	  	</div> 
-	    		<?php if($valid && $rb_invoice['total'] != floatval(0)):?>  
+	    		<?php if($valid && $rb_invoice['total'] != floatval(0) && $rb_invoice['status'] == PayInvoiceInvoice::STATUS_DUE):?>  
 		 	   <div class="span5">
 			 	   <dl class="dl-horizontal">
 					    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_PAYMENT_METHOD');?></dt>

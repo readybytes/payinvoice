@@ -48,11 +48,11 @@
 		<!-- Administration menu -->
 		<menu view="dashboard">COM_PAYINVOICE</menu>
 		<submenu>
-            <menu view="config">COM_PAYINVOICE_CONFIG</menu>		
-			<menu view="invoice">COM_PAYINVOICE_INVOICE</menu>	
- 			<menu view="processor">COM_PAYINVOICE_PROCESSOR</menu>		
-			<menu view="transaction">COM_PAYINVOICE_TRANSACTION</menu>			
-			<menu view="buyer">COM_PAYINVOICE_BUYER</menu>			
+            <menu view="config">COM_PAYINVOICE_CONFIG</menu>
+            <menu view="processor">COM_PAYINVOICE_PROCESSOR</menu>	
+            <menu view="buyer">COM_PAYINVOICE_BUYER</menu>				
+			<menu view="invoice">COM_PAYINVOICE_INVOICE</menu>		
+			<menu view="transaction">COM_PAYINVOICE_TRANSACTION</menu>	
 		</submenu>
 
 		<!-- Back-end files -->

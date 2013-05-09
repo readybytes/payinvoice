@@ -78,10 +78,9 @@ class PayInvoiceHelperInvoice extends JObject
 	   		$class = 'label-info';
 	   }
 	   
-	   $invoice		= PayInvoiceLib::getInstance('invoice');
-	   $statusList	= $invoice->getStatusList();
+	   $status_list	= PayInvoiceInvoice::getStatusList();
 	   
-	   $button	= "<div class='label center $class'><h4>$statusList[$status]</h4></div>";
+	   $button	= "<div class='label center $class'><h4>$status_list[$status]</h4></div>";
 	   return $button;
 	}
 	

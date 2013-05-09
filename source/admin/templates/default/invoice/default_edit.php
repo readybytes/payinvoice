@@ -60,8 +60,8 @@ JHtml::_('behavior.formvalidation');
 	<div class="row-fluid">
 	<div class="span8"><h2><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_DETAILS' ); ?></h2></div>
 	<?php if($form->getValue('invoice_id')):?>
-	<div class="offset1 span3 pull-right">
-		<?php echo $statusbutton;?>
+	<div class="pull-right span3">
+		<div class="row"><?php echo $statusbutton;?></div>
 	</div>
 	<?php endif;?>
 	</div>
@@ -175,8 +175,8 @@ JHtml::_('behavior.formvalidation');
 			</div>		
 		
 				<div class="pull-right span3 ">
-				<?php if($form->getValue('invoice_id')):?>
-					<div class="row-fluid well well-small">	
+					<?php if($form->getValue('invoice_id')):?>
+					<div class="row well well-small">	
 						<h4 class="center muted"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_RELATED_DATES')?></h4><hr>
 					    <ul class="horizontal unstyled center">
 						    <li class="muted"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_CREATED_ON')." ".$rb_invoice['created_date'];?></li><hr>
@@ -191,26 +191,27 @@ JHtml::_('behavior.formvalidation');
 				    </div>
 				    <?php endif;?>	
 				    
-			    	<?php $class="";?>
-					<?php if(empty($payinvoice_invoice['params']['processor_id'])):?>
-					<a href="#" id="payinvoice-add-processor" class="btn btn-info" title="<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_ADD_PROCESSOR_TOOLTIP');?>">
-						<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_ADD_PROCESSOR');?>
-					</a>
-					<?php $class='class="hide"';?>
-					<?php endif;?>
-					<div>&nbsp;</div>
-					<div id="payinvoice-payment-processor" <?php echo $class;?>>
-						<div class="control-group">
-							<label class="control-label"><strong><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_PAYMENT_METHOD');?></strong></label>
-				  			<div class="controls">
-							    	<?php echo PayInvoiceHtml::_('payinvoicehtml.processors.edit', 'payinvoice_form[params][processor_id]' ,$processor_id ,array('none'=>true, 'style' => 'class="input-medium"')); ?>
-				  			</div>
+				    <div class="row well well-small">
+						<?php $class="";?>
+						<?php if(empty($payinvoice_invoice['params']['processor_id'])):?>
+						<a href="#" id="payinvoice-add-processor" class="btn btn-info btn-block btn-large" title="<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_ADD_PROCESSOR_TOOLTIP');?>">
+							<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_ADD_PROCESSOR');?>
+						</a>
+						<?php $class='class="hide"';?>
+						<?php endif;?>
+						<div>&nbsp;</div>
+						<div id="payinvoice-payment-processor" <?php echo $class;?>>
+							<div class="center">
+				    			<?php echo PayInvoiceHtml::_('payinvoicehtml.processors.edit', 'payinvoice_form[params][processor_id]' ,$processor_id ,array('none'=>true, 'style' => 'class="input-medium"')); ?>
+							</div>
 						</div>
 					</div>
-						
-				  	<?php echo $rb_invoice_fields['notes']->label;?>
-					<hr>
-					<?php echo $rb_invoice_fields['notes']->input;?>			
+				    
+					<div class="row well well-small">	
+					  	<?php echo $rb_invoice_fields['notes']->label;?>
+						<hr>
+						<?php echo $rb_invoice_fields['notes']->input;?>
+					</div>			
     		</div>	
     		
 			
