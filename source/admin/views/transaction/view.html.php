@@ -27,11 +27,14 @@ class PayInvoiceAdminViewTransaction extends PayInvoiceAdminBaseViewTransaction
 	
 	protected function _adminGridToolbar()
 	{
-		Rb_HelperToolbar::addNew('new');
 		Rb_HelperToolbar::editList();
 		Rb_HelperToolbar::divider();
-		Rb_HelperToolbar::divider();
 		Rb_HelperToolbar::deleteList();
+	}
+	
+	protected function _adminEditToolbar()
+	{	
+		Rb_HelperToolbar::cancel();
 	}
 	
 	function _displayGrid($records)

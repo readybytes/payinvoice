@@ -35,7 +35,6 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		Rb_HelperToolbar::addNew('new');
 		Rb_HelperToolbar::editList();
 		Rb_HelperToolbar::divider();
-		Rb_HelperToolbar::divider();
 		Rb_HelperToolbar::deleteList();
 	}
 	

@@ -27,7 +27,7 @@ class PayInvoiceHtmlProcessortypes
 		
 		$options = array();
 		if(isset($attr['none']))
-			$options[] = PayInvoiceHtml::_('select.option', '', Rb_Text::_('Select Action Type'));
+			$options[] = PayInvoiceHtml::_('select.option', '', Rb_Text::_('COM_PAYINVOICE_PROCESSOR_SELECT_PROCESSOR_TYPE'));
 			
 		foreach($processor_data  as $type => $data){
 			$options[] = PayInvoiceHtml::_('select.option', $type, JString::ucfirst($type));	

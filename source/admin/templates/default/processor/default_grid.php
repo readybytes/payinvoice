@@ -41,10 +41,10 @@ if(!defined( '_JEXEC' )){
 				    </th>
 					<td><?php echo $count+1; ?> </td>	
 					<td><?php echo $record->processor_id;?></td>
+					<td><?php echo $record->type;?></td>
 					<td><?php echo PayInvoiceHtml::link($uri.'&task=edit&id='.$record->{$record_key}, $record->title); ?>
 						 <p class="muted"><?php echo $record->description;?></p>
 					</td>							
-					<td><?php echo $record->type;?></td>
 					<td><?php echo PayInvoiceHtml::_("rb_html.boolean.grid", $record, 'published', $count, 'tick.png', 'publish_x.png', '', $langPrefix='COM_PAYINVOICE');?></td>
 			
 			<?php $count++;?>		

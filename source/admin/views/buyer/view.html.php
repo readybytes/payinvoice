@@ -28,14 +28,12 @@ class PayInvoiceAdminViewBuyer extends PayInvoiceAdminBaseViewBuyer
 		Rb_HelperToolbar::save2new('savenew');
 		Rb_HelperToolbar::divider();
 		Rb_HelperToolbar::cancel();
-		Rb_HelperToolbar::divider();
 	}
 
 	protected function _adminGridToolbar()
 	{
 		Rb_HelperToolbar::addNew('new');
 		Rb_HelperToolbar::editList();
-		Rb_HelperToolbar::divider();
 		Rb_HelperToolbar::divider();
 		Rb_HelperToolbar::deleteList();
 	}
