@@ -19,18 +19,9 @@ if(!defined( '_JEXEC' )){
  */
 class PayInvoiceEvent extends JEvent
 {
-	public function onRbItemAfterSave($prev, $new)
-	{
-		// if this triger is for PayInvoice
-		if($new instanceof Rb_EcommerceInvoice){			
-			return self::_onRb_EcommerceInvoiceAfterSave($prev, $new);
-		}
-	}
-	
-	protected function _onRb_EcommerceInvoiceAfterSave($prev, $new)
+	public function onRb_EcommerceInvoiceAfterSave($prev, $new)
 	{		
 		$this->_sendEmail($new, $prev);
-
 		return true;
 	}
 	
@@ -82,4 +73,5 @@ class PayInvoiceEvent extends JEvent
 }
 
 $dispatcher = JDispatcher::getInstance();
-$dispatcher->register('onRbItemAfterSave', 'PayInvoiceEvent');
+$dispatcher->register('onRb_EcommerceInvoiceAfterSave', 'PayInvoiceEvent');
+
