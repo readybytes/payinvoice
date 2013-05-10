@@ -25,11 +25,11 @@ if(!defined( '_JEXEC' )){
 				<th>
 					<?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_INVOICE_ID", 'invoice_id', 	$filter_order_Dir, $filter_order);?>
 				</th>
-				<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_INVOICE_TITLE", 'title', $filter_order_Dir, $filter_order);?></th>
-				<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_INVOICE_BUYER", 'buyer_id', 	$filter_order_Dir, $filter_order);?></th>
-				<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_INVOICE_OBJECT_TYPE", 'object_type', $filter_order_Dir, $filter_order);?></th>
-				<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_INVOICE_TOTAL", 'total', $filter_order_Dir, $filter_order);?></th>
-				<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_INVOICE_STATUS", 'status', $filter_order_Dir, $filter_order);?></th>
+				<th><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_TITLE');?></th>
+				<th><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_BUYER');?></th>
+				<th><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_OBJECT_TYPE');?></th>
+				<th><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_TOTAL');?></th>
+				<th><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_STATUS');?></th>
 							
 			</tr>
 		<!-- TABLE HEADER END -->

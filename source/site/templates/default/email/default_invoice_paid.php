@@ -76,7 +76,7 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 				</tr>
 				<tr id="fourth-row" bgcolor="#ffffff">
 					<td id="fourth-left" bgcolor="#ffffff" height="10" width="10"></td>
-					<td id="fourth-middle" align="right"><img src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);?>" alt="" /><span style="font-family: 'Lucida Grande','Segoe UI',Arial,Verdana,'Lucida Sans Unicode',Tahoma,'Sans Serif'; font-size: 11px; color: #888;"> Copyright © 2013 <?php echo $config_data['company_name'];?>. All Rights Reserved. <br /> &nbsp;&nbsp;<?php echo $config_data['company_address'].",".$config_data['company_city'].", Phone:".$config_data['company_phone'];?> </span></td>
+					<td id="fourth-middle" align="right"><span style="font-family: 'Lucida Grande','Segoe UI',Arial,Verdana,'Lucida Sans Unicode',Tahoma,'Sans Serif'; font-size: 11px; color: #888;"> Copyright © 2013 <?php echo $config_data['company_name'];?>. All Rights Reserved. <br /> &nbsp;&nbsp;<?php echo $config_data['company_address'].",".$config_data['company_city'].", Phone:".$config_data['company_phone'];?> </span></td>
 					<td id="fourth-right" bgcolor="#ffffff" height="10" width="10"></td>
 				</tr>
 			</tbody>

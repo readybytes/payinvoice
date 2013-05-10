@@ -20,4 +20,8 @@ if(!defined( '_JEXEC' )){
 require_once dirname(__FILE__).'/view.php';
 class PayInvoiceAdminViewDashboard extends PayInvoiceAdminBaseViewDashboard
 {
+	protected function _adminToolbar()
+	{
+		
+	}
 }

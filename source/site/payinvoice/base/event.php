@@ -60,6 +60,13 @@ class PayInvoiceEvent extends JEvent
 		if($new->getStatus()	== Rb_EcommerceInvoice::STATUS_REFUNDED){
 			$suffix = 'refund';			
 		}
+		elseif($prev->getStatus() == PayInvoiceInvoice::STATUS_INPROCESS && $new->getStatus() == PayInvoiceInvoice::STATUS_DUE)
+		{
+			$filter			= array('invoice_id' => $rb_invoice['invoice_id']);
+			$transaction	= Rb_EcommerceAPI::transaction_get($filter);
+			$email_view->assign('transaction', $transaction);
+			$suffix	= 'error';
+		}
 		
 		$body 	 			= $email_view->loadTemplate('invoice_'.$suffix);
 		$subject 			= Rb_Text::_('COM_PAYINVOICE_INVOICE_SEND_EMAIL_ON_INVOICE_'.strtoupper($suffix));

@@ -38,33 +38,34 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 							</tbody>
 						</table>
 						<p class="fontlist pp-WordSpacing" style="padding: 10px; margin-left: 15px;"><span style="font-size: 12pt; color: #4d4d4d;">Hello <?php echo $buyer->name;?>,</span></p>
-						<p class="fontlist pp-lineWordSpacing" style="padding: 10px; margin-left: 15px;"><span style="font-size: 12pt; color: #4d4d4d;">Thank you for using our product.This mail is to notify that your payment refunded successfully of <?php echo $rb_invoice['title'];?>.</span><br /><br /><span style="font-size: 12pt; color: #4d4d4d;"> <strong>Your details at our website:</strong></span></p>
+						<p class="fontlist pp-lineWordSpacing" style="padding: 10px; margin-left: 15px;"><span style="font-size: 12pt; color: #4d4d4d;">This mail is to notify that your payment not completed successfully.</span><br /><br /><span style="font-size: 12pt; color: #4d4d4d;"> <strong>Your details at our website:</strong></span></p>
 						<table class="fontlist" align="center">
 							<tbody>
 								<tr>
 									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><strong><?php echo Rb_Text::_('COM_PAYINVOICE_BUYER_USERNAME')." ";?></strong></span></td>
 									<td class="col"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo $buyer->username;?></span></td>
-								</tr>								
-								<tr>
+									</tr>
+									
+									<tr>
 									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><strong><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_NUMBER')." ";?></strong></span></td>
 									<td class="col"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo $rb_invoice['serial'];?></span></td>
-								</tr>								
+								</tr>						
 								<tr>
 									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><strong><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_ISSUE_DATE')." ";?></strong></span></td>
 									<td class="col"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo $rb_invoice['issue_date'];?></span></td>
-								</tr>							
+								</tr>
 								<tr>
-									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><strong><?php echo Rb_Text::_('COM_PAYINVOICE_REFUNDED_DATE')." ";?></strong></span></td>
-									<td class="col"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo $rb_invoice['refund_date'];?></span></td>
+									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><strong><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_PAYMENT_METHOD')." ";?></strong></span></td>
+									<td class="col"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo $rb_invoice['processor_type'];?></span></td>
 								</tr>								
 								<tr>
-									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><strong><?php echo Rb_Text::_('COM_PAYINVOICE_AMOUNT_REFUNDED')." ";?></strong></span></td>
-									<td class="col"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo $rb_invoice['currency']." ".number_format($rb_invoice['total'],2);?></span></td>
+									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><strong><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_ERROR_MESSAGE')." ";?></strong></span></td>
+									<td class="col"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo Rb_Text::_($transaction['message']);?></span></td>
 								</tr>
 								
 							</tbody>
-						</table>
-						<p class="fontlist" style="padding: 10px; margin-left: 15px;"><span style="font-size: 10pt;"></span><br /><br /><span style="font-size: 10pt;"> <strong><?php echo $config_data['company_name'];?></strong></span><br /><span style="padding: 20px 0px; font-size: 10pt;"><?php echo $config_data['company_address'].";".$config_data['company_city'];?></span><br /><span style="padding: 20px 0px; font-size: 10pt;"> <?php echo "Phone :".$config_data['company_phone'];?></span><br /><br /><span style="font-size: 10pt;"><a class="links" style="text-decoration: none;" href="#"></a></span></p>
+						</table>						
+						<p class="fontlist" style="padding: 10px; margin-left: 15px;"><span style="font-size: 10pt;">Happy Invoicing! </span><br /><br /><span style="font-size: 10pt;"> <strong><?php echo $config_data['company_name'];?></strong></span><br /><span style="padding: 20px 0px; font-size: 10pt;"><?php echo $config_data['company_address'].";".$config_data['company_city'];?></span><br /><span style="padding: 20px 0px; font-size: 10pt;"> <?php echo "Phone :".$config_data['company_phone'];?></span><br /><br /><span style="font-size: 10pt;"><a class="links" style="text-decoration: none;" href="#"></a></span></p>
 					</td>
 					<td bgcolor="#ffffff" width="10"></td>
 				</tr>
