@@ -22,11 +22,8 @@ if(!defined( '_JEXEC' )){
 					<th class="default-grid-sno">
 		      			<?php echo Rb_Text::_("COM_PAYINVOICE_NUM"); ?>
 		    		</th> 
-					<th>
-						<?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_PROCESSOR_ID", 'processor_id', 	$filter_order_Dir, $filter_order);?>
-					</th>
-					<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_PROCESSOR_TYPE", 'type', 	$filter_order_Dir, $filter_order);?></th>
 					<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_PROCESSOR_TITLE", 'title', 	$filter_order_Dir, $filter_order);?></th>
+					<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_PROCESSOR_TYPE", 'type', 	$filter_order_Dir, $filter_order);?></th>
 					<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_PUBLISHED", 'published', $filter_order_Dir, $filter_order);?></th>
 				</tr>
 			<!-- TABLE HEADER END -->
@@ -40,11 +37,10 @@ if(!defined( '_JEXEC' )){
 				    	<?php echo PayInvoiceHtml::_('grid.id', $count, $record->{$record_key} ); ?>
 				    </th>
 					<td><?php echo $count+1; ?> </td>	
-					<td><?php echo $record->processor_id;?></td>
-					<td><?php echo $record->type;?></td>
 					<td><?php echo PayInvoiceHtml::link($uri.'&task=edit&id='.$record->{$record_key}, $record->title); ?>
 						 <p class="muted"><?php echo $record->description;?></p>
-					</td>							
+					</td>	
+					<td><?php echo $record->type;?></td>						
 					<td><?php echo PayInvoiceHtml::_("rb_html.boolean.grid", $record, 'published', $count, 'tick.png', 'publish_x.png', '', $langPrefix='COM_PAYINVOICE');?></td>
 			
 			<?php $count++;?>		

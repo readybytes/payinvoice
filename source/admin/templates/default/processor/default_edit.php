@@ -17,7 +17,7 @@ JHtml::_('behavior.keepalive');
 JHtml::_('behavior.formvalidation');
 ?>
 
-<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
+<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="rb-validate-form">
 		<div class="span6">		
 			<fieldset class="form-horizontal">
 				<h3> <?php echo ucfirst(Rb_Text::_($processor->getType()))." - ".Rb_Text::_('COM_PAYINVOICE_PROCESSOR_EDIT_DETAILS' ); ?></h3><hr>
