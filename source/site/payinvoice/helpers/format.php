@@ -36,6 +36,11 @@ class PayInvoiceHelperFormat extends JObject
 		$configHelper	= PayInvoiceFactory::getHelper('config');
 		$date_format	= $configHelper->get('date_format');
 		$format 		= ($format === null) ? $date_format : $format;
+
+		if(empty($format)){
+			return (string)$date;
+		}
+		
 		return $date->toFormat($format);
 	}
 }

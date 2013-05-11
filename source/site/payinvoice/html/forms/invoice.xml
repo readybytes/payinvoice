@@ -148,6 +148,7 @@
 					label="COM_PAYINVOICE_INVOICE_DUE_DATE"
 					description="COM_PAYINVOICE_INVOICE_DUE_DATE_DESC"
 					class="input-medium" 
+					format="%Y-%m-%d %H:%M:%S"
 					required="true"
 					labelclass="control-label"/>
 					
@@ -155,7 +156,8 @@
 					type="calendar"					
 					label="COM_PAYINVOICE_INVOICE_ISSUE_DATE"
 					description="COM_PAYINVOICE_INVOICE_ISSUE_DATE_DESC"
-					class="input-medium" 
+					class="input-medium"
+					format="%Y-%m-%d %H:%M:%S" 
 					required="true"
 					labelclass="control-label"/>
 			</fieldset>						
