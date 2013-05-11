@@ -44,7 +44,21 @@ JHtml::_('behavior.formvalidation');
 					<?php $fieldset_name = 'processor_config';?>
 					<?php echo $this->loadTemplate('partial_fieldset', compact('fieldset_name', 'form'));?>
 			</fieldset>
-		</div>
+		
+		<?php if(!empty($help['help'])): ?>
+			<fieldset class="form-horizontal">
+				<legend > <?php echo Rb_Text::_('COM_PAYINVOICE_PROCESSOR_HELP_MESSAGE'); ?></legend>
+					<div class="row-fluid">
+					<?php if(!empty($help['help'])):?>
+						<div class="span6">
+						  <div><?php echo (isset($help['help']) && !empty($help['help'])) ? Rb_Text::_($help['help']) : ''; ?></div>
+						</div>
+					<?php endif;?>
+					</div>
+			</fieldset>	
+		<?php endif;?>
+	
+	</div>
 	
 		<?php echo $form->getInput('processor_id'); ?>
 		<?php echo $form->getInput('type'); ?>

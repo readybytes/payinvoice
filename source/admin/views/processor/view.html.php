@@ -40,8 +40,11 @@ class PayInvoiceAdminViewProcessor extends PayInvoiceAdminBaseViewProcessor
 			$processorType->set('type',$processor_type);
 		}
 		
+		$help  	   =  PayInvoiceHelperProcessor::getXml($processorType->getType());
+				
 		$this->assign('processor', $processorType);
 		$this->assign('form',  $processorType->getModelform()->getForm($processorType));
+		$this->assign('help', $help);
 		
 		return true;
 	}
