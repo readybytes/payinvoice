@@ -30,9 +30,9 @@ class PayInvoiceSiteViewInvoice extends PayInvoiceSiteBaseViewInvoice
 		$rb_invoice = Rb_EcommerceAPI::invoice_get($filter);
 		$buyer   	= PayInvoiceBuyer::getInstance($rb_invoice['buyer_id']);
 		
-		$discount	=  $this->_helper->get_discount($itemid);
-		$tax		=  $this->_helper->get_tax($itemid);
-		$subtotal	=  $this->_helper->get_subtotal($itemid);
+		$discount	=  $this->_helper->get_discount($rb_invoice['invoice_id']);
+		$tax		=  $this->_helper->get_tax($rb_invoice['invoice_id']);
+		$subtotal	=  $this->_helper->get_subtotal($rb_invoice['invoice_id']);
 		
 		$formatHelper	= $this->getHelper('format');
 		$currency  		= $formatHelper->getCurrency($rb_invoice['currency'], 'symbol');
