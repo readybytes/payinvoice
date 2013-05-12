@@ -61,6 +61,12 @@ class PayInvoiceHelperInvoice extends JObject
 		return Rb_EcommerceAPI::invoice_get($filter);
 	}
 	
+	public function delete_rb_invoice($invoice_id)
+	{
+		$rb_invoice = $this->get_rb_invoice($invoice_id);
+		return Rb_EcommerceAPI::invoice_delete($rb_invoice['invoice_id']);
+	}
+	
 	public function get_rb_invoice_records($filter)
 	{
 		return Rb_EcommerceAPI::invoice_get_records($filter);

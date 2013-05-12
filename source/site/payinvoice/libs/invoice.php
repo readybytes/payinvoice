@@ -92,4 +92,12 @@ class PayInvoiceInvoice extends PayInvoiceLib
 			self::STATUS_EXPIRED	=> Rb_Text::_('COM_PAYINVOICE_INVOICE_STATUS_EXPIRED'),		
 		);
 	}
+	
+	public function delete()
+	{
+		// XITODO : error handling		
+		$this->getHelper()->delete_rb_invoice($this->getId());
+		
+		return parent::delete();
+	} 
 }
