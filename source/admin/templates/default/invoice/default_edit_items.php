@@ -59,7 +59,7 @@ $params = $invoice->getParams();;
 			}
 			
 			$(this).parents('.payinvoice-invoice-item').find('.payinvoice-item-total').val(total);
-			payinvoice.admin.invoice.item.calculate_total();
+			payinvoice.admin.invoice.calculate_total();
 		});
 
 		$('.payinvoice-item-price').live('blur', function(){

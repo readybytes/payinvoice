@@ -132,7 +132,7 @@ JHtml::_('behavior.formvalidation');
 				  			<div class="controls">
 				  				<div class="input-prepend">
 									<span class="add-on payinvoice-currency"></span>
-									<input type="text" name="payinvoice_form[discount]" class="input-small" min="0" id="payinvoice-invoice-discount" value="<?php echo $discount;?>">
+									<input type="text" name="payinvoice_form[discount]" class="input-small validate-number" min="0" id="payinvoice-invoice-discount" value="<?php echo $discount;?>">
 								</div>
 				  			</div>
 						</div>
@@ -140,7 +140,7 @@ JHtml::_('behavior.formvalidation');
 							<label class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX');?></label>
 				  			<div class="controls">
 				  				<div class="input-append">									
-									<input type="text" name="payinvoice_form[tax]" class="input-small" id="payinvoice-invoice-tax" min="0" value="<?php echo $tax;?>">
+									<input type="text" name="payinvoice_form[tax]" class="input-small validate-number" id="payinvoice-invoice-tax" min="0" value="<?php echo $tax;?>">
 									<span class="add-on">%</span>
 								</div>
 				  			</div>
@@ -151,7 +151,7 @@ JHtml::_('behavior.formvalidation');
 				  			<div class="controls">
 				  				<div class="input-prepend">
 									<span class="add-on payinvoice-currency"></span>
-									<input type="text" name="payinvoice_form[total]" class="input-small" readonly="readonly" id="payinvoice-invoice-total" >
+									<input type="text" name="payinvoice_form[total]" class="input-small" readonly="readonly" id="payinvoice-invoice-total" min="0">
 								</div>
 				  			</div>
 						</div>

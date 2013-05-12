@@ -120,6 +120,10 @@ payinvoice.admin.invoice = {
 						html = html.replace(/##total##/g, total);
 						$('<div class="payinvoice-invoice-item">' + html + '</div>').appendTo('.payinvoice-invoice-items').show();
 						$('#payinvoice-invoice-item-add').attr('counter', parseInt(counter) + 1);
+						
+						// apply validation on added item
+						$('.payinvoice-item-quantity, .payinvoice-item-price').jqBootstrapValidation();						
+						
 						return false;
 			}
 		},
