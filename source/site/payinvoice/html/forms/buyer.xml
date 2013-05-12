@@ -18,6 +18,7 @@
 				label="COM_PAYINVOICE_BUYER_USERNAME"
 				description="COM_PAYINVOICE_BUYER_USERNAME_DESC"
 				default=""
+				required="true"	
 				labelclass="control-label"/>
 		
 		<field 	name="email" 
