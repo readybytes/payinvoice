@@ -22,6 +22,6 @@ class PayInvoiceAdminViewDashboard extends PayInvoiceAdminBaseViewDashboard
 {
 	protected function _adminToolbar()
 	{
-		
+		$this->_adminToolbarTitle();
 	}
 }
