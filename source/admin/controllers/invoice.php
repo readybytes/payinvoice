@@ -96,18 +96,6 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 		
 	}
 	
-	function _remove($itemId=null, $userId=null)
-	{
-		$filter  = array('object_id' => $itemId); 
-		$invoice = Rb_EcommerceAPI::invoice_get_records($filter, array(), '',$orderby='object_id');
-		
-		$invoiceId = $invoice[$itemId]->invoice_id;
-		
-	    Rb_EcommerceAPI::invoice_delete_record($invoiceId);
-	    
-	    return parent::_remove($itemId, $userId);	
-		
-	}
 	
 	public function email()
 	{
