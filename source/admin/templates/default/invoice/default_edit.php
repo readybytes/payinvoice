@@ -41,12 +41,6 @@ JHtml::_('behavior.formvalidation');
 				return false;
 			}),
 
-			$('#payinvoice_form_rb_invoice_serial').change(function(){
-				var serial 	= $(this).val();
-				payinvoice.admin.invoice.on_serial_change(serial);
-				return false;	
-			}),
-
 			$("#payinvoice-add-processor").click(function () {
 				$("#payinvoice-payment-processor").slideToggle("fast");				
 			});
@@ -84,8 +78,12 @@ JHtml::_('behavior.formvalidation');
 						</div>
 						<div class="control-group">
 							<?php echo $rb_invoice_fields['serial']->label;?>
-							<div class="controls"><?php echo $rb_invoice_fields['serial']->input;?><br>
-								<span class="invoice-error error"></span>
+							<div class="controls">
+							  	<input 	type="text" 
+							  			name="payinvoice_form[rb_invoice][serial]" 
+							  			class="required input-medium"
+							  			value="<?php echo $rb_invoice_fields['serial']->value; ?>"
+							  			data-validation-ajax-ajax="<?php echo Rb_Route::_('index.php?option=com_payinvoice&view=invoice&task=ajaxchangeserial');?>"/>								
 							</div>							
 						</div>
 					</div>

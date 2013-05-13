@@ -158,12 +158,6 @@ payinvoice.admin.invoice = {
 				payinvoice.ajax.go(url, buyer);
 		},
 		
-		on_serial_change : function(serial){
-			var serial   = {'event_args' :{'serial' : serial} };
-			var url 	= 'index.php?option=com_payinvoice&view=invoice&task=ajaxchangeserial';
-			payinvoice.ajax.go(url, serial);
-		},
-		
 		email : {	
 			confirm : function(invoice_id){
 				var url 	= 'index.php?option=com_payinvoice&view=invoice&task=email&invoice_id='+invoice_id;
@@ -179,24 +173,6 @@ payinvoice.admin.invoice = {
 			}			
 		}
 };
-
-payinvoice.admin.buyer = {		
-		on_email_change	: function(email, buyer_id){
-				var email   = {'event_args' :{'email' : email, 'buyer_id'	: buyer_id} };
-				var url 	= 'index.php?option=com_payinvoice&view=buyer&task=ajaxvalidateemail';
-				payinvoice.ajax.go(url, email);
-	
-		},
-		
-		on_username_change	: function(username, buyer_id){
-			var username   = {'event_args' :{'username' : username, 'buyer_id'	: buyer_id} };
-			var url 	= 'index.php?option=com_payinvoice&view=buyer&task=ajaxvalidateusername';
-			payinvoice.ajax.go(url, username);
-
-		}
-};
-
-
 
 /*--------------------------------------------------------------
   on Document ready 

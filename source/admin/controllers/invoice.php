@@ -107,17 +107,19 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 	// Check serial number is already exist or not
 	function ajaxchangeserial()
 	{
-		$args     			= $this->_getArgs();
-		$invoice_serial 	= $args['serial'];
-	
+		$invoice_serial 	= $this->input->get('value');	
 		$serial				= $this->_helper->exist_serial_number($invoice_serial);
-		$response 		    = PayInvoiceFactory::getAjaxResponse();
+
+		$response = array();
+		$response['value'] = $invoice_serial;
 		if($serial){	
-			$response->addScriptCall('payinvoice.jQuery("span.invoice-error").html',Rb_Text::_('COM_PAYINVOICE_INVOICE_SERIAL_ALREADY_EXIST'));
-			$response->addScriptCall('payinvoice.jQuery("#payinvoice_form_rb_invoice_serial").focus()');
+			$response['valid'] 	 = false;
+			$response['message'] = Rb_Text::_('COM_PAYINVOICE_INVOICE_SERIAL_ALREADY_EXIST');
 		}else {
-			$response->addScriptCall('payinvoice.jQuery("span.invoice-error").html', "");
+			$response['valid'] 	 = true;
+			$response['message'] = '';
 		}
-		$response->sendResponse();
+		echo json_encode($response);
+		exit();
 	}
 }
