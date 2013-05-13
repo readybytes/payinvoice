@@ -14,11 +14,11 @@
 				description="COM_PAYINVOICE_DATE_FORMAT_DESC"
 				type="list">
 				<option value="">COM_PAYINVOICE_SELECT_OPTION</option>
-				<option value="Y-m-d">COM_PAYINVOICE_Y-M-D</option>   
-			   	<option value="m/d/Y">COM_PAYINVOICE_M/D/Y</option>
-			   	<option value="m-d-Y">COM_PAYINVOICE_M-D-Y</option> 
-		   		<option value="d/m/Y">COM_PAYINVOICE_D/M/Y</option>
-				<option value="d-m-Y">COM_PAYINVOICE_D-M-Y</option>
+				<option value="Y-m-d">COM_PAYINVOICE_YEAR_DASH_MONTH_DASH_DATE</option>   
+			   	<option value="m/d/Y">COM_PAYINVOICE_MONTH_SLASH_DATE_SLASH_YEAR</option>
+			   	<option value="m-d-Y">COM_PAYINVOICE_MONTH_DASH_DATE_DASH_YEAR</option> 
+		   		<option value="d/m/Y">COM_PAYINVOICE_DATE_SLASH_MONTH_SLASH_YEAR</option>
+				<option value="d-m-Y">COM_PAYINVOICE_DATE_DASH_MONTH_DASH_YEAR</option>
 		
 		</field>
 		
