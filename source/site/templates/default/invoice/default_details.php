@@ -17,7 +17,7 @@ if(!defined( '_JEXEC' )){
 		<?php if(!$applicable){?>
 			<div class="span4"><?php echo $statusbutton;?></div>	
 		<?php }else { ?>
-			<div class="span4 label center"><h4><i class="icon-lock" title="<?php echo Rb_Text::_($applicable);?>"></i>&nbsp;<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_LOCKED');?></h4></div>	
+			<div class="span4"><?php echo $applicable;?></div>	
 		<?php }?>
 </div>
 	

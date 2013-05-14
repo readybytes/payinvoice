@@ -52,7 +52,7 @@ class PayInvoiceSiteViewInvoice extends PayInvoiceSiteBaseViewInvoice
 			$this->assign('processor_title', $processor['title']);
 		}
 
-		$applicable	= $this->getHelper('invoice')->is_applicable_date($rb_invoice['issue_date'], $rb_invoice['due_date']);
+		$applicable	= $this->getHelper('invoice')->is_applicable_date($rb_invoice);
 		
 		//XITODO : Clean the code		
 		$this->assign('tax', $tax);

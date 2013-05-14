@@ -155,24 +155,33 @@ class PayInvoiceHelperInvoice extends JObject
 		return false;
 	}
 	
-	public function is_applicable_date($issue_date, $due_date)
+	public function is_applicable_date($rb_invoice)
 	{
-		$current_date   = new Rb_Date('now');
-	    $issue_date		= new Rb_Date($issue_date);
-		$due_date      	= new Rb_Date($due_date);
-		
-		$currentDate 	= $current_date->toUnix();
-		$issueDate    	= $issue_date->toUnix();
-		$dueDate 		= $due_date->toUnix();
-		
-		$message		= '';
-		if($currentDate < $issueDate){
-			$message	= 'COM_PAYINVOICE_INVOICE_LOCKED_ISSUE_DATE_MSG';
-		}elseif ($currentDate > $dueDate) {
-			$message	= 'COM_PAYINVOICE_INVOICE_LOCKED_DUE_DATE_MSG';
+		if($rb_invoice['status'] == PayInvoiceInvoice::STATUS_DUE)
+		{
+			$current_date   = new Rb_Date('now');
+		    $issue_date		= new Rb_Date($rb_invoice['issue_date']);
+			$due_date      	= new Rb_Date($rb_invoice['due_date']);
+			
+			$currentDate 	= $current_date->toUnix();
+			$issueDate    	= $issue_date->toUnix();
+			$dueDate 		= $due_date->toUnix();
+			
+			$title			= Rb_Text::_('COM_PAYINVOICE_INVOICE_LOCKED');
+			$message		= '';
+			if($currentDate < $issueDate){
+				$message	= Rb_Text::_('COM_PAYINVOICE_INVOICE_LOCKED_ISSUE_DATE_MSG');
+			}elseif ($currentDate > $dueDate) {
+				$message	= Rb_Text::_('COM_PAYINVOICE_INVOICE_LOCKED_DUE_DATE_MSG');
+			}
+
+			if($message){
+		 		$button	= "<div class='label center'><i class='pull-right icon-question-sign' title='$message'></i><h4><i class='icon-lock'></i>&nbsp;$title</h4></div>";
+				return $button;
+			}
 		}
 		
-		return $message;
+		return false;
 		
 	}
 	
