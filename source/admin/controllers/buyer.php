@@ -38,37 +38,41 @@ class PayInvoiceAdminControllerBuyer extends PayInvoiceController
   	// Check email already registere or not
 	public function ajaxvalidateemail()
 	{
-		$args     	= $this->_getArgs();
-		$email		= $args['email'];
-		$buyer_id	= $args['buyer_id'];
+		$email				= $this->input->getHtml('value');
+		$buyer_id			= $this->_getId();
+		$existing_userid 	= $this->_helper->getjoomlaUser('email', $email);
 		
-		$existing_userid = $this->_helper->getjoomlaUser('email', $email);
-		$response 	 	 = PayInvoiceFactory::getAjaxResponse();
-		if($existing_userid && ($existing_userid != $buyer_id)){
-			$response->addScriptCall('payinvoice.jQuery("span.payinvoice-email-error").html', Rb_Text::_('COM_PAYINVOICE_EMAIL_ALREADY_EXIST'));
-			$response->addScriptCall('payinvoice.jQuery("#payinvoice_form_email").focus()');
+		$response = array();
+		$response['value'] = $email;
+		if($existing_userid && $existing_userid != $buyer_id){
+			$response['valid'] 	 = false;
+			$response['message'] = Rb_Text::_('COM_PAYINVOICE_EMAIL_ALREADY_EXIST');
 		}else {
-			$response->addScriptCall('payinvoice.jQuery("span.payinvoice-email-error").html', "");
+			$response['valid'] 	 = true;
+			$response['message'] = '';
 		}
-		$response->sendResponse();	
+		echo json_encode($response);
+		exit();	
 	}
 	
 	// XITODO : Clean Code
 	// Check username already registered or not
 	public function ajaxvalidateusername()
 	{
-		$args     	= $this->_getArgs();
-		$username	= $args['username'];
-		$buyer_id	= $args['buyer_id'];
+		$username			= $this->input->getHtml('value');
+		$buyer_id			= $this->_getId();
+		$existing_userid 	= $this->_helper->getjoomlaUser('username', $username);
 		
-		$existing_username = $this->_helper->getjoomlaUser('username', $username);
-		$response 	 	 = PayInvoiceFactory::getAjaxResponse();
-		if($existing_username && ($existing_username != $buyer_id)){
-			$response->addScriptCall('payinvoice.jQuery("span.payinvoice-username-error").html', Rb_Text::_('COM_PAYINVOICE_USERNAME_ALREADY_EXIST'));
-			$response->addScriptCall('payinvoice.jQuery("#payinvoice_form_username").focus()');
+		$response = array();
+		$response['value'] = $username;
+		if($existing_userid && $existing_userid != $buyer_id){	
+			$response['valid'] 	 = false;
+			$response['message'] = Rb_Text::_('COM_PAYINVOICE_USERNAME_ALREADY_EXIST');
 		}else {
-			$response->addScriptCall('payinvoice.jQuery("span.payinvoice-username-error").html', "");
+			$response['valid'] 	 = true;
+			$response['message'] = '';
 		}
-		$response->sendResponse();	
+		echo json_encode($response);
+		exit();
 	}
 }

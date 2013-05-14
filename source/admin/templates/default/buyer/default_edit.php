@@ -17,32 +17,12 @@ JHtml::_('behavior.formvalidation');
 JHtml::_('behavior.tooltip');
 JHtml::_('behavior.keepalive');
 JHtml::_('behavior.formvalidation');
+
+if(empty($record_id)){
+	$record_id = 0;
+}
+
 ?>
-<script type="text/javascript">
-
-(function($){
- $(document).ready(function(){
-	 var buyer_id	= '';
-	 <?php if($record_id):?>
-	       buyer_id	= '<?php echo $record_id;?>';
-	 <?php endif;?>
-	 				
-			$('#payinvoice_form_email').change(function(){
-			  	var email   = $(this).val();
-			  	payinvoice.admin.buyer.on_email_change(email, buyer_id);
-				return false;
-			}),
-
-			$('#payinvoice_form_username').change(function(){
-			  	var username   = $(this).val();
-			  	payinvoice.admin.buyer.on_username_change(username, buyer_id);
-				return false;
-			});
-			
-	});
-})(payinvoice.jQuery);
-</script>
-
 <form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="rb-validate-form">
 <div class="row-fluid">
 <fieldset class="form-horizontal">
@@ -64,15 +44,23 @@ JHtml::_('behavior.formvalidation');
 
 				<div class="control-group">
 					<?php echo $form->getLabel('username'); ?>
-					<div class="controls"><?php echo $form->getInput('username'); ?><br>
-						<span class="payinvoice-username-error "></span>
+					<div class="controls">
+						<input 	type="text" 
+								name="payinvoice_form[username]" 
+								class="required"
+								value="<?php echo $form->getValue('username'); ?>"
+								data-validation-ajax-ajax="<?php echo Rb_Route::_('index.php?option=com_payinvoice&view=buyer&task=ajaxvalidateusername&buyer_id='.$record_id);?>"/>
 					</div>
 				</div>		
 						 
 				<div class="control-group">
 					<?php echo $form->getLabel('email'); ?>
-					<div class="controls"><?php echo $form->getInput('email'); ?><br>
-						<span class="payinvoice-email-error error"></span>
+					<div class="controls">
+						<input 	type="text" 
+								name="payinvoice_form[email]" 
+								class="required validate-email"
+								value="<?php echo $form->getValue('email'); ?>"
+								data-validation-ajax-ajax="<?php echo Rb_Route::_('index.php?option=com_payinvoice&view=buyer&task=ajaxvalidateemail&buyer_id='.$record_id);?>"/>								
 					</div>										
 				</div>	
 						
