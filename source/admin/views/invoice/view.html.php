@@ -98,10 +98,19 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		 	$this->assign('rb_invoice', $rb_invoice);
 		}
 		else{
+			$rb_invoice = $this->_helper->get_rb_invoice($itemId);
+			
+			// XITODO : need to fix it properly
+			// add 7 days in due date
+			$binddata['rb_invoice']['issue_date'] = $rb_invoice['issue_date'];
+			$due_date = new Rb_Date($rb_invoice['due_date']);
+			$due_date->add(new DateInterval('P7D'));
+			$binddata['rb_invoice']['due_date'] = (string)$due_date;
+			
 			$helper					= $this->getHelper('config');
 			$currency 				= $helper->get('currency');
 			$terms					= $helper->get('terms_and_conditions');
-			$binddata['rb_invoice'] = array('currency' => $currency);
+			$binddata['rb_invoice']['currency'] = $currency;
 			$binddata['params'] 	=  array('terms_and_conditions' => $terms);
 			$form->bind($binddata);
 			
