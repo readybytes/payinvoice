@@ -33,6 +33,7 @@ if(!defined( '_JEXEC' )){
 			<?php $count= $limitstart;
 			  foreach ($records as $record):?>
 				<tr class="<?php echo "row".$count%2; ?>">
+				<?php if(isset($processor_names[$record->type])) :?>	 
 				    <th class="default-grid-chkbox">
 				    	<?php echo PayInvoiceHtml::_('grid.id', $count, $record->{$record_key} ); ?>
 				    </th>
@@ -42,6 +43,16 @@ if(!defined( '_JEXEC' )){
 					</td>	
 					<td><?php echo $record->type;?></td>						
 					<td><?php echo PayInvoiceHtml::_("rb_html.boolean.grid", $record, 'published', $count, 'tick.png', 'publish_x.png', '', $langPrefix='COM_PAYINVOICE');?></td>
+			   <?php else :?>
+        			 <th class="default-grid-chkbox">
+				    	<?php echo PayInvoiceHtml::_('grid.id', $count, $record->{$record_key} ); ?>
+				    </th>
+					<td><?php echo $count+1; ?> </td>	
+					<td><?php echo $record->title;?>
+						<p class="muted"><?php echo $record->description;?></p>
+					</td>
+    				<td colspan="3"><?php echo sprintf(Rb_Text::_('COM_PAYINVOICE_PROCESSOR_GRID_PROCESSOR_PLUGIN_DISABLE'), $record->type);?></td>	
+			   <?php endif;?>
 			
 			<?php $count++;?>		
 			<?php endforeach;?>

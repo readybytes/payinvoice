@@ -29,6 +29,12 @@ class PayInvoiceAdminViewProcessor extends PayInvoiceAdminBaseViewProcessor
 		Rb_HelperToolbar::deleteList();
 	}
 	
+	function _displayGrid($records)
+	{	
+		$this->assign('processor_names',  Rb_EcommerceAPI::get_processors_list());
+		return parent::_displayGrid($records);
+	}
+	
 	function edit($tpl= null, $itemId = null, $processor_type= null)
 	{
 		$itemId  		=  ($itemId === null) ? $this->getModel()->getState('id') : $itemId ;		
@@ -40,7 +46,7 @@ class PayInvoiceAdminViewProcessor extends PayInvoiceAdminBaseViewProcessor
 			$processorType->set('type',$processor_type);
 		}
 		
-		$help  	   =  PayInvoiceHelperProcessor::getXml($processorType->getType());
+		$help  	   =  $this->getHelper('processor')->getXml($processorType->getType());
 				
 		$this->assign('processor', $processorType);
 		$this->assign('form',  $processorType->getModelform()->getForm($processorType));

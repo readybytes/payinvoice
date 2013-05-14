@@ -34,6 +34,23 @@ class PayInvoiceAdminControllerBuyer extends PayInvoiceController
 
 		return parent::_save($data, $itemId, $type);
 	}	
+
+	function _remove($itemId=null, $userId=null)
+	{
+		$user           = JFactory::getUser($itemId);
+		$isUserSA       = $user->authorise('core.admin');
+		
+		if($isUserSA)
+		{
+			$this->setError(Rb_Text::_('COM_PAYINVOICE_CANNOT_DELETE_SUPER_ADMINISTRATOR'));
+			return false;
+
+		}else {
+			$user->delete();
+		}
+		
+		return true;
+	}
     
   	// Check email already registere or not
 	public function ajaxvalidateemail()
