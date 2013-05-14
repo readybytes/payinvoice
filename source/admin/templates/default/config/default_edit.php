@@ -58,7 +58,9 @@ JHtml::_('behavior.formvalidation');
 			<div class="control-group">
 				<div class="control-label"><?php echo $form->getLabel('company_logo'); ?> </div>
 				<div class="controls">
-					<div id="payinvoice-logo-image"><img src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);; ?>" /></div>
+					<!-- XITODO : Fix size of logo properly -->
+					<div id="payinvoice-logo-image"><img class="img-polaroid" src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false); ?>" width="210" /></div>
+					<div>&nbsp;</div>
 					<?php echo $form->getInput('company_logo'); ?>
 					<div><a href="#" id="payinvoice-delete-logo" class="span3">Delete</a></div>
 				</div>								

@@ -35,7 +35,7 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		Rb_HelperToolbar::addNew('new');
 		Rb_HelperToolbar::editList();
 		Rb_HelperToolbar::divider();
-		Rb_HelperToolbar::deleteList();
+		Rb_HelperToolbar::deleteList(Rb_Text::_('COM_PAYINVOICE_JS_ARE_YOU_SURE_TO_DELETE'));
 	}
 	
 	function _displayGrid($records)

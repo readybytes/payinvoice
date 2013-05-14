@@ -47,6 +47,13 @@ class PayInvoiceAdminControllerBuyer extends PayInvoiceController
 
 		}else {
 			$user->delete();
+			// Invoice delated related to deleted user
+			$filter		= array('buyer_id' => $itemId, 'object_type' => 'PayInvoiceInvoice');	
+			$invoices	= Rb_EcommerceAPI::invoice_get_records($filter);
+			foreach ($invoices as $invoice)
+			{	
+				PayInvoiceInvoice::getInstance($invoice->object_id)->delete();
+			}
 		}
 		
 		return true;
