@@ -44,9 +44,7 @@ if(!defined( '_JEXEC' )){
 					<td><?php echo $record->type;?></td>						
 					<td><?php echo PayInvoiceHtml::_("rb_html.boolean.grid", $record, 'published', $count, 'tick.png', 'publish_x.png', '', $langPrefix='COM_PAYINVOICE');?></td>
 			   <?php else :?>
-        			 <th class="default-grid-chkbox">
-				    	<?php echo PayInvoiceHtml::_('grid.id', $count, $record->{$record_key} ); ?>
-				    </th>
+        			 <th class="default-grid-chkbox"></th>
 					<td><?php echo $count+1; ?> </td>	
 					<td><?php echo $record->title;?>
 						<p class="muted"><?php echo $record->description;?></p>
