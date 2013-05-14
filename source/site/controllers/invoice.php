@@ -60,7 +60,7 @@ class PayInvoiceSiteControllerInvoice extends PayInvoiceController
 			$request_name = $response->get('next_request_name', 'payment');
 		}
 
-		// XITODO : redirect url
+		$this->setRedirect(Rb_Route::_('index.php?option=com_payinvoice&view=invoice&task=complete&invoice_id='.$itemid));
 		return false;
 	}
 	

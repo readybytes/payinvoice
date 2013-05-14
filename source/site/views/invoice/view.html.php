@@ -80,16 +80,33 @@ class PayInvoiceSiteViewInvoice extends PayInvoiceSiteBaseViewInvoice
 	function complete()
 	{
 		$itemId 	= $this->getModel()->getId();
-		$invoice	= $this->getHelper('invoice')->get_rb_invoice($itemId);
-				
-		$action = Rb_Factory::getApplication()->input->get('action','success');
-		
-		if($action === 'success'){
-			$this->setTpl('complete_success');			
-		}else {
-			$this->setTpl('complete_error');
+		if(!$itemId){
+			// XITODO : get invoice number from response
 		}
+		else{	
+			$invoice = $this->getHelper('invoice')->get_rb_invoice($itemId);							
+			$this->assign('rb_invoice', $invoice);
+			$suffix = '';
+			if($invoice['status'] == PayInvoiceInvoice::STATUS_DUE){
+				$suffix = 'DUE';
+			}
+			elseif($invoice['status'] == PayInvoiceInvoice::STATUS_INPROCESS){
+				$suffix = 'INPROCESS';
+			}
+			elseif($invoice['status'] == PayInvoiceInvoice::STATUS_PAID){
+				$suffix = 'PAID';
+			}
+			elseif($invoice['status'] == PayInvoiceInvoice::STATUS_REFUNDED){
+				$suffix = 'REFUNDED';
+			}
+			else{
+				$suffix = 'CONTACT_ADMIN';
+			}
 			
+			$this->assign('message', 'COM_PAYINVOICE_INVOICE_COMPLETE_MESSAGE_'.$suffix);
+		}
+		
+		$this->setTpl('complete');
 		return true;
 	}
 	
