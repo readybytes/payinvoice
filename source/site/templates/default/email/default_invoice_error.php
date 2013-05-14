@@ -33,7 +33,7 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 						<table style="padding: 10px; width: 100%;" bgcolor="f1f2f3">
 							<tbody>
 								<tr>
-									<td align="left" height="100"><img src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);?>" class="img-polaroid" /></td>
+									<td align="left" height="100"><img src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);?>" class="img-polaroid" width="300" /></td>
 								</tr>
 							</tbody>
 						</table>
