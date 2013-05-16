@@ -23,15 +23,19 @@ class PayInvoiceHtmlProcessors
 {
 	function edit($name, $value, $attr=null, $ignore=array())
 	{
-	    $filters	 		= array('published'=>1);
-        $processors 	= PayInvoiceFactory::getInstance('processor', 'model')->loadRecords($filters);		
+		$processor_list		= Rb_EcommerceAPI::get_processors_list();
+		
+   		$filters            = array('published' => 1);
+        $processors 		= PayInvoiceFactory::getInstance('processor', 'model')->loadRecords($filters);		
 		
 		$options = array();
 		if(isset($attr['none']))
 			$options[] = PayInvoiceHtml::_('select.option', '', Rb_Text::_('Select Processor'));
 			
 		foreach($processors  as $processor){
-			$options[] = PayInvoiceHtml::_('select.option', $processor->processor_id, JString::ucfirst($processor->title));	
+			if(isset($processor_list[$processor->type])){
+				$options[] = PayInvoiceHtml::_('select.option', $processor->processor_id, JString::ucfirst($processor->title));	
+			}
 		}
 
 		$style = isset($attr['style']) ? $attr['style'] : '';

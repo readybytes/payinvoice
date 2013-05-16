@@ -13,8 +13,9 @@ if(!defined( '_JEXEC' )){
 	die( 'Restricted access' );
 }
 
-$form = $response->data->form;
-$fieldSets = $form->getFieldsets();
+if(isset($response)){
+	$form = $response->data->form;
+	$fieldSets = $form->getFieldsets();
 
 ?>
 <?php foreach ($fieldSets as $name => $fieldSet) : ?>
@@ -27,4 +28,4 @@ $fieldSets = $form->getFieldsets();
 		<?php endforeach;?>
 	</fieldset>
 <?php endforeach;?>
-<?php 
+<?php } 

@@ -122,7 +122,7 @@ payinvoice.admin.invoice = {
 						$('#payinvoice-invoice-item-add').attr('counter', parseInt(counter) + 1);
 						
 						// apply validation on added item
-						$('.payinvoice-item-quantity, .payinvoice-item-price').jqBootstrapValidation();						
+						$('.payinvoice-item-quantity, .payinvoice-item-price, .payinvoice-item-title').jqBootstrapValidation();						
 						
 						return false;
 			}

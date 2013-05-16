@@ -17,11 +17,14 @@ $component_name = $this->_component->getNameSmall();
 <div class="payinvoice-invoice-item">
 	<div class="row-fluid">
 		<div class="span5"> 
-			<textarea name="<?php echo $component_name;?>_form[params][items][##counter##][title]" placeholder="<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_ENTER_NAME_AND_DESCRIPTION');?>">##item_description##</textarea>
+			<div class="control-group">	
+				<textarea class="payinvoice-item-title" name="<?php echo $component_name;?>_form[params][items][##counter##][title]" required="true" placeholder="<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_ENTER_NAME_AND_DESCRIPTION');?>">##item_description##</textarea>
+				<p class="help-block"></p>
+			</div>
 		</div>
 		<div class="span2">
 			<div class="control-group">		
-				<input type="text" class="input-small payinvoice-item-quantity validate-number" min="0" name="<?php echo $component_name;?>_form[params][items][##counter##][quantity]"  value="##quantity##" placeholder="<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_QUANTITY');?>">
+				<input type="text" class="input-small payinvoice-item-quantity validate-number" required="true" min="0" name="<?php echo $component_name;?>_form[params][items][##counter##][quantity]"  value="##quantity##" placeholder="<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_QUANTITY');?>">
 				<p class="help-block"></p>
 			</div>	
 		</div>
@@ -29,7 +32,7 @@ $component_name = $this->_component->getNameSmall();
 			<div class="control-group">
 				<div class="input-prepend">              			
 					<span class="add-on payinvoice-currency"></span>
-					<input type="text" class="input-small payinvoice-item-price validate-number" name="<?php echo $component_name;?>_form[params][items][##counter##][price]" value="##price##" placeholder="<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_PRICE_PER_UNIT');?>">						
+					<input type="text" class="input-small payinvoice-item-price validate-number" required="true" min="0" name="<?php echo $component_name;?>_form[params][items][##counter##][price]" value="##price##" placeholder="<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_PRICE_PER_UNIT');?>">						
 				</div>
 				<p class="help-block"></p>
 			</div>

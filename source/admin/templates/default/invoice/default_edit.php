@@ -191,10 +191,10 @@ JHtml::_('behavior.formvalidation');
 				    
 				    <div class="row well well-small">
 						<?php $class="";?>
-						<?php if(empty($payinvoice_invoice['params']['processor_id'])):?>
 						<a href="#" id="payinvoice-add-processor" class="btn btn-info btn-block btn-large" title="<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_ADD_PROCESSOR_TOOLTIP');?>">
 							<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_ADD_PROCESSOR');?>
 						</a>
+						<?php if(!$processor_id):?>
 						<?php $class='class="hide"';?>
 						<?php endif;?>
 						<div>&nbsp;</div>

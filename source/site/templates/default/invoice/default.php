@@ -25,6 +25,9 @@ if(!defined( '_JEXEC' )){
         	
 		$('#payinvoice_formparamsprocessor_id').change(function(){
 			var processor   = $(this).val();
+			if(processor != ""){
+				$('#payinvoice-paynow-html').html("");	
+			}
 			payinvoice.site.invoice.on_processor_change(processor, invoice_id);
 			return false;
 		});
