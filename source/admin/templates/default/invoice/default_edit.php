@@ -42,7 +42,8 @@ JHtml::_('behavior.formvalidation');
 			}),
 
 			$("#payinvoice-add-processor").click(function () {
-				$("#payinvoice-payment-processor").slideToggle("fast");				
+				$("#payinvoice-payment-processor").slideToggle("fast");	
+				return false;
 			});
 	});
 })(payinvoice.jQuery);
