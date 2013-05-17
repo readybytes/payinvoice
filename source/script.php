@@ -40,6 +40,7 @@ class Com_payinvoiceInstallerScript
 	function update($parent)
 	{
 		self::install($parent);
+		$this->addDefaultProcessor();
 	}
 
 	function installExtensions($actionPath=null,$delFolder=true)
@@ -98,6 +99,22 @@ class Com_payinvoiceInstallerScript
 
 		$query .= 'WHERE '.implode(' OR ', $subQuery);
 
+		$db->setQuery($query);
+		return $db->query();
+	}
+	
+	function addDefaultProcessor()
+	{
+		$db = JFactory::getDBO();
+		
+		$processor_exist		= 'SELECT * FROM #__payinvoice_processor';
+		$db->setQuery($processor_exist);
+		if($db->loadColumn()){
+			return true;
+		}
+	
+		$query   = 'INSERT INTO `#__payinvoice_processor` (`title`, `published`, `type`) VALUES ("Stripe",1,"stripe")';
+						 
 		$db->setQuery($query);
 		return $db->query();
 	}
