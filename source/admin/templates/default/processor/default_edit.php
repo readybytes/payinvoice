@@ -47,14 +47,17 @@ JHtml::_('behavior.formvalidation');
 		
 		<?php if(!empty($help['help'])): ?>
 			<fieldset class="form-horizontal">
-				<legend > <?php echo Rb_Text::_('COM_PAYINVOICE_PROCESSOR_HELP_MESSAGE'); ?></legend>
-					<div class="row-fluid">
-					<?php if(!empty($help['help'])):?>
+			<legend onClick="payinvoice.jQuery('.payinvoice-processor-help').slideToggle();">
+					<span class="payinvoice-processor-help">[+]</span><span> <?php echo Rb_Text::_('COM_PAYINVOICE_PROCESSOR_HELP_MESSAGE'); ?></span>
+					
+				</legend>
+				<div class="hide payinvoice-processor-help">
+				<?php if(!empty($help['help'])):?>
 						<div class="span6">
 						  <div><?php echo (isset($help['help']) && !empty($help['help'])) ? Rb_Text::_($help['help']) : ''; ?></div>
 						</div>
 					<?php endif;?>
-					</div>
+				</div>
 			</fieldset>	
 		<?php endif;?>
 	
