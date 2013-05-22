@@ -53,6 +53,10 @@ if(!defined( '_JEXEC' )){
 			<?php endforeach;?>
 			</tbody>
   		</table>
+  		
+  		<div class="row">
+     		<div class="offset5 span7"><?php echo $pagination->getListFooter();?></div>
+   		</div> 
  
 		<input type="hidden" name="filter_order" value="<?php echo $filter_order;?>" />
 		<input type="hidden" name="filter_order_Dir" value="<?php echo $filter_order_Dir;?>" />

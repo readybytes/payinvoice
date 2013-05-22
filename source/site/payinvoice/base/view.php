@@ -73,4 +73,40 @@ class PayInvoiceView extends PayInvoiceViewbase
 		Rb_HelperToolbar::divider();
 		Rb_HelperToolbar::cancel();
 	}
+	
+	protected function _showFooter()
+	{
+		// avoid ajax request
+		if(JRequest::getVar('tmpl')=='component'){
+			return '';
+		}
+		
+		//always shown in admin
+		if(PayInvoiceFactory::getApplication()->isAdmin()==true){
+			return $this->_showAdminFooter();
+		}
+		
+		return '<p align="center">'.Rb_Text::_('COM_PAYINVOICE_POWERED_BY') .'<a id="payinvoicePowerdBy" href="http://www.jpayplans.com/payinvoice" target="_blank" >PayInvoice</a></p>';
+	}
+	
+	
+	protected function _showAdminFooter()
+	{
+		ob_start()?>
+       
+         	 <div class="powered-by">
+				<div class="pull-right muted">
+				   <?php echo Rb_Text::_('COM_PAYINVOICE_POWERED_BY') .'<a href="http://www.jpayplans.com/payinvoice" target="_blank" >PayInvoice</a>';?>
+				   <?php echo ' | '.Rb_Text::_('COM_PAYINVOICE_FOOTER_VERSION').' <strong>'.PAYINVOICE_VERSION .'</strong> | '. Rb_Text::_('COM_PAYINVOICE_FOOTER_BUILD').PAYINVOICE_REVISION; ?>	  	
+			    	<?php echo '<br />'
+			    		.Rb_Text::_('COM_PAYINVOICE_FOOTER_MESSAGE')
+			    		.'<a href="" target="_blank">'.Rb_Text::_('COM_PAYINVOICE_FOOTER_MESSAGE_JED_LINK').'</a>'
+			    	?>
+		    	</div>
+			</div>
+		<?php 
+		$content = ob_get_contents();
+		ob_end_clean();
+		return $content;
+	}
 }

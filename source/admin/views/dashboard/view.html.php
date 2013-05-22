@@ -24,4 +24,14 @@ class PayInvoiceAdminViewDashboard extends PayInvoiceAdminBaseViewDashboard
 	{
 		$this->_adminToolbarTitle();
 	}
+	
+	public function display()
+	{
+		return true;
+	}
+	
+	public function _basicFormSetup($task)
+	{
+		return true;
+	}
 }

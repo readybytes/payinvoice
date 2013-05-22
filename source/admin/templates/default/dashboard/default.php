@@ -14,6 +14,23 @@ if(!defined( '_JEXEC' )){
 }
 ?>
 
-Dashboard
+<div class="row-fluid">
+	<div class="span12">
+		<div class="span8">	
+		</div>
+		
+		<!--For BroadCast By PayInvoice-->
+		<div class="span4 well well-small">
+			<?php 	$version = new JVersion();
+					$suffix = 'jom=J'.$version->RELEASE.'&utm_campaign=broadcast&payinvoice=PI'.PAYINVOICE_VERSION.'&dom='.JURI::getInstance()->toString(array('scheme', 'host', 'port'));?>
+			<div class="span12">
+				<iframe class="span12 payinvoice-border00" height="350px;" src=""></iframe>
+				<div class="span12" style="display:none;">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 <?php 

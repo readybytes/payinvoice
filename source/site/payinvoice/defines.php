@@ -23,8 +23,8 @@ define('PAYINVOICE_COMPONENT_NAME','payinvoice');
 
 
 // define versions
-define('PAYINVOICE_VERSION', '0.0.1');
-define('PAYINVOICE_REVISION','v0.9.0-4-ga3793b7');
+define('PAYINVOICE_VERSION', '@build.version@');
+define('PAYINVOICE_REVISION','@build.number@');
 
 //shared paths
 define('PAYINVOICE_PATH_CORE',				JPATH_SITE.'/components/com_payinvoice/payinvoice');

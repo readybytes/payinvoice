@@ -19,13 +19,4 @@ if(!defined( '_JEXEC' )){
  */
 class PayInvoiceAdminBaseViewDashboard extends PayInvoiceView
 {
-	public function display()
-	{
-		return true;
-	}
-	
-	public function _basicFormSetup()
-	{
-		return true;
-	}
 }

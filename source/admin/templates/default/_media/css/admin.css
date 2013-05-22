@@ -11,3 +11,13 @@
 	clear : none;
 }
 
+.payinvoice .payinvoice-border00{
+	border:none;
+}
+
+.payinvoice .powered-by{
+
+	background-color: #FAFAFA;
+	border-top: 1px dashed #D6D6D6;
+    margin-top: 10px;
+}
