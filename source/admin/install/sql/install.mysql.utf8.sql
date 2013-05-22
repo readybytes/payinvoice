@@ -7,27 +7,6 @@ CREATE TABLE IF NOT EXISTS `#__payinvoice_invoice` (
   INDEX `idx_type` (`type`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
 
-CREATE TABLE IF NOT EXISTS `#__payinvoice_invoiceitem` (
-  `invoiceitem_id` int(11) NOT NULL AUTO_INCREMENT,
-  `invoice_id` int(11) NOT NULL,
-  `item_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL DEFAULT '1',
-  `price_per_unit` decimal(15,4) NOT NULL,
-  PRIMARY KEY (`invoiceitem_id`),
-  INDEX `idx_invoice_id` (`invoice_id`),
-  INDEX `idx_item_id` (`item_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
-
-CREATE TABLE IF NOT EXISTS `#__payinvoice_item` (
-  `item_id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(255) NOT NULL,
-  `description` text,
-  `price` double(15,4) NOT NULL,
-  `params` text,
-  PRIMARY KEY (`item_id`),
-  INDEX `idx_title` (`title`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
-
 CREATE TABLE IF NOT EXISTS `#__payinvoice_buyer` (
   `buyer_id` int(11) NOT NULL AUTO_INCREMENT,
   `currency` char(3) NOT NULL,
