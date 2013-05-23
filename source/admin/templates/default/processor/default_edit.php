@@ -18,8 +18,8 @@ JHtml::_('behavior.formvalidation');
 ?>
 
 <form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="rb-validate-form">
+	<fieldset class="form-horizontal">
 		<div class="span6">		
-			<fieldset class="form-horizontal">
 				<h3> <?php echo ucfirst(Rb_Text::_($processor->getType()))." - ".Rb_Text::_('COM_PAYINVOICE_PROCESSOR_EDIT_DETAILS' ); ?></h3><hr>
 				<div class="control-group">
 					<div class="control-label"><?php echo $form->getLabel('title'); ?> </div>
@@ -35,18 +35,15 @@ JHtml::_('behavior.formvalidation');
 					<div class="control-label"><?php echo $form->getLabel('description'); ?> </div>
 					<div class="controls"><?php echo $form->getInput('description'); ?></div>								
 				</div>
-			</fieldset>
+			
 		</div>
 	
 		<div class="span6">
-			<fieldset class="form-horizontal">
 				<h3> <?php echo Rb_Text::_('COM_PAYINVOICE_PAYMENTMETHOD_EDIT_CONFIG_PARAMS' ); ?></h3><hr>
 					<?php $fieldset_name = 'processor_config';?>
 					<?php echo $this->loadTemplate('partial_fieldset', compact('fieldset_name', 'form'));?>
-			</fieldset>
 		
-		<?php if(!empty($help['help'])): ?>
-			<fieldset class="form-horizontal">
+		<?php if(!empty($help['help'])): ?>		
 			<legend onClick="payinvoice.jQuery('.payinvoice-processor-help').slideToggle();">
 					<span class="payinvoice-processor-help">[+]</span><span> <?php echo Rb_Text::_('COM_PAYINVOICE_PROCESSOR_HELP_MESSAGE'); ?></span>
 					
@@ -58,11 +55,10 @@ JHtml::_('behavior.formvalidation');
 						</div>
 					<?php endif;?>
 				</div>
-			</fieldset>	
 		<?php endif;?>
 	
-	</div>
-	
+		</div>
+	</fieldset>	
 		<?php echo $form->getInput('processor_id'); ?>
 		<?php echo $form->getInput('type'); ?>
 		<input type="hidden" name="task" value="save" />

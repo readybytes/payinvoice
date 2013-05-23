@@ -48,10 +48,6 @@ Rb_HelperLoader::addAutoLoadViews(PAYINVOICE_PATH_SITE.'/views', RB_REQUEST_DOCU
 Rb_HelperLoader::addAutoLoadFolder(PAYINVOICE_PATH_ADMIN.'/controllers',	'Controller',		'PayInvoiceAdmin');
 Rb_HelperLoader::addAutoLoadViews(PAYINVOICE_PATH_ADMIN.'/views', RB_REQUEST_DOCUMENT_FORMAT, 'PayInvoiceAdmin');
 
-//load langauge file
-$filename = 'com_payinvoice';
-$language = JFactory::getLanguage();
-$language->load($filename, JPATH_SITE);
 
 //load processor
 Rb_EcommerceAPI::get_processors_list();
