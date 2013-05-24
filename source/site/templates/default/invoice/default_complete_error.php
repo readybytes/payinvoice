@@ -6,7 +6,7 @@
 * @subpackage	Frontend
 * @contact 		team@readybytes.in
 */
-if(defined('_JEXEC')===false) die();
+if(defined('_JEXEC')===false) die('Restricted access' );
 ?>
 <div>
 	<h2><?php echo Rb_Text::_('COM_PAYINVOICE_PAYMENT_FAILED');?></h2>

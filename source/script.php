@@ -5,7 +5,7 @@
 * @package			PAYINVOICE
 * @subpackage		Backend
 */
-if(defined('_JEXEC')===false) die();
+if(defined('_JEXEC')===false) die('Restricted access' );
 
 class Com_payinvoiceInstallerScript
 {

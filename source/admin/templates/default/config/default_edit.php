@@ -7,7 +7,7 @@
 * @contact 		team@readybytes.in
 */
 
-if(defined('_JEXEC')===false) die();
+if(defined('_JEXEC')===false) die('Restricted access');
 
 JHtml::_('behavior.formvalidation');
 //JHtml::_('formbehavior.chosen', 'select');

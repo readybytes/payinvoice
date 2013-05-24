@@ -6,7 +6,7 @@
 * @subpackage	Frontend
 * @contact 		team@readybytes.in
 */
-if(defined('_JEXEC')===false) die();
+if(defined('_JEXEC')===false) die('Restricted access' );
 class PayInvoiceHelperUtils extends JObject
 {
 	function saveUploadedFile($storagepath='',$filepath='',$filename='',$supportedExtensions=array(),$savedname="default")
