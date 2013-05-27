@@ -26,7 +26,16 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		$invoice_id = $this->getModel()->getId();	
 		
 		if(!$this->get('confirmed')){
-			$this->_setAjaxWinTitle(Rb_Text::_('COM_PAYINVOICE_INVOICE_EMAIL_WINDOW_TITLE'));
+			$this->_confirmSendmail($invoice_id);	
+		}
+		
+		$this->_sendMailToClient($invoice_id);
+	}
+
+    // Confirm send email
+	public function _confirmSendmail($invoice_id)
+	{
+		$this->_setAjaxWinTitle(Rb_Text::_('COM_PAYINVOICE_INVOICE_EMAIL_WINDOW_TITLE'));
 			$this->_setAjaxWinBody(Rb_Text::_('COM_PAYINVOICE_INVOICE_EMAIL_CONFIRM_MESSAGE'));
 		
 			$this->_addAjaxWinAction(Rb_Text::_('COM_PAYINVOICE_CONFIRM'), 'payinvoice.admin.invoice.email.send('.$invoice_id.');', 'btn btn-info', 'id="payinvoice-invoice-email-confirm-button"');
@@ -35,8 +44,11 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		
 			$ajax = Rb_Factory::getAjaxResponse();
 			$ajax->sendResponse();
-		}
-		
+	}
+	
+	// Send email to client
+	public function _sendMailToClient($invoice_id)
+	{
 		// get instance of front end email view
 		$email_controller 	= PayInvoiceFactory::getInstance('email', 'controller', 'PayInvoicesite');
 		$email_view 		= $email_controller->getView();

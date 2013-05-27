@@ -29,4 +29,13 @@ class PayInvoiceAdminControllerTransaction extends PayInvoiceController
 		return Rb_EcommerceAPI::transaction_delete_record($itemId);	
 	}
 
+	public function refund()
+	{
+		$invoiceId	= $this->input->get('invoice_id');
+		$confirmed 	= $this->input->getBool('confirmed', 0);
+		$this->getView()->assign('confirmed', $confirmed);
+		$this->getView()->assign('invoice_id', $invoiceId);
+		
+		return true;
+	}
 }

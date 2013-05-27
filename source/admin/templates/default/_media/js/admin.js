@@ -172,6 +172,25 @@ payinvoice.admin.invoice = {
 				payinvoice.ajax.go(url);
 			}			
 		}
+	
+};
+
+payinvoice.admin.transaction = {
+		refund : {	
+			confirm : function(invoice_id){
+				var url 	= 'index.php?option=com_payinvoice&view=transaction&task=refund&invoice_id='+invoice_id;
+				payinvoice.url.modal(url);
+			},
+	
+			request : function(invoice_id){
+				payinvoice.ui.dialog.body('<div class="center"><span class="spinner">&nbsp;</span></div>');
+				// XITODO : use bootstarp to disable the button click
+				$('#payinvoice-invoice-refund-confirm-button').attr('disabled', 'disabled');
+				var url 	= 'index.php?option=com_payinvoice&view=transaction&task=refund&confirmed=1&invoice_id='+invoice_id;
+				payinvoice.ajax.go(url);
+			}			
+}	
+		
 };
 
 /*--------------------------------------------------------------

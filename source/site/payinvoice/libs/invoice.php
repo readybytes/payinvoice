@@ -100,4 +100,12 @@ class PayInvoiceInvoice extends PayInvoiceLib
 		
 		return parent::delete();
 	} 
+
+	public static function refund($invoice_id)
+	{
+		$req_response 	= Rb_EcommerceAPI::invoice_request('refund', $invoice_id);
+		$response 		= Rb_EcommerceAPI::invoice_process($invoice_id, $req_response);	
+		
+		return $response;
+	}
 }

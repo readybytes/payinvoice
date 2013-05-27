@@ -16,6 +16,14 @@ if(!defined( '_JEXEC' )){
 <form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="form-validate">
      
 <fieldset class="form-horizontal">
+	<div class="row-fluid">
+		<?php if($refundable): ?>
+					<div class="pull-right">
+						<a href="#" onclick="payinvoice.admin.transaction.refund.confirm('<?php echo $transaction['invoice_id']?>')" class="btn btn-large btn-info"><?php echo Rb_Text::_('Refund');?></a>			
+					</div>
+		<?php endif;?>
+	</div>
+	
   	<div class="row-fluid"> 
     	<div class="span6">
 		     <h2><?php echo Rb_Text::_('COM_PAYINVOICE_TRANSACTION_DETAILS' ); ?></h2><hr>
@@ -38,6 +46,11 @@ if(!defined( '_JEXEC' )){
 		   <div class="control-group">
 				<div class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_TRANSACTION_PROCESSOR' ); ?> </div>
 				<div class="controls"><?php echo $transaction['processor_type']; ?></div>	
+		   </div>
+
+			<div class="control-group">
+				<div class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_TRANSACTION_PAYMENT_STATUS' ); ?> </div>
+				<div class="controls"><?php echo Rb_Text::_($statusList[$transaction['payment_status']]);?></div>	
 		   </div>	
 
  			<div class="control-group">
