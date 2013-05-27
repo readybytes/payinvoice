@@ -38,8 +38,8 @@ class PayInvoiceSiteControllerInvoice extends PayInvoiceController
 			$rb_invoice['processor_config'] 	= $processor->getParams();
 			Rb_EcommerceApi::invoice_update($rb_invoice['invoice_id'], $rb_invoice);
 		}else {
-			$rb_invoice['processor_type'] 		= null;
-			$rb_invoice['processor_config'] 	= null;
+			$rb_invoice['processor_type'] 		= '';
+			$rb_invoice['processor_config'] 	= '';
 			Rb_EcommerceApi::invoice_update($rb_invoice['invoice_id'], $rb_invoice);	
 			return true;
 		}

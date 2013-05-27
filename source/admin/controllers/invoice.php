@@ -40,8 +40,8 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 		    $data['rb_invoice']['processor_type']     = $processor->getType();
 		    $data['rb_invoice']['processor_config']   = $processor->getParams();
 		}else {
-			$data['rb_invoice']['processor_type']     = null;
-		    $data['rb_invoice']['processor_config']   = null;
+			$data['rb_invoice']['processor_type']     = '';
+		    $data['rb_invoice']['processor_config']   = '';
 		}
 						
 		// create invoice in Rb_Ecommerce, in $itemId is null

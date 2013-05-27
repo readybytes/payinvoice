@@ -27,6 +27,8 @@ $config_data['company_phone']	= isset($config_data['company_phone'])		? $config_
 			</address>
 	  	 </div>		   
 	   	<div class="span2 offset2">
-	   		<img src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);?>">
+	   		<?php if(isset($config_data['company_logo'])):?>
+	   			<img src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);?>">
+   			<?php endif;?>
    		</div>
 </div>
