@@ -69,7 +69,7 @@ class PayInvoiceView extends PayInvoiceViewbase
 	{
 		Rb_HelperToolbar::apply();
 		Rb_HelperToolbar::save();
-		Rb_HelperToolbar::save2new();
+		Rb_HelperToolbar::save2new('savenew');
 		Rb_HelperToolbar::divider();
 		Rb_HelperToolbar::cancel();
 	}

@@ -92,7 +92,6 @@ if(!defined( '_JEXEC' )){
 		 		<form action="" method="post"  name="paynowForm" id="paynowForm" class="rb-validate-form">
 		 			<div id="payinvoice-paynow-html">
 		 			</div>
-		 			<button type="submit" class="btn btn-primary pull-right"><?php echo Rb_Text::_('COM_PAYINVOICE_PAY_NOW');?></button>
 		 			<div>&nbsp;</div>
 		 			<div>&nbsp;</div>
 					<div class="span12">
