@@ -40,7 +40,9 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 					<tbody>
 						<tr>
 							<td>
+								<?php if(isset($config_data['company_logo'])):?>
 									<img src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);?>" class="img-polaroid" width="300">																	</td>
+								<?php endif;?>
 						</tr>
 					</tbody>
 				</table>
