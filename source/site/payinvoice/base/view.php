@@ -98,9 +98,9 @@ class PayInvoiceView extends PayInvoiceViewbase
 				<div class="pull-right muted">
 				   <?php echo Rb_Text::_('COM_PAYINVOICE_POWERED_BY') .'<a href="http://www.jpayplans.com/payinvoice" target="_blank" >PayInvoice</a>';?>
 				   <?php echo ' | '.Rb_Text::_('COM_PAYINVOICE_FOOTER_VERSION').' <strong>'.PAYINVOICE_VERSION .'</strong> | '. Rb_Text::_('COM_PAYINVOICE_FOOTER_BUILD').PAYINVOICE_REVISION; ?>	  	
-			    	<?php echo '<br />'
-			    		.Rb_Text::_('COM_PAYINVOICE_FOOTER_MESSAGE')
-			    		.'<a href="" target="_blank">'.Rb_Text::_('COM_PAYINVOICE_FOOTER_MESSAGE_JED_LINK').'</a>'
+			    	<?php echo '<br />';
+			    		//.Rb_Text::_('COM_PAYINVOICE_FOOTER_MESSAGE')
+			    		//.'<a href="" target="_blank">'.Rb_Text::_('COM_PAYINVOICE_FOOTER_MESSAGE_JED_LINK').'</a>'
 			    	?>
 		    	</div>
 			</div>
