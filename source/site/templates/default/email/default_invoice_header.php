@@ -28,7 +28,7 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 							<td>
 								<p style="margin:0px 0px 5px;font-family: sans-serif;"><?php echo $config_data['company_name'];?></p>
 								<address style="font-family: Times New Roman;"><?php echo $config_data['company_address'];?><br><?php echo $config_data['company_city'];?><br>
-								  Phone<span href="tel:"></span>: <?php echo $config_data['company_phone'];?></address>																		
+								  <?php echo Rb_Text::_('COM_PAYINVOICE_COMPANY_PHONE_NO');?><span href="tel:"></span>: <?php echo $config_data['company_phone'];?></address>																		
 							</td>
 						</tr>
 					</tbody>
@@ -39,10 +39,11 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 				<table border="0" cellspacing="0" cellpadding="0" align="right">
 					<tbody>
 						<tr>
-							<td>
-								<?php if(isset($config_data['company_logo'])):?>
-									<img src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);?>" class="img-polaroid" width="300">																	</td>
-								<?php endif;?>
+							<?php if(isset($config_data['company_logo'])):?>
+								<td>
+									<img src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);?>" class="img-polaroid" width="300">																	
+								</td>
+							<?php endif;?>
 						</tr>
 					</tbody>
 				</table>
@@ -63,6 +64,10 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 			<td  height="110;" valign="bottom">
 				<table width="350px" cellspacing="0" cellpadding="8" border="1" align="right" style="font:14px Georgia, Serif;border-collapse: collapse;">
 					<tbody>
+						<tr>
+							<td style="background-color:#eee"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_STATUS');?></td>
+							<td style="text-align:right"><strong><?php echo $status_list[$rb_invoice['status']];?></strong></td>
+						</tr>
 						<tr>
 							<td style="background-color:#eee">
 								<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_NUMBER');?>

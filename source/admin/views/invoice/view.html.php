@@ -22,12 +22,15 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 {		
 	protected function _adminEditToolbar()
 	{	
-		Rb_HelperToolbar::apply();
-		Rb_HelperToolbar::save();
-		Rb_HelperToolbar::save2new('savenew');
-		Rb_HelperToolbar::divider();
+		$invoice_id 	= $this->getModel()->getState('id');
+		$editable		= PayInvoiceInvoice::isEditable($invoice_id);
+		if($editable){
+			Rb_HelperToolbar::apply();
+			Rb_HelperToolbar::save();
+			Rb_HelperToolbar::save2new('savenew');
+			Rb_HelperToolbar::divider();
+		}
 		Rb_HelperToolbar::cancel();
-		Rb_HelperToolbar::divider();
 	}
 	
 	protected function _adminGridToolbar()
@@ -53,13 +56,9 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 			$buyerIds[] = $invoice->buyer_id;
 		}
 		
-		$buyerHelper	= $this->getHelper('buyer');
-		$buyer 			= $buyerHelper->get($buyerIds);
-		$status_list	= PayInvoiceInvoice::getStatusList();
-		
-		$this->assign('invoice', $invoices);
-		$this->assign('buyer', $buyer);
-		$this->assign('status_list', $status_list);
+		$this->assign('invoice', 	 $invoices);
+		$this->assign('buyer', 		 $this->getHelper('buyer')->get($buyerIds));
+		$this->assign('status_list', PayInvoiceInvoice::getStatusList());
 
 		return parent::_displayGrid($records);
 	}
@@ -79,41 +78,37 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 			$processor_id  = $params->processor_id;
 		}
 		
+		$rb_invoice = $this->_helper->get_rb_invoice($itemId);	
 		$discount	= 0.00;
 		$tax		= 0.00;
 		
 		if($itemId){
-			$rb_invoice = $this->_helper->get_rb_invoice($itemId);
 			$form->bind(array('rb_invoice' => $rb_invoice)); 
 			
 			$discount	= $this->_helper->get_discount($rb_invoice['invoice_id']);
 			$tax		= $this->_helper->get_tax($rb_invoice['invoice_id']);
-		 	$currency 	= $rb_invoice['currency'];
-
-		 	$invoice_url	= $invoice->getPayUrl();
-		 	$this->assign('invoice_url', $invoice_url);
-		 	
-		 	$statusbutton	= $this->_helper->get_status_button($rb_invoice['status']);
-		 	$this->assign('statusbutton', $statusbutton);
-		 	$this->assign('rb_invoice', $rb_invoice);
+	 		$currency 	= $rb_invoice['currency'];
+	 	
+	 		$invoice_url	= $invoice->getPayUrl();
+	 		$this->assign('invoice_url', $invoice_url);
+	 		
+	 		$this->assign('statusbutton', 	$this->_helper->get_status_button($rb_invoice['status']));
+	 		$this->assign('rb_invoice', 	$rb_invoice);
 		}
 		else{
-			$rb_invoice = $this->_helper->get_rb_invoice($itemId);
-			
 			// XITODO : need to fix it properly
 			// add 7 days in due date
 			$binddata['rb_invoice']['issue_date'] = $rb_invoice['issue_date'];
 			$due_date = new Rb_Date($rb_invoice['due_date']);
 			$due_date->add(new DateInterval('P7D'));
 			$binddata['rb_invoice']['due_date'] = (string)$due_date;
-			
+	
 			$helper					= $this->getHelper('config');
 			$currency 				= $helper->get('currency');
 			$terms					= $helper->get('terms_and_conditions');
 			$binddata['rb_invoice']['currency'] = $currency;
 			$binddata['params'] 	=  array('terms_and_conditions' => $terms);
-			$form->bind($binddata);
-			
+			$form->bind($binddata);	
 		}	
 		
 		$rb_invoice_fieldset = $form->getFieldset('rb_invoice');
@@ -128,12 +123,23 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 				$invoice_params_fields[$field->fieldname] = $field->input;
 		}
 		
-		$this->assign('discount', number_format($discount, 2));
-		$this->assign('tax', number_format($tax, 2));
-		$this->assign('rb_invoice_fields', $rb_invoice_fields);
-        $this->assign('processor_id', $processor_id);   
-        $this->assign('currency', $currency);
-		$this->assign('invoice_params', $invoice_params_fields);
+		$editable		= PayInvoiceInvoice::isEditable($itemId);
+		if(!$editable){
+			$this->setTpl('view');
+		}
+		
+		// Get transactions of an invoice
+		$filter			= array('invoice_id' => $rb_invoice['invoice_id']);
+		$transaction   	= Rb_EcommerceAPI::transaction_get_records($filter);
+		
+		$this->assign('discount', 			number_format($discount, 2));
+		$this->assign('tax', 				number_format($tax, 2));
+		$this->assign('rb_invoice_fields', 	$rb_invoice_fields);
+        $this->assign('processor_id', 		$processor_id);   
+        $this->assign('currency', 			$currency);
+        $this->assign('currency_symbol', 	$this->getHelper('format')->getCurrency($currency, 'symbol'));
+		$this->assign('invoice_params', 	$invoice_params_fields);
+		$this->assign('transactions', 		$transaction);
 		return true;
 	}	
 }

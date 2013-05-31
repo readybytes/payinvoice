@@ -108,4 +108,14 @@ class PayInvoiceInvoice extends PayInvoiceLib
 		
 		return $response;
 	}
+
+	// Check that Invoice is editable or not	
+	public function isEditable($invoice_id)
+	{
+		$rb_invoice = $this->getHelper('invoice')->get_rb_invoice($invoice_id);
+		if($rb_invoice['status'] == PayInvoiceInvoice::STATUS_DUE || $rb_invoice['status'] == PayInvoiceInvoice::STATUS_NONE){
+			return true;
+		}	
+		return false;
+	}
 }

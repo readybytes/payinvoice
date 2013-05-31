@@ -33,15 +33,16 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 						<table style="padding: 10px; width: 100%;" bgcolor="f1f2f3">
 							<tbody>
 								<tr>
-									<td align="left" height="100">
-										<?php if(isset($config_data['company_logo'])):?>
-											<img src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);?>" class="img-polaroid" width="300"/></td>
-										<?php endif;?>
+									<?php if(isset($config_data['company_logo'])):?>
+										<td align="left" height="100">
+											<img src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);?>" class="img-polaroid" width="300"/>
+										</td>
+									<?php endif;?>
 								</tr>
 							</tbody>
 						</table>
-						<p class="fontlist pp-WordSpacing" style="padding: 10px; margin-left: 15px;"><span style="font-size: 12pt; color: #4d4d4d;">Hello <?php echo $buyer->name;?>,</span></p>
-						<p class="fontlist pp-lineWordSpacing" style="padding: 10px; margin-left: 15px;"><span style="font-size: 12pt; color: #4d4d4d;">Thank you for using our product.This mail is to notify that your payment refunded successfully of <?php echo $rb_invoice['title'];?>.</span><br /><br /><span style="font-size: 12pt; color: #4d4d4d;"> <strong>Your details at our website:</strong></span></p>
+						<p class="fontlist pp-WordSpacing" style="padding: 10px; margin-left: 15px;"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo sprintf(Rb_Text::_('COM_PAYINVOICE_HELLO'), $buyer->name);?>,</span></p>
+						<p class="fontlist pp-lineWordSpacing" style="padding: 10px; margin-left: 15px;"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo sprintf(Rb_Text::_('COM_PAYINVOICE_REFUND_MESSAGE'), $rb_invoice['title']);?></span><br /><br /><span style="font-size: 12pt; color: #4d4d4d;"> <strong><?php echo Rb_Text::_('COM_PAYINVOICE_WEBSITE_DETAILS');?></strong></span></p>
 						<table class="fontlist" align="center">
 							<tbody>
 								<tr>

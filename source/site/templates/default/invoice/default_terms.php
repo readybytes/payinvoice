@@ -36,7 +36,7 @@ if(!empty($payinvoice_invoice['params']['terms_and_conditions'])): ?>
     		</div>
 
     		<div class="modal-footer">
-    			<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    			<button class="btn" data-dismiss="modal" aria-hidden="true"><?php echo Rb_Text::_('COM_PAYINVOICE_CLOSE');?></button>
     		</div>
 	    </div>
 </div>

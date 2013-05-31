@@ -67,8 +67,6 @@ class PayInvoiceAdminViewTransaction extends PayInvoiceAdminBaseViewTransaction
 		$invoice		= $this->getHelper('invoice')->get_rb_invoice_records(array('invoice_id' => $transaction['invoice_id']));
 		$buyer			= $this->getHelper('buyer')->get($transaction['buyer_id']);
 		
-		$statusList 	= Rb_EcommerceAPI::response_get_status_list();
-		
 		// Show or hide refund button
 		$refundable 		= false;
 		if($transaction['payment_status'] == 'payment_complete'){ 
@@ -78,11 +76,11 @@ class PayInvoiceAdminViewTransaction extends PayInvoiceAdminBaseViewTransaction
 			}
 		}
 		
-		$this->assign('transaction', $transaction);	
-		$this->assign('invoice', $invoice);	
-		$this->assign('buyer', $buyer);	
-		$this->assign('statusList', $statusList);
-		$this->assign('refundable', $refundable);
+		$this->assign('transaction', 	$transaction);	
+		$this->assign('invoice', 		$invoice);	
+		$this->assign('buyer', 			$buyer);	
+		$this->assign('statusList',	 	Rb_EcommerceAPI::response_get_status_list());
+		$this->assign('refundable', 	$refundable);
 		
 		return true;	
 	}	
