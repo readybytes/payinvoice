@@ -188,11 +188,25 @@ payinvoice.admin.transaction = {
 				$('#payinvoice-invoice-refund-confirm-button').attr('disabled', 'disabled');
 				var url 	= 'index.php?option=com_payinvoice&view=transaction&task=refund&confirmed=1&invoice_id='+invoice_id;
 				payinvoice.ajax.go(url);
-			}			
-}	
-		
+			}
+		}
 };
 
+payinvoice.admin.dashboard = {
+		statistics : {
+			refresh : function (){
+				var start_time 	= $('#payinvoice_form_statistics_start_time').val();
+				var end_time 	= $('#payinvoice_form_statistics_end_time').val();
+				var currency 	= $('#payinvoice_form_statistics_currency').val();
+	
+				var url 		= 'index.php?option=com_payinvoice&view=dashboard&task=refresh_statistics';
+				var args   		= {'event_args' : {'start_time' : start_time, 'end_time' : end_time, 'currency' : currency} };
+	
+				$("#payinvoice-dashboard-chart-revenue").html('<div class="center"><span class="spinner">&nbsp;</span></div>');
+				payinvoice.ajax.go(url, args); 
+			}
+		}
+};
 /*--------------------------------------------------------------
   on Document ready 
 --------------------------------------------------------------*/

@@ -16,19 +16,20 @@ if(!defined( '_JEXEC' )){
 
 <div class="row-fluid">
 	<div class="span12">
+		<div class="row-fluid">
 		<div class="span8">	
+			<?php echo $this->loadTemplate('charts');?>
 		</div>
 		
 		<!--For BroadCast By PayInvoice-->
 		<div class="span4 well well-small">
 			<?php 	$version = new JVersion();
 					$suffix = 'jom=J'.$version->RELEASE.'&utm_campaign=broadcast&payinvoice=PI'.PAYINVOICE_VERSION.'&dom='.JURI::getInstance()->toString(array('scheme', 'host', 'port'));?>
-			<div class="span12">
 				<iframe class="span12 payinvoice-border00" height="350px;" src="http://pub.jpayplans.com/payinvoice_broadcast.html?<?php echo $suffix?>"></iframe>
 				<div class="span12" style="display:none;">
 					
 				</div>
-			</div>
+		</div>
 		</div>
 	</div>
 </div>
