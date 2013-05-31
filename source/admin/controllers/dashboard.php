@@ -18,6 +18,13 @@ if(!defined( '_JEXEC' )){
  * @author Gaurav Jain
  */
 class PayInvoiceAdminControllerDashboard extends PayInvoiceController
-{	
-	
+{
+	public function refresh_statistics()
+	{
+		$args = $this->_getArgs();
+		$view = $this->getView();
+		
+		$view->assign('args', 	$args);
+		return true;
+	}
 }

@@ -32,6 +32,7 @@ Rb_HelperLoader::addAutoLoadFolder(PAYINVOICE_PATH_CORE.'/tables',		'Table',	 'P
 Rb_HelperLoader::addAutoLoadFolder(PAYINVOICE_PATH_CORE.'/libs',			'',			 'PayInvoice');
 Rb_HelperLoader::addAutoLoadFolder(PAYINVOICE_PATH_CORE.'/helpers',		'Helper',	 'PayInvoice');
 Rb_HelperLoader::addAutoLoadFolder(PAYINVOICE_PATH_CORE.'/payment',		'',	 		 'PayInvoice');
+Rb_HelperLoader::addAutoLoadFolder(PAYINVOICE_PATH_CORE.'/statistics',	'Statistics','PayInvoice');
 
 // load Ecommerce Package
 rb_import('ecommerce');
