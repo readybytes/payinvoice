@@ -21,3 +21,17 @@
 	border-top: 1px dashed #D6D6D6;
     margin-top: 10px;
 }
+
+/* CSS added for Invoice Preview template */
+#payinvoice-invoice-preview .row-fluid [class*="span"]{
+	 margin-left: 2.5641%;	
+}
+
+#payinvoice-invoice-preview .row-fluid [class*="span"]:FIRST-CHILD{
+	 margin-left: 0%;	
+}
+
+/* CSS added for Blue color text */
+.payinvoice .info {
+    color: #3A87AD;
+}

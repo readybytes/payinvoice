@@ -88,9 +88,6 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 			$discount	= $this->_helper->get_discount($rb_invoice['invoice_id']);
 			$tax		= $this->_helper->get_tax($rb_invoice['invoice_id']);
 	 		$currency 	= $rb_invoice['currency'];
-	 	
-	 		$invoice_url	= $invoice->getPayUrl();
-	 		$this->assign('invoice_url', $invoice_url);
 	 		
 	 		$this->assign('statusbutton', 	$this->_helper->get_status_button($rb_invoice['status']));
 	 		$this->assign('rb_invoice', 	$rb_invoice);
@@ -129,8 +126,11 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		}
 		
 		// Get transactions of an invoice
-		$filter			= array('invoice_id' => $rb_invoice['invoice_id']);
-		$transaction   	= Rb_EcommerceAPI::transaction_get_records($filter);
+		$filter				= array('invoice_id' => $rb_invoice['invoice_id']);
+		$transaction   		= Rb_EcommerceAPI::transaction_get_records($filter);
+		
+		$processor	= PayInvoiceProcessor::getInstance($processor_id)->toArray();
+		$this->assign('processor_title', $processor['title']);
 		
 		$this->assign('discount', 			number_format($discount, 2));
 		$this->assign('tax', 				number_format($tax, 2));
@@ -140,6 +140,11 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
         $this->assign('currency_symbol', 	$this->getHelper('format')->getCurrency($currency, 'symbol'));
 		$this->assign('invoice_params', 	$invoice_params_fields);
 		$this->assign('transactions', 		$transaction);
-		return true;
+		$this->assign('valid', 				$this->getHelper('invoice')->is_valid_date($rb_invoice['issue_date'], $rb_invoice['due_date']));
+		$this->assign('applicable', 		$this->getHelper('invoice')->is_applicable_date($rb_invoice));
+		$this->assign('buyer', 				PayInvoiceBuyer::getInstance($rb_invoice['buyer_id']));
+		$this->assign('config_data',        $this->getHelper('config')->get());
+		$this->assign('subtotal', 			number_format($this->_helper->get_subtotal($rb_invoice['invoice_id']), 2));
+        return true;
 	}	
 }

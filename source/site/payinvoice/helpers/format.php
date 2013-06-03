@@ -12,7 +12,7 @@ if(defined('_JEXEC')===false) die('Restricted access' );
 class PayInvoiceHelperFormat extends JObject
 {
 	// XITODO : should not use static function
-	public static function getCurrency($itemId, $format = null)
+	public function getCurrency($itemId, $format = null)
 	{
 		// XITODO : apply caching here: do not ask again is a currnecy is requested previously
 	   $currencyId	= array('currency_id' => $itemId);
@@ -33,7 +33,7 @@ class PayInvoiceHelperFormat extends JObject
 		return false;
 	}
 	
-	public static function date(Rb_Date $date ,$format=null)
+	public function date(Rb_Date $date ,$format=null)
 	{
 		$configHelper	= PayInvoiceFactory::getHelper('config');
 		$date_format	= $configHelper->get('date_format');

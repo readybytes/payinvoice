@@ -46,7 +46,7 @@ class PayInvoiceHelperUtils extends JObject
 		return $img1;
 	}
 	
-	static function removeFile($file)
+	public function removeFile($file)
 	{
 		if(JFile::exists($file)){
 			return JFile::delete($file);

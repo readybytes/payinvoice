@@ -163,10 +163,8 @@ JHtml::_('behavior.formvalidation');
 				
 				<div>&nbsp;</div>
 				<div class="pull-right">
-					<?php if(!empty($invoice_url)):?>
-					<a href="<?php echo $invoice_url;?>" class="btn btn-info" target="_blank"><i class="icon-search icon-white"></i>&nbsp;<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_PREVIEW_LINK');?></a>					
-					<?php endif;?>
 					<?php if(!empty($record_id)):?>
+					<a href="#payinvoice-invoice-preview" id="payinvoice-preview-link" role="button" class="btn btn-info" data-toggle="modal"><i class="icon-search icon-white"></i>&nbsp;<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_PREVIEW_LINK');?></a>					
 					<a href="#" onclick="payinvoice.admin.invoice.email.confirm('<?php echo $record_id?>')" class="btn btn-info"><i class="icon-envelope icon-white"></i>&nbsp;<?php echo Rb_Text::_('PAYINVOCIE_TOOLBAR_EMAIL');?></a>	
 					<?php endif;?>	
 				</div>								
@@ -212,11 +210,17 @@ JHtml::_('behavior.formvalidation');
 						<?php echo $rb_invoice_fields['notes']->input;?>
 					</div>			
     		</div>	
-    		
-			
-	
 		</div>
 	</fieldset>
+	
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	<?php if(!empty($record_id)):?>
+	<div class="row-fluid">
+		<h5><?php echo Rb_Text::_('COM_PAYINVOICE_COPY_LINK');?></h5>
+		<p class="info"><?php echo $invoice->getPayUrl();;?></p>
+	</div>
+ 	<?php endif;?>
 	
 	<!--  HIDDEN -->
 	<input type="hidden" name="task" value="save" />
@@ -224,3 +228,7 @@ JHtml::_('behavior.formvalidation');
 	<?php echo $form->getInput('invoice_id');?>
 	<?php echo $rb_invoice_fields['invoice_id']->input;?>
 </form>
+<!--Load Preview template-->
+<?php if(!empty($record_id)):?>
+<?php echo $this->loadTemplate('preview');?>
+<?php endif;

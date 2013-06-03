@@ -15,8 +15,13 @@ if(defined('_JEXEC')===false) die('Restricted access' );
 			$header	= 'COM_PAYINVOICE_PAYMENT_NOT_COMPLETED_MESSAGE';
 		}
 ?>
-<div class="center">
-	<h2><?php echo Rb_Text::_($header);?></h2>
-	<?php echo Rb_Text::_($message);?>		
+<div class="row-fluid">
+	<div class="center">
+		<h2><?php echo Rb_Text::_($header);?></h2>
+		<?php echo Rb_Text::_($message);?>		
+	</div>
+	
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
 </div>
 <?php 

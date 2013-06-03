@@ -13,4 +13,13 @@ if(!defined( '_JEXEC' )){
 	die( 'Restricted access' );
 }?>
 
-<h3><?php echo Rb_Text::_('COM_PAYINVOICE_NOT_AUTHORIZED');?></h3>
+<div class="row-fluid">
+	<div class="center">
+		<h3><?php echo Rb_Text::_('COM_PAYINVOICE_NOT_AUTHORIZED');?></h3>
+	</div>
+	
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>
+	
+</div>
+<?php

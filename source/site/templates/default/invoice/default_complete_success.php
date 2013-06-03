@@ -9,6 +9,12 @@
 if(defined('_JEXEC')===false) die('Restricted access' );
 ?>
 
-<div>
-	<h2><?php echo Rb_Text::_('COM_PAYINVOICE_PAYMENT_COMPLETED');?></h2>
+<div class="row-fluid">
+	<div class="center">
+		<h2><?php echo Rb_Text::_('COM_PAYINVOICE_PAYMENT_COMPLETED');?></h2>
+	</div>
+	
+	<div>&nbsp;</div>
+	<div>&nbsp;</div>	
 </div>
+<?php
