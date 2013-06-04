@@ -19,8 +19,12 @@ if(!defined( '_JEXEC' )){
  */
 class PayInvoiceEvent extends JEvent
 {
-	public function onRb_EcommerceInvoiceAfterSave($prev, $new)
+	public function onRb_EcommerceAfterSave($prev, $new, $entity)
 	{		
+		if('invoice' !== strtolower($entity)){
+			return true;
+		}
+		
 		$this->_sendEmail($new, $prev);
 		return true;
 	}
@@ -73,5 +77,5 @@ class PayInvoiceEvent extends JEvent
 }
 
 $dispatcher = JDispatcher::getInstance();
-$dispatcher->register('onRb_EcommerceInvoiceAfterSave', 'PayInvoiceEvent');
+$dispatcher->register('onRb_EcommerceAfterSave', 'PayInvoiceEvent');
 
