@@ -15,7 +15,7 @@ JHtml::_('behavior.tooltip');
 JHtml::_('behavior.keepalive');
 JHtml::_('behavior.formvalidation');
 ?>	
-	<div class="span8">
+
 	<!-- START : Invoice Details -->
 		<div class="row-fluid well well-large">					
 			<div class="span6">		

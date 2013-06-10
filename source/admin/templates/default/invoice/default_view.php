@@ -30,14 +30,17 @@ JHtml::_('behavior.formvalidation');
 	<hr>
 		
 	<fieldset class="form-horizontal">	
+		<div class="span8">
 		<?php echo $this->loadTemplate('view_invoice_details');?>
 		
 			<!-- END : Total -->
 			<?php 	$invoiceParams	= $invoice->getParams();?>
-			<div class="row well well-small">
-				<?php if(!empty($invoiceParams->terms_and_conditions)):?>
-				<h4><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_TERMS_AND_CONDITIONS');?></h4><hr>
-				<?php echo $invoiceParams->terms_and_conditions;?>			
+			<?php if(!empty($invoiceParams->terms_and_conditions)):?>
+			<div class="row">
+					<div class="well well-small">
+						<h4><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_TERMS_AND_CONDITIONS');?></h4><hr>
+						<?php echo $invoiceParams->terms_and_conditions;?>	
+					</div>		
 			</div> 
 			<?php endif;?>
 			<div>&nbsp;</div>

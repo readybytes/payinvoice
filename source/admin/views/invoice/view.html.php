@@ -91,6 +91,7 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 	 		
 	 		$this->assign('statusbutton', 	$this->_helper->get_status_button($rb_invoice['status']));
 	 		$this->assign('rb_invoice', 	$rb_invoice);
+ 	        $this->assign('currency_symbol', 	$this->getHelper('format')->getCurrency($currency, 'symbol'));	
 		}
 		else{
 			// XITODO : need to fix it properly
@@ -137,7 +138,6 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		$this->assign('rb_invoice_fields', 	$rb_invoice_fields);
         $this->assign('processor_id', 		$processor_id);   
         $this->assign('currency', 			$currency);
-        $this->assign('currency_symbol', 	$this->getHelper('format')->getCurrency($currency, 'symbol'));
 		$this->assign('invoice_params', 	$invoice_params_fields);
 		$this->assign('transactions', 		$transaction);
 		$this->assign('valid', 				$this->getHelper('invoice')->is_valid_date($rb_invoice['issue_date'], $rb_invoice['due_date']));
