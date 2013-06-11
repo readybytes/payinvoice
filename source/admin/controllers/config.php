@@ -51,20 +51,8 @@ class PayInvoiceAdminControllerConfig extends PayInvoiceController
 	
 	public function removelogo()
 	{
-		$response       		= PayInvoiceFactory::getAjaxResponse();
-
-		$image   				= $this->_helper->get('company_logo');
-		$data['company_logo'] 	= '';
-			
-		$extension      = JFile::getExt($image);
-		
-		$this->getHelper('utils')->removeFile(JPATH_ROOT.$image);
-        $model 	= $this->getModel();
-		$model->save($data);
-		
-		$response->addScriptCall('payinvoice.jQuery(\'#payinvoice-logo-image\').hide');
-		$response->addAlert(Rb_Text::_('COM_PAYINVOICE_LOGO_REMOVED_SUCCESSFULLY'));
-		$response->sendResponse();
-		return false;
+		$confirmed = $this->input->getBool('confirmed', 0);
+		$this->getView()->assign('confirmed', $confirmed);	
+		return true;
 	}
 }

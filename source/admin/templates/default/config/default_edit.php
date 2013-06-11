@@ -59,12 +59,14 @@ JHtml::_('behavior.formvalidation');
 				<div class="control-label"><?php echo $form->getLabel('company_logo'); ?> </div>
 				<div class="controls">
 					<!-- XITODO : Fix size of logo properly -->
-					<?php if(isset($config_data['company_logo'])):?>
+					<?php if(!empty($config_data['company_logo'])):?>
 						<div id="payinvoice-logo-image"><img src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false); ?>" width="210" /></div>
 						<div>&nbsp;</div>
 					<?php endif;?>
 					<?php echo $form->getInput('company_logo'); ?>
-					<div><a href="#" id="payinvoice-delete-logo" class="span3">Delete</a></div>
+					<?php if(!empty($config_data['company_logo'])):?>
+					<div><a href="#" class="span3" id="payinvoice-delete-logo" onclick="payinvoice.admin.config.deleteLogo.confirm()"><?php echo Rb_Text::_('COM_PAYINVOICE_DELETE');?></a></div>
+					<?php endif;?>
 				</div>								
 			</div>
 			

@@ -207,6 +207,23 @@ payinvoice.admin.dashboard = {
 			}
 		}
 };
+
+payinvoice.admin.config = {
+		deleteLogo : {	
+			confirm : function(){
+				var url 	= 'index.php?option=com_payinvoice&view=config&task=removelogo';
+				payinvoice.url.modal(url);
+			},
+	
+			remove : function(invoice_id){
+				payinvoice.ui.dialog.body('<div class="center"><span class="spinner">&nbsp;</span></div>');
+				// XITODO : use bootstarp to disable the button click
+				$('#payinvoice-invoice-deletelogo-confirm-button').attr('disabled', 'disabled');
+				var url 	= 'index.php?option=com_payinvoice&view=config&task=removelogo&confirmed=1';
+				payinvoice.ajax.go(url);
+			}
+		}
+};
 /*--------------------------------------------------------------
   on Document ready 
 --------------------------------------------------------------*/
