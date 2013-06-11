@@ -51,6 +51,14 @@ class plgUserPayInvoice extends JPlugin
 	    $buyer  = PayInvoiceLib::getInstance('buyer', $buyerId);
 	    $buyer->delete();
 
+		//Delete invoice & transaction related to the user (after deleting user from joomla)
+		$filter		= array('buyer_id' => $buyerId, 'object_type' => 'PayInvoiceInvoice');	
+		$invoices	= Rb_EcommerceAPI::invoice_get_records($filter);
+		foreach ($invoices as $invoice)
+		{	
+			PayInvoiceInvoice::getInstance($invoice->object_id)->delete();
+		}
+
 		return true;   	
 	}
 	
