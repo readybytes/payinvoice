@@ -11,6 +11,10 @@
 	clear : none;
 }
 
+.daterangepicker.dropdown-menu{
+	display: none;
+}
+
 .payinvoice .payinvoice-border00{
 	border:none;
 }
@@ -35,3 +39,7 @@
 .payinvoice .info {
     color: #3A87AD;
 }
+
+#payinvoice-dashboard-chart-revenue svg{
+ 	height: 400px;
+}	

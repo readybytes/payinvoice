@@ -33,12 +33,6 @@ echo $this->loadTemplate('charts_header');
 
 ?>
 
-<style>
-svg {
-  min-height: 400px;
-}
-</style>
-
 <div id="payinvoice-dashboard-chart-revenue">
 	
 </div>
