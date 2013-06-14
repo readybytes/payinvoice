@@ -7,7 +7,7 @@
 * @contact 		team@readybytes.in
 */
 
-if(defined('_JEXEC')===false) die('Restricted access' );
+defined( '_JEXEC' ) or die( 'Restricted access' );
 
 class PayInvoiceHelperFormat extends JObject
 {

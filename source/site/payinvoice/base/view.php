@@ -9,9 +9,7 @@
  */
 
 // no direct access
-if(!defined( '_JEXEC' )){
-	die( 'Restricted access' );
-}
+defined( '_JEXEC' ) or die( 'Restricted access' );
 
 if(RB_REQUEST_DOCUMENT_FORMAT === 'ajax'){
 	class PayInvoiceViewbase extends Rb_ViewAjax{}

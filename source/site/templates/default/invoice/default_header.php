@@ -7,9 +7,7 @@
 * @contact		team@readybytes.in
 */
 // no direct access
-if(!defined( '_JEXEC' )){
-	die( 'Restricted access' );
-}
+defined( '_JEXEC' ) or die( 'Restricted access' );
 
 $config_data['company_name']	= isset($config_data['company_name']) 		? $config_data['company_name'] 		: "";
 $config_data['company_address']	= isset($config_data['company_address']) 	? $config_data['company_address']	: "";

@@ -9,13 +9,12 @@
 */
 
 // no direct access
-if(!defined( '_JEXEC' )){
-	die( 'Restricted access' );
-}
-	$items = array();
-	if(isset($invoice['params']['items'])){
-		$items = $invoice['params']['items'];
-	}?>
+defined( '_JEXEC' ) or die( 'Restricted access' );
+
+$items = array();
+if(isset($invoice['params']['items'])){
+	$items = $invoice['params']['items'];
+}?>
 	
 <table border="1" width="100%"cellspacing="0" cellpadding="0" style="border-collapse: collapse;font:14px Georgia, Serif">
 	<tbody>

@@ -9,10 +9,7 @@
 */
 
 // no direct access
-if(!defined( '_JEXEC' )){
-	die( 'Restricted access' );
-}
-
+defined( '_JEXEC' ) or die( 'Restricted access' );
 /** 
  * Invoice Table
  * @author Gaurav Jain

@@ -9,9 +9,7 @@
 */
 
 // no direct access
-if(!defined( '_JEXEC' )){
-	die( 'Restricted access' );
-}
+defined( '_JEXEC' ) or die( 'Restricted access' ); 
 ?>
 <div>
 	<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm">

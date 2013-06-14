@@ -9,9 +9,7 @@
 */
 
 // no direct access
-if(!defined( '_JEXEC' )){
-	die( 'Restricted access' );
-}
+defined( '_JEXEC' ) or die( 'Restricted access' );
 
 Rb_Html::_('rb_html.nvd3.load');
 Rb_Html::_('rb_html.daterangepicker.load');

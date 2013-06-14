@@ -7,9 +7,8 @@
 * @contact		team@readybytes.in
 */
 // no direct access
-if(!defined( '_JEXEC' )){
-	die( 'Restricted access' );
-}?>
+defined( '_JEXEC' ) or die( 'Restricted access' );
+?>
 
 <?php 
 	$items = array();

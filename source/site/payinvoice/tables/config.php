@@ -6,7 +6,9 @@
 * @subpackage	Frontend
 * @contact 		team@readybytes.in
 */
-if(defined('_JEXEC')===false) die('Restricted access' );
+
+// no direct access
+defined( '_JEXEC' ) or die( 'Restricted access' );
 
 
 class PayInvoiceTableConfig extends PayInvoiceTable

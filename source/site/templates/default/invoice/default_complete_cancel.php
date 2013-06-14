@@ -6,7 +6,7 @@
 * @subpackage	Frontend
 * @contact 		team@readybytes.in
 */
-if(defined('_JEXEC')===false) die('Restricted access' );
+defined( '_JEXEC' ) or die( 'Restricted access' );
 ?>
 <div class="row-fluid">
 	<div class="center">

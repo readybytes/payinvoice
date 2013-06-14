@@ -9,9 +9,8 @@
 */
 
 // no direct access
-if(!defined( '_JEXEC' )){
-	die( 'Restricted access' );
-}?>
+defined( '_JEXEC' ) or die( 'Restricted access' );
+?>
 
 <div class="row-fluid">
 	<div class="center">

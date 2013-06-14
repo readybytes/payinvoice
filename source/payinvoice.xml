@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="component" version="2.5" method="upgrade">
-	<name>COM_PAYINVOICE</name>
+	<name>PayInvoice</name>
 	<creationDate>2012-11-20</creationDate>
 	<author>Ready Bytes</author>
 	<authorEmail>team@readybytes.in</authorEmail>
