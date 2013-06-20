@@ -29,10 +29,10 @@ JHtml::_('behavior.formvalidation');
 	});
 })(payinvoice.jQuery);
 </script>
-
+<div class="row-fluid">
 <form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" enctype="multipart/form-data" class="rb-validate-form">	
-  <fieldset class="form-horizontal">
-  	<div class="span6">	
+   	<div class="span6">
+   		<fieldset class="form">	
 			<h3> <?php echo Rb_Text::_('COM_PAYINVOICE_CONFIG_BASIC_SETTING' ); ?> </h3><hr>	
 			
 			<div class="control-group">
@@ -49,10 +49,11 @@ JHtml::_('behavior.formvalidation');
 				<div class="control-label"><?php echo $form->getLabel('terms_and_conditions'); ?> </div>
 				<div class="controls"><?php echo $form->getInput('terms_and_conditions'); ?></div>								
 			</div>
-	  
+	  </fieldset>
 	</div>				
 			
-		<div class="span6">
+	<div class="span6">
+		<fieldset class="form">	
 			<h3> <?php echo Rb_Text::_('COM_PAYINVOICE_CONFIG_COMPANY_SETTINGS' ); ?> </h3><hr>	
 				
 			<div class="control-group">
@@ -89,10 +90,10 @@ JHtml::_('behavior.formvalidation');
 				<div class="control-label"><?php echo $form->getLabel('company_phone'); ?> </div>
 				<div class="controls"><?php echo $form->getInput('company_phone'); ?></div>								
 			</div>			
-	</div>
-</fieldset>
-	
+		</fieldset>
+	</div>	
 	<input type="hidden" name="task" value="save" />
 </form>
+</div>
 <?php 
 

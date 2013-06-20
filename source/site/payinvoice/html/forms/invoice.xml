@@ -27,8 +27,7 @@
 					default=""
 					label="COM_PAYINVOICE_INVOICE_BUYER_ID"
 					description="COM_PAYINVOICE_INVOICE_BUYER_ID_DESC"					 
-					required="true"
-					class="input-medium"
+					required="true"					
 					labelclass="control-label">
 					<option value="">COM_PAYINVOICE_SELECT_OPTION</option>
 			</field>
@@ -38,8 +37,7 @@
 					default=""
 					label="COM_PAYINVOICE_INVOICE_CURRENCY"
 					description="COM_PAYINVOICE_INVOICE_CURRENCY_DESC"				 
-					required="true"
-					class="input-medium"
+					required="true"					
 					labelclass="control-label">
 					<option value="">COM_PAYINVOICE_SELECT_OPTION</option>
 			</field>			
@@ -49,9 +47,7 @@
 					default="Inv-01-"
 					label="COM_PAYINVOICE_INVOICE_SERIAL"
 					description="COM_PAYINVOICE_INVOICE_SERIAL_DESC"
-					required="true"
-					size="45"
-					class="input-medium"
+					required="true"										
 					labelclass="control-label"/>
 			
 			<field 	name="status" 
@@ -68,8 +64,7 @@
 					default=""
 					label="COM_PAYINVOICE_INVOICE_TITLE"
 					description="COM_PAYINVOICE_INVOICE_TITLE_DESC"				 
-					required="true"
-					class="input-medium"
+					required="true"					
 					labelclass="control-label"/>
 			
 			<field 	name="expiration_type" 
@@ -93,8 +88,7 @@
 					type="text"
 					default="0"
 					label="COM_PAYINVOICE_INVOICE_RECURRENCE_COUNT"
-					description="COM_PAYINVOICE_INVOICE_RECURRENCE_COUNT_DESC"
-					size="45" 
+					description="COM_PAYINVOICE_INVOICE_RECURRENCE_COUNT_DESC"					
 					class="required"/>
 					
 			<field 	name="subtotal" 
@@ -166,8 +160,8 @@
 	<fields name="params">
 		<fieldset name="params">
 			<field 	name="terms_and_conditions" 
-				type="editor" 
-				class="inputbox"
+				type="textarea" 
+				class="inputbox span12"
 				buttons="true"
 				filter="JComponentHelper::filterText"
 				label="COM_PAYINVOICE_CONFIG_TERMS_AND_CONDITIONS" 

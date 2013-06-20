@@ -49,130 +49,99 @@ JHtml::_('behavior.formvalidation');
 </script>	
 
 <?php echo $this->loadTemplate('edit_item');?>
-
-<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="rb-validate-form">
+<div class="row-fluid">
+<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="rb-validate-form">	
 	<div class="row-fluid">
-	<div class="span8"><h2><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_DETAILS' ); ?></h2></div>
-	<?php if($form->getValue('invoice_id')):?>
-	<div class="pull-right span3">
-		<div class="row"><?php echo $statusbutton;?></div>
-	</div>
-	<?php endif;?>
+		<div class="span9"><h2><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_DETAILS' ); ?></h2></div>		
+		<?php if($form->getValue('invoice_id')):?>
+			<div class="span3">
+				<?php echo $statusbutton;?>
+			</div>
+		<?php endif;?>
 	</div>
 	
 	<hr>
-	<fieldset class="form-horizontal">	
+	<div class="row-fluid">
+		<div class="span9">		
 		<div class="row-fluid">
-			<div class="span8">
+			<fieldset class="form">
+				<div class="well well-large">
+					<!-- START : Invoice Details -->
+					<div class="row-fluid">											
+						<div class="span6">		
+							<div class="control-group">
+								<?php echo $rb_invoice_fields['title']->label;?>
+								<div class="controls"><?php echo $rb_invoice_fields['title']->input;?></div>								
+							</div>
+							<div class="control-group">
+								<?php echo $rb_invoice_fields['buyer_id']->label;?>
+								<div class="controls"><?php echo $rb_invoice_fields['buyer_id']->input;?></div>								
+							</div>
+							<div class="control-group">
+								<?php echo $rb_invoice_fields['serial']->label;?>
+								<div class="controls">
+								  	<input 	type="text" 
+								  			name="payinvoice_form[rb_invoice][serial]" 
+								  			class="required"
+								  			value="<?php echo $rb_invoice_fields['serial']->value; ?>"
+								  			data-validation-ajax-ajax="<?php echo Rb_Route::_('index.php?option=com_payinvoice&view=invoice&task=ajaxchangeserial');?>"/>								
+								</div>							
+							</div>
+						</div>
+						
+						<div class="span6">
+							<div class="control-group">
+								<?php echo $rb_invoice_fields['currency']->label;?>
+								<div class="controls"><?php echo $rb_invoice_fields['currency']->input;?></div>								
+							</div>						
+							<div class="control-group">
+								<?php echo $rb_invoice_fields['issue_date']->label;?>
+								<div class="controls"><?php echo $rb_invoice_fields['issue_date']->input;?></div>								
+							</div>
+							<div class="control-group">
+								<?php echo $rb_invoice_fields['due_date']->label;?>
+								<div class="controls"><?php echo $rb_invoice_fields['due_date']->input;?></div>								
+							</div>
+						</div>	
+					</div>
+				</div>				
+			</fieldset>
+			</div>			
+			<!-- END : Invoice Details -->
 			
-				<!-- START : Invoice Details -->
-				<div class="row-fluid well well-large">					
-					<div class="span6">		
-						<div class="control-group">
-							<?php echo $rb_invoice_fields['title']->label;?>
-							<div class="controls"><?php echo $rb_invoice_fields['title']->input;?></div>								
-						</div>
-						<div class="control-group">
-							<?php echo $rb_invoice_fields['buyer_id']->label;?>
-							<div class="controls"><?php echo $rb_invoice_fields['buyer_id']->input;?></div>								
-						</div>
-						<div class="control-group">
-							<?php echo $rb_invoice_fields['serial']->label;?>
-							<div class="controls">
-							  	<input 	type="text" 
-							  			name="payinvoice_form[rb_invoice][serial]" 
-							  			class="required input-medium"
-							  			value="<?php echo $rb_invoice_fields['serial']->value; ?>"
-							  			data-validation-ajax-ajax="<?php echo Rb_Route::_('index.php?option=com_payinvoice&view=invoice&task=ajaxchangeserial');?>"/>								
-							</div>							
-						</div>
-					</div>
-					
-					<div class="span6">
-						<div class="control-group">
-							<?php echo $rb_invoice_fields['currency']->label;?>
-							<div class="controls"><?php echo $rb_invoice_fields['currency']->input;?></div>								
-						</div>						
-						<div class="control-group">
-							<?php echo $rb_invoice_fields['issue_date']->label;?>
-							<div class="controls"><?php echo $rb_invoice_fields['issue_date']->input;?></div>								
-						</div>
-						<div class="control-group">
-							<?php echo $rb_invoice_fields['due_date']->label;?>
-							<div class="controls"><?php echo $rb_invoice_fields['due_date']->input;?></div>								
-						</div>
-					</div>			
-				</div>
-				<!-- END : Invoice Details -->
-				
+			<div class="row-fluid">
 				<!-- START : Item Table -->
-						<?php echo $this->loadTemplate('edit_items');?>		
+					<?php echo $this->loadTemplate('edit_items');?>		
 				<!-- END : Item Table -->
-				
-				
-				<!-- START : Total -->
-				<div class="row-fluid">
-					<div class="span7">
-					
-					</div>
-					<div class="span5">
-						<div class="control-group">
-							<label class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_SUBTOTAL');?></label>
-				  			<div class="controls">
-				  				<div class="input-prepend">              			
-									<span class="add-on payinvoice-currency"></span>
-									<input type="text" name="payinvoice_form[subtotal]" class="input-small" readonly="readonly" id="payinvoice-invoice-subtotal">		
-								</div>
-				  			</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_DISCOUNT');?></label>
-				  			<div class="controls">
-				  				<div class="input-prepend">
-									<span class="add-on payinvoice-currency"></span>
-									<input type="text" name="payinvoice_form[discount]" class="input-small validate-number" min="0" id="payinvoice-invoice-discount" value="<?php echo $discount;?>">
-								</div>
-				  			</div>
-						</div>
-						<div class="control-group">
-							<label class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX');?></label>
-				  			<div class="controls">
-				  				<div class="input-append">									
-									<input type="text" name="payinvoice_form[tax]" class="input-small validate-number" id="payinvoice-invoice-tax" min="0" value="<?php echo $tax;?>">
-									<span class="add-on">%</span>
-								</div>
-				  			</div>
-						</div>
-						<hr>
-						<div class="control-group">
-							<label class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TOTAL');?></label>
-				  			<div class="controls">
-				  				<div class="input-prepend">
-									<span class="add-on payinvoice-currency"></span>
-									<input type="text" name="payinvoice_form[total]" class="input-small" readonly="readonly" id="payinvoice-invoice-total" min="0">
-								</div>
-				  			</div>
-						</div>
-					</div>
-				</div>	
-				<!-- END : Total -->
-				
-				<h4><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_TERMS_AND_CONDITIONS');?></h4><hr>
-					<?php echo $invoice_params['terms_and_conditions'];?>
-				
-				<div>&nbsp;</div>
-				<div class="pull-right">
-					<?php if(!empty($record_id)):?>
-					<a href="#payinvoice-invoice-preview" id="payinvoice-preview-link" role="button" class="btn btn-info" data-toggle="modal"><i class="icon-search icon-white"></i>&nbsp;<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_PREVIEW_LINK');?></a>					
-					<a href="#" onclick="payinvoice.admin.invoice.email.confirm('<?php echo $record_id?>')" class="btn btn-info"><i class="icon-envelope icon-white"></i>&nbsp;<?php echo Rb_Text::_('PAYINVOCIE_TOOLBAR_EMAIL');?></a>	
-					<?php endif;?>	
-				</div>								
+			</div>
+			
+			<div class="row-fluid">
+				<button type="button" class="btn btn-small btn-success" id="payinvoice-invoice-item-add" counter="0"><i class="icon-plus"></i><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_ADD')?></button>
+			</div>
 
-			</div>		
-		
-				<div class="pull-right span3 ">
-					<?php if($form->getValue('invoice_id')):?>
-					<div class="row well well-small">	
+			<div class="row-fluid">
+				<!-- START : Item Table -->
+					<?php echo $this->loadTemplate('edit_total');?>		
+				<!-- END : Item Table -->
+			</div>
+			
+			<div class="row-fluid">
+				<h4><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_TERMS_AND_CONDITIONS');?></h4>
+				<hr>
+				<?php echo $invoice_params['terms_and_conditions'];?>
+			</div>
+			
+			<div class="row-fluid">
+				<!-- START : Item Table -->
+					<?php echo $this->loadTemplate('edit_footer');?>		
+				<!-- END : Item Table -->
+			</div>
+		</div>		
+			
+		<div class="span3">
+			<?php if($form->getValue('invoice_id')):?>
+				<div class="row-fluid">
+					<div class="well well-small">	
 						<h4 class="center muted"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_RELATED_DATES')?></h4><hr>
 					    <ul class="horizontal unstyled center">
 						    <li class="muted"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_CREATED_ON')." ".$rb_invoice['created_date'];?></li><hr>
@@ -185,11 +154,13 @@ JHtml::_('behavior.formvalidation');
 						    <?php endif;?>
 					    </ul>
 				    </div>
-				    <?php endif;?>	
-				    
-				    <div class="row well well-small">
+				</div>
+			<?php endif;?>
+			
+			<div class="row-fluid">
+			    <div class="well well-small">
 						<?php $class="";?>
-						<a href="#" id="payinvoice-add-processor" class="btn btn-info btn-block btn-large" title="<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_ADD_PROCESSOR_TOOLTIP');?>">
+						<a href="#" id="payinvoice-add-processor" class="btn btn-success btn-block btn-large" title="<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_ADD_PROCESSOR_TOOLTIP');?>">
 							<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_ADD_PROCESSOR');?>
 						</a>
 						<?php if(!$processor_id):?>
@@ -202,31 +173,34 @@ JHtml::_('behavior.formvalidation');
 							</div>
 						</div>
 					</div>
+				</div>
 				    
-					<div class="row well well-small">	
+				<div class="row-fluid">
+					<div class="well well-small">	
 					  	<?php echo $rb_invoice_fields['notes']->label;?>
 						<hr>
 						<?php echo $rb_invoice_fields['notes']->input;?>
-					</div>			
-    		</div>	
-		</div>
-	</fieldset>
-	
-	<div>&nbsp;</div>
-	<div>&nbsp;</div>
-	<?php if(!empty($record_id)):?>
-	<div class="row-fluid">
-		<h5><?php echo Rb_Text::_('COM_PAYINVOICE_COPY_LINK');?></h5>
-		<p class="info"><?php echo $invoice->getPayUrl();;?></p>
-	</div>
- 	<?php endif;?>
-	
+					</div>
+				</div>
+				
+				<?php if(!empty($record_id)):?>
+					<div class="row-fluid">
+						<div class="well well-small">
+							<h5><?php echo Rb_Text::_('COM_PAYINVOICE_COPY_LINK');?></h5>
+							<p class="info"><?php echo $invoice->getPayUrl();;?></p>
+						</div>
+					</div>
+ 				<?php endif;?>
+		</div>				
+	</div>			
+
 	<!--  HIDDEN -->
 	<input type="hidden" name="task" value="save" />
 	<?php echo $form->getInput('type');?>
 	<?php echo $form->getInput('invoice_id');?>
 	<?php echo $rb_invoice_fields['invoice_id']->input;?>
 </form>
+</div>
 <!--Load Preview template-->
 <?php if(!empty($record_id)):?>
 <?php echo $this->loadTemplate('preview');?>

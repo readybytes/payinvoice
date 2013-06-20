@@ -96,7 +96,4 @@ $params = $invoice->getParams();;
 <div class="payinvoice-invoice-items">
 	
 </div>
-
-<div class="row-fluid">
-	<button type="button" class="btn btn-small btn-success" id="payinvoice-invoice-item-add" counter="0"><i class="icon-plus"></i><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_ADD')?></button>
-</div>
+<?php 

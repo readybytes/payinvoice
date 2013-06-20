@@ -23,8 +23,7 @@
 		</field>
 		
 	 	<field 	name="terms_and_conditions" 
-				type="editor" 
-				class="inputbox"
+				type="textarea"				
 				buttons="true"
 				filter="JComponentHelper::filterText"
 				label="COM_PAYINVOICE_CONFIG_TERMS_AND_CONDITIONS" 

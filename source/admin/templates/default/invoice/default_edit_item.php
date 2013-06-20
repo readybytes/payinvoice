@@ -29,18 +29,12 @@ $component_name = $this->_component->getNameSmall();
 		</div>
 		<div class="span2">
 			<div class="control-group">
-				<div class="input-prepend">              			
-					<span class="add-on payinvoice-currency"></span>
-					<input type="text" class="input-small payinvoice-item-price validate-number" required="true" min="0" name="<?php echo $component_name;?>_form[params][items][##counter##][price]" value="##price##" placeholder="<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_PRICE_PER_UNIT');?>">						
-				</div>
+				<input type="text" class="input-small payinvoice-item-price validate-number" required="true" min="0" name="<?php echo $component_name;?>_form[params][items][##counter##][price]" value="##price##" placeholder="<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_PRICE_PER_UNIT');?>">						
 				<p class="help-block"></p>
 			</div>
 		</div>	
 		<div class="span2">
-			<div class="input-prepend">              			
-				<span class="add-on payinvoice-currency"></span>
-				<input type="text" class="input-small payinvoice-item-total" name="<?php echo $component_name;?>_form[params][items][##counter##][total]" value="##total##" readonly="readonly">													
-			</div>
+			<input type="text" class="input-small payinvoice-item-total" name="<?php echo $component_name;?>_form[params][items][##counter##][total]" value="##total##" readonly="readonly">
 		</div>
 		<div class="span1"><button type="button" class="btn payinvoice-invoice-item_remove" name="<?php echo $component_name;?>_form_params_items_##counter##_remove"><i class="icon-remove"></i></button></div>
 	</div>
