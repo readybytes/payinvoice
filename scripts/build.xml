@@ -41,6 +41,7 @@
 		<delete dir="${dir.tmp}" includeemptydirs="true" />
 
 		<copy file="${build.package.location}/pkg.xml" tofile="${dir.packages}/${build.package.name}.xml" overwrite="true"/>
+		<copy file="${build.package.location}/script.php" tofile="${dir.packages}/script.php" overwrite="true"/>
 		
 		<!-- Apply the version change to all files. -->
 		<reflexive>

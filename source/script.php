@@ -33,6 +33,12 @@ class Com_payinvoiceInstallerScript
 
 	function uninstall($parent)
 	{
+		$state=0;
+		$extensions[] 	= array('type'=>'user', 'name'=>'payinvoice');
+		$extensions[] 	= array('type'=>'system',   'name'=>'rbsl');
+		$extensions[]	= array('type'=>'rb_ecommerceprocessor ', 'name'=>'stripe');
+		$this->changeExtensionState($extensions, $state);
+
 		return true;
 	}
 
