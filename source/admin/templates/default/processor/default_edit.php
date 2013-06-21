@@ -15,10 +15,10 @@ JHtml::_('behavior.tooltip');
 JHtml::_('behavior.keepalive');
 JHtml::_('behavior.formvalidation');
 ?>
-
-<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="rb-validate-form">
-	<fieldset class="form-horizontal">
+<div class="row-fluid">
+	<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="rb-validate-form">
 		<div class="span6">		
+			<fieldset class="form">
 				<h3> <?php echo ucfirst(Rb_Text::_($processor->getType()))." - ".Rb_Text::_('COM_PAYINVOICE_PROCESSOR_EDIT_DETAILS' ); ?></h3><hr>
 				<div class="control-group">
 					<div class="control-label"><?php echo $form->getLabel('title'); ?> </div>
@@ -34,33 +34,37 @@ JHtml::_('behavior.formvalidation');
 					<div class="control-label"><?php echo $form->getLabel('description'); ?> </div>
 					<div class="controls"><?php echo $form->getInput('description'); ?></div>								
 				</div>
-			
+			</fieldset>
 		</div>
-	
-		<div class="span6">
-				<h3> <?php echo Rb_Text::_('COM_PAYINVOICE_PAYMENTMETHOD_EDIT_CONFIG_PARAMS' ); ?></h3><hr>
-					<?php $fieldset_name = 'processor_config';?>
-					<?php echo $this->loadTemplate('partial_fieldset', compact('fieldset_name', 'form'));?>
 		
-		<?php if(!empty($help['help'])): ?>		
-			<legend onClick="payinvoice.jQuery('.payinvoice-processor-help').slideToggle();">
-					<span class="payinvoice-processor-help">[+]</span><span> <?php echo Rb_Text::_('COM_PAYINVOICE_PROCESSOR_HELP_MESSAGE'); ?></span>
-					
-				</legend>
-				<div class="hide payinvoice-processor-help">
-				<?php if(!empty($help['help'])):?>
-						<div class="span6">
-						  <div><?php echo (isset($help['help']) && !empty($help['help'])) ? Rb_Text::_($help['help']) : ''; ?></div>
+		<div class="span6">
+			<fieldset class="form">
+				<h3> <?php echo Rb_Text::_('COM_PAYINVOICE_PAYMENTMETHOD_EDIT_CONFIG_PARAMS' ); ?></h3><hr>
+				<?php $fieldset_name = 'processor_config';?>
+				<div class="row-fluid">
+					<?php echo $this->loadTemplate('edit_params', compact('fieldset_name', 'form'));?>
+				</div>				
+		
+				<?php //XITODO : generalize the concept of toggle ?>
+				<?php if(!empty($help['help'])): ?>
+					<div class="row-fluid">
+						<legend onClick="payinvoice.jQuery('.payinvoice-processor-help').slideToggle();">
+							<span class="payinvoice-processor-help">[+]</span>
+							<span> <?php echo Rb_Text::_('COM_PAYINVOICE_PROCESSOR_HELP_MESSAGE'); ?></span>
+						</legend>
+				
+						<div class="hide payinvoice-processor-help">				
+							<div><?php echo (isset($help['help']) && !empty($help['help'])) ? Rb_Text::_($help['help']) : ''; ?></div>
 						</div>
-					<?php endif;?>
-				</div>
-		<?php endif;?>
-	
+					</div>
+				<?php endif;?>
+			</fieldset>
 		</div>
-	</fieldset>	
+		
 		<?php echo $form->getInput('processor_id'); ?>
 		<?php echo $form->getInput('type'); ?>
 		<input type="hidden" name="task" value="save" />
 		<input type="hidden" name="boxchecked" value="1" />
 	</form>
+</div>
 <?php 
