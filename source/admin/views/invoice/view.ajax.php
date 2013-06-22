@@ -36,7 +36,7 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		$this->_setAjaxWinTitle(Rb_Text::_('COM_PAYINVOICE_INVOICE_EMAIL_WINDOW_TITLE'));
 		$this->_setAjaxWinBody(Rb_Text::_('COM_PAYINVOICE_INVOICE_EMAIL_CONFIRM_MESSAGE'));
 	
-		$this->_addAjaxWinAction(Rb_Text::_('COM_PAYINVOICE_CONFIRM'), 'payinvoice.admin.invoice.email.send('.$invoice_id.');', 'btn btn-info', 'id="payinvoice-invoice-email-confirm-button"');
+		$this->_addAjaxWinAction(Rb_Text::_('COM_PAYINVOICE_CONFIRM'), 'payinvoice.admin.invoice.email.send('.$invoice_id.');', 'btn btn-success', 'id="payinvoice-invoice-email-confirm-button"');
 		$this->_addAjaxWinAction(Rb_Text::_('COM_PAYINVOICE_CLOSE'), 'rb.ui.dialog.close();', 'btn');
 		$this->_setAjaxWinAction();		
 	

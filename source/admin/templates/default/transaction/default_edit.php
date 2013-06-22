@@ -17,7 +17,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 	<div class="row-fluid">
 		<?php if($refundable): ?>
 					<div class="pull-right">
-						<a href="#" onclick="payinvoice.admin.transaction.refund.confirm('<?php echo $transaction['invoice_id']?>')" class="btn btn-large btn-info"><?php echo Rb_Text::_('Refund');?></a>			
+						<a href="#" onclick="payinvoice.admin.transaction.refund.confirm('<?php echo $transaction['invoice_id']?>')" class="btn btn-large btn-success"><?php echo Rb_Text::_('COM_PAYINVOICE_TRANSACTION_REFUND');?></a>			
 					</div>
 		<?php endif;?>
 	</div>

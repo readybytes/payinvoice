@@ -36,7 +36,7 @@ class PayInvoiceAdminViewTransaction extends PayInvoiceAdminBaseViewTransaction
 		$this->_setAjaxWinTitle(Rb_Text::_('COM_PAYINVOICE_INVOICE_REFUND_WINDOW_TITLE'));
 		$this->_setAjaxWinBody(Rb_Text::_('COM_PAYINVOICE_INVOICE_REFUND_CONFIRM_MESSAGE'));
 	
-		$this->_addAjaxWinAction(Rb_Text::_('COM_PAYINVOICE_CONFIRM'), 'payinvoice.admin.transaction.refund.request('.$invoice_id.');', 'btn btn-info', 'id="payinvoice-invoice-refund-confirm-button"');
+		$this->_addAjaxWinAction(Rb_Text::_('COM_PAYINVOICE_CONFIRM'), 'payinvoice.admin.transaction.refund.request('.$invoice_id.');', 'btn btn-success', 'id="payinvoice-invoice-refund-confirm-button"');
 		$this->_addAjaxWinAction(Rb_Text::_('COM_PAYINVOICE_CLOSE'), 'rb.ui.dialog.close();', 'btn');
 		$this->_setAjaxWinAction();		
 	

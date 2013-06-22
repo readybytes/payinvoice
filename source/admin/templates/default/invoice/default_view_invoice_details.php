@@ -16,37 +16,41 @@ JHtml::_('behavior.formvalidation');
 ?>	
 
 	<!-- START : Invoice Details -->
-		<div class="row-fluid well well-large">					
+<fieldset class="form">
+	<div class="well well-large">
+		<div class="row-fluid">					
 			<div class="span6">		
 				<div class="control-group">
-					<?php echo $rb_invoice_fields['title']->label;?>
+					<strong><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_TITLE');?></strong>
 					<div class="controls"><?php echo $rb_invoice['title'];?></div>								
 				</div>
 				<div class="control-group">
-					<?php echo $rb_invoice_fields['buyer_id']->label;?>
+					<strong><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_BUYER_ID');?></strong>
 					<div class="controls"><?php echo $rb_invoice['buyer_id']. '('.$buyer->getBuyername().')';?></div>								
 				</div>
 				<div class="control-group">
-					<?php echo $rb_invoice_fields['serial']->label;?>
+				<strong><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_SERIAL');?></strong>
 					<div class="controls"><?php echo $rb_invoice['serial'];?></div>						
 				</div>
 			</div>
 			
-			<div class="span6">
+			<div class="span5">
 				<div class="control-group">
-					<?php echo $rb_invoice_fields['currency']->label;?>
+					<strong><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_CURRENCY');?></strong>
 					<div class="controls"><?php echo $rb_invoice['currency'];?></div>								
 				</div>						
 				<div class="control-group">
-					<?php echo $rb_invoice_fields['issue_date']->label;?>
+					<strong><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_ISSUE_DATE');?></strong>
 					<div class="controls"><?php echo $rb_invoice['issue_date'];?></div>								
 				</div>
 				<div class="control-group">
-					<?php echo $rb_invoice_fields['due_date']->label;?>
+					<strong><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_DUE_DATE');?></strong>
 					<div class="controls"><?php echo $rb_invoice['due_date'];?></div>								
 				</div>
 			</div>			
 		</div>
+	</div>
+</fieldset>	
 		<!-- END : Invoice Details -->
 		
 		<!-- START : Item Table -->
@@ -57,24 +61,20 @@ JHtml::_('behavior.formvalidation');
 		<!-- START : Total -->
 <div class="row-fluid">
 	<div class="span7"></div>
-	<div class="span5">
-		<dl class="dl-horizontal">
+	<div class="span4">
+		<dl class="dl-horizontal pull-right">
 		    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_SUBTOTAL');?></dt>
-		    <dd><?php echo $currency_symbol." ".number_format($rb_invoice['subtotal'],2);?></dd>
+		    <dd><?php echo $currency_symbol." ".number_format($subtotal, 2);?></dd>
 		    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_DISCOUNT');?></dt>
 		    <dd><?php echo $currency_symbol." ".number_format($discount,2);?></dd>
 		    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX');?></dt>
 		    <dd><?php echo number_format($tax, 2)." %";?></dd>
 		    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_PAYMENT_METHOD');?></dt>
-		    <dd><?php echo $rb_invoice['processor_type'];?></dd>
-		 </dl>
-		 <hr>
-		 
-		 <dl class="dl-horizontal">
+		    <dd><?php echo ucfirst($rb_invoice['processor_type']);?></dd><hr> 
 		    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TOTAL');?></dt>
 		    <dd><?php echo $currency_symbol." ".number_format($rb_invoice['total'], 2);?></dd>
-	    </dl>
+		 </dl>
 	</div>
 </div>	
-			
+<?php		
 	

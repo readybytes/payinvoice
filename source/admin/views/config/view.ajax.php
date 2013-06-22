@@ -33,7 +33,7 @@ class PayInvoiceAdminViewConfig extends PayInvoiceAdminBaseViewConfig
 		$this->_setAjaxWinTitle(Rb_Text::_('COM_PAYINVOICE_INVOICE_DELETE_LOGO_WINDOW_TITLE'));
 		$this->_setAjaxWinBody(Rb_Text::_('COM_PAYINVOICE_INVOICE_DELETE_LOGO_CONFIRM_MESSAGE'));
 	
-		$this->_addAjaxWinAction(Rb_Text::_('COM_PAYINVOICE_CONFIRM'), 'payinvoice.admin.config.deleteLogo.remove();', 'btn btn-info', 'id="payinvoice-invoice-deletelogo-confirm-button"');
+		$this->_addAjaxWinAction(Rb_Text::_('COM_PAYINVOICE_CONFIRM'), 'payinvoice.admin.config.deleteLogo.remove();', 'btn btn-success', 'id="payinvoice-invoice-deletelogo-confirm-button"');
 		$this->_addAjaxWinAction(Rb_Text::_('COM_PAYINVOICE_CLOSE'), 'rb.ui.dialog.close();', 'btn');
 		$this->_setAjaxWinAction();		
 	

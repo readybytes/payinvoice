@@ -49,7 +49,10 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 					<td><?php echo PayInvoiceHtml::link('index.php?option=com_payinvoice&view=invoice&task=edit&id='.$invoice[$record->invoice_id]->object_id, $invoice[$record->invoice_id]->object_id.'('.$invoice[$record->invoice_id]->title.')');?></td>
 					<td><?php echo $record->amount;?></td>
 					<td><?php echo Rb_Text::_($statusList[$record->payment_status]);?></td>					
-					<td class="nowrap hidden-phone"><?php echo Rb_date::timeago($record->created_date);?></td>
+					<td class="nowrap hidden-phone">
+						<?php $rb_date = new Rb_Date();?>
+						<?php echo $rb_date->timeago($record->created_date);?>
+					</td>
 			
 		<?php $count++;?>		
 		<?php endforeach;?>

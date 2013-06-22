@@ -35,7 +35,6 @@ if(isset($params->items)){
 				<th class="span2"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_QUANTITY');?></th>
 				<th class="span2"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_PRICE_PER_UNIT');?></th>
 				<th class="span2"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_PRICE_TOTAL');?></th>
-				<th class="span1"></th>
 			</tr>
 		</thead>
 		
