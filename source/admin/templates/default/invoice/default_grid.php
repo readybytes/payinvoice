@@ -17,16 +17,15 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 		<thead>
 			<!-- TABLE HEADER START -->
 			<tr>
-				<th  width="1%">
+				<th  width="1%" class="hidden-phone">
 					<input type="checkbox" name="toggle" value="" onclick="Joomla.checkAll(this);" />
 				</th>
-				<th class="default-grid-sno"><?php echo Rb_Text::_("COM_PAYINVOICE_NUM"); ?></th>
-				<th>
+				<th class="default-grid-sno hidden-phone"><?php echo Rb_Text::_("COM_PAYINVOICE_NUM"); ?></th>
+				<th class="default-grid-sno hidden-phone">
 					<?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_INVOICE_ID", 'invoice_id', 	$filter_order_Dir, $filter_order);?>
 				</th>
 				<th><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_TITLE');?></th>
-				<th><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_BUYER');?></th>
-				<th><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_OBJECT_TYPE');?></th>
+				<th class="hidden-phone"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_BUYER');?></th>				
 				<th><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_TOTAL');?></th>
 				<th><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_STATUS');?></th>
 							
@@ -38,14 +37,13 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 			<?php $count= $limitstart;
 			  foreach ($records as $record):?>
 				<tr class="<?php echo "row".$count%2; ?>">
-				    <th class="default-grid-chkbox">
+				    <th class="default-grid-chkbox hidden-phone">
 				    	<?php echo PayInvoiceHtml::_('grid.id', $count, $record->{$record_key} ); ?>
 				    </th>
-					<td><?php echo $count+1; ?> </td>	
-					<td><?php echo $record->invoice_id;?></td>
-					<td><?php echo PayInvoiceHtml::link($uri.'&task=edit&id='.$record->{$record_key}, $invoice[$record->invoice_id]->title);?></td>
-                   	<td><?php echo PayInvoiceHtml::link('index.php?option=com_payinvoice&view=buyer&task=edit&id='.$invoice[$record->invoice_id]->buyer_id, $invoice[$record->invoice_id]->buyer_id.'('.$buyer[$invoice[$record->invoice_id]->buyer_id]->name.')');?></td>
-                    <td><?php echo $invoice[$record->invoice_id]->object_type;?></td>
+					<td class="nowrap hidden-phone"><?php echo $count+1; ?> </td>	
+					<td class="nowrap hidden-phone"><?php echo $record->invoice_id;?></td>
+					<td><?php echo PayInvoiceHtml::link($uri.'&task=edit&id='.$record->{$record_key}, $invoice[$record->invoice_id]->title.' ('.$invoice[$record->invoice_id]->serial.')');?> </td>
+                   	<td class="nowrap hidden-phone"><?php echo PayInvoiceHtml::link('index.php?option=com_payinvoice&view=buyer&task=edit&id='.$invoice[$record->invoice_id]->buyer_id, $invoice[$record->invoice_id]->buyer_id.'('.$buyer[$invoice[$record->invoice_id]->buyer_id]->name.')');?></td>
                     <td><?php echo $invoice[$record->invoice_id]->total;?></td>
                     <td><?php echo Rb_Text::_($status_list[$invoice[$record->invoice_id]->status]);?></td>
 			<?php $count++;?>		

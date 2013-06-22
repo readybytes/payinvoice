@@ -12,7 +12,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 class PayInvoiceModelConfig extends PayInvoiceModel
 {
-	function save($data = array())
+	function save($data, $pk=null, $new=false)
 	{		
 		$keys 	= array_keys($data);
 		$db 	= PayInvoiceFactory::getDbo();

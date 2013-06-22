@@ -17,21 +17,20 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 		<thead>
 			<!-- TABLE HEADER START -->
 			<tr>
-				<th  width="1%">
+				<th  width="1%" class="hidden-phone">
 					<input type="checkbox" name="toggle" value="" onclick="Joomla.checkAll(this);" />
 				</th>
 				
-				<th class="default-grid-sno">
+				<th class="default-grid-sno hidden-phone">
           			<?php echo Rb_Text::_("COM_PAYINVOICE_NUM"); ?>
         		</th>
 				
 				<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_TRANSACTION_ID", 'transaction_id', $filter_order_Dir, $filter_order);?></th>
-				<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_TRANSACTION_BUYER", 'buyer_id', $filter_order_Dir, $filter_order);?></th>
+				<th class="hidden-phone"><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_TRANSACTION_BUYER", 'buyer_id', $filter_order_Dir, $filter_order);?></th>
 				<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_TRANSACTION_INVOICE_ID", 'invoice_id', $filter_order_Dir, $filter_order);?></th>
 				<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_TRANSACTION_AMOUNT", 'amount', $filter_order_Dir, $filter_order);?></th>
-				<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_TRANSACTION_PAYMENT_STATUS", 'payment_status', $filter_order_Dir, $filter_order);?></th>
-				<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_TRANSACTION_MESSAGE", 'message', $filter_order_Dir, $filter_order);?></th>
-				<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_TRANSACTION_CREATED_DATE", 'created_date', $filter_order_Dir, $filter_order);?></th>
+				<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_TRANSACTION_PAYMENT_STATUS", 'payment_status', $filter_order_Dir, $filter_order);?></th>				
+				<th class="hidden-phone"><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_TRANSACTION_CREATED_DATE", 'created_date', $filter_order_Dir, $filter_order);?></th>
 	
 			</tr>
 		<!-- TABLE HEADER END -->
@@ -40,18 +39,17 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 		<?php $count= $limitstart;
 			  foreach ($records as $record):?>
 				<tr class="<?php echo "row".$count%2; ?>">
-				 	<th class="default-grid-chkbox">
+				 	<th class="default-grid-chkbox nowrap hidden-phone">
 				    	<?php echo PayInvoiceHtml::_('grid.id', $count, $record->{$record_key} ); ?>
 				    </th>
-					<td> <?php echo $count+1; ?> </td>	
+					<td class="nowrap hidden-phone"> <?php echo $count+1; ?> </td>	
 					<td><?php echo PayInvoiceHtml::link($uri.'&task=edit&id='.$record->{$record_key}, $record->{$record_key}); ?></td>							
-					<td><?php echo PayInvoiceHtml::link('index.php?option=com_payinvoice&view=buyer&task=edit&id='.$record->buyer_id, $record->buyer_id.'('.$buyer[$record->buyer_id]->name.')');?>
+					<td class="nowrap hidden-phone"><?php echo PayInvoiceHtml::link('index.php?option=com_payinvoice&view=buyer&task=edit&id='.$record->buyer_id, $record->buyer_id.'('.$buyer[$record->buyer_id]->name.')');?>
 					     </td>
 					<td><?php echo PayInvoiceHtml::link('index.php?option=com_payinvoice&view=invoice&task=edit&id='.$invoice[$record->invoice_id]->object_id, $invoice[$record->invoice_id]->object_id.'('.$invoice[$record->invoice_id]->title.')');?></td>
 					<td><?php echo $record->amount;?></td>
-					<td><?php echo Rb_Text::_($statusList[$record->payment_status]);?></td>
-					<td><?php echo Rb_Text::_($record->message);?></td>
-					<td><?php echo $record->created_date;?></td>
+					<td><?php echo Rb_Text::_($statusList[$record->payment_status]);?></td>					
+					<td class="nowrap hidden-phone"><?php echo Rb_date::timeago($record->created_date);?></td>
 			
 		<?php $count++;?>		
 		<?php endforeach;?>

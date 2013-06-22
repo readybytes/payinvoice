@@ -15,10 +15,10 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 			<thead>
 				<!-- TABLE HEADER START -->
 				<tr>
-					<th  width="1%">
+					<th  width="1%" class="hidden-phone">
 						<input type="checkbox" name="toggle" value="" onclick="Joomla.checkAll(this);" />
 					</th>
-					<th class="default-grid-sno">
+					<th class="default-grid-sno hidden-phone">
 		      			<?php echo Rb_Text::_("COM_PAYINVOICE_NUM"); ?>
 		    		</th> 
 					<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_PROCESSOR_TITLE", 'title', 	$filter_order_Dir, $filter_order);?></th>
@@ -33,10 +33,10 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 			  foreach ($records as $record):?>
 				<tr class="<?php echo "row".$count%2; ?>">
 				<?php if(isset($processor_names[$record->type])) :?>	 
-				    <th class="default-grid-chkbox">
+				    <th class="default-grid-chkbox nowrap hidden-phone">
 				    	<?php echo PayInvoiceHtml::_('grid.id', $count, $record->{$record_key} ); ?>
 				    </th>
-					<td><?php echo $count+1; ?> </td>	
+					<td class="nowrap hidden-phone"><?php echo $count+1; ?> </td>	
 					<td><?php echo PayInvoiceHtml::link($uri.'&task=edit&id='.$record->{$record_key}, $record->title); ?>
 						 <p class="muted"><?php echo $record->description;?></p>
 					</td>	
