@@ -24,7 +24,7 @@ JHtml::_('behavior.formvalidation');
 				</div>
 				<div class="control-group">
 					<?php echo $rb_invoice_fields['buyer_id']->label;?>
-					<div class="controls"><?php echo $rb_invoice['buyer_id'];?></div>								
+					<div class="controls"><?php echo $rb_invoice['buyer_id']. '('.$buyer->getBuyername().')';?></div>								
 				</div>
 				<div class="control-group">
 					<?php echo $rb_invoice_fields['serial']->label;?>

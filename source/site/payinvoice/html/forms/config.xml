@@ -43,16 +43,9 @@
 				label="COM_PAYINVOICE_CONFIG_COMPANY_ADDRESS" 
 				description="COM_PAYINVOICE_CONFIG_COMPANY_ADDRESS_DESC"
 		        />
-		        
-        <field 	name="company_city" 
-				type="text"
-				label="COM_PAYINVOICE_CONFIG_COMPANY_CITY" 
-				description="COM_PAYINVOICE_CONFIG_COMPANY_CITY_DESC"
-		        />
-		        
+		        		        
         <field 	name="company_phone" 
-				type="number"
-				class="validate-number"
+				type="text"
 				label="COM_PAYINVOICE_CONFIG_COMPANY_PHONE" 
 				description="COM_PAYINVOICE_CONFIG_COMPANY_PHONE_DESC"
 		        />

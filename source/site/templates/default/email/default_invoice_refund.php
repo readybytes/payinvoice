@@ -13,7 +13,6 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 $config_data['company_name']	= isset($config_data['company_name'])  		? $config_data['company_name'] 		: "";
 $config_data['company_address']	= isset($config_data['company_address']) 	? $config_data['company_address'] 	: "";
-$config_data['company_city']	= isset($config_data['company_city']) 		? $config_data['company_city'] 		: "";
 $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config_data['company_phone']		: "";
 ?>
 
@@ -31,9 +30,9 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 						<table style="padding: 10px; width: 100%;" bgcolor="f1f2f3">
 							<tbody>
 								<tr>
-									<?php if(isset($config_data['company_logo'])):?>
+									<?php if(!empty($config_data['company_logo'])):?>
 										<td align="left" height="100">
-											<img src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);?>" class="img-polaroid" width="300"/>
+											<img src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);?>" class="img-polaroid"/>
 										</td>
 									<?php endif;?>
 								</tr>
@@ -66,7 +65,7 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 								
 							</tbody>
 						</table>
-						<p class="fontlist" style="padding: 10px; margin-left: 15px;"><span style="font-size: 10pt;"></span><br /><br /><span style="font-size: 10pt;"> <strong><?php echo $config_data['company_name'];?></strong></span><br /><span style="padding: 20px 0px; font-size: 10pt;"><?php echo $config_data['company_address'].";".$config_data['company_city'];?></span><br /><span style="padding: 20px 0px; font-size: 10pt;"> <?php echo "Phone :".$config_data['company_phone'];?></span><br /><br /><span style="font-size: 10pt;"><a class="links" style="text-decoration: none;" href="#"></a></span></p>
+						<p class="fontlist" style="padding: 10px; margin-left: 15px;"><span style="font-size: 10pt;"></span><br /><br /><span style="font-size: 10pt;"> <strong><?php echo $config_data['company_name'];?></strong></span><br /><span style="padding: 20px 0px; font-size: 10pt;"><?php echo $config_data['company_address'];?></span><br /><br /><span style="font-size: 10pt;"><a class="links" style="text-decoration: none;" href="#"></a></span></p>
 					</td>
 					<td bgcolor="#ffffff" width="10"></td>
 				</tr>
@@ -77,7 +76,7 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 				</tr>
 				<tr id="fourth-row" bgcolor="#ffffff">
 					<td id="fourth-left" bgcolor="#ffffff" height="10" width="10"></td>
-					<td id="fourth-middle" align="right"><span style="font-family: 'Lucida Grande','Segoe UI',Arial,Verdana,'Lucida Sans Unicode',Tahoma,'Sans Serif'; font-size: 11px; color: #888;"> Copyright © 2013 <?php echo $config_data['company_name'];?>. All Rights Reserved. <br /> &nbsp;&nbsp;<?php echo $config_data['company_address'].",".$config_data['company_city'].", Phone:".$config_data['company_phone'];?> </span></td>
+					<td id="fourth-middle" align="right"><span style="font-family: 'Lucida Grande','Segoe UI',Arial,Verdana,'Lucida Sans Unicode',Tahoma,'Sans Serif'; font-size: 11px; color: #888;"> Copyright © 2013 <?php echo $config_data['company_name'];?>. All Rights Reserved. <br /> &nbsp;&nbsp;<?php echo $config_data['company_address'].",".Rb_Text::_('COM_PAYINVOICE_COMPANY_PHONE_NO')." ".$config_data['company_phone'];?> </span></td>
 					<td id="fourth-right" bgcolor="#ffffff" height="10" width="10"></td>
 				</tr>
 			</tbody>

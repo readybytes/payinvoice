@@ -27,6 +27,14 @@ class PayInvoiceAdminViewProcessor extends PayInvoiceAdminBaseViewProcessor
 		Rb_HelperToolbar::deleteList(Rb_Text::_('COM_PAYINVOICE_JS_ARE_YOU_SURE_TO_DELETE'));
 	}
 	
+	protected function _adminEditToolbar()
+	{	
+		Rb_HelperToolbar::apply();
+		Rb_HelperToolbar::save();
+		Rb_HelperToolbar::divider();
+		Rb_HelperToolbar::cancel();
+	}
+	
 	function _displayGrid($records)
 	{	
 		$this->assign('processor_names',  Rb_EcommerceAPI::get_processors_list());

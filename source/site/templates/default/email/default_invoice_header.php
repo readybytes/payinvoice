@@ -13,7 +13,6 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 $config_data['company_name']	= isset($config_data['company_name'])  		? $config_data['company_name'] 		: "";
 $config_data['company_address']	= isset($config_data['company_address']) 	? $config_data['company_address'] 	: "";
-$config_data['company_city']	= isset($config_data['company_city']) 		? $config_data['company_city'] 		: "";
 $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config_data['company_phone']		: "";
 ?>
 <table width="100%;" border="0" cellspacing="0" cellpadding="0" style="font-size: 16px;padding: 20px 0px 20px 0px">
@@ -25,8 +24,10 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 						<tr>
 							<td>
 								<p style="margin:0px 0px 5px;font-family: sans-serif;"><?php echo $config_data['company_name'];?></p>
-								<address style="font-family: Times New Roman;"><?php echo $config_data['company_address'];?><br><?php echo $config_data['company_city'];?><br>
-								  <?php echo Rb_Text::_('COM_PAYINVOICE_COMPANY_PHONE_NO');?><span href="tel:"></span>: <?php echo $config_data['company_phone'];?></address>																		
+								<address style="font-family: Times New Roman;"><?php echo $config_data['company_address'];?><br>
+								 <?php if(!empty($config_data['company_phone'])):
+											echo Rb_Text::_('COM_PAYINVOICE_COMPANY_PHONE_NO');?><span href="tel:"></span>: <?php echo $config_data['company_phone'];?></address>																		
+								 <?php endif;?>
 							</td>
 						</tr>
 					</tbody>
@@ -37,9 +38,9 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 				<table border="0" cellspacing="0" cellpadding="0" align="right">
 					<tbody>
 						<tr>
-							<?php if(isset($config_data['company_logo'])):?>
+							<?php if(!empty($config_data['company_logo'])):?>
 								<td>
-									<img src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);?>" class="img-polaroid" width="300">																	
+									<img src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);?>" class="img-polaroid">																	
 								</td>
 							<?php endif;?>
 						</tr>
