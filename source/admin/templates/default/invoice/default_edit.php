@@ -88,8 +88,8 @@ JHtml::_('behavior.formvalidation');
 								</div>							
 							</div>
 						</div>
-						
-						<div class="span6">
+						<?php // IMP : we are skiping one span, to fix ui issue ?>
+						<div class="span5">
 							<div class="control-group">
 								<?php echo $rb_invoice_fields['currency']->label;?>
 								<div class="controls"><?php echo $rb_invoice_fields['currency']->input;?></div>								
