@@ -26,7 +26,9 @@ if(isset($response)){
 		<?php endforeach;?>
 	</fieldset>
 <?php endforeach;?>
-	<div id ="payinvoice-paynow">
-		<button type="submit" class="btn btn-primary pull-right"><?php echo Rb_Text::_('COM_PAYINVOICE_PAY_NOW');?></button>
+	<div class="row-fluid">
+		<div id ="payinvoice-paynow">
+			<button type="submit" class="btn btn-primary pull-right"><?php echo Rb_Text::_('COM_PAYINVOICE_PAY_NOW');?></button>
+		</div>
 	</div>
 <?php } 

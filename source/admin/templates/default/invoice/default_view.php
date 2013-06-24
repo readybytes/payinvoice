@@ -47,7 +47,9 @@ JHtml::_('behavior.formvalidation');
 				</div>
 				
 				<div class="row-fluid">
-					<a href="#" onclick="payinvoice.admin.invoice.email.confirm('<?php echo $record_id?>')" class="pull-right btn btn-success"><i class="icon-envelope icon-white"></i>&nbsp;<?php echo Rb_Text::_('PAYINVOCIE_TOOLBAR_EMAIL');?></a>
+				<!-- START : Item Table -->
+					<?php echo $this->loadTemplate('edit_footer');?>		
+				<!-- END : Item Table -->
 				</div>
 				<div>&nbsp;</div>		
 			</div>
@@ -94,4 +96,9 @@ JHtml::_('behavior.formvalidation');
 	<input type="hidden" name="boxchecked" value="1" />	
 	</form>
 </div>	
-<?php
+
+<!--Load Preview template-->
+<?php if(!empty($record_id)):?>
+<?php echo $this->loadTemplate('preview');?>
+<?php endif;
+

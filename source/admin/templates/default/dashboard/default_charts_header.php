@@ -12,7 +12,7 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
 ?>
-<div class="well well-small center alert alert-info">
+<div class="well well-small center alert alert-success">
 	<div class="row-fluid">		
 		<div class="span4">
 			<h3><span id="payinvoice-dashboard-total">0</span></h3>

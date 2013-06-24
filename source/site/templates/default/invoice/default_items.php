@@ -17,24 +17,24 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 	}
 
 ?>
-<div class="row">
- 	<table class="table table-hover">
+<div class="row-fluid">
+ 	<table class="table table-bordered">
     	<thead>
 			<tr>
-				<th><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEMS');?></th>
-				<th><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_QUANTITY');?></th>
-				<th><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_PRICE_PER_UNIT');?></th>
-				<th><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_PRICE_TOTAL');?></th>
+				<th class="span5"><span><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEMS');?></span></th>
+				<th class="span2"><span class="pull-right"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_QUANTITY');?></span></th>
+				<th class="span2"><span class="pull-right"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_PRICE_PER_UNIT');?></span></th>
+				<th class="span3"><span class="pull-right"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_PRICE_TOTAL');?></span></th>
 			</tr>
 		</thead>
 		
 		<tbody>
 			<?php foreach ($items as $item) :?>
 			<tr>
-			    <td><?php echo $item->title;?></td>
-			    <td><?php echo $item->quantity;?></td>
-			    <td><?php echo $currency." ".number_format($item->price, 2);?></td>
-			    <td><?php echo $currency." ".number_format($item->total, 2);?></td>
+			    <td class="span5"><span><?php echo $item->title;?></span></td>
+			    <td class="span2"><span class="pull-right"><?php echo $item->quantity;?></span></td>
+			    <td class="span2"><span class="pull-right"><?php echo $currency." ".number_format($item->price, 2);?></span></td>
+			    <td class="span3"><span class="pull-right"><?php echo $currency." ".number_format($item->total, 2);?></span></td>
 		    </tr>
 		    <?php endforeach;?>
 		</tbody>

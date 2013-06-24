@@ -99,7 +99,7 @@ class PayInvoiceStatisticsRevenue extends PayInvoiceStatistics
 								    {
 								      values: sin,
 								      key: "<?php echo Rb_Text::_('COM_PAYINVOICE_STATISTICS_REVENUE_HEADER');?>",
-								      color: "#3A87AD"
+								      color: "#468847"
 								    }
 							  	];
 					}

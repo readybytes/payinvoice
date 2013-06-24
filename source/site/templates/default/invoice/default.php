@@ -37,69 +37,51 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 <div class="container-fluid">
     <div class="row-fluid">		  
 		  <?php echo $this->loadTemplate('header');?>
-		  <?php echo $this->loadTemplate('details');?>
+		  <?php echo $this->loadTemplate('details');?><br>
 		  <?php echo $this->loadTemplate('items');?>
 	 	
-	 	<div class="row">
+	 	<div class="row-fluid">
 	 		<div class="span7"></div>
 	 		
 	 		<div class="span5">
-	 		 		<dl class="dl-horizontal">
-					    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_SUBTOTAL');?></dt>
-					    <dd><?php echo $currency." ". number_format($subtotal, 2);?></dd>
-					    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_DISCOUNT');?></dt>
-					    <dd><?php echo $currency." ". number_format($discount, 2);?></dd>
-					    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX');?></dt>
-					    <dd><?php echo number_format($tax, 2)." %";?></dd>
-					 </dl><hr>
-
+ 		 		<dl class="dl-horizontal pull-right">
+				    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_SUBTOTAL');?></dt>
+				    <dd><?php echo $currency." ". number_format($subtotal, 2);?></dd>
+				    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_DISCOUNT');?></dt>
+				    <dd><?php echo $currency." ". number_format($discount, 2);?></dd>
+				    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX');?></dt>
+				    <dd><?php echo number_format($tax, 2)." %";?></dd><hr>
+			     	<dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TOTAL');?></dt>
+				    <dd><?php echo $currency." ".number_format($rb_invoice['total'], 2);?></dd><br>
+					<!-- Payment method-->
+	  				<?php if($valid && $rb_invoice['total'] != floatval(0) && $rb_invoice['status'] == PayInvoiceInvoice::STATUS_DUE):?>  
+				    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_PAYMENT_METHOD');?></dt>
+			    	<dd><?php if(!empty($processor_title)) {
+			    				 echo $processor_title;?>
+				    	<?php }else {
+	    		 				 echo PayInvoiceHtml::_('payinvoicehtml.processors.edit', 'payinvoice_form[params][processor_id]', '', array('none'=>true, 'style' => 'class="input-medium"'));
+	   					  	 }?>
+				 	</dd>
+			 	</dl>
 	 		</div>
 	 	</div>
 	 	
-	 	<div class="row">
-	 		<div class="span7">
-	 		</div>
-	 		
-	 		<div class="span5">
-	 	 		<dl class="dl-horizontal">
-						    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TOTAL');?></dt>
-						    <dd><?php echo $currency." ".number_format($rb_invoice['total'], 2);?></dd>
-			    </dl>
-		    </div>
-		</div>
+	 	<div class="row-fluid">
+	 		<form action="" method="post"  name="paynowForm" id="paynowForm" class="rb-validate-form">
+	 			<div class="row-fluid">
+	 				<div id="payinvoice-paynow-html"></div>
+	 			</div>
+	 			
+	 			<div>&nbsp;</div>
+	 			<div>&nbsp;</div>
+	 			
+				<div class="row-fluid">
+					<?php echo $this->loadTemplate('terms');?>
+				</div>
+	 		</form>
+	 	</div>
+	 	 <?php endif;?>
 		
-		 	<div class="row">
-		 	  	<div class="span7"> 
-		 	  	</div> 
-	    		<?php if($valid && $rb_invoice['total'] != floatval(0) && $rb_invoice['status'] == PayInvoiceInvoice::STATUS_DUE):?>  
-		 	   <div class="span5">
-			 	   <dl class="dl-horizontal">
-					    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_PAYMENT_METHOD');?></dt>
-					    <dd>
-					    	<?php 	if(!empty($processor_title)){?>
-				    				 <?php echo $processor_title;?>
-					    	 <?php	 }else {
-			    		 				echo PayInvoiceHtml::_('payinvoicehtml.processors.edit', 'payinvoice_form[params][processor_id]', '', array('none'=>true, 'style' => 'class="input-medium"'));
-			   					  	 }?>
-			   			</dd>
-					   
-			   		</dl>	 	   		
-		 	   	</div>
-		 	</div>
-		 		
-		 	<div class="row">
-		 		<form action="" method="post"  name="paynowForm" id="paynowForm" class="rb-validate-form">
-		 			<div id="payinvoice-paynow-html">
-		 			</div>
-		 			<div>&nbsp;</div>
-		 			<div>&nbsp;</div>
-					<div class="span12">
-						<?php echo $this->loadTemplate('terms');?>
-					</div>
-		 		</form>
-		 	</div>
-		 	 <?php endif;?>
-		
- </div>
+ 	</div>
 </div>
 <?php 

@@ -14,7 +14,7 @@ $config_data['company_address']	= isset($config_data['company_address']) 	? $con
 $config_data['company_phone']	= isset($config_data['company_phone'])		? $config_data['company_phone']		: "";
 ?>
 
-<div class="row well well-small">
+<div class="row-fluid well well-small">
 	   <div class="span8">
 		   <address>
 				<strong><?php echo $config_data['company_name'];?></strong><br>

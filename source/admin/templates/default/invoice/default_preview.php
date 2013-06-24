@@ -24,7 +24,7 @@ $config_data['company_phone']	= isset($config_data['company_phone'])		? $config_
    	 	<div class="modal-body">
    		 	<div class="container-fluid">
    		 	 	<div class="row-fluid">	
-					<div class="row well well-small">
+					<div class="row-fluid well well-small">
 			  		 	<div class="span8">
 					  	 <address>
 							<strong><?php echo $config_data['company_name'];?></strong><br>
@@ -33,8 +33,11 @@ $config_data['company_phone']	= isset($config_data['company_phone'])		? $config_
 							<abbr title="Phone"><?php echo Rb_Text::_('COM_PAYINVOICE_COMPANY_PHONE_NO');?></abbr>&nbsp;<?php echo $config_data['company_phone'];?>
 							<?php endif;?>
 						</address>
-			  	 		</div>		   
-			   			<div class="span2 offset2">
+			  	 		</div>	
+			  	 		
+			  	 		<div class="span2"></div>	
+			  	 		   
+			   			<div class="span2">
 				   			<?php if(!empty($config_data['company_logo'])):?>
 				   				<img src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);?>">
 			   				<?php endif;?>
@@ -52,10 +55,6 @@ $config_data['company_phone']	= isset($config_data['company_phone'])		? $config_
 				</div>
 				<hr>
 				<div class="row-fluid">
-				 	<div class="span2">
-				  		<img class="img-polaroid" src="<?php echo $buyer->getAvatar('medium');?>" alt="">
-				  	</div>
-	   	 
 					<div class="span5">
 					    <ul class="unstyled">
 							<li><strong><?php echo Rb_Text::_('COM_PAYINVOICE_BUYER_NAME');?></strong></li>
@@ -68,16 +67,16 @@ $config_data['company_phone']	= isset($config_data['company_phone'])		? $config_
 							<li><?php echo $buyer->getTaxnumber(); ?></li>
 						</ul>
 					</div>
+					
+					<div class="span2"></div>
 	   
 			   		<div class="span5">
-				   		<div class="well well-small">
 							 <ul class="unstyled">    
 									<li><strong><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_ISSUE_DATE');?></strong></li>
 									<li><?php echo $rb_invoice['created_date'];?></li>		    			    
 									<li><strong><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_DUE_DATE');?></strong></li>
 									<li><?php echo $rb_invoice['due_date'];?></li>		    
 							</ul>
-						</div>
 					</div>
 				</div>
 	
@@ -86,39 +85,29 @@ $config_data['company_phone']	= isset($config_data['company_phone'])		? $config_
 	
 				<div class="row-fluid">
 					<div class="span7"></div>
-					<div class="span5 pull-right">
-						<dl class="dl-horizontal">
+					<div class="span5">
+						<dl class="dl-horizontal pull-right">
 							<dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_SUBTOTAL');?></dt>
 							<dd><?php echo $currency_symbol." ".number_format($subtotal,2);?></dd>
 							<dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_DISCOUNT');?></dt>
 							<dd><?php echo $currency_symbol." ".number_format($discount,2);?></dd>
 							<dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX');?></dt>
-							<dd><?php echo number_format($tax, 2)." %";?></dd>
-						 </dl> <hr>
-					 
-						 <dl class="dl-horizontal">
+							<dd><?php echo number_format($tax, 2)." %";?></dd><hr>
 							<dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TOTAL');?></dt>
-							<dd><?php echo $currency_symbol." ".number_format($rb_invoice['total'], 2);?></dd>
-						</dl>
-					</div>
-				</div>	
-		
-				<div class="row-fluid">
-					<div class="span7"></div>
-					<div class="span5 pull-right"> 
-						<?php if($valid):?>
-						<dl class="dl-horizontal">
+							<dd><?php echo $currency_symbol." ".number_format($rb_invoice['total'], 2);?></dd><br>
+							<?php if($valid):?>
 							<dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_PAYMENT_METHOD');?></dt>
-							<dd>
-								<?php 	if(!empty($processor_title)){?>
-										 <?php echo $processor_title;?>
-								 <?php	 }else {
+							<dd><?php if(!empty($rb_invoice['processor_type'])){?>
+								<?php echo ucfirst($rb_invoice['processor_type']);?>
+								<?php	 }else {
 							 				echo PayInvoiceHtml::_('payinvoicehtml.processors.edit', 'payinvoice_form[params][processor_id]', '', array('none'=>true, 'style' => 'class="input-small"'));
 				   					  	 }?>
 				   			</dd>
-				   		</dl>	
-						<?php endif;?>
-						</div> 
+				   			<?php endif;?>
+			   			</dl>
+					</div>
+				</div>	
+
 				</div>
 		
 				<?php 	$invoiceParams	= $invoice->getParams();?>
