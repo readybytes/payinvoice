@@ -120,4 +120,10 @@ class PayInvoiceView extends PayInvoiceViewbase
 		
 		return $this;
 	}
+	
+	public function loadPosition($position, $data = array())
+	{
+		$args = array($position, $this, $data);
+		return Rb_HelperPlugin::trigger('onPayinvoiceLoadPosition', $args);
+	}
 }

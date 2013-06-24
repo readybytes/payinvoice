@@ -34,6 +34,7 @@ Rb_HelperLoader::addAutoLoadFolder(PAYINVOICE_PATH_CORE.'/statistics',	'Statisti
 
 // load Ecommerce Package
 rb_import('ecommerce');
+Rb_HelperPlugin::loadPlugins('payinvoice');
 
 //html
 Rb_HelperLoader::addAutoLoadFolder(PAYINVOICE_PATH_CORE.'/html/html',		'Html',		 'PayInvoice');
