@@ -1,0 +1,95 @@
+
+h1, h2, h3, h4, h5, h6, li, blockquote, p, th, td div{
+	font-family: "Times New Roman",Georgia, Serif; /*Trebuchet MS,*/
+}
+
+h1, h2, h3, h4 {
+	font-weight: normal;
+}
+
+h4, h5, h6 {
+	color: #5E88B6;
+}
+
+h2 {
+	margin: 0 auto auto auto;
+	font-size: x-large;
+}
+
+h3 {
+	margin: 0 auto auto auto;
+}
+
+h2 span {
+	text-transform: uppercase;
+}
+
+ul {
+	list-style: url(img/bullet.gif) none;
+}
+
+table {
+	width: 100%;
+}
+
+td p{
+	
+	font-size: x-small;
+	margin: 0;
+}
+
+td{
+	vertical-align:top;
+}
+
+fieldset{
+	border: 0px solid;
+	width:100% ;
+    background-color: #fff;   
+    text-align: left;
+    padding: 10px 0;
+    margin : 5px 0;
+   	display: inline-block;
+}
+
+fieldset legend{
+	border-bottom: 0.5px #ccc solid;
+	width:100% ;
+	line-height: 1.0em;
+	color:#666666;
+	margin: 0px;
+	padding: 0px;
+}
+
+.pp-pdf-top-margin{
+	margin-top:4px;
+}
+
+.pp-pdf-bottom-fullborder{
+	border-bottom: 0.5px solid;
+}
+
+.pp-pdf-upper-border{
+	border-top: 0.5px solid;
+}
+
+.pp-pdf-bottom-border{
+	border-bottom: 0.5px solid #ccc;
+}
+
+.pp-pdf-box{
+	text-align:center;
+	line-height:2em;
+}
+
+.pp-pdf-colored-border{
+	border:0.5px solid #ccc;
+}
+
+.pp-pdf-margin-top-14{
+	margin-top: -14px;
+}
+
+.pp-pdf-top-margin-60{
+	margin-top:60px;
+}
