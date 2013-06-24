@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<project name="Package Builder" basedir="." default="build" description="Phing build script for package.">
+
+	<target name="get_build_number">
+		<exec command="git describe" dir="" outputProperty="build.number"  />
+		<property name='build.number' value="${build.number}"  override="true" />
+
+	</target>
+
+	<target name="config" description="Load configuration file">
+	    <php expression="(PHP_OS == 'WINNT') ? 'win/' :'unix/'" returnProperty="IF_OS"/>
+
+		<property file="${IF_OS}global.prop" override="true" />
+		<phingcall target="get_build_number" />
+
+		<property file="${IF_OS}project.prop" override="true" />
+		<property file="${IF_OS}build.prop" override="true" />
+	</target>
+
+	<target name="build" description="build installable package only" depends="config,get_build_number">
+
+		<mkdir dir="${dir.packages}/plugins" />
+
+		<php expression="plg" returnProperty="ext.prefix" />
+		<php expression="payinvoice" returnProperty="ext.element" />
+
+		<mkdir dir="${dir.packages}/plugins/payinvoice" />
+		
+		<phingcall target="export_sourcecode" />
+
+		<foreach param="dirname" absparam="absname" target="zip_plugins">
+		  <fileset dir="${dir.root}/plugins/${ext.element}">
+			<type type="dir" />
+			<depth max="0" min="0" />
+		  </fileset>
+		</foreach>	
+			
+	</target>
+
+	<target name="export_sourcecode" description="Export files from a local repository to package folder">			
+
+		<!-- Apply the version change to all files. -->
+		<reflexive>
+			<fileset dir="${dir.root}/plugins/${ext.element}">
+			     <include name="**/*.*" />
+			</fileset>
+			 <filterchain>
+				<replacetokens>
+					 <token key="build.version"  value="${build.version}" />
+				   	 <token key="build.number"   value="${build.number}" />
+				</replacetokens>
+			</filterchain>
+		</reflexive>		
+	</target>
+	
+
+	<target name="zip_plugins">
+		<echo msg="${dirname} ${absname}" />
+		<zip destfile="${dir.packages}/plugins/${ext.element}/${ext.prefix}_${ext.element}_${dirname}.zip" 
+		     basedir="${absname}" />		
+	</target>
+
+</project>
