@@ -55,16 +55,20 @@ class plgPayinvoicePdfinvoice extends Rb_Plugin
 	public function onPayinvoiceLoadPosition($position, $view, $data)
 	{
 		// XITODO : load html from tmpl
-		if($position == 'admin-invoice-edit-footer'){
-			ob_start();
-			?>
-			<a href="index.php?option=com_payinvoice&view=pdfinvoice&task=download&format=pdf&invoice_id=<?php echo $data['invoice']->getId();?>" class="btn btn-success"><i class="icon-download-alt icon-white"></i> <?php echo Rb_Text::_('PLG_PAYINVOICE_PGFINVOICE_DOWNLOAD_PDF');?></a>
-			<?php
+			if($position == 'admin-invoice-edit-footer'){
+				$invoiceId = $data['invoice']->getId();
+				if(!empty($invoiceId)){
+					ob_start();
+					?>
 
-			$content = ob_get_contents();
-			ob_end_clean();
-			return $content;
-		}
+					<a href="index.php?option=com_payinvoice&view=pdfinvoice&task=download&format=pdf&invoice_id=<?php echo $data['invoice']->getId();?>" class="btn btn-success"><i class="icon-download-alt icon-white"></i> <?php echo Rb_Text::_('PLG_PAYINVOICE_PGFINVOICE_DOWNLOAD_PDF');?></a>
+					<?php
+	
+					$content = ob_get_contents();
+					ob_end_clean();
+					return $content;
+				}
+			}
 		
 		return false;
 	}
