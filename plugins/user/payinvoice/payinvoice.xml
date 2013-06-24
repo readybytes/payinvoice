@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="2.5" type="plugin" group="user" method="upgrade">
 	<name>User - PayInvoice Users</name>
+  	<version>@build.version@.@build.number@</version>
 	<creationDate>April 2013</creationDate>
+ 	<author>Team JoomlaXi</author>
+	<authorEmail>team@readybytes.in</authorEmail>
+	<authorUrl>http://www.jpayplans.com</authorUrl>
 	<copyright>GNU GPL</copyright>
 	<license>GPL License</license>
 	<authorEmail>team@readybytes.in</authorEmail>

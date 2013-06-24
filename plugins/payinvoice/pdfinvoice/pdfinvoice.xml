@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <extension version="2.5" type="plugin" group="payinvoice" method="upgrade">
-    <name>Pdf Invoices</name>
-	<version></version>
+	<name>Pdf Invoices</name>
+	<version>@build.version@.@build.number@</version>
 	<creationDate>June 2013</creationDate>
-	<author></author>
+	<author>Team JoomlaXi</author>
 	<authorEmail>team@readybytes.in</authorEmail>
-	<authorUrl></authorUrl>
+	<authorUrl>http://www.jpayplans.com</authorUrl>
 	<copyright>2009-13 Ready Bytes Software Labs Pvt. Ltd.</copyright>
 	<license>GNU/GPL</license>
 	<description>Pdf of Invoices</description>	

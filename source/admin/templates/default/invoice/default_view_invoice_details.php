@@ -64,11 +64,11 @@ JHtml::_('behavior.formvalidation');
 	<div class="span4">
 		<dl class="dl-horizontal pull-right">
 		    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_SUBTOTAL');?></dt>
-		    <dd><?php echo $currency_symbol." ".number_format($subtotal, 2);?></dd>
+		    <dd><?php echo $currency_symbol." ".$subtotal;?></dd>
 		    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_DISCOUNT');?></dt>
-		    <dd><?php echo $currency_symbol." ".number_format($discount,2);?></dd>
+		    <dd><?php echo $currency_symbol." ".$discount;?></dd>
 		    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX');?></dt>
-		    <dd><?php echo number_format($tax, 2)." %";?></dd>
+		    <dd><?php echo $tax." %";?></dd>
 		    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_PAYMENT_METHOD');?></dt>
 		    <dd><?php echo ucfirst($rb_invoice['processor_type']);?></dd><hr> 
 		    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TOTAL');?></dt>
