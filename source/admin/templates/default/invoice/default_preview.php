@@ -120,12 +120,11 @@ $config_data['company_phone']	= isset($config_data['company_phone'])		? $config_
 				</div> 
 				<?php endif;?>
 		
-   				</div>			
-			</div>
-
-    		<div class="modal-footer">
-	    		<a href="#" class="btn" data-dismiss="modal" aria-hidden="true"><?php echo Rb_Text::_('COM_PAYINVOICE_CLOSE');?></a>
-    		</div>
+   				</div>
+   				
+   				<div class="modal-footer">
+	    			<a href="#" class="btn" data-dismiss="modal" aria-hidden="true"><?php echo Rb_Text::_('COM_PAYINVOICE_CLOSE');?></a>
+    			</div>			
+			</div>	
 	    </div>
-</div>
 <?php 
