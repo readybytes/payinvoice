@@ -61,7 +61,7 @@ class PayInvoiceAdminViewPdfInvoice extends PayInvoiceAdminBaseViewPdfInvoice
 		if(!in_array($rb_invoice->status, array(PayInvoiceInvoice::STATUS_PAID, PayInvoiceInvoice::STATUS_REFUNDED))){			
 			$extra_data = array();
 			$extra_data['txn_key']  = '';
-			$extra_data['title']	= Rb_Text::_('Due On');
+			$extra_data['title']	= Rb_Text::_('PLG_PAYINVOICE_PGFINVOICE_DUE_ON');
 			$extra_data['date']	 	= $rb_invoice->due_date;
 			$extra_data['status']   = PayInvoiceInvoice::STATUS_DUE;
 						
@@ -73,7 +73,7 @@ class PayInvoiceAdminViewPdfInvoice extends PayInvoiceAdminBaseViewPdfInvoice
 		$transaction   	    = Rb_EcommerceAPI::transaction_get_records(array('invoice_id' => $rb_invoice->invoice_id, 'payment_status' => 'payment_complete'), array(), '',$orderby='invoice_id');
 		
 		$extra_data = array();
-		$extra_data['title']	= Rb_Text::_('Paid On');
+		$extra_data['title']	= Rb_Text::_('PLG_PAYINVOICE_PGFINVOICE_PAID_ON');
 		$extra_data['date']		= $rb_invoice->paid_date;
 		$extra_data['txn_key'] 	= '';
 		$extra_data['status']  	= PayInvoiceInvoice::STATUS_PAID;
@@ -87,7 +87,7 @@ class PayInvoiceAdminViewPdfInvoice extends PayInvoiceAdminBaseViewPdfInvoice
 		
 		if($rb_invoice->status == PayInvoiceInvoice::STATUS_REFUNDED){
 			$transaction		 	= Rb_EcommerceAPI::transaction_get_records(array('invoice_id' => $rb_invoice->invoice_id, 'payment_status' => 'payment_refund'), array(), '',$orderby='invoice_id');
-			$extra_data['title']	= Rb_Text::_('Refund On');
+			$extra_data['title']	= Rb_Text::_('PLG_PAYINVOICE_PGFINVOICE_REFUND_ON');
 			$extra_data['date']	 	= $rb_invoice->refund_date;
 			$extra_data['txn_key']  = '';
 			$extra_data['status']   = PayInvoiceInvoice::STATUS_REFUNDED;
