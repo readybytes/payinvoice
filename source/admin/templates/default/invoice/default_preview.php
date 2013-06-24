@@ -88,11 +88,11 @@ $config_data['company_phone']	= isset($config_data['company_phone'])		? $config_
 					<div class="span5">
 						<dl class="dl-horizontal pull-right">
 							<dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_SUBTOTAL');?></dt>
-							<dd><?php echo $currency_symbol." ".number_format($subtotal,2);?></dd>
+							<dd><?php echo $currency_symbol." ".$subtotal;?></dd>
 							<dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_DISCOUNT');?></dt>
-							<dd><?php echo $currency_symbol." ".number_format($discount,2);?></dd>
+							<dd><?php echo $currency_symbol." ".$discount;?></dd>
 							<dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX');?></dt>
-							<dd><?php echo number_format($tax, 2)." %";?></dd><hr>
+							<dd><?php echo $tax." %";?></dd><hr>
 							<dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TOTAL');?></dt>
 							<dd><?php echo $currency_symbol." ".number_format($rb_invoice['total'], 2);?></dd><br>
 							<?php if($valid):?>
