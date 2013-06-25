@@ -15,4 +15,13 @@ include_once dirname(__FILE__).'/view.php';
 class PayInvoiceAdminViewInstall extends PayInvoiceAdminBaseViewInstall
 {
 
+	protected function _adminToolbar()
+	{
+		$this->_adminToolbarTitle();
+	}
+	
+	public function _basicFormSetup($task)
+	{
+		return true;
+	}
 }
