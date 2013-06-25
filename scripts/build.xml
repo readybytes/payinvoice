@@ -28,6 +28,7 @@
 
 		<phingcall target="export_sourcecode" />
 		<phingcall target="copy_default_plugin"/>
+		<phingcall target="replace_tokens" />		
 
 		<phing phingfile="${project.shortform.small}.xml" inheritAll="true" target="build" />
 
@@ -81,18 +82,6 @@
 		</copy>
 		
 
-		<!-- Apply the version change to all files. -->
-		<reflexive>
-			<fileset dir="${dir.tmp}">
-			     <include name="**/*.*" />
-			</fileset>
-			 <filterchain>
-				<replacetokens>
-				    <token key="build.version" 	value="${build.version}" />
-				    <token key="build.number"   value="${build.number}" />
-				</replacetokens>
-			</filterchain>
-		</reflexive>		
 	</target>
 
 	<target name="copy_framework">
@@ -114,5 +103,20 @@
 				<include name="**/*.*" />
 			</fileset>
 		</copy>
+	</target>
+
+	<target name="replace_tokens">
+		<!-- Apply the version change to all files. -->
+		<reflexive>
+			<fileset dir="${dir.tmp}">
+			     <include name="**/*.*" />
+			</fileset>
+			 <filterchain>
+				<replacetokens>
+				    <token key="build.version" 	value="${build.version}" />
+				    <token key="build.number"   value="${build.number}" />
+				</replacetokens>
+			</filterchain>
+		</reflexive>	
 	</target>
 </project>
