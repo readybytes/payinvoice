@@ -28,7 +28,7 @@ if(isset($params->items)){
 			
 			<td width="90%" align="left">
 				<h2>
-					<?php if(!empty($config_data['company_logo'])):?>
+					<?php if(!empty($config_data['company_name'])):?>
 					<?php echo $config_data['company_name']; ?> 
 					<?php endif;?>
 				</h2>
@@ -36,7 +36,7 @@ if(isset($params->items)){
 					<?php if(!empty($config_data['company_address'])):?>
 					<?php echo $config_data['company_address'];?><br />
 					<?php endif;?>
-					<?php if(!empty($confi_data['company_phone'])):?>
+					<?php if(!empty($config_data['company_phone'])):?>
 					<?php echo $config_data['company_phone'];?><br />
 					<?php endif;?>
 				</p>
