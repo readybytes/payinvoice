@@ -16,6 +16,10 @@ JHtml::_('behavior.keepalive');
 JHtml::_('behavior.formvalidation');
 ?>
 <div class="row-fluid">
+	<a class="btn btn-success pull-right" target="_blank" href="http://www.jpayplans.com/payinvoice/documentation/item/paypal-payment-gateway.html"><i class="icon-white icon-book"></i>&nbsp;<?php echo Rb_Text::_('COM_PAYINVOICE_DOCUMENTATION_BUTTON');?></a>
+</div>
+
+<div class="row-fluid">
 	<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="rb-validate-form">
 		<div class="span6">		
 			<fieldset class="form">
