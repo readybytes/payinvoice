@@ -62,10 +62,12 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 	    		 				 echo PayInvoiceHtml::_('payinvoicehtml.processors.edit', 'payinvoice_form[params][processor_id]', '', array('none'=>true, 'style' => 'class="input-medium"'));
 	   					  	 }?>
 				 	</dd>
+				 	<?php endif;?>
 			 	</dl>
 	 		</div>
 	 	</div>
 	 	
+	 	<?php if($valid && $rb_invoice['total'] != floatval(0) && $rb_invoice['status'] == PayInvoiceInvoice::STATUS_DUE):?>  
 	 	<div class="row-fluid">
 	 		<form action="" method="post"  name="paynowForm" id="paynowForm" class="rb-validate-form">
 	 			<div class="row-fluid">
