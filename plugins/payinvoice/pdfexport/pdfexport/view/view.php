@@ -12,10 +12,10 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
 /** 
- * Pdf Invoice Base View
+ * Pdf Export Base View
  * @author Manisha Ranawat
  */
-class PayInvoiceAdminBaseViewPdfInvoice extends PayInvoiceView
+class PayInvoiceAdminBaseViewPdfExport extends PayInvoiceView
 {
 	/**
 	 * @var PayInvoiceHelperPdfInvoice

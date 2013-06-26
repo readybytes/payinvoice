@@ -3,7 +3,7 @@
 * @copyright	Copyright (C) 2009 - 2013 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license	    GNU/GPL, see LICENSE.php
 * @package	    PAYINVOICE
-* @subpackage	PDFINVOICE
+* @subpackage	PDFEXPORT
 * @contact 	    team@readybytes.in
 */
 
@@ -13,7 +13,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 jimport( 'joomla.filesystem.archive' );
 jimport( 'joomla.document.document' );
 
-class plgPayinvoicePdfinvoice extends Rb_Plugin
+class plgPayinvoicePdfExport extends Rb_Plugin
 {
 	public function __construct(&$subject, $config = array())
 	{
@@ -29,15 +29,15 @@ class plgPayinvoicePdfinvoice extends Rb_Plugin
 
 	public function onRbControllerCreation($option, $view, $controller, $task, $format)
 	{
-		if($controller === 'pdfinvoice'){			
-			Rb_HelperLoader::addAutoLoadFile(dirname(__FILE__).'/'.$this->_name.'/view/view.'.$format.'.php', 'PayInvoiceAdminViewPdfInvoice');
-			Rb_HelperLoader::addAutoLoadFile(dirname(__FILE__).'/'.$this->_name.'/controller.php', 'PayInvoiceAdminControllerPdfInvoice');			
-			Rb_HelperLoader::addAutoLoadFile(dirname(__FILE__).'/'.$this->_name.'/helper.php', 'PayInvoiceHelperPdfInvoice');			
-			Rb_HelperLoader::addAutoLoadFolder(__DIR__.'/pdfinvoice/dompdf0.6', '');
+		if($controller === 'pdfexport'){			
+			Rb_HelperLoader::addAutoLoadFile(dirname(__FILE__).'/'.$this->_name.'/view/view.'.$format.'.php', 'PayInvoiceAdminViewPdfExport');
+			Rb_HelperLoader::addAutoLoadFile(dirname(__FILE__).'/'.$this->_name.'/controller.php', 'PayInvoiceAdminControllerPdfExport');			
+			Rb_HelperLoader::addAutoLoadFile(dirname(__FILE__).'/'.$this->_name.'/helper.php', 'PayInvoiceHelperPdfExport');			
+			Rb_HelperLoader::addAutoLoadFolder(__DIR__.'/pdfexport/dompdf0.6', '');
 		}
 		
 		// load class of dompdf
-		require_once dirname(__FILE__).'/pdfinvoice/dompdf0.6/dompdf_config.inc.php';
+		require_once dirname(__FILE__).'/pdfexport/dompdf0.6/dompdf_config.inc.php';
 	    $files = JFolder::files(DOMPDF_INC_DIR);
 	    foreach ($files as $file){
 			$class = JFile::stripExt($file);
@@ -61,7 +61,7 @@ class plgPayinvoicePdfinvoice extends Rb_Plugin
 					ob_start();
 					?>
 
-					<a href="index.php?option=com_payinvoice&view=pdfinvoice&task=download&format=pdf&invoice_id=<?php echo $data['invoice']->getId();?>" class="btn btn-success"><i class="icon-download-alt icon-white"></i> <?php echo Rb_Text::_('PLG_PAYINVOICE_PGFINVOICE_DOWNLOAD_PDF');?></a>
+					<a href="index.php?option=com_payinvoice&view=pdfexport&task=download&format=pdf&invoice_id=<?php echo $data['invoice']->getId();?>" class="btn btn-success"><i class="icon-download-alt icon-white"></i> <?php echo Rb_Text::_('PLG_PAYINVOICE_PDFEXPORT_DOWNLOAD_PDF');?></a>
 					<?php
 	
 					$content = ob_get_contents();
@@ -73,4 +73,5 @@ class plgPayinvoicePdfinvoice extends Rb_Plugin
 		return false;
 	}
 }
+
 

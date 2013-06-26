@@ -3,7 +3,7 @@
 * @copyright	Copyright (C) 2009 - 2013 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license	    GNU/GPL, see LICENSE.php
 * @package	    PAYINVOICE
-* @subpackage	PDFINVOICE
+* @subpackage	PDFEXPORT
 * @contact 	    team@readybytes.in
 */
 
@@ -89,7 +89,7 @@ if(isset($params->items)){
 		?>
 		
 			<td width="50%" align="left">
-				<p><b><?php echo Rb_Text::_('PLG_PAYINVOICE_PDFINVOICE_INVOICE_BILL_TO');?></b><br/>
+				<p><b><?php echo Rb_Text::_('PLG_PAYINVOICE_PDFEXPORT_INVOICE_BILL_TO');?></b><br/>
 				<?php echo $buyer->getBuyername(); ?><br/>
 				<?php echo $buyer->getEmail();?><br/>
 				<?php if(!empty($buyer_address)):?>
@@ -124,10 +124,10 @@ if(isset($params->items)){
 						<tr>
 							<td align="left">
 								<p>
-								<b>	<?php echo Rb_Text::_('PLG_PAYINVOICE_PDFINVOICE_INVOICE_NUMBER');?><br/>
-									<?php echo Rb_Text::_('PLG_PAYINVOICE_PDFINVOICE_INVOICE_TITLE');?><br/>	
+								<b>	<?php echo Rb_Text::_('PLG_PAYINVOICE_PDFEXPORT_INVOICE_NUMBER');?><br/>
+									<?php echo Rb_Text::_('PLG_PAYINVOICE_PDFEXPORT_INVOICE_TITLE');?><br/>	
 							    	<?php if(!empty($data['txn_key'])):?>
-							    	<?php echo Rb_Text::_('PLG_PAYINVOICE_PDFINVOICE_INVOICE_TRANSACTION_KEY');?><br/>
+							    	<?php echo Rb_Text::_('PLG_PAYINVOICE_PDFEXPORT_INVOICE_TRANSACTION_KEY');?><br/>
 							    	<?php endif;?> 
 							    	<?php if(!empty($rb_invoice->processor_type)):?>
 							    	<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_PAYMENT_METHOD');?></b><br/>
@@ -166,7 +166,7 @@ if(isset($params->items)){
 									
 					    		</td>
 					    		<td class="pp-pdf-colored-border">
-					    			<p><b><?php echo Rb_Text::_('PLG_PAYINVOICE_PDFINVOICE_INVOICE_ISSUE_ON'); ?></b></p>
+					    			<p><b><?php echo Rb_Text::_('PLG_PAYINVOICE_PDFEXPORT_INVOICE_ISSUE_ON'); ?></b></p>
 					    			<?php $issue_date = new Rb_Date($rb_invoice->issue_date);?>
 									<p><?php echo PayInvoiceHelperFormat::date($issue_date); ?></p>
 					    		</td>
@@ -214,8 +214,8 @@ if(isset($params->items)){
 			 		<table style="border-collapse:collapse;">
 			 			<thead>
 				 			<tr>
-			 					<th width="80%" class="pp-pdf-bottom-fullborder" align="left"><p><?php echo Rb_Text::_('PLG_PAYINVOICE_PDFINVOICE_INVOICE_DESCRIPTION'); ?></p></th>
-			 					<th width="20%" align="right" class="pp-pdf-bottom-fullborder"><p><?php echo Rb_Text::_('PLG_PAYINVOICE_PDFINVOICE_INVOICE_AMOUNT'); ?></p></th>
+			 					<th width="80%" class="pp-pdf-bottom-fullborder" align="left"><p><?php echo Rb_Text::_('PLG_PAYINVOICE_PDFEXPORT_INVOICE_DESCRIPTION'); ?></p></th>
+			 					<th width="20%" align="right" class="pp-pdf-bottom-fullborder"><p><?php echo Rb_Text::_('PLG_PAYINVOICE_PDFEXPORT_INVOICE_AMOUNT'); ?></p></th>
 				 			</tr>
 			 			</thead>
 					 			

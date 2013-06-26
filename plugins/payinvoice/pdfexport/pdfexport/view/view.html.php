@@ -12,11 +12,11 @@
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
 /** 
- * PdfInvoice Helper
+ * Pdf Export Html View
  * @author Manisha Ranawat
  */
-class PayInvoiceHelperPdfInvoice extends JObject
+require_once dirname(__FILE__).'/view.php';
+class PayInvoiceAdminViewPdfExport extends PayInvoiceAdminBaseViewPdfExport
 {
-	
 	
 }
