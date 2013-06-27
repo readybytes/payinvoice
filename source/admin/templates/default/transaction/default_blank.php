@@ -18,7 +18,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 		</div>
 		
 		<div class="center">
-			<a href="#" target="_blank" class="btn disabled"><i class="icon-question-sign "></i>&nbsp;<?php echo Rb_Text::_('COM_PAYINVOICE_SUPPORT_BUTTON');?></a>
+			<a href="http://www.jpayplans.com/support/forum/payinvoice-support.html" target="_blank" class="btn disabled"><i class="icon-question-sign "></i>&nbsp;<?php echo Rb_Text::_('COM_PAYINVOICE_SUPPORT_BUTTON');?></a>
 			<a href="http://www.jpayplans.com/payinvoice/documentation" target="_blank" class="btn disabled"><i class="icon-book"></i>&nbsp;<?php echo Rb_Text::_('COM_PAYINVOICE_DOCUMENTATION_BUTTON');?></a>
 		</div>
 		
