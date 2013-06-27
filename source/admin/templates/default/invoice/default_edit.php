@@ -136,6 +136,7 @@ JHtml::_('behavior.formvalidation');
 					<?php echo $this->loadTemplate('edit_footer');?>		
 				<!-- END : Item Table -->
 			</div>
+			<div>&nbsp;</div>
 		</div>		
 			
 		<div class="span3">
@@ -186,7 +187,7 @@ JHtml::_('behavior.formvalidation');
 				<?php if(!empty($record_id)):?>
 					<div class="row-fluid">
 						<div class="well well-small">
-							<h5><?php echo Rb_Text::_('COM_PAYINVOICE_COPY_LINK');?></h5>
+							<h5><?php echo Rb_Text::_('COM_PAYINVOICE_COPY_LINK');?></h5><hr>
 							<p class="info"><?php echo $invoice->getPayUrl();;?></p>
 						</div>
 					</div>

@@ -26,7 +26,9 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 		// If Serial number already exist then do nothing
 		$serial_exist	= $this->_helper->exist_serial_number($data['rb_invoice']['serial']);
 		if(!$itemId && $serial_exist){
-			return true;
+			$message  = Rb_Text::_('COM_PAYINVOICE_ENTER_VALID_SERIAL_NUMBER');
+			$type	  = 'error'; 		
+			return JFactory::getApplication()->redirect(Rb_Route::_('index.php?option=com_payinvoice&view=invoice&task=edit'), $message, $type);
 		}
 		//create new lib instance
 		$invoice = Rb_Lib::getInstance($this->_component->getPrefixClass(), $this->getName(), $itemId, $data)
