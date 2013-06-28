@@ -38,7 +38,7 @@ JHtml::_('behavior.framework');
 		<?php
 			$version = new JVersion();
 			$suffix = 'jom=J'.$version->RELEASE.'&utm_campaign=broadcast&payinvoice=PI'.PAYINVOICE_VERSION.'&dom='.JURI::getInstance()->toString(array('scheme', 'host', 'port'));?>
-			<iframe src="http://pub.jpayplans.com/broadcast/payinvoice/installation.html?<?php echo $suffix?>"></iframe>
+			<iframe src="http://pub.jpayplans.com/payinvoice/broadcast/installation.html?<?php echo $suffix?>"></iframe>
 	</div>
 </div>
 <?php 
