@@ -23,15 +23,34 @@ JHtml::_('behavior.framework');
 			<p><?php echo Rb_Text::_('COM_PAYINVOICE_INSTALLATION_SUCCESS_MSG_CONTENT');?></p>
 		</div>
 	</div>
+	
+	<div class="well well-small">
+		<div class="row-fluid">
+			<div class="span5 center"><?php echo Rb_Html::image(Rb_HelperTemplate::mediaURI(PAYINVOICE_PATH_ADMIN_TEMPLATE."/default/_media/icons/payinvoice-apps-banner.png", false), Rb_Text::_('bundle image'));?></div>	
+			
+			<div class="span2">&nbsp;</div>
+			
+			<div class="span5">
+				<div class="payinvoice-unit">
+	    			<h1><?php echo Rb_Text::_('COM_PAYINVOICE_INSTALLATION_HEADER');?></h1>
+	    			<p><?php echo Rb_Text::_('COM_PAYINVOICE_INSTALLATION_HEADER_MSG')?></p>
+	    			<div>&nbsp;</div>
+				    <p><a href="http://www.jpayplans.com/payinvoice.html" target="_blank" class="btn btn-success btn-large"><?php echo Rb_Text::_('COM_PAYINVOICE_GET_APPS');?></a></p>
+		    	</div>
+			</div>
+		</div>
+	</div>
+	
+	<div>&nbsp;</div>
 		
 	<div class="row-fluid">
 		<button type="submit" class="btn btn-success btn-large pull-right" onclick="window.location.href='<?php echo JUri::base().'index.php?option=com_payinvoice&view=install&task=complete';?>';">
 	  	<i class="icon-hand-right"></i>&nbsp;<?php echo Rb_Text::_('COM_PAYINVOICE_FINISH_INSTALLATION_BUTTON');?>
 		</button>
-   	</div>	
+	</div>	
+	<div>&nbsp;</div>
 	
 </div>
-
 
 <div class="row-fluid">
 	<div class="hide">

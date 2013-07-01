@@ -47,3 +47,21 @@
 #payinvoice-dashboard-chart-revenue svg{
  	height: 400px;
 }	
+
+/* css added for installation screen */
+.payinvoice .payinvoice-unit {
+	margin-bottom: 30px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+}
+
+.payinvoice .payinvoice-unit h1 {
+	font-size: 45px;
+	line-height: 1;
+}
+
+.payinvoice .payinvoice-unit p {
+	font-size: 18px;
+	line-height: 27px;
+}

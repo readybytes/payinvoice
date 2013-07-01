@@ -41,7 +41,7 @@
 
 		<!-- Apply the version change to all files. -->
 		<reflexive>
-			<fileset dir="${dir.root}/plugins/${ext.element}">
+			<fileset dir="${dir.packages}/plugins/${ext.element}">
 			     <include name="**/*.*" />
 			</fileset>
 			 <filterchain>

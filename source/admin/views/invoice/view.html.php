@@ -96,7 +96,8 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 			// add 7 days in due date
 			$binddata['rb_invoice']['issue_date'] = $rb_invoice['issue_date'];
 			$due_date = new Rb_Date($rb_invoice['due_date']);
-			$due_date->add(new DateInterval('P7D'));
+			// Previously add is used instead of modify(fix for php 5.2 compatibility)			
+			$due_date->modify('+7 day');
 			$binddata['rb_invoice']['due_date'] = (string)$due_date;
 	
 			$helper					= $this->getHelper('config');
