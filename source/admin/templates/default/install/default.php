@@ -24,18 +24,17 @@ JHtml::_('behavior.framework');
 		</div>
 	</div>
 	
-	<div class="well well-small">
+	<div class="payinvoice-install-border">
 		<div class="row-fluid">
-			<div class="span5 center"><?php echo Rb_Html::image(Rb_HelperTemplate::mediaURI(PAYINVOICE_PATH_ADMIN_TEMPLATE."/default/_media/icons/payinvoice-apps-banner.png", false), Rb_Text::_('bundle image'));?></div>	
+			<div class="span5 center"><?php echo Rb_Html::image(Rb_HelperTemplate::mediaURI(PAYINVOICE_PATH_ADMIN_TEMPLATE."/default/_media/images/payinvoice-apps-banner.jpg", false), Rb_Text::_('COM_PAYINVOICE_APPS_BANNER'));?></div>	
 			
 			<div class="span2">&nbsp;</div>
 			
 			<div class="span5">
 				<div class="payinvoice-unit">
-	    			<h1><?php echo Rb_Text::_('COM_PAYINVOICE_INSTALLATION_HEADER');?></h1>
+	    			<span class="payinvoice-install-header"><?php echo Rb_Text::_('COM_PAYINVOICE_INSTALLATION_HEADER');?></span>
 	    			<p><?php echo Rb_Text::_('COM_PAYINVOICE_INSTALLATION_HEADER_MSG')?></p>
-	    			<div>&nbsp;</div>
-				    <p><a href="http://www.jpayplans.com/payinvoice.html" target="_blank" class="btn btn-success btn-large"><?php echo Rb_Text::_('COM_PAYINVOICE_GET_APPS');?></a></p>
+				    <p><a href="http://www.jpayplans.com/payinvoice.html" target="_blank" class="btn btn-info btn-large"><?php echo Rb_Text::_('COM_PAYINVOICE_GET_APPS');?></a></p>
 		    	</div>
 			</div>
 		</div>
