@@ -22,3 +22,8 @@ Rb_Html::stylesheet(PAYINVOICE_PATH_CORE_MEDIA.'/css/payinvoice.css');
 
 Rb_Html::script(dirname(__FILE__).'/_media/js/admin.js');
 Rb_Html::stylesheet(dirname(__FILE__).'/_media/css/admin.css');
+
+// Load CSS for Joomla 2.5 only
+if(RB_CMS_VERSION_FAMILY === '16'){
+	Rb_Html::stylesheet(dirname(__FILE__).'/_media/css/admin.j25.css');
+}
