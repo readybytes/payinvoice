@@ -76,7 +76,7 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 			$processor_id  = $params->processor_id;
 		}
 		
-		$rb_invoice = $this->_helper->get_rb_invoice($itemId);	
+		$rb_invoice = $this->_helper->get_rb_invoice($itemId, true);	
 		$discount	= 0.00;
 		$tax		= 0.00;
 		
