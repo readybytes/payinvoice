@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <extension version="2.5" type="plugin" group="payinvoice" method="upgrade">
 	<name>Pdf Export</name>
-	<version>@build.version@.@build.number@</version>
+	<version>@build.version@</version>
 	<creationDate>June 2013</creationDate>
 	<author>Team PayPlans</author>
 	<authorEmail>team@readybytes.in</authorEmail>

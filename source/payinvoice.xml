@@ -7,7 +7,7 @@
 	<authorUrl>http://www.jpayplans.com</authorUrl>
 	<copyright>2009-13 Ready Bytes Software Labs Pvt. Ltd.</copyright>
 	<license>This component in released under the GNU/GPL v3 or later license</license>
-	<version>@build.version@.@build.number@</version>
+	<version>@build.version@</version>
 	<description>COM_PAYINVOICE_DESCRIPTION</description>
 
 	<!-- Public front end files -->
