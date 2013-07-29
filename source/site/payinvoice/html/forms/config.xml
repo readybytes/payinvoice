@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset addfieldpath="/components/com_payinvoice/payinvoice/html/fields" name="config_params">
+        <field 	name="currency"				 
+				type="payinvoice.currencies"
+				default=""
+				label="COM_PAYINVOICE_CONFIG_CURRENCY"
+				description="COM_PAYINVOICE_CONFIG_CURRENCY_DESC">
+				<option value="">COM_PAYINVOICE_SELECT_OPTION</option>
+		</field>
+		
+		<field name="date_format"	
+				label="COM_PAYINVOICE_DATE_FORMAT"
+				description="COM_PAYINVOICE_DATE_FORMAT_DESC"
+				type="list">
+				<option value="">COM_PAYINVOICE_SELECT_OPTION</option>
+				<option value="Y-m-d">COM_PAYINVOICE_YEAR_DASH_MONTH_DASH_DATE</option>   
+			   	<option value="m/d/Y">COM_PAYINVOICE_MONTH_SLASH_DATE_SLASH_YEAR</option>
+			   	<option value="m-d-Y">COM_PAYINVOICE_MONTH_DASH_DATE_DASH_YEAR</option> 
+		   		<option value="d/m/Y">COM_PAYINVOICE_DATE_SLASH_MONTH_SLASH_YEAR</option>
+				<option value="d-m-Y">COM_PAYINVOICE_DATE_DASH_MONTH_DASH_YEAR</option>
+		
+		</field>
+		
+	 	<field 	name="terms_and_conditions" 
+				type="textarea"				
+				buttons="true"
+				filter="JComponentHelper::filterText"
+				label="COM_PAYINVOICE_CONFIG_TERMS_AND_CONDITIONS" 
+				description="COM_PAYINVOICE_CONFIG_TERMS_AND_CONDITIONS_DESC" />
+		
+	</fieldset>
+        
+	<fieldset name="company_details">
+		<field 	name="company_name" 
+				type="text"
+				label="COM_PAYINVOICE_CONFIG_COMPANY_NAME" 
+				description="COM_PAYINVOICE_CONFIG_COMPANY_NAME_DESC"
+		        />
+		        
+        <field 	name="company_address" 
+				type="textarea"
+				label="COM_PAYINVOICE_CONFIG_COMPANY_ADDRESS" 
+				description="COM_PAYINVOICE_CONFIG_COMPANY_ADDRESS_DESC"
+		        />
+		        		        
+        <field 	name="company_phone" 
+				type="text"
+				label="COM_PAYINVOICE_CONFIG_COMPANY_PHONE" 
+				description="COM_PAYINVOICE_CONFIG_COMPANY_PHONE_DESC"
+		        />
+		        
+        <field 	name="company_logo" 
+				type="file"
+				label="COM_PAYINVOICE_CONFIG_COMPANY_LOGO" 
+				description="COM_PAYINVOICE_CONFIG_COMPANY_LOGO_DESC"
+				size="12"
+		        />
+
+	</fieldset>
+	
+</form>

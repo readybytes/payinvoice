@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="2.5" method="upgrade">
+	<name>PayInvoice</name>
+	<creationDate>2012-11-20</creationDate>
+	<author>Team PayPlans</author>
+	<authorEmail>team@readybytes.in</authorEmail>
+	<authorUrl>http://www.jpayplans.com</authorUrl>
+	<copyright>2009-13 Ready Bytes Software Labs Pvt. Ltd.</copyright>
+	<license>This component in released under the GNU/GPL v3 or later license</license>
+	<version>@build.version@</version>
+	<description>COM_PAYINVOICE_DESCRIPTION</description>
+
+	<!-- Public front end files -->
+	<files folder="site">
+		<folder>controllers</folder>
+		<folder>views</folder>
+		<folder>templates</folder>
+		<folder>payinvoice</folder>
+		<filename>payinvoice.php</filename>
+		<filename>index.html</filename>
+	</files>
+
+	<!-- Media files -->
+	<media destination="com_payinvoice" folder="media">
+		<folder>js</folder>
+		<folder>css</folder>
+		<folder>images</folder>
+		<filename>index.html</filename>
+	</media>
+
+	<scriptfile>script.php</scriptfile>
+	
+	<languages>
+		<language tag="en-GB">languages/site/en-GB.com_payinvoice.ini</language>
+	</languages>
+
+<!--	<scriptfile>installscript.php</scriptfile> -->
+
+	<!-- Runs on install -->
+        <install>
+	  	 	 <sql>
+	           	 <file driver="mysql" charset="utf8">install/sql/install.mysql.utf8.sql</file>
+	   		 </sql>
+        </install>
+
+	<!-- Administrator back-end section -->
+	<administration>
+		<!-- Administration menu -->
+		<menu view="dashboard">COM_PAYINVOICE</menu>
+		<submenu>
+            <menu view="config">COM_PAYINVOICE_CONFIG</menu>
+            <menu view="processor">COM_PAYINVOICE_PROCESSOR</menu>	
+            <menu view="buyer">COM_PAYINVOICE_BUYER</menu>				
+			<menu view="invoice">COM_PAYINVOICE_INVOICE</menu>		
+			<menu view="transaction">COM_PAYINVOICE_TRANSACTION</menu>	
+		</submenu>
+
+		<!-- Back-end files -->
+		<files folder="admin">
+			<filename>payinvoice.php</filename>
+			<filename>index.html</filename>
+			<folder>controllers</folder>
+			<folder>views</folder>
+			<folder>templates</folder>
+			<folder>install</folder>
+		</files>
+
+		<languages>
+			<language tag="en-GB">languages/admin/en-GB.com_payinvoice.ini</language>
+			<language tag="en-GB">languages/admin/en-GB.com_payinvoice.sys.ini</language>
+		</languages>
+	</administration>
+</extension>

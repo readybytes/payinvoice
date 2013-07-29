@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension version="2.5" type="plugin" group="payinvoice" method="upgrade">
+	<name>Pdf Export</name>
+	<version>@build.version@</version>
+	<creationDate>June 2013</creationDate>
+	<author>Team PayPlans</author>
+	<authorEmail>team@readybytes.in</authorEmail>
+	<authorUrl>http://www.jpayplans.com</authorUrl>
+	<copyright>2009-13 Ready Bytes Software Labs Pvt. Ltd.</copyright>
+	<license>GNU/GPL</license>
+	<description>Pdf of Invoices</description>	
+	<files>
+		<filename plugin="pdfexport">pdfexport.php</filename>
+		<folder>pdfexport</folder>
+	</files>
+
+	<languages>
+		<language tag="en-GB">en-GB.plg_payinvoice_pdfexport.ini</language>
+		<language tag="en-GB">en-GB.plg_payinvoice_pdfexport.sys.ini</language>
+	</languages>
+	
+	<config>
+	</config>
+</extension>

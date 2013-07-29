@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+  <fieldset addfieldpath="/components/com_payinvoice/payinvoice/html/fields">
+  		<field 	name="buyer_id"
+				type="hidden"
+				default="0"
+				readonly="true"/>
+				
+  		<field 	name="name" 
+				type="text"
+				label="COM_PAYINVOICE_BUYER_NAME"
+				description="COM_PAYINVOICE_BUYER_NAME_DESC"	
+				required="true"			 
+				labelclass="control-label"/>
+				
+		<field 	name="username" 
+				type="text"
+				label="COM_PAYINVOICE_BUYER_USERNAME"
+				description="COM_PAYINVOICE_BUYER_USERNAME_DESC"
+				default=""
+				required="true"	
+				labelclass="control-label"/>
+		
+		<field 	name="email" 
+				type="email"
+				label="COM_PAYINVOICE_BUYER_EMAIL"
+				description="COM_PAYINVOICE_BUYER_EMAIL_DESC"				
+				labelclass="control-label"
+				required="true"/>
+				
+				
+		<field 	name="password" 
+				type="password"
+				class="inputbox validate-password"
+				label="COM_PAYINVOICE_BUYER_PASSWORD"
+				description="COM_PAYINVOICE_BUYER_PASSWORD_DESC"		 
+				labelclass="control-label"/>
+				
+		<field 	name="currency" 
+				type="payinvoice.currencies"
+				default=""
+				label="COM_PAYINVOICE_BUYER_CURRENCY"
+				description="COM_PAYINVOICE_BUYER_CURRENCY_DESC"
+				labelclass="control-label">
+				<option value="">COM_PAYINVOICE_SELECT_OPTION</option>
+		</field>	
+		
+		<field 	name="address" 
+				type="textarea"
+				label="COM_PAYINVOICE_BUYER_ADDRESS"
+				description="COM_PAYINVOICE_BUYER_ADDRESS_DESC" 
+				labelclass="control-label"/>
+				
+		<field 	name="city" 
+				type="text"
+				label="COM_PAYINVOICE_BUYER_CITY"
+				description="COM_PAYINVOICE_BUYER_CITY_DESC"				 
+				labelclass="control-label"/>
+		
+		<field 	name="state" 
+				type="text"
+				label="COM_PAYINVOICE_BUYER_STATE"
+				description="COM_PAYINVOICE_BUYER_STATE_DESC"
+				labelclass="control-label"/>
+				
+		<field 	name="country" 
+				type="payinvoice.countries"
+				default=""
+				label="COM_PAYINVOICE_BUYER_COUNTRY"
+				description="COM_PAYINVOICE_BUYER_COUNTRY_DESC"
+				labelclass="control-label">
+				<option value="">COM_PAYINVOICE_SELECT_OPTION</option>
+		</field>	
+				
+		<field 	name="tax_number" 
+				type="text"
+				label="COM_PAYINVOICE_BUYER_TAX_NUMBER"
+				description="COM_PAYINVOICE_BUYER_TAX_NUMBER_DESC"
+				labelclass="control-label"/>
+				
+		<field 	name="zipcode" 
+				type="text"
+				label="COM_PAYINVOICE_BUYER_ZIPCODE"
+				description="COM_PAYINVOICE_BUYER_ZIPCODE_DESC"
+				labelclass="control-label"/>		
+  </fieldset>	
+</form>

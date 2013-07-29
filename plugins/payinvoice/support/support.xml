@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5" type="plugin" group="payinvoice" method="upgrade">
+    <name>Support</name>
+    <version>@build.version@</version>
+    <creationDate>June 2013</creationDate>
+    <author>Team PayPlans</author>
+    <authorEmail>team@readybytes.in</authorEmail>
+    <authorUrl>http://www.jpayplans.com</authorUrl>
+    <copyright>2009-13 Ready Bytes Software Labs Pvt. Ltd.</copyright>
+    <license>GNU General Public License v2</license>
+    <description>Remove-backlinking will be provided by using this plugin.</description>
+	<files>
+		<filename plugin="support">support.php</filename>
+	</files>
+</extension>
