@@ -17,10 +17,21 @@
 		<phingcall target="copy_component">
 			<property name="args.comname" value="com_payinvoice" />
 			<property name="args.name" value="payinvoice" />
-        	</phingcall>	
+        </phingcall>
+        	
+		<phingcall target="copy_test" />
 		
 		<copy file="${source}/build.xml"  tofile="${target}/scripts/reverse-build/build.xml" />
 		<copy file="${source}/delete.xml" tofile="${target}/scripts/reverse-build/delete.xml" />
+	</target>
+	
+	<target name="copy_test">
+		<copy todir="${target}/test">
+			<fileset dir="${source}/test/">
+				<include name="**/*.*" />
+				<exclude name="build**/*.*" />
+			</fileset>
+		</copy>
 	</target>
 	
 	<target name="copy_component">
