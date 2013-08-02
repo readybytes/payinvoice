@@ -9,10 +9,13 @@
  * @link       http://www.phpunit.de/manual/current/en/installation.html
  */
 
+define('_JEXEC', 1);
+
 // Fix magic quotes.
 @ini_set('magic_quotes_runtime', 0);
 
 // Maximise error reporting.
+ini_set('zend.ze1_compatibility_mode', '0');
 error_reporting(E_ALL & ~E_STRICT);
 ini_set('display_errors', 1);
 
@@ -28,9 +31,13 @@ if (!defined('JPATH_PLATFORM'))
 {
 	define('JPATH_PLATFORM', realpath(dirname(JPATH_TESTS) . '/libraries'));
 }
+if (!defined('JPATH_LIBRARIES'))
+{
+	define('JPATH_LIBRARIES', realpath(dirname(JPATH_TESTS) . '/libraries'));
+}
 if (!defined('JPATH_BASE'))
 {
-	define('JPATH_BASE', realpath(JPATH_TESTS . '/tmp'));
+	define('JPATH_BASE', realpath(dirname(__DIR__)));
 }
 if (!defined('JPATH_ROOT'))
 {
@@ -44,9 +51,21 @@ if (!defined('JPATH_CONFIGURATION'))
 {
 	define('JPATH_CONFIGURATION', JPATH_BASE);
 }
+if (!defined('JPATH_SITE'))
+{
+	define('JPATH_SITE', JPATH_ROOT);
+}
+if (!defined('JPATH_ADMINISTRATOR'))
+{
+	define('JPATH_ADMINISTRATOR', JPATH_ROOT . '/administrator');
+}
+if (!defined('JPATH_INSTALLATION'))
+{
+	define('JPATH_INSTALLATION', JPATH_ROOT . '/installation');
+}
 if (!defined('JPATH_MANIFESTS'))
 {
-	define('JPATH_MANIFESTS', JPATH_BASE . '/manifests');
+	define('JPATH_MANIFESTS', JPATH_ADMINISTRATOR . '/manifests');
 }
 if (!defined('JPATH_PLUGINS'))
 {
@@ -54,33 +73,18 @@ if (!defined('JPATH_PLUGINS'))
 }
 if (!defined('JPATH_THEMES'))
 {
-	define('JPATH_THEMES', JPATH_BASE . '/themes');
+	define('JPATH_THEMES', JPATH_BASE . '/templates');
 }
 
-// Import the platform.
-require_once JPATH_PLATFORM . '/import.php';
+// Import the platform in legacy mode.
+require_once JPATH_PLATFORM . '/import.legacy.php';
+
+// Force library to be in JError legacy mode
+JError::setErrorHandling(E_NOTICE, 'message');
+JError::setErrorHandling(E_WARNING, 'message');
+
+// Bootstrap the CMS libraries.
+require_once JPATH_LIBRARIES . '/cms.php';
 
 // Register the core Joomla test classes.
 JLoader::registerPrefix('Test', __DIR__ . '/core');
-
-/*
- * The following classes still depend on `JVersion` so we must load it until they are dealt with.
- *
- * JInstallerHelper
- * JUpdaterCollection
- * JUpdaterExtension
- * JUpdate
- * JFactory
- */
-require_once __DIR__ . '/version.php';
-
-/*
- * The PHP garbage collector can be too aggressive in closing circular references before they are no longer needed.  This can cause
- * segfaults during long, memory-intensive processes such as testing large test suites and collecting coverage data.  We explicitly
- * disable garbage collection during the execution of PHPUnit processes so that we (hopefully) don't run into these issues going
- * forwards.  This is only a problem PHP 5.3+.
- */
-gc_disable();
-
-// We need this to test JSession for now.  We should really fix this.
-ob_start();

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>	
+	<fieldset name="config_params">
+		<field 	name="test_single" 
+				type="text"
+				label="test_single" 
+				description="test_single"
+		        />
+		        
+		<field 	name="test_multiple" 
+				type="text"
+				multiple="true"
+				label="test_multiple" 
+				description="test_multiple"
+		        />
+		        
+		<field 	name="default" 
+				type="text"
+				default="default"
+				label="test_single" 
+				description="test_single"
+		        />
+	</fieldset>	
+</form>

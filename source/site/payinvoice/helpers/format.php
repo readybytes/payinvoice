@@ -33,14 +33,19 @@ class PayInvoiceHelperFormat extends JObject
 		return false;
 	}
 	
-	public function date(Rb_Date $date ,$format=null)
+	public function date(Rb_Date $date ,$format=null, PayInvoiceHelperConfig $cHelper = null)
 	{
-		$configHelper	= PayInvoiceFactory::getHelper('config');
-		$date_format	= $configHelper->get('date_format');
-		$format 		= ($format === null) ? $date_format : $format;
+		if($format === null){
+			if($cHelper === null){
+				$cHelper	= PayInvoiceFactory::getHelper('config');
+			}
+		
+			$date_format	= $cHelper->get('date_format');
+			$format = $date_format;
+		}
 
 		if(empty($format)){
-			return (string)$date;
+			return $date->toString();
 		}
 		
 		return $date->toFormat($format);
@@ -48,7 +53,7 @@ class PayInvoiceHelperFormat extends JObject
 	
 	public function price($amount, $currency, $format = null)
 	{
-		$currency_symbol = self::getCurrency($currency, $format);
+		$currency_symbol = $this->getCurrency($currency, $format);
 		return $currency_symbol.' '.number_format($amount, 2, '.', '');			
 	}
 }
