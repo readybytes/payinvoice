@@ -37,7 +37,7 @@ payinvoice.url = {
 		    var ajaxCall = {'url':theurl, 'data':options.data, 'iframe' : false};
 		}
 
-		payinvoice.ui.dialog.create(ajaxCall, '', 650, 300);
+		payinvoice.ui.dialog.create(ajaxCall, '', 650, 'auto');
 	},
 		
 	redirect:function(url){

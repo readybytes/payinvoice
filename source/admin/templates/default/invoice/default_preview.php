@@ -73,9 +73,13 @@ $config_data['company_phone']	= isset($config_data['company_phone'])		? $config_
 			   		<div class="span5">
 							 <ul class="unstyled">    
 									<li><strong><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_ISSUE_DATE');?></strong></li>
-									<li><?php echo $rb_invoice['created_date'];?></li>		    			    
+									<li><?php $issue_date = new Rb_Date($rb_invoice['issue_date']); ?>
+										<?php echo PayInvoiceHelperFormat::date($issue_date);?>
+									</li>		    			    
 									<li><strong><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_DUE_DATE');?></strong></li>
-									<li><?php echo $rb_invoice['due_date'];?></li>		    
+									<li><?php $due_date = new Rb_Date($rb_invoice['due_date'])?>
+										<?php echo PayInvoiceHelperFormat::date($due_date);?>
+									</li>		    
 							</ul>
 					</div>
 				</div>

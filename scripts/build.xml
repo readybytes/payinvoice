@@ -28,6 +28,16 @@
 
 		<phingcall target="export_sourcecode" />
 		<phingcall target="copy_default_plugin"/>
+
+		<if>
+		 <equals arg1="${payinvoice.premium}" arg2="true" />
+		 <then>
+		   	<echo message="This is a Premium build" />
+			<phingcall target="copy_premium_plugin" />
+			<property name="project.build" value="Premium" />
+		 </then>
+		</if>		
+
 		<phingcall target="replace_tokens" />		
 
 		<phing phingfile="${project.shortform.small}.xml" inheritAll="true" target="build" />
@@ -100,6 +110,14 @@
 	<target name="copy_default_plugin">
 		<copy todir="${dir.tmp}/admin/install/extensions/plg_user_payinvoice">
 			<fileset dir="${dir.root}/plugins/user/payinvoice">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+	</target>
+
+	<target name="copy_premium_plugin">
+		<copy todir="${dir.tmp}/admin/install/extensions/plg_support_payinvoice">
+			<fileset dir="${dir.root}/plugins/payinvoice/support">
 				<include name="**/*.*" />
 			</fileset>
 		</copy>

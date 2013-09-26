@@ -12,4 +12,5 @@
 	<files>
 		<filename plugin="support">support.php</filename>
 	</files>
+	<scriptfile>script.php</scriptfile>
 </extension>
