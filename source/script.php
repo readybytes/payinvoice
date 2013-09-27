@@ -26,6 +26,8 @@ class Com_payinvoiceInstallerScript
 		$extensions[] 	= array('type'=>'system',   'name'=>'rbsl');
 		//For Enabling Stripe Processor
 		$extensions[]	= array('type'=>'rb_ecommerceprocessor ', 'name'=>'stripe');
+		// For Enabling Support Plugin
+		$extensions[]	= array('type' => 'payinvoice', 'name' => 'support');	
 
 		$this->changeExtensionState($extensions);
 		return true;

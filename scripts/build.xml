@@ -116,7 +116,7 @@
 	</target>
 
 	<target name="copy_premium_plugin">
-		<copy todir="${dir.tmp}/admin/install/extensions/plg_support_payinvoice">
+		<copy todir="${dir.tmp}/admin/install/extensions/plg_payinvoice_support">
 			<fileset dir="${dir.root}/plugins/payinvoice/support">
 				<include name="**/*.*" />
 			</fileset>
