@@ -22,6 +22,10 @@ class PayInvoiceEvent extends JEvent
 		if('invoice' !== strtolower($entity)){
 			return true;
 		}
+
+		if($new == null || $new->get('object_type') != 'PayInvoiceItem'){
+			return true;
+		}
 		
 		$this->_sendEmail($new, $prev);
 		return true;
