@@ -53,8 +53,10 @@ class PayInvoiceEvent extends JEvent
 		$email_view->assign('buyer', $buyer);
 		$email_view->assign('config_data', $config_data);
 		
-		$suffix = 'paid';
-		if($new->getStatus()	== Rb_EcommerceInvoice::STATUS_REFUNDED){
+		if($new->getStatus()  == Rb_EcommerceInvoice::STATUS_PAID){
+			$suffix = 'paid';
+		}
+		else if($new->getStatus()	== Rb_EcommerceInvoice::STATUS_REFUNDED){
 			$suffix = 'refund';			
 		}
 		elseif($prev->getStatus() == PayInvoiceInvoice::STATUS_INPROCESS && $new->getStatus() == PayInvoiceInvoice::STATUS_DUE)
@@ -63,6 +65,8 @@ class PayInvoiceEvent extends JEvent
 			$transaction	= Rb_EcommerceAPI::transaction_get($filter);
 			$email_view->assign('transaction', $transaction);
 			$suffix	= 'error';
+		}else {
+			return true;
 		}
 		
 		$body 	 			= $email_view->loadTemplate('invoice_'.$suffix);
