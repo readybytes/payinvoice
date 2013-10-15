@@ -34,7 +34,7 @@ class PayInvoiceView extends PayInvoiceViewbase
 		
 		// intialize input
 		$this->input = PayInvoiceFactory::getApplication()->input;
-		self::addSubmenus(array('dashboard', 'config' , 'processor', 'buyer', 'invoice', 'transaction'));
+		self::addSubmenus(array('dashboard', 'config' , 'processor', 'buyer', 'invoice', 'transaction', 'appstore'));
 		
 		if(!isset($this->_helper)){
 			$this->_helper = $this->getHelper();
