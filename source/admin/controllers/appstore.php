@@ -19,7 +19,14 @@ class PayInvoiceAdminControllerAppstore extends PayInvoiceController
 	
 	public function display()
 	{
-		if(!Rb_HelperPlugin::getStatus('rbinstaller', 'system'))
+		$db		= PayInvoiceFactory::getDbo();
+		$query	= 'SELECT * FROM `#__extensions`'
+				 .'WHERE `type` LIKE "component"'
+				 .'AND `element` LIKE "com_rbinstaller"'
+				 .'AND `enabled` =1';
+				
+		$db->setQuery($query);
+		if(!$db->loadColumn())
 		{
 	 		$file_url  	= 'http://pub.readybytes.net/rbinstaller/update/live.json';
      		$link     	= new JURI($file_url);  
