@@ -106,6 +106,16 @@ class PayInvoiceSiteControllerInvoice extends PayInvoiceController
 	
 	public function complete()
 	{
+		$itemid = $this->_getId();    
+    
+		if($itemid <= 0){
+  			$invoice_number   	= $this->input->get('invoice_number', '');
+  			$rb_invoice_id    	= Rb_EcommerceAPI::invoice_get_id_from_number($invoice_number);
+  			$rb_invoice     	= $this->_helper->get_rb_invoice_records(array('invoice_id' => $rb_invoice_id));
+  			// XITODO : check rb_invoice had data or not      
+  			$rb_invoice     	= array_shift($rb_invoice);
+  			$this->getModel()->setState('id', $rb_invoice->object_id);
+   		 } 
 		return true;
 	}
 	
