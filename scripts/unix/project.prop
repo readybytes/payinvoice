@@ -4,7 +4,7 @@ project.shortform.small = payinvoice
 project.codename	= payinvoice
 
 # Version
-build.version 	= 1.0.0
+build.version 	= 1.0.1
 #build.number	= Will be created dynamically
 
 # Output settings
@@ -13,7 +13,7 @@ file.compression	= gzip
 file.extension		= zip
 
 # RbFramework
-rbframework.build.version = 1.0.0
+rbframework.build.version = 1.0.1
 rbframework.name	  = RBSL
 rbframework.location	  = ${user.home}/Dropbox/TEAM/dev/rbframework
 
