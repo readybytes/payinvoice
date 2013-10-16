@@ -34,7 +34,7 @@ JHtml::_('behavior.framework');
 				<div class="payinvoice-unit">
 	    			<span class="payinvoice-install-header"><?php echo Rb_Text::_('COM_PAYINVOICE_INSTALLATION_HEADER');?></span>
 	    			<p><?php echo Rb_Text::_('COM_PAYINVOICE_INSTALLATION_HEADER_MSG')?></p>
-				    <p><a href="http://www.jpayplans.com/payinvoice.html" target="_blank" class="btn btn-info btn-large"><?php echo Rb_Text::_('COM_PAYINVOICE_GET_APPS');?></a></p>
+				    <p><a href="<?php echo JUri::base().'index.php?option=com_payinvoice&view=appstore';?>" class="btn btn-info btn-large"><?php echo Rb_Text::_('COM_PAYINVOICE_GET_APPS');?></a></p>
 		    	</div>
 			</div>
 		</div>
