@@ -70,12 +70,14 @@ class PayInvoiceSiteControllerInvoice extends PayInvoiceController
 	
 	public function notify()
 	{
-		$get 	= Rb_Request::get('GET'); // XITODO :
-		$post 	= Rb_Request::get('POST');// XITODO :
-		$data 	= array_merge($get, $post);
+		$get         = Rb_Request::get('GET'); // XITODO :
+		$post        = Rb_Request::get('POST');// XITODO :
+		$data        = array_merge($get, $post);
 		
-		$response = new stdClass();
-		$response->data = $data;
+		$response       	= new stdClass();
+		$response->data   	= $data;
+		$response->__post  	= $post;
+		$response->__get  	= $get; 
 		
 //		file_put_contents(JPATH_SITE.'/tmp/'.time(), var_export($data,true), FILE_APPEND);		
 		
