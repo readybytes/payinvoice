@@ -10,7 +10,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 ?>
 <div class="row-fluid">
 	<div class="center">
-		<h2><?php echo Rb_Text::_('COM_PAYINVOICE_PAYMENT_FAILED');?></h2>
+		<h3><?php echo Rb_Text::_('COM_PAYINVOICE_PAYMENT_FAILED');?></h3>
 	</div>
 	
 	<div>&nbsp;</div>
