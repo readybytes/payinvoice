@@ -28,6 +28,12 @@ class PayInvoiceSiteControllerInvoice extends PayInvoiceController
 		$this->registerTask( 'cancel', 		'cancel');
 	}
 
+	public function __construct($options = array())
+	{
+		parent::__construct();
+		$this->registerTask( 'cancel', 		'cancel');
+	}
+
 	public function ajaxRequestBuildForm()
 	{
 		$itemid 		= $this->_getId(); 
