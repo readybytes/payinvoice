@@ -53,7 +53,12 @@ if(!$applicable){
 	
 	<div class="row-fluid">
 		<div class="span8"><h4><?php echo $rb_invoice['serial']." : ". $rb_invoice['title'];?></h4></div>
-		<div class="span4"><?php echo $status?></div>
+		<?php if(!$applicable){?>
+			<div class="span4 center <?php echo $statusbutton['class']?>"><h4><?php echo $statusbutton['status']?></h4></div>
+		<?php }else {?>
+			<div class="span4 center label">
+				<i class="pull-right icon-question-sign" title='<?php echo $applicable['message']?>'></i><h4><i class='icon-lock'></i>&nbsp;<?php echo $applicable['title']?></h4></div>
+		<?php }?>
 	</div><hr>
 	
 	

@@ -44,7 +44,7 @@ class PayInvoiceAdminViewTransaction extends PayInvoiceAdminBaseViewTransaction
 			$InvoiceIds[] = $record->invoice_id;
 		}
 		
-		$filter 	= array('invoice_id' => array(array('IN', '('.implode(",", $InvoiceIds).')')));
+		$filter 	= array('invoice_id' => array(array('IN', '('.implode(",", $InvoiceIds).')')), 'object_type' => 'PayInvoiceInvoice');
 		$invoices 	= $this->getHelper('invoice')->get_rb_invoice_records($filter);				
 		$helper		= $this->getHelper('buyer');
 		$buyer 		= $helper->get($buyerIds);
@@ -62,7 +62,7 @@ class PayInvoiceAdminViewTransaction extends PayInvoiceAdminBaseViewTransaction
 		$filter			= array('transaction_id' => $itemId);
 		$transaction   	= Rb_EcommerceAPI::transaction_get($filter);
 		
-		$invoice		= $this->getHelper('invoice')->get_rb_invoice_records(array('invoice_id' => $transaction['invoice_id']));
+		$invoice		= $this->getHelper('invoice')->get_rb_invoice_records(array('invoice_id' => $transaction['invoice_id'], 'object_type' => 'PayInvoiceInvoice'));
 		$buyer			= $this->getHelper('buyer')->get($transaction['buyer_id']);
 		
 		// Show or hide refund button

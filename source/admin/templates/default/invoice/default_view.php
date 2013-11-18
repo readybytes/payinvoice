@@ -22,8 +22,8 @@ JHtml::_('behavior.formvalidation');
 		<div class="row-fluid">
 			<div class="span9"><h2><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_DETAILS' ); ?></h2></div>		
 			<?php if($form->getValue('invoice_id')):?>
-				<div class="span3">
-					<?php echo $statusbutton;?>
+				<div class="span3 center <?php echo $statusbutton['class']?>">
+					<h4><?php echo $statusbutton['status']?></h4>
 				</div>
 			<?php endif;?>
 		</div><hr>

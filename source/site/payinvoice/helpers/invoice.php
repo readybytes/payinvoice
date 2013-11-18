@@ -73,19 +73,18 @@ class PayInvoiceHelperInvoice extends JObject
 	public function get_status_button($status)
 	{
 		if(in_array($status, array(PayInvoiceInvoice::STATUS_PAID, PayInvoiceInvoice::STATUS_REFUNDED))){
-	   		$class = 'label-success';
+	   		$class = 'label label-success';
 	   	}
 	   	elseif ($status == PayInvoiceInvoice::STATUS_DUE){
-	   	 	$class = 'label-warning';
+	   	 	$class = 'label label-warning';
 	   	}
 	   	else {
-	   		$class = 'label-info';
+	   		$class = 'label label-info';
 	   }
 	   
 	   $status_list	= PayInvoiceInvoice::getStatusList();
 	   
-	   $button	= "<div class='label center $class'><h4>$status_list[$status]</h4></div>";
-	   return $button;
+	   return array('class' => $class, 'status' => $status_list[$status]);
 	}
 	
     // get existing serial number
@@ -174,8 +173,7 @@ class PayInvoiceHelperInvoice extends JObject
 			}
 
 			if($message){
-		 		$button	= "<div class='label center'><i class='pull-right icon-question-sign' title='$message'></i><h4><i class='icon-lock'></i>&nbsp;$title</h4></div>";
-				return $button;
+		 		return array('message' => $message, 'title' => $title);
 			}
 		}
 		
