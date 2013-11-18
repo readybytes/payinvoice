@@ -44,7 +44,8 @@ class PayInvoiceAdminViewTransaction extends PayInvoiceAdminBaseViewTransaction
 			$InvoiceIds[] = $record->invoice_id;
 		}
 		
-		$filter 	= array('invoice_id' => array(array('IN', '('.implode(",", $InvoiceIds).')')));
+		//XITODO : Not Proper fix for fetch transactions 
+		$filter 	= array('invoice_id' => array(array('IN', '('.implode(",", $InvoiceIds).')')), 'object_type' => 'PayInvoiceInvoice');
 		$invoices 	= $this->getHelper('invoice')->get_rb_invoice_records($filter);				
 		$helper		= $this->getHelper('buyer');
 		$buyer 		= $helper->get($buyerIds);
@@ -53,7 +54,11 @@ class PayInvoiceAdminViewTransaction extends PayInvoiceAdminBaseViewTransaction
 		$this->assign('statusList', $statusList);
         $this->assign('invoice', $invoices);
 		
-		return parent::_displayGrid($records);
+		if(!empty($invoices)){
+			return parent::_displayGrid($records);
+        }else {
+        	return parent::_displayBlank();
+        }
 	}
 	
 	function edit($tpl=null,$itemId = null)
@@ -62,7 +67,7 @@ class PayInvoiceAdminViewTransaction extends PayInvoiceAdminBaseViewTransaction
 		$filter			= array('transaction_id' => $itemId);
 		$transaction   	= Rb_EcommerceAPI::transaction_get($filter);
 		
-		$invoice		= $this->getHelper('invoice')->get_rb_invoice_records(array('invoice_id' => $transaction['invoice_id']));
+		$invoice		= $this->getHelper('invoice')->get_rb_invoice_records(array('invoice_id' => $transaction['invoice_id'], 'object_type' => 'PayInvoiceInvoice'));
 		$buyer			= $this->getHelper('buyer')->get($transaction['buyer_id']);
 		
 		// Show or hide refund button

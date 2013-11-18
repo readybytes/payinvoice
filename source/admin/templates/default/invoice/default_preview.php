@@ -48,9 +48,10 @@ $config_data['company_phone']	= isset($config_data['company_phone'])		? $config_
 	   	 		<div class="row-fluid">
 					<div class="span8"><h5><?php echo $rb_invoice['serial'];?> : <?php echo $rb_invoice['title'];?></h5></div>
 						<?php if(!$applicable){?>
-						<div class="span4"><?php echo $statusbutton;?></div>	
-						<?php }else { ?>
-						<div class="span4"><?php echo $applicable;?></div>	
+							<div class="span4 center <?php echo $statusbutton['class']?>"><h4><?php echo $statusbutton['status']?></h4></div>
+						<?php }else {?>
+							<div class="span4 center label">
+							<i class="pull-right icon-question-sign" title='<?php echo $applicable['message']?>'></i><h4><i class='icon-lock'></i>&nbsp;<?php echo $applicable['title']?></h4></div>
 						<?php }?>
 				</div>
 				<hr>
