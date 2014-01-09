@@ -189,6 +189,15 @@ JHtml::_('behavior.formvalidation');
 							<p class="info"><?php echo $invoice->getPayUrl();;?></p>
 						</div>
 					</div>
+
+					<div class="row-fluid">
+		    			<div class="well well-small">
+			    			<?php if(!empty($transactions)):?>
+			    			<h4 class="muted"><?php echo Rb_Text::_('Transactions');?></h4><hr>
+			    			<?php echo $this->loadTemplate('invoice_transaction');?>	
+			    			<?php endif;?>
+		    			</div>
+	    			</div>
  				<?php endif;?>
 		</div>				
 	</div>			
