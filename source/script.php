@@ -30,6 +30,7 @@ class Com_payinvoiceInstallerScript
 		$extensions[]	= array('type' => 'payinvoice', 'name' => 'support');	
 
 		$this->changeExtensionState($extensions);
+		$this->addDefaultProcessor();
 		return true;
 	}
 
@@ -48,7 +49,6 @@ class Com_payinvoiceInstallerScript
 	function update($parent)
 	{
 		self::install($parent);
-		$this->addDefaultProcessor();
 	}
 
 	function installExtensions($actionPath=null,$delFolder=true)
