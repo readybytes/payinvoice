@@ -26,10 +26,11 @@ class Com_payinvoiceInstallerScript
 		$extensions[] 	= array('type'=>'system',   'name'=>'rbsl');
 		//For Enabling Stripe Processor
 		$extensions[]	= array('type'=>'rb_ecommerceprocessor ', 'name'=>'stripe');
- 		// For Enabling Support Plugin
-        $extensions[]  = array('type' => 'payinvoice', 'name' => 'support');
+		// For Enabling Support Plugin
+		$extensions[]	= array('type' => 'payinvoice', 'name' => 'support');	
 
 		$this->changeExtensionState($extensions);
+		$this->addDefaultProcessor();
 		return true;
 	}
 
@@ -48,7 +49,6 @@ class Com_payinvoiceInstallerScript
 	function update($parent)
 	{
 		self::install($parent);
-		$this->addDefaultProcessor();
 	}
 
 	function installExtensions($actionPath=null,$delFolder=true)

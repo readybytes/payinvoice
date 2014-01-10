@@ -66,7 +66,7 @@ class PayInvoiceSiteControllerInvoice extends PayInvoiceController
 			if($response->get('next_request', false) == false){
 				break;
 			}
-			$data = array();
+
 			$request_name = $response->get('next_request_name', 'payment');
 		}
 
