@@ -48,7 +48,7 @@ if(isset($invoice['params']['items'])){
 		<tr>
 			<td colspan="2" style="padding:10px 5px 5px 7px;border: 0;">&nbsp;</td>
 			<td align="right" style="padding:10px 5px 10px 7px;border-right:0px;"><?php echo Rb_Text::_('COM_PAYINVOICE_TAX');?></td>
-			<td style="border-left:0px;">&nbsp;&nbsp;<?php echo $rb_invoice['currency']." ".number_format($tax, 2);?></td>
+			<td style="border-left:0px;">&nbsp;&nbsp;<?php echo number_format($tax, 2)." %";?></td>
 		</tr>
 		<tr>
 			<td colspan="2" style="padding:10px 5px 10px 7px;border: 0;">&nbsp;
