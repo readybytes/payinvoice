@@ -13,7 +13,7 @@ file.compression	= gzip
 file.extension		= zip
 
 # RbFramework
-rbframework.build.version = 1.0.2
+rbframework.build.version = 1.0.3
 rbframework.name	  = RBSL
 rbframework.location	  = ${user.home}/Dropbox/TEAM/dev/rbframework
 
