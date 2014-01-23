@@ -62,7 +62,7 @@ class PayInvoiceInvoice extends PayInvoiceLib
 		return $this;
 	}
 	
-	public function getParams($object = true)
+	public function getParams($object = true, $default = null, $property='params')
 	{
 		if($object){
 			return $this->params->toObject();

@@ -21,7 +21,7 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 	protected function _adminEditToolbar()
 	{	
 		$invoice_id 	= $this->getModel()->getState('id');
-		$editable		= PayInvoiceInvoice::isEditable($invoice_id);
+		$editable		= $this->_helper->isEditable($invoice_id);
 		if($editable){
 			Rb_HelperToolbar::apply();
 			Rb_HelperToolbar::save();
@@ -120,7 +120,7 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 				$invoice_params_fields[$field->fieldname] = $field->input;
 		}
 		
-		$editable		= PayInvoiceInvoice::isEditable($itemId);
+		$editable		= $this->_helper->isEditable($itemId);
 		if(!$editable){
 			$this->setTpl('view');
 		}

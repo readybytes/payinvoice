@@ -39,7 +39,7 @@ class PayInvoiceBuyer extends PayInvoiceLib
 		$this->name                 = '';
 		$this->username             = '';
 		$this->email                = '';
-		$this->currency 			= PayInvoiceHelperConfig::get('currency');
+		$this->currency 			= $this->getHelper('config')->get('currency');
 		$this->city                 = '';
 		$this->address              = '';
 		$this->state                = '';

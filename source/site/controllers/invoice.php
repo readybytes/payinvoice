@@ -96,7 +96,7 @@ class PayInvoiceSiteControllerInvoice extends PayInvoiceController
 		$response 		  = Rb_EcommerceApi::invoice_process($invoice_id, $response);			
 	}
 
-	public function display()
+	public function display($cachable = false, $urlparams = array())
 	{
 		$key		= PayInvoiceFactory::getApplication()->input->get('key');
 		$itemid 	= $this->getModel()->getId();

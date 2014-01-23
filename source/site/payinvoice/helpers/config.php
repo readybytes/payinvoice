@@ -16,7 +16,7 @@ class PayInvoiceHelperConfig extends JObject
 {
 	static $configuration = null;
 	
-	public function get($key = null)
+	public function get($key = null, $default = null)
 	{
 		if(self::$configuration === null || ($key !== null && !isset(self::$configuration[$key])))
 		{

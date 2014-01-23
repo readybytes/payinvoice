@@ -17,7 +17,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
  */
 class PayInvoiceAdminControllerTransaction extends PayInvoiceController
 {
-	public function getModel()
+	public function getModel($name = '', $prefix = '', $config = array())
 	{
         return Rb_EcommerceAPI::transaction_get_model();
 	}

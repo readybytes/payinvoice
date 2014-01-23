@@ -18,7 +18,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 require_once dirname(__FILE__).'/view.php';
 class PayInvoiceSiteViewInvoice extends PayInvoiceSiteBaseViewInvoice
 {	
-	public function display()
+	public function display($tpl = null)
 	{
 		$itemid  = $this->getModel()->getId();
 		$payinvoice_invoice = PayInvoiceInvoice::getInstance($itemid)->toArray();	
@@ -59,7 +59,7 @@ class PayInvoiceSiteViewInvoice extends PayInvoiceSiteBaseViewInvoice
 		return true;
 	}
 
-	public function _basicFormSetup()
+	public function _basicFormSetup($task=null)
 	{
 		return true;
 	}

@@ -74,7 +74,7 @@ class PayInvoiceModelBuyer extends PayInvoiceModel
 	
 	//added filter for user so it is necessary to override _buildQueryFilter function here 
 	//so that proper query can be build corresponding to applied filter
-	protected function _buildQueryFilter(Rb_Query &$query, $key, $value)
+	protected function _buildQueryFilter(Rb_Query &$query, $key, $value, $tblAlias='`tbl`.')
     {
     	// Only add filter if we are working on bulk records
 		if($this->getId()){
@@ -124,7 +124,7 @@ class PayInvoiceModelBuyer extends PayInvoiceModel
 		return parent::save($data, $pk, $new);
     }
     
-	public function loadRecords(Array $queryFilters=array(), Array $queryClean = array(), $emptyRecord=false)
+	public function loadRecords(Array $queryFilters=array(), Array $queryClean = array(), $emptyRecord=false, $indexedby = null)
 	{	
 		//it is required to decide which query to execute in FROM
 		// for single record or multiple record
