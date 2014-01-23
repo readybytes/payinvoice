@@ -190,14 +190,14 @@ JHtml::_('behavior.formvalidation');
 						</div>
 					</div>
 
-					<div class="row-fluid">
-		    			<div class="well well-small">
-			    			<?php if(!empty($transactions)):?>
-			    			<h4 class="muted"><?php echo Rb_Text::_('Transactions');?></h4><hr>
-			    			<?php echo $this->loadTemplate('invoice_transaction');?>	
-			    			<?php endif;?>
-		    			</div>
-	    			</div>
+					<?php if(!empty($transactions)):?>
+						<div class="row-fluid">	
+              				<div class="well well-small">
+               			 		<h4 class="muted"><?php echo Rb_Text::_('Transactions');?></h4><hr>
+                				<?php echo $this->loadTemplate('invoice_transaction');?>  
+              				</div>
+           				</div>
+           			<?php endif;?>		
  				<?php endif;?>
 		</div>				
 	</div>			

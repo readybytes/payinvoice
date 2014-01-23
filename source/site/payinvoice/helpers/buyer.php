@@ -76,7 +76,7 @@ class PayInvoiceHelperBuyer extends JObject
 		return $user->id;
 	}
 
-	public function get($buyerIds)
+	public function get($buyerIds, $default = null)
 	{
 		if(!is_array($buyerIds)){
 			$buyerIds = array($buyerIds);

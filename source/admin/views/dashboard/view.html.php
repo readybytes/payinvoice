@@ -23,7 +23,7 @@ class PayInvoiceAdminViewDashboard extends PayInvoiceAdminBaseViewDashboard
 		$this->_adminToolbarTitle();
 	}
 	
-	public function display()
+	public function display($tpl=null)
 	{
 		$this->assign('currencies', $this->getHelper('statistics')->currencies_used());
 		$this->assign('default_currency', $this->getHelper('config')->get('currency'));

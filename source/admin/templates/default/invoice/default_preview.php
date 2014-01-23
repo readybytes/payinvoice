@@ -72,16 +72,14 @@ $config_data['company_phone']	= isset($config_data['company_phone'])		? $config_
 					<div class="span2"></div>
 	   
 			   		<div class="span5">
-							 <ul class="unstyled">    
-									<li><strong><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_ISSUE_DATE');?></strong></li>
-									<li><?php $issue_date = new Rb_Date($rb_invoice['issue_date']); ?>
-										<?php echo PayInvoiceHelperFormat::date($issue_date);?>
-									</li>		    			    
-									<li><strong><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_DUE_DATE');?></strong></li>
-									<li><?php $due_date = new Rb_Date($rb_invoice['due_date'])?>
-										<?php echo PayInvoiceHelperFormat::date($due_date);?>
-									</li>		    
-							</ul>
+    					<dl class="dl-horizontal pull-right">	
+						    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_ISSUE_DATE');?></dt>
+						   	<?php $issue_date = new Rb_Date($rb_invoice['issue_date']);?>
+						    <dd><?php echo $this->getHelper('format')->date($issue_date);?></dd>
+						    <?php $due_date = new Rb_Date($rb_invoice['due_date']);?>		    			    
+						    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_DUE_DATE');?></dt>
+						    <dd><?php echo $this->getHelper('format')->date($due_date);?></dd>		    
+		   				</dl>
 					</div>
 				</div>
 	

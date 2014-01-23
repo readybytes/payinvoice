@@ -25,7 +25,7 @@ class PayInvoiceModelformProcessor extends PayInvoiceModelform
 	 * (non-PHPdoc)
 	 * @see libraries/joomla/application/component/JModelForm::preprocessForm()
 	 */
-	function preprocessForm($form, $data)
+	function preprocessForm(JForm $form, $data, $group = 'content')
 	{		
 		if(isset($data['type'])){	
 			$processor = Rb_EcommerceAPI::get_processor_instance($data['type']);

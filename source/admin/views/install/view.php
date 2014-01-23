@@ -12,7 +12,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 class PayInvoiceAdminBaseViewInstall extends PayInvoiceView
 {
-	public function display()
+	public function display($tpl=null)
 	{
 		return true;
 	}
