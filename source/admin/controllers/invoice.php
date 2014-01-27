@@ -91,10 +91,14 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 		
 		$buyer 		= PayInvoiceBuyer::getInstance($buyer_id);
 		$currency   = $buyer->getCurrency();
+
+		if(empty($currency)){
+	      		$currency  = $this->getHelper('config')->get('currency');
+		}
 				
 		$response  = PayInvoiceFactory::getAjaxResponse();
 		$response->addScriptCall('payinvoice.jQuery("#payinvoice_form_rb_invoice_currency").val',$currency);
-		$response->addScriptCall('payinvoice.admin.invoice.item.on_currency_change', $currency);
+		$response->addScriptCall('payinvoice.admin.invoice.on_currency_change', $currency);
 		$response->sendResponse();
 		
 	}

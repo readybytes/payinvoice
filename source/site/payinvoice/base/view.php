@@ -88,7 +88,7 @@ class PayInvoiceView extends PayInvoiceViewbase
 			return '';
 		}
 		
-		return '<p align="center">'.Rb_Text::_('COM_PAYINVOICE_POWERED_BY') .'<a id="payinvoicePowerdBy" href="http://www.jpayplans.com/payinvoice" target="_blank" >PayInvoice</a></p>';
+		return '<p align="center">'.Rb_Text::_('COM_PAYINVOICE_POWERED_BY') .'<a id="payinvoicePowerdBy" href="http://www.readybytes.net/payinvoice.html" target="_blank" >PayInvoice</a></p>';
 	}
 	
 	
@@ -98,7 +98,7 @@ class PayInvoiceView extends PayInvoiceViewbase
        
          	 <div class="powered-by">
 				<div class="pull-right muted">
-				   <?php echo Rb_Text::_('COM_PAYINVOICE_POWERED_BY') .'<a href="http://www.jpayplans.com/payinvoice" target="_blank" >PayInvoice</a>';?>
+				   <?php echo Rb_Text::_('COM_PAYINVOICE_POWERED_BY') .'<a href="http://www.readybytes.net/payinvoice.html" target="_blank" >PayInvoice</a>';?>
 				   <?php echo ' | '.Rb_Text::_('COM_PAYINVOICE_FOOTER_VERSION').' <strong>'.PAYINVOICE_VERSION .'</strong> | '. Rb_Text::_('COM_PAYINVOICE_FOOTER_BUILD').PAYINVOICE_REVISION; ?>	  	
 			    	<?php echo '<br />'
 			    		.Rb_Text::_('COM_PAYINVOICE_FOOTER_MESSAGE')
