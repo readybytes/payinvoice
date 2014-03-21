@@ -26,7 +26,7 @@ define('PAYINVOICE_REVISION','@build.number@');
 
 //shared paths
 define('PAYINVOICE_PATH_CORE',				JPATH_SITE.'/components/com_payinvoice/payinvoice');
-define('PAYINVOICE_PATH_CORE_MEDIA',			JPATH_ROOT.'/media/com_payinvoice');
+define('PAYINVOICE_PATH_CORE_MEDIA',			dirname(dirname(dirname(dirname(__FILE__)))).'/media/com_payinvoice');
 define('PAYINVOICE_PATH_CORE_FORM',			PAYINVOICE_PATH_CORE.'/form');
 
 // front-end
