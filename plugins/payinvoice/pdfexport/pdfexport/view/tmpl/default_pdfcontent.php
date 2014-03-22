@@ -157,7 +157,7 @@ if(isset($params->items)){
 					    		<td class="pp-pdf-colored-border">
 					    			<p><b><?php echo $data['title'];?></b></p>
 					    			<?php $paid_date = new Rb_Date($data['date']);?>
-							        <p><?php echo PayInvoiceHelperFormat::date($paid_date); ?></p>			
+							        <p><?php echo $this->getHelper('format')->date($paid_date); ?></p>			
 								</td>
 								
 					    		<td class="pp-pdf-colored-border">
@@ -168,7 +168,7 @@ if(isset($params->items)){
 					    		<td class="pp-pdf-colored-border">
 					    			<p><b><?php echo Rb_Text::_('PLG_PAYINVOICE_PDFEXPORT_INVOICE_ISSUE_ON'); ?></b></p>
 					    			<?php $issue_date = new Rb_Date($rb_invoice->issue_date);?>
-									<p><?php echo PayInvoiceHelperFormat::date($issue_date); ?></p>
+									<p><?php echo $this->getHelper('format')->date($issue_date); ?></p>
 					    		</td>
 					    	</tr>
 					    </table>

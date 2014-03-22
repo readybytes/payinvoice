@@ -61,7 +61,7 @@ JHtml::_('behavior.formvalidation');
 				<div class="controls">
 					<!-- XITODO : Fix size of logo properly -->
 					<?php if(!empty($config_data['company_logo'])):?>
-						<div id="payinvoice-logo-image"><img src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false); ?>" /></div>
+						<div id="payinvoice-logo-image"><img style="max-width: 250px;" src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false); ?>" /></div>
 						<div>&nbsp;</div>
 						<div><a href="#" id="payinvoice-delete-logo" onclick="payinvoice.admin.config.deleteLogo.confirm()"><?php echo Rb_Text::_('COM_PAYINVOICE_DELETE');?></a></div>
 						<div>&nbsp;</div>
