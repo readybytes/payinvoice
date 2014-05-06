@@ -30,25 +30,17 @@ class plgPayinvoicePdfExport extends Rb_Plugin
 	public function onRbControllerCreation($option, $view, $controller, $task, $format)
 	{
 		if($controller === 'pdfexport'){			
-			Rb_HelperLoader::addAutoLoadFile(dirname(__FILE__).'/'.$this->_name.'/view/view.'.$format.'.php', 'PayInvoiceAdminViewPdfExport');
-			Rb_HelperLoader::addAutoLoadFile(dirname(__FILE__).'/'.$this->_name.'/controller.php', 'PayInvoiceAdminControllerPdfExport');			
-			Rb_HelperLoader::addAutoLoadFile(dirname(__FILE__).'/'.$this->_name.'/helper.php', 'PayInvoiceHelperPdfExport');			
-			Rb_HelperLoader::addAutoLoadFolder(__DIR__.'/pdfexport/dompdf0.6', '');
+			$this->__loadFiles($format);
+			// load class of dompdf
+			$this->__loadDomPdfClass();
 		}
 		
-		// load class of dompdf
-		require_once dirname(__FILE__).'/pdfexport/dompdf0.6/dompdf_config.inc.php';
-	    $files = JFolder::files(DOMPDF_INC_DIR);
-	    foreach ($files as $file){
-			$class = JFile::stripExt($file);
-			$class = JFile::stripExt($class);
-			$frags = explode('_',$class);
-		
-			for($i=0; $i < count($frags); $i++)
-				$frags[$i] = JString::ucfirst($frags[$i]);
-				
-			$class = implode ('_',$frags);
-			Rb_HelperLoader::addAutoLoadFile(DOMPDF_INC_DIR.'/'."$file",$class);
+		if($controller === 'invoice' && $task === 'download'){	
+			$controller	= 'PdfExport';
+			$this->__loadFiles();
+
+			// load class of dompdf
+			$this->__loadDomPdfClass();
 		}
 	}
 
@@ -69,8 +61,34 @@ class plgPayinvoicePdfExport extends Rb_Plugin
 					return $content;
 				}
 			}
-		
+					
 		return false;
+	}
+	
+	protected function __loadFiles($format = 'pdf')
+	{
+		Rb_HelperLoader::addAutoLoadFile(dirname(__FILE__).'/'.$this->_name.'/view/view.'.$format.'.php', 'PayInvoiceAdminViewPdfExport');
+		Rb_HelperLoader::addAutoLoadFile(dirname(__FILE__).'/'.$this->_name.'/controller.php', 'PayInvoiceAdminControllerPdfExport');			
+		Rb_HelperLoader::addAutoLoadFile(dirname(__FILE__).'/'.$this->_name.'/helper.php', 'PayInvoiceHelperPdfExport');			
+		Rb_HelperLoader::addAutoLoadFolder(__DIR__.'/pdfexport/dompdf0.6', '');
+	}
+	
+	/* load class of dompdf */
+	protected function __loadDomPdfClass()
+	{
+		require_once dirname(__FILE__).'/pdfexport/dompdf0.6/dompdf_config.inc.php';
+	    $files = JFolder::files(DOMPDF_INC_DIR);
+	    foreach ($files as $file){
+			$class = JFile::stripExt($file);
+			$class = JFile::stripExt($class);
+			$frags = explode('_',$class);
+		
+			for($i=0; $i < count($frags); $i++)
+				$frags[$i] = JString::ucfirst($frags[$i]);
+				
+			$class = implode ('_',$frags);
+			Rb_HelperLoader::addAutoLoadFile(DOMPDF_INC_DIR.'/'."$file",$class);
+		}
 	}
 }
 

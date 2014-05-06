@@ -20,16 +20,83 @@ class PayInvoiceAdminViewPdfExport extends PayInvoiceAdminBaseViewPdfExport
 {
 	public function download()
 	{
+		$invoice_id = $this->input->get('invoice_id');
+		if($invoice_id){
+			$InvoiceIds     = is_array($invoice_id)	? $invoice_id : (array)$invoice_id;
+
+		}else {
+			$InvoiceIds 	= $this->input->get('cid', array(), 'array');
+			$session		= PayInvoiceFactory::getSession();
+			if(!empty($InvoiceIds)){
+				$this->deleteUserFiles();	
+				$this->clearSessionVariables();	
+				$session->set('invoice_ids',$InvoiceIds);
+			}else {
+				$InvoiceIds = $session->get('invoice_ids',array());
+			}
+		}
+						
+		if(count($InvoiceIds) > 10){
+			$session		= PayInvoiceFactory::getSession();
+			$count	     	= $session->get('pdfexport_count',1);
+			$limitStart 	= $session->get('pdfexport_start',0);
+			
+			if($limitStart < count($InvoiceIds)){
+		
+				$invoice_ids 	= array_slice($InvoiceIds , $limitStart, 10);
+				$contents		= $this->getContent($invoice_ids);
+					
+				$this->createFolder($this->genratePdf($contents), $count);
+				$app 		 	= PayInvoiceFactory::getApplication();
+				$session->set('invoice_ids', $InvoiceIds);
+				$session->set('pdfexport_count', ++$count);
+				$session->set('pdfexport_start', $limitStart +10);
+				$this->doRefresh();
+			}	
+			
+			$this->clearSessionVariables();
+			$this->createZipOfFiles();
+			
+		}else { 
+			$contents	= $this->getContent($InvoiceIds);
+			$pdf   		= $this->genratePdf($contents);
+			$pdf->stream(invoice.pdf);
+		}
+			
+		return true;
+	}
+	
+	function doRefresh()
+	{
+		$app 		 = PayInvoiceFactory::getApplication();
+		$currentUrl  = JURI::getInstance();
+		// set task for generate pdf files for next slote
+		$currentUrl->setVar('task', 'download');
+		$redirectUrl = $currentUrl->toString();
+       	$app->redirect($currentUrl);
+	}
+	
+	public function getContent($invoice_ids)
+	{
+		$filter 		= array('invoice_id' => array(array('IN', '('.implode(",", $invoice_ids).')')));
+		$invoices 		= $i_helper->get_rb_invoice_records($filter);
+		$contents		= '';
+		foreach ($invoices as $invoice)
+		{
+			$this->getTemplate($invoice);
+			$contents	.= $this->getPdfContent($invoice);
+		}
+		return $contents;
+	}
+	
+	
+	public function getTemplate($rb_invoice)
+	{
 		$i_helper = $this->getHelper('invoice');
 		$f_helper = $this->getHelper('format');	
-		
-		// set by controller
-		$invoice_id = $this->input->get('invoice_id');	
-		$rb_invoice	= $i_helper->get_rb_invoice($invoice_id);
-		$rb_invoice= (object) $rb_invoice;
-			
+
 		//get instances
-		$invoice	= PayInvoiceInvoice::getInstance($invoice_id);
+		$invoice	= PayInvoiceInvoice::getInstance($rb_invoice->object_id);
 		$buyer		= PayInvoiceBuyer::getInstance($rb_invoice->buyer_id);
 	
 		$this->assign('invoice',	 		$invoice);
@@ -41,19 +108,9 @@ class PayInvoiceAdminViewPdfExport extends PayInvoiceAdminBaseViewPdfExport
 		$this->assign('subtotal', 			$i_helper->get_subtotal($rb_invoice->invoice_id));
 		$this->assign('config_data',		$this->getHelper('config')->get());
 		$this->assign('status_list', 		PayInvoiceInvoice::getStatusList());
-		
-		$contents = $this->loadTemplate('pdfheader');		
-		$contents .= $this->getPdf($rb_invoice);
-		$contents.= "</body></html>";
-		$pdf      = new DOMPDF();
-		$pdf->set_paper("a4", "portrait");
-		$pdf->load_html($contents);
-		$pdf->render();
-		$pdf->stream('invoice.pdf');
-		return false;
 	}
 	
-	public function getPdf($rb_invoice)
+	public function getPdfContent($rb_invoice)
 	{
 		$i_helper = $this->getHelper('invoice');
 		$f_helper = $this->getHelper('format');	
@@ -101,6 +158,111 @@ class PayInvoiceAdminViewPdfExport extends PayInvoiceAdminBaseViewPdfExport
 			$contents .= $this->loadTemplate('pdfcontent');			
 		}
 		
-		return $contents;	
+		return $contents;
 	}
+	
+	/**
+	 *  Generate pdf file
+	 */
+	public function genratePdf($contents)
+	{
+		$pdfContent	  = $this->loadTemplate('pdfheader');		
+		$pdfContent  .= $contents;
+		$pdfContent  .= "</body></html>";
+		$pdf          = new DOMPDF();
+		$pdf->set_paper("a4", "portrait");
+		$pdf->load_html($pdfContent);
+		$pdf->render();
+		
+		return $pdf;	
+	}
+	
+	
+	/**
+	 *  Creating folder of given pdf files
+	 */
+	function createFolder($pdf, $count = 0 , $buyerId = null)
+	{
+		$buyer	  = PayInvoiceFactory::getUser($buyerId);
+		$dir_path = dirname(dirname(dirname(__FILE__))).'/pdfexport'.$buyer->id;
+		if(!is_dir($dir_path)){
+			mkdir($dir_path);
+		} 	
+		file_put_contents($dir_path.'/invoice'.$count.'.pdf', $pdf->output());
+		return ;
+	}	
+	
+
+	/**
+	 * delete folder and contained files
+	 */
+	function deleteFolder($dirPath)
+	{
+		if(is_dir($dirPath)){	
+			$files = JFolder::files($dirPath);
+			foreach ($files as $file){
+				unlink($dirPath.'/'.$file);
+			}
+			JFolder::delete($dirPath);
+		}
+		return true;	
+	}
+	
+	function deleteUserFiles($buyerId = null)
+	{   
+		$buyer 	= PayInvoiceFactory::getUser($buyerId);
+		//delete files and folder before and after processing
+		$this->deleteFolder(dirname(dirname(dirname(__FILE__))).'/pdfexport'.$buyer->id);
+		return true;
+	}
+	
+	/**
+	 * Create zip of pdf files 
+	 */
+	function createZipOfFiles()
+	{
+		$buyer 			   = PayInvoiceFactory ::getUser();
+		$dir_path 		   = dirname(dirname(dirname(__FILE__))).'/pdfexport'.$buyer->id.'/';
+		$archive_file_name = $dir_path."pdfinvoices".$buyer->id.".zip";
+		$files             = JFolder::files($dir_path);
+		$zip 			   = new JArchive();
+		$zip_adapter       = JArchive::getAdapter('zip'); // compression type
+		
+		$filesToZip 	   = array();
+		//create file data required for zip_adapter
+		foreach ($files as $file){
+			$data 		   = JFile::read($dir_path.DS.$file);
+			$filesToZip[]  = array('name'=> $file, 'data'=>$data);
+		}
+		
+		//create the file and throw the error if unsuccessful
+		if (!$zip_adapter->create($archive_file_name,$filesToZip)) {
+          exit('Error creating zip file');
+        }
+		
+	    //then send the headers to force download the zip file
+	    if(file_exists($archive_file_name)){
+		    header("Content-type: application/zip");
+		    header("Content-Disposition: attachment; filename=pdfInvoices.zip");
+		    header("Pragma: no-cache");
+		    header("Expires: 0");
+		    readfile("$archive_file_name");
+		    exit;
+	    }
+	    return true;
+	}
+
+	/**
+	 * clear all session variables
+	 */
+	function clearSessionVariables()
+	{
+		$mysess   = PayInvoiceFactory::getSession();
+		$sessVars = array('pdfexport_start','pdfexport_count','invoice_ids');
+		foreach ($sessVars as $var){
+			$mysess->clear($var);
+		}
+		return true;	
+	}
+	
 }
