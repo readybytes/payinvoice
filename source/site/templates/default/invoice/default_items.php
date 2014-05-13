@@ -29,7 +29,8 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 		</thead>
 		
 		<tbody>
-			<?php foreach ($items as $item) :?>
+			<?php foreach ($items as $item) :
+				$item  = is_array($item) ? (object)$item : $item ; ?>
 			<tr>
 			    <td class="span5"><span><?php echo $item->title;?></span></td>
 			    <td class="span2"><span class="pull-right"><?php echo $item->quantity;?></span></td>
