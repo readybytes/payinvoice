@@ -50,6 +50,7 @@ class PayInvoiceAdminViewPdfExport extends PayInvoiceAdminBaseViewPdfExport
 		$pdf->load_html($contents);
 		$pdf->render();
 		$pdf->stream('invoice.pdf');
+		return false;
 	}
 	
 	public function getPdf($rb_invoice)

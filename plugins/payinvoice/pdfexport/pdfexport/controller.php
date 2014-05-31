@@ -14,7 +14,7 @@ if(defined('_JEXEC')===false) die();
 
 class PayInvoiceadmincontrollerPdfExport extends PayInvoiceController
 {	
-	public function getModel()
+	public function getModel($name = '', $prefix = '', $config = array())
 	{
 		return null;
 	}

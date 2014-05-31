@@ -116,6 +116,29 @@ class PayInvoiceSiteControllerInvoice extends PayInvoiceController
 	public function complete()
 	{
 		$itemid = $this->_getId();    
+
+		// XITODO 
+  		$notify           = $this->input->get('notify', 0);
+   		if ($notify){
+			$get         		= Rb_Request::get('GET'); // XITODO :
+		    $post        	    = Rb_Request::get('POST');// XITODO :
+		    $data        	    = array_merge($get, $post);
+                       
+	   		$response     		= new stdClass();
+			$response->data     = $data;
+			$response->__post	= $post;
+			$response->__get	= $get;
+                      
+			//	file_put_contents(JPATH_SITE.'/tmp/'.time(), var_export($data,true), FILE_APPEND);		
+		
+           	if(!isset($data['processor'])){
+            	// raise error                                
+           	}
+                       
+       		$processor_type   = $data['processor'];
+         	$invoice_id       = Rb_EcommerceAPI::invoice_get_from_response($processor_type, $response);                
+       		$response         = Rb_EcommerceApi::invoice_process($invoice_id, $response);
+       	}  
     
 		if($itemid <= 0){
   			$invoice_number   	= $this->input->get('invoice_number', '');
