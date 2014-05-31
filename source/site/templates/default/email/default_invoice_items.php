@@ -24,7 +24,8 @@ if(isset($invoice['params']['items'])){
 			<th style="font-size: 1em;padding-top: 12px;padding-bottom: 10px;background-color: #eee;"><?php echo Rb_Text::_('COM_PAYINVOICE_UNIT_PRICE');?></th>
 			<th  style="font-size: 1em;padding-top: 12px;padding-bottom: 10px;background-color: #eee;"><?php echo Rb_Text::_('COM_PAYINVOICE_AMOUNT');?></th>
 		</tr>
-		<?php foreach ($items as $item) :?>
+		<?php foreach ($items as $item) :
+			$item  = is_array($item) ? (object)$item : $item ; ?>
 		<tr>
 			<td style="padding:10px 5px 5px 7px"><?php echo $item->title;?></td>
 			<td style="padding:10px 5px 5px 7px"><?php echo $item->quantity;?></td>
