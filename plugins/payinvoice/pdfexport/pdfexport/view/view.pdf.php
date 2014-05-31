@@ -15,6 +15,10 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
  *Pdf Export Html View
  * @author Manisha Ranawat
  */
+
+// constant for limit
+define('PAYINVOICE_PDF_EXPORT_LIMIT', 10);
+
 require_once dirname(__FILE__).'/view.php';
 class PayInvoiceAdminViewPdfExport extends PayInvoiceAdminBaseViewPdfExport
 {
@@ -36,21 +40,21 @@ class PayInvoiceAdminViewPdfExport extends PayInvoiceAdminBaseViewPdfExport
 			}
 		}
 						
-		if(count($InvoiceIds) > 10){
+		if(count($InvoiceIds) > PAYINVOICE_PDF_EXPORT_LIMIT){
 			$session		= PayInvoiceFactory::getSession();
 			$count	     	= $session->get('pdfexport_count',1);
 			$limitStart 	= $session->get('pdfexport_start',0);
 			
 			if($limitStart < count($InvoiceIds)){
 		
-				$invoice_ids 	= array_slice($InvoiceIds , $limitStart, 10);
+				$invoice_ids 	= array_slice($InvoiceIds , $limitStart, PAYINVOICE_PDF_EXPORT_LIMIT);
 				$contents		= $this->getContent($invoice_ids);
 					
 				$this->createFolder($this->genratePdf($contents), $count);
 				$app 		 	= PayInvoiceFactory::getApplication();
 				$session->set('invoice_ids', $InvoiceIds);
 				$session->set('pdfexport_count', ++$count);
-				$session->set('pdfexport_start', $limitStart +10);
+				$session->set('pdfexport_start', $limitStart + PAYINVOICE_PDF_EXPORT_LIMIT);
 				$this->doRefresh();
 			}	
 			
