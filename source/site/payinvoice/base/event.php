@@ -23,7 +23,7 @@ class PayInvoiceEvent extends JEvent
 			return true;
 		}
 
-		if($new == null || $new->get('object_type') != 'PayInvoiceItem'){
+		if($new == null || $new->get('object_type') != 'PayInvoiceInvoice'){
 			return true;
 		}
 		
