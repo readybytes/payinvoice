@@ -11,76 +11,144 @@
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
-$config_data['company_name']	= isset($config_data['company_name'])  		? $config_data['company_name'] 		: "";
-$config_data['company_address']	= isset($config_data['company_address']) 	? $config_data['company_address'] 	: "";
-$config_data['company_phone']	= isset($config_data['company_phone']) 		? $config_data['company_phone']		: "";
+$config_data['company_name']	= !empty($config_data['company_name'])  		? $config_data['company_name'] 		: "";
+$config_data['company_address']	= !empty($config_data['company_address']) 	? $config_data['company_address'] 	: "";
+$config_data['company_phone']	= !empty($config_data['company_phone']) 		? $config_data['company_phone']		: "";
 ?>
 
 <html>
-<head>
-	<style></style>
-</head>
-<body>
-	<div style="background-color:#fff;">
-		<table id="page-table" style="width: 650px;" bgcolor="#f8f8f8" border="0" cellpadding="0" cellspacing="0" align="center">
-			<tbody>
-				<tr id="second-row">
-					<td id="second-left" bgcolor="#ffffff" width="10"></td>
-					<td id="second-middle" bgcolor="f8f8f8">
-						<table style="padding: 10px; width: 100%;" bgcolor="f1f2f3">
-							<tbody>
-								<tr>
-									<?php if(!empty($config_data['company_logo'])):?>
-										<td align="left" height="100">
-											<img src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);?>" class="img-polaroid"/>
-										</td>
-									<?php endif;?>
-								</tr>
-							</tbody>
-						</table>
-						<p class="fontlist pp-WordSpacing" style="padding: 10px; margin-left: 15px;"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo sprintf(Rb_Text::_('COM_PAYINVOICE_HELLO'), $buyer->name);?>,</span></p>
-						<p class="fontlist pp-lineWordSpacing" style="padding: 10px; margin-left: 15px;"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo sprintf(Rb_Text::_('COM_PAYINVOICE_REFUND_MESSAGE'), $rb_invoice['title']);?></span><br /><br /><span style="font-size: 12pt; color: #4d4d4d;"> <strong><?php echo Rb_Text::_('COM_PAYINVOICE_WEBSITE_DETAILS');?></strong></span></p>
-						<table class="fontlist" align="center">
-							<tbody>
-								<tr>
-									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><strong><?php echo Rb_Text::_('COM_PAYINVOICE_BUYER_USERNAME')." ";?></strong></span></td>
-									<td class="col"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo $buyer->username;?></span></td>
-								</tr>								
-								<tr>
-									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><strong><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_NUMBER')." ";?></strong></span></td>
-									<td class="col"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo $rb_invoice['serial'];?></span></td>
-								</tr>								
-								<tr>
-									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><strong><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_ISSUE_DATE')." ";?></strong></span></td>
-									<td class="col"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo $rb_invoice['issue_date'];?></span></td>
-								</tr>							
-								<tr>
-									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><strong><?php echo Rb_Text::_('COM_PAYINVOICE_REFUNDED_DATE')." ";?></strong></span></td>
-									<td class="col"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo $rb_invoice['refund_date'];?></span></td>
-								</tr>								
-								<tr>
-									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><strong><?php echo Rb_Text::_('COM_PAYINVOICE_AMOUNT_REFUNDED')." ";?></strong></span></td>
-									<td class="col"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo $rb_invoice['currency']." ".number_format($rb_invoice['total'],2);?></span></td>
-								</tr>
-								
-							</tbody>
-						</table>
-						<p class="fontlist" style="padding: 10px; margin-left: 15px;"><span style="font-size: 10pt;"></span><br /><br /><span style="font-size: 10pt;"> <strong><?php echo $config_data['company_name'];?></strong></span><br /><span style="padding: 20px 0px; font-size: 10pt;"><?php echo $config_data['company_address'];?></span><br /><br /><span style="font-size: 10pt;"><a class="links" style="text-decoration: none;" href="#"></a></span></p>
-					</td>
-					<td bgcolor="#ffffff" width="10"></td>
-				</tr>
-				<tr id="third-row">
-						<td id="third-left" bgcolor="#ffffff" height="10" width="10"></td>
-						<td id="third-middle" bgcolor="#ffffff" height="10"></td>
-						<td id="third-right" bgcolor="#ffffff" height="10" width="10"></td>
-				</tr>
-				<tr id="fourth-row" bgcolor="#ffffff">
-					<td id="fourth-left" bgcolor="#ffffff" height="10" width="10"></td>
-					<td id="fourth-middle" align="right"><span style="font-family: 'Lucida Grande','Segoe UI',Arial,Verdana,'Lucida Sans Unicode',Tahoma,'Sans Serif'; font-size: 11px; color: #888;"> Copyright © 2013 <?php echo $config_data['company_name'];?>. All Rights Reserved. <br /> &nbsp;&nbsp;<?php echo $config_data['company_address'].",".Rb_Text::_('COM_PAYINVOICE_COMPANY_PHONE_NO')." ".$config_data['company_phone'];?> </span></td>
-					<td id="fourth-right" bgcolor="#ffffff" height="10" width="10"></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
+<body style="padding:0;margin:0;"bgcolor="#E4E8EB">
+<div style="padding-left:0!important;padding-right:0!important;padding-top:0!important;margin-right:0!important;width:100%!important;margin-left:0!important;margin-bottom:0!important;margin-top:0!important;padding-bottom:0!important;font-family:Arial,sans-serif,Helvetica Neue,Helvetica;">
+
+<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0" bgcolor="#E4E8EB">
+	<tbody>
+		<tr valign="top">
+			<td valign="top" align="center" style="border-collapse:collapse"> 
+               	<table align="center" cellpadding="0" cellspacing="0" border="0">
+                   	<tbody>
+                   		<tr>
+                       		<td valign="middle" height="70px" align="center" style="font-size:0;line-height:0;border-collapse:collapse">&nbsp;</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+             
+	
+		<tr>
+			<td>
+				<table align="center" cellpadding="0" cellspacing="0">
+	            		<tbody>
+	            			<tr>
+	                       		<td valign="top" bgcolor="#f6f8fa" style="max-width:598px;width:600px;border: 1px solid #fff;">
+	                       			<table cellspacing="0" border="0" cellpadding="0" bgcolor="#f6f8fa" width="600" align="center" style="padding:30px;">
+	                       				<tbody>
+					                       	<tr>
+					                       		<td valign="middle" height="30px" align="center" style="font-size:0;line-height:0;border-collapse:collapse">&nbsp;</td>
+											</tr>
+											
+											<tr>
+					                       		<td style="padding-bottom: 30px;border-bottom: 1px solid #e8e8e8;">
+					                       			<img alt="company_Logo" src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);?>">
+					                       		</td>
+					                      	</tr>
+											
+											<tr>
+					                       		<td valign="middle" style="border-collapse:collapse;font-size:14px;color:#666;line-height:2;">
+					                       			<p><?php echo sprintf(Rb_Text::_('COM_PAYINVOICE_HELLO'), $buyer->name);?>,</p>
+					                       			<p><?php echo sprintf(Rb_Text::_('COM_PAYINVOICE_REFUND_MESSAGE'), $rb_invoice['title']);?></p>
+
+					                       		</td>
+											</tr>
+											
+											<tr>
+												<td>
+													<p style="font-size:18px;color:#444;"><?php echo Rb_Text::_('COM_PAYINVOICE_WEBSITE_DETAILS');?></p>
+												</td>
+											</tr>
+											<tr>
+					                       		<td valign="middle" height="30px" align="center" style="font-size:0;line-height:0;border-collapse:collapse">&nbsp;</td>
+											</tr>
+											<tr>
+												<td>
+													<table cellpadding="0" cellspacing="0" border="0" align="center" style="line-height: 36px;font-size: 14px;color: #333;">
+														<tbody>
+															<tr>
+																<td><span style="color:#666"><?php echo Rb_Text::_('COM_PAYINVOICE_BUYER_USERNAME');?></span></td>
+																	<td><span style="padding: 0 10px;">:</span></td>
+																<td><span style="color:#333"><?php echo $buyer->username;?></span></td>
+															</tr>
+															<tr>
+																<td><span style="color:#666"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_NUMBER');?></span></td>
+																<td><span style="padding: 0 10px;">:</span></td>
+																<td><span style="color:#333"><?php echo $rb_invoice['serial'];?></span></td>
+															</tr>
+															<tr>
+																<td><span style="color:#666"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_ISSUE_DATE');?></span></td>
+																<td><span style="padding: 0 10px;">:</span></td>
+																<td><span style="color:#333"><?php echo $rb_invoice['issue_date'];?></span></td>
+															</tr>
+															<tr>
+																<td><span style="color:#666"><?php echo Rb_Text::_('COM_PAYINVOICE_REFUNDED_DATE');?></span></td>
+																<td><span style="padding: 0 10px;">:</span></td>
+																<td><span style="color:#333"><?php echo $rb_invoice['refund_date'];?></span></td>
+															</tr>
+															<tr>
+																<td><span style="color:#666"><?php echo Rb_Text::_('COM_PAYINVOICE_AMOUNT_PAID');?></span></td>
+																<td><span style="padding: 0 10px;">:</span></td>
+																<td><span style="color:#333"><?php echo $rb_invoice['currency']." ".number_format($rb_invoice['total'],2);?></span></td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+											
+											<tr>
+					                       		<td valign="middle" height="40px" align="center" style="font-size:0;line-height:0;border-collapse:collapse">&nbsp;</td>
+											</tr>
+											
+											<tr>
+					                       		<td>
+					                       			<table cellpadding="0" cellspacing="0" border="0" style="line-height: 2;font-size:14px;color:#666;">
+					                       				<tbody>
+															<tr>
+																<td><p><?php echo Rb_Text::_('COM_PAYINVOICE_PAYINVOICING');?></p></td>
+															</tr>
+														</tbody>
+													</table>
+												</td>
+											</tr>
+										</tbody>
+									</table> 
+	                       		</td>
+	                    	</tr>
+	                </tbody>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td valign="middle" height="20px" align="center" style="font-size:0;line-height:0;border-collapse:collapse">&nbsp;</td>
+		</tr>
+		<tr>
+			<td align="center">
+                 <table cellpadding="0" cellspacing="0" border="0" style="font-size: 10px;color: #777;" align="center">
+                 	<tbody>
+                 		<tr>
+                     		<td align="center">
+                     			<p>Copyright &copy; <?php echo $config_data['company_name'];?></p>
+                     			<p><?php echo $config_data['company_address'].", Phone:".$config_data['company_phone'];?></p>
+                     		</td>
+                     	</tr>
+					</tbody>
+				</table>
+        	</td>
+		</tr>
+		<tr>
+			<td valign="middle" height="80px" align="center" style="font-size:0;line-height:0;border-collapse:collapse">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+</div>
 </body>
-</html>	
+</html>
