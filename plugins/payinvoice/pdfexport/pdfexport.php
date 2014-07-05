@@ -27,7 +27,7 @@ class plgPayinvoicePdfExport extends Rb_Plugin
 		$this->loadLanguage();	
 	}	
 
-	public function onRbControllerCreation($option, $view, $controller, $task, $format)
+	public function onRbControllerCreation(&$option, &$view, &$controller, &$task, &$format)
 	{
 		if($controller === 'pdfexport'){			
 			$this->__loadFiles($format);
