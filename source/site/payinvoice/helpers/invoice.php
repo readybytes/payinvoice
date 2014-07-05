@@ -36,7 +36,7 @@ class PayInvoiceHelperInvoice extends JObject
 			$modifier->percentage = $is_percentage;			
 		}
 		else{
-			$invoice = Rb_EcommerceAPI::invoice_get(array('invoice_id' => $invoice_id));
+			$invoice = Rb_EcommerceAPI::invoice_get(array('object_type' => 'PayInvoiceInvoice', 'invoice_id' => $invoice_id));
 			$modifier = new stdClass();
 			$modifier->modifier_id 	= 0;				
 			$modifier->invoice_id 	= $invoice_id;

@@ -24,8 +24,7 @@ class PayInvoiceSiteViewInvoice extends PayInvoiceSiteBaseViewInvoice
 		$payinvoice_invoice = PayInvoiceInvoice::getInstance($itemid)->toArray();	
 
 		// XITODO : use helper function
-		$filter 	= array('object_type' => 'PayInvoiceInvoice', 'object_id' => $itemid, 'master_invoice_id' => 0);
-		$rb_invoice = Rb_EcommerceAPI::invoice_get($filter);
+		$rb_invoice	= $this->getHelper('invoice')->get_rb_invoice($itemid);
 
 		$formatHelper	= $this->getHelper('format');
 		$currency  		= $formatHelper->getCurrency($rb_invoice['currency'], 'symbol');
@@ -71,7 +70,7 @@ class PayInvoiceSiteViewInvoice extends PayInvoiceSiteBaseViewInvoice
 			// XITODO : get invoice number from response
 		}
 		else{	
-			$invoice = Rb_EcommerceAPI::invoice_get(array('invoice_id' => $itemId), false);							
+			$invoice = Rb_EcommerceAPI::invoice_get(array('invoice_id' => $itemId, 'object_type' => 'PayInvoiceInvoice'), false);						
 			$this->assign('rb_invoice', $invoice);
 			$suffix = '';
 			if($invoice['status'] == PayInvoiceInvoice::STATUS_DUE){
