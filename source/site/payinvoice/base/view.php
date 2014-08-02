@@ -84,11 +84,7 @@ class PayInvoiceView extends PayInvoiceViewbase
 			return $this->_showAdminFooter();
 		}
 
-		if(defined('PAYINVOICE_PREMIUM_BUILD')){
-			return '';
-		}
-		
-		return '<p align="center">'.Rb_Text::_('COM_PAYINVOICE_POWERED_BY') .'<a id="payinvoicePowerdBy" href="http://www.readybytes.net/payinvoice.html" target="_blank" >PayInvoice</a></p>';
+		return ;
 	}
 	
 	
