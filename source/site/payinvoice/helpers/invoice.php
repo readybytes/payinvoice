@@ -190,6 +190,20 @@ class PayInvoiceHelperInvoice extends JObject
 		}	
 		return false;
 	}
+
+	public function process_payment($request_name, $rb_invoice, $data)
+	{
+		while(true){
+			$req_response 		= Rb_EcommerceApi::invoice_request($request_name, $rb_invoice['invoice_id'], $data);			
+			$response 			= Rb_EcommerceApi::invoice_process($rb_invoice['invoice_id'], $req_response);
+						
+			if($response->get('next_request', false) == false){
+				break;
+			}
+
+			$request_name = $response->get('next_request_name', 'payment');
+		}
+	}
 	
 	
 }

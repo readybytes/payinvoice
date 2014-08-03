@@ -126,6 +126,12 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 			$this->setTpl('view');
 		}
 		
+		// Mark Inoice paid from backend itself 
+		$this->assign('mark_paid', false);
+		if($rb_invoice['status'] == PayInvoiceInvoice::STATUS_INPROCESS){
+			$this->assign('mark_paid', true);
+		}
+		
 		// Get transactions of an invoice
 		$filter				= array('invoice_id' => $rb_invoice['invoice_id']);
 		$transaction   		= Rb_EcommerceAPI::transaction_get_records($filter);
