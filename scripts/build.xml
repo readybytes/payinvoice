@@ -28,14 +28,15 @@
 
 		<phingcall target="export_sourcecode" />
 		<phingcall target="copy_default_plugin"/>
+		<phingcall target="copy_pdfexport"/>
 
 		<if>
  			<equals arg1="${payinvoice.premium}" arg2="true" />
- 				<then>
-         			<echo message="This is a Premium build" />
-      				<phingcall target="copy_premium_plugin" />
-      				<property name="project.build" value="Premium" />
-     			</then>
+				<then>
+         				<echo message="This is a Premium build" />
+      					<phingcall target="copy_premium_plugin" />
+      					<property name="project.build" value="Premium" />
+     				</then>
     		</if> 
 
 		<phingcall target="replace_tokens" />		
@@ -115,13 +116,13 @@
 		</copy>
 	</target>
 
-	<target name="copy_premium_plugin">
-    		<copy todir="${dir.tmp}/admin/install/extensions/plg_payinvoice_support">
-      			<fileset dir="${dir.root}/plugins/payinvoice/support">
-        			<include name="**/*.*" />
-      			</fileset>
-    		</copy>
-  	</target> 
+	<target name="copy_pdfexport">
+		<copy todir="${dir.tmp}/admin/install/extensions/plg_pdfexport">
+			<fileset dir="${dir.root}/plugins/payinvoice/pdfexport">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+	</target>
 
 	<target name="replace_tokens">
 		<!-- Apply the version change to all files. -->

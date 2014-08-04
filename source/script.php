@@ -23,12 +23,12 @@ class Com_payinvoiceInstallerScript
 		$extensions 	= array();
 		$extensions[] 	= array('type'=>'user', 'name'=>'payinvoice');
 		//For Enabling Rb_Framework
-		$extensions[] 	= array('type'=>'system',   'name'=>'rbsl');
+		$extensions[] 	= array('type' => 'system',   'name'=>'rbsl');
 		//For Enabling Stripe Processor
-		$extensions[]	= array('type'=>'rb_ecommerceprocessor ', 'name'=>'stripe');
-		// For Enabling Support Plugin
-		$extensions[]	= array('type' => 'payinvoice', 'name' => 'support');	
-
+		$extensions[]	= array('type' => 'rb_ecommerceprocessor ', 'name'=>'stripe');
+		//For Enabling PdfExport plugin
+		$extensions[]	= array('type' => 'payinvoice', 'name'=>'pdfexport');
+		
 		$this->changeExtensionState($extensions);
 		$this->addDefaultProcessor();
 		return true;
@@ -39,7 +39,7 @@ class Com_payinvoiceInstallerScript
 		$state=0;
 		$extensions[] 	= array('type'=>'user', 'name'=>'payinvoice');
 		$extensions[] 	= array('type'=>'system',   'name'=>'rbsl');
-		$extensions[]	= array('type'=>'rb_ecommerceprocessor ', 'name'=>'stripe');
+		$extensions[]	= array('type'=>'payinvoice ', 'name'=>'pdfexport');
 		$this->changeExtensionState($extensions, $state);
 
 		return true;
