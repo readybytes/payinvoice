@@ -59,16 +59,7 @@ class PayInvoiceSiteControllerInvoice extends PayInvoiceController
 		
 		$request_name = 'payment';
 		
-		while(true){
-			$req_response 	= Rb_EcommerceApi::invoice_request($request_name, $rb_invoice['invoice_id'], $data);
-			$response 		= Rb_EcommerceApi::invoice_process($rb_invoice['invoice_id'], $req_response);
-						
-			if($response->get('next_request', false) == false){
-				break;
-			}
-
-			$request_name = $response->get('next_request_name', 'payment');
-		}
+		$this->_helper->process_payment($request_name, $rb_invoice, $data);
 
 		$this->setRedirect(Rb_Route::_('index.php?option=com_payinvoice&view=invoice&task=complete&invoice_id='.$itemid));
 		return false;

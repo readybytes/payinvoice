@@ -171,7 +171,23 @@ payinvoice.admin.invoice = {
 				var url 	= 'index.php?option=com_payinvoice&view=invoice&task=email&confirmed=1&invoice_id='+invoice_id;
 				payinvoice.ajax.go(url);
 			}			
-		}
+		},
+
+		markpaid : {
+			confirm : function(invoice_id){
+				var url = 'index.php?option=com_payinvoice&view=invoice&task=markpaid&invoice_id='+invoice_id;
+				payinvoice.url.modal(url);
+		},
+
+			processpayment : function(invoice_id){
+				payinvoice.ui.dialog.body('<div class="center"><span class="spinner">&nbsp;</span></div>');
+				// XITODO : use bootstarp to disable the button click
+				$('#payinvoice-invoice-payment-confirm-button').attr('disabled', 'disabled');
+
+				var url = 'index.php?option=com_payinvoice&view=invoice&task=markpaid&confirmed=1&invoice_id='+invoice_id;
+				payinvoice.ajax.go(url);
+			}
+		} 
 	
 };
 

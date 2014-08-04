@@ -128,4 +128,11 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 		echo json_encode($response);
 		exit();
 	}
+
+	public function markpaid()
+	{
+		$confirmed = $this->input->getBool('confirmed', 0);
+		$this->getView()->assign('confirmed', $confirmed);
+		return true;
+	}
 }
