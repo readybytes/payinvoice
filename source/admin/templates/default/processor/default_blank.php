@@ -19,8 +19,8 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 		
 		<div class="center">
 			<a href="<?php echo JUri::base().'index.php?option=com_payinvoice&view=processor&task=selectProcessor';?>" class="btn btn-success jxif-width100"><i class="icon-plus-sign icon-white"></i>&nbsp;<?php echo Rb_Text::_('JTOOLBAR_NEW');?></a>
-			<a href="http://www.jpayplans.com/support/forum/payinvoice-support.html" target="_blank" class="btn disabled"><i class="icon-question-sign "></i>&nbsp;<?php echo Rb_Text::_('COM_PAYINVOICE_SUPPORT_BUTTON');?></a>
-			<a href="http://www.jpayplans.com/payinvoice/documentation" target="_blank" class="btn disabled"><i class="icon-book"></i>&nbsp;<?php echo Rb_Text::_('COM_PAYINVOICE_DOCUMENTATION_BUTTON');?></a>
+			<a href="http://www.readybytes.net/payinvoice/forum.html" target="_blank" class="btn disabled"><i class="icon-question-sign "></i>&nbsp;<?php echo Rb_Text::_('COM_PAYINVOICE_SUPPORT_BUTTON');?></a>
+			<a href="http://www.readybytes.net/payinvoice/documentation" target="_blank" class="btn disabled"><i class="icon-book"></i>&nbsp;<?php echo Rb_Text::_('COM_PAYINVOICE_DOCUMENTATION_BUTTON');?></a>
 		</div>
 		
 	</div> 
