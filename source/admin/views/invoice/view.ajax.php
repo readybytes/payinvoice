@@ -134,6 +134,7 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		$this->_helper->process_payment($request_name, $rb_invoice, $data);
 
 		$this->_setAjaxWinTitle(Rb_Text::_('COM_PAYINVOICE_INVOICE_MARKPAID_WINDOW_TITLE'));
+		$this->_setAjaxWinBody(Rb_Text::_('COM_PAYINVOICE_INVOICE_MARKPAID_SUCCESSFULL_MESSAGE'));
 		$this->_addAjaxWinAction('close', 'rb.ui.dialog.close(); window.location.reload();', 'btn');
 		$this->_setAjaxWinAction();
 
