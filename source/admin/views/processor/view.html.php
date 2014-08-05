@@ -18,13 +18,18 @@ class PayInvoiceAdminViewProcessor extends PayInvoiceAdminBaseViewProcessor
 {	
 	protected function _adminGridToolbar()
 	{
-		Rb_HelperToolbar::addNew('selectProcessor');
-		Rb_HelperToolbar::editList();
-		Rb_HelperToolbar::divider();
-		Rb_HelperToolbar::publish();
-		Rb_HelperToolbar::unpublish();
-		Rb_HelperToolbar::divider();
-		Rb_HelperToolbar::deleteList(Rb_Text::_('COM_PAYINVOICE_JS_ARE_YOU_SURE_TO_DELETE'));
+		$task	= PayInvoiceFactory::getApplication()->input->get('task', '');
+		if($task == 'selectProcessor'){
+			Rb_HelperToolbar::back('COM_PAYINVOICE_JS_BACK', 'index.php?option=com_payinvoice&view=processor');
+		}else {
+			Rb_HelperToolbar::addNew('selectProcessor');
+			Rb_HelperToolbar::editList();
+			Rb_HelperToolbar::divider();
+			Rb_HelperToolbar::publish();
+			Rb_HelperToolbar::unpublish();
+			Rb_HelperToolbar::divider();
+			Rb_HelperToolbar::deleteList(Rb_Text::_('COM_PAYINVOICE_JS_ARE_YOU_SURE_TO_DELETE'));
+		}
 	}
 	
 	protected function _adminEditToolbar()
@@ -46,10 +51,9 @@ class PayInvoiceAdminViewProcessor extends PayInvoiceAdminBaseViewProcessor
 		$itemId  		=  ($itemId === null) ? $this->getModel()->getState('id') : $itemId ;		
 		$processorType 	=  PayInvoiceProcessor::getInstance($itemId);
 		
-		if(!$itemId){
-			$processor_type =	$this->input->get('processor_type', $processor_type);
-			Rb_Error::assert(($processor_type), Rb_Text::_('COM_PAYINVOICE_NO_PROCESSOR_TYPE'));
-			$processorType->set('type',$processor_type);
+		if(!$processor_type){
+				$message	= Rb_Text::_('COM_PAYINVOICE_NO_PROCESSOR_TYPE');				
+				PayInvoiceFactory::getApplication()->redirect('index.php?option=com_payinvoice&view=processor&task=selectProcessor', $message, 'error');
 		}
 		
 		$help  	   =  $this->getHelper('processor')->getXml($processorType->getType());
