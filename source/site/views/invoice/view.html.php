@@ -70,7 +70,7 @@ class PayInvoiceSiteViewInvoice extends PayInvoiceSiteBaseViewInvoice
 			// XITODO : get invoice number from response
 		}
 		else{	
-			$invoice 	= Rb_EcommerceAPI::invoice_get(array('invoice_id' => $itemId, 'object_type' => 'PayInvoiceInvoice'), false);							
+			$invoice 	= Rb_EcommerceAPI::invoice_get(array('object_id' => $itemId, 'object_type' => 'PayInvoiceInvoice'), false);							
 			$this->assign('rb_invoice', $invoice);
 			$suffix = '';
 			if($invoice['status'] == PayInvoiceInvoice::STATUS_DUE){
