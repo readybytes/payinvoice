@@ -49,26 +49,32 @@ $config_data['company_phone']	= !empty($config_data['company_phone']) 		? $confi
 											
 											<tr>
 					                       		<td width="58px">
-					                       			<img alt="company_Logo" src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);?>" />
+					                       			<img alt="company_Logo" src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);?>" height="60" width="140" />
 					                       		</td>
 					                      	</tr>
+					                      	
+					                      	<tr>
+					                       		<td valign="middle" height="30px" align="center" style="font-size:0;line-height:0;border-collapse:collapse">&nbsp;</td>
+											</tr>
 											
 											<tr>
 					                       		<td valign="middle" style="border-collapse:collapse;font-size:14px;color:#666;line-height:2;">
 					                       			<p><?php echo sprintf(Rb_Text::_('COM_PAYINVOICE_HELLO'), $buyer->name);?>,</p>
 					                       			<p><?php echo sprintf(Rb_Text::_('COM_PAYINVOICE_PAID_MESSAGE'), $rb_invoice['title']);?></p>
-					                       			
-					                       		
 					                       		</td>
 											</tr>
 											
 											<tr>
+				                       			<td valign="middle" height="30px" align="center" style="font-size:0;line-height:0;border-collapse:collapse">&nbsp;</td>
+											</tr>
+											
+											<tr>
 												<td>
-													<p style="font-size:18px;color:#444;"><?php echo Rb_Text::_('COM_PAYINVOICE_WEBSITE_DETAILS');?></p>
+													<p style="font-size:16px; color:#666"><?php echo Rb_Text::_('COM_PAYINVOICE_WEBSITE_DETAILS');?></p>
 												</td>
 											</tr>
 											<tr>
-					                       		<td valign="middle" height="30px" align="center" style="font-size:0;line-height:0;border-collapse:collapse">&nbsp;</td>
+					                       		<td valign="middle" height="10px" align="center" style="font-size:0;line-height:0;border-collapse:collapse">&nbsp;</td>
 											</tr>
 											<tr>
 												<td>

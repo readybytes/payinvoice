@@ -51,9 +51,13 @@ class PayInvoiceAdminViewProcessor extends PayInvoiceAdminBaseViewProcessor
 		$itemId  		=  ($itemId === null) ? $this->getModel()->getState('id') : $itemId ;		
 		$processorType 	=  PayInvoiceProcessor::getInstance($itemId);
 		
-		if(!$processor_type){
+		if(!$itemId){
+			$processor_type =	$this->input->get('processor_type', $processor_type);
+			if(!$processor_type){
 				$message	= Rb_Text::_('COM_PAYINVOICE_NO_PROCESSOR_TYPE');				
 				PayInvoiceFactory::getApplication()->redirect('index.php?option=com_payinvoice&view=processor&task=selectProcessor', $message, 'error');
+			}
+			$processorType->set('type',$processor_type);
 		}
 		
 		$help  	   =  $this->getHelper('processor')->getXml($processorType->getType());

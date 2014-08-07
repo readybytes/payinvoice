@@ -40,7 +40,7 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 						<tr>
 							<?php if(!empty($config_data['company_logo'])):?>
 								<td>
-									<img src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);?>" class="img-polaroid">																	
+									<img src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);?>" height="60" width="140" class="img-polaroid">																	
 								</td>
 							<?php endif;?>
 						</tr>
@@ -57,7 +57,18 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 		<!-- company names -->
 		<tr>		
 			<td height="110;" valign="top">
-				<h3 style="font-family: caption;"><?php echo $buyer[$rb_invoice['buyer_id']]->name."<br>".$buyer[$rb_invoice['buyer_id']]->email."<br>".$buyer[$rb_invoice['buyer_id']]->address."<br>".$buyer[$rb_invoice['buyer_id']]->city.",".$buyer[$rb_invoice['buyer_id']]->country;?></h3>
+				<h3 style="font-family: caption;">
+					<?php	$address 	= $buyer[$rb_invoice['buyer_id']]->address;
+						$city		= $buyer[$rb_invoice['buyer_id']]->city;
+						$country	= $buyer[$rb_invoice['buyer_id']]->country; ?>
+					
+					<?php	echo $buyer[$rb_invoice['buyer_id']]->name."<br>".$buyer[$rb_invoice['buyer_id']]->email; ?><br>
+					<?php 	if($address) echo $address;?><br>
+					<?php 	if($city) echo $city;?><br>
+					<?php 	if($country) echo ",".$country;?>
+							
+					
+				</h3>
 			</td>
 						
 			<td  height="110;" valign="bottom">

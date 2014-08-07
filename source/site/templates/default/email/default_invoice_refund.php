@@ -49,9 +49,13 @@ $config_data['company_phone']	= !empty($config_data['company_phone']) 		? $confi
 											
 											<tr>
 					                       		<td style="padding-bottom: 30px;border-bottom: 1px solid #e8e8e8;">
-					                       			<img alt="company_Logo" src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);?>">
+					                       			<img alt="company_Logo" src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);?>" height="60" width="140" />
 					                       		</td>
 					                      	</tr>
+					                      	
+					                      	<tr>
+					                       		<td valign="middle" height="30px" align="center" style="font-size:0;line-height:0;border-collapse:collapse">&nbsp;</td>
+											</tr>
 											
 											<tr>
 					                       		<td valign="middle" style="border-collapse:collapse;font-size:14px;color:#666;line-height:2;">
@@ -62,12 +66,15 @@ $config_data['company_phone']	= !empty($config_data['company_phone']) 		? $confi
 											</tr>
 											
 											<tr>
+												<tr>
+					                       			<td valign="middle" height="30px" align="center" style="font-size:0;line-height:0;border-collapse:collapse">&nbsp;</td>
+												</tr>
 												<td>
-													<p style="font-size:18px;color:#444;"><?php echo Rb_Text::_('COM_PAYINVOICE_WEBSITE_DETAILS');?></p>
+													<p style="font-size:16px; color:#666"><?php echo Rb_Text::_('COM_PAYINVOICE_WEBSITE_DETAILS');?></p>
 												</td>
 											</tr>
 											<tr>
-					                       		<td valign="middle" height="30px" align="center" style="font-size:0;line-height:0;border-collapse:collapse">&nbsp;</td>
+					                       		<td valign="middle" height="10px" align="center" style="font-size:0;line-height:0;border-collapse:collapse">&nbsp;</td>
 											</tr>
 											<tr>
 												<td>
