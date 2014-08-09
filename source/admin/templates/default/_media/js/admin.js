@@ -130,12 +130,16 @@ payinvoice.admin.invoice = {
 			
 		calculate_total : function(){
 					var subtotal = 0;
+					var discount = 0
+
 					$('.payinvoice-item-total:visible').each(function(e){
 						subtotal = subtotal + parseFloat($(this).val());
 					});
 					$('#payinvoice-invoice-subtotal').val(parseFloat(subtotal).toFixed(2));
 					
-					var discount = parseFloat($('#payinvoice-invoice-discount').val());
+					if($('#payinvoice-invoice-discount').val() != ''){
+						discount = parseFloat($('#payinvoice-invoice-discount').val());
+					}
 					var tax 	 = parseFloat($('#payinvoice-invoice-tax').val());
 					
 					var total = subtotal - discount;

@@ -82,7 +82,7 @@ class PayInvoiceAdminViewPdfExport extends PayInvoiceAdminBaseViewPdfExport
 	
 	public function getContent($invoice_ids)
 	{
-		$filter 		= array('invoice_id' => array(array('IN', '('.implode(",", $invoice_ids).')')));
+		$filter 		= array('object_id' => array(array('IN', '('.implode(",", $invoice_ids).')')));
 		$invoices 		= $this->getHelper('invoice')->get_rb_invoice_records($filter);
 		$contents		= '';
 		foreach ($invoices as $invoice)
