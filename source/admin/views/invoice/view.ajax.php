@@ -63,9 +63,9 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		//$currency = $this->getHelper('format')->getCurrency($rb_invoice['currency'], 'symbol');
 		//$email_view->assign('currency', $currency);
 		
-		$email_view->assign('tax', 		$this->_helper->get_tax($invoice_id));
-		$email_view->assign('discount', $this->_helper->get_discount($invoice_id));
-		$email_view->assign('subtotal', $this->_helper->get_subtotal($invoice_id));
+		$email_view->assign('tax', 		$this->_helper->get_tax($rb_invoice['invoice_id']));
+		$email_view->assign('discount', $this->_helper->get_discount($rb_invoice['invoice_id']));
+		$email_view->assign('subtotal', $this->_helper->get_subtotal($rb_invoice['invoice_id']));
 		
         // md5 key generated for authentication		
 		$key	= md5($rb_invoice['created_date']);
