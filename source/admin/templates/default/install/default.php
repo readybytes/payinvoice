@@ -54,17 +54,17 @@ JHtml::_('behavior.framework');
 <div class="row-fluid">
 		<div class="hide">
 		<?php
-			$version 	= new JVersion();
-			$suffix 	= 'jom=J'.$version->RELEASE.'&utm_campaign=broadcast&payinvoice=PI'.PAYINVOICE_VERSION.'&dom='.JURI::getInstance()->toString(array('scheme', 'host', 'port'));?>
-			<iframe src="http://pub.jpayplans.com/payinvoice/broadcast/installation.html?<?php //echo $suffix?>"></iframe>
-			
-			<?php 
-			$event			= "product.installation";
-			$domain 		= JURI::getInstance()->toString(array('scheme', 'host', 'port'));
-			$event_args 	= array('domain'=> $domain, 'version'=> "'.PAYINVOICE_VERSION.'", 'product'=>'PayInvoice', 'email'=>'', 'joomla_version'=> "'.$version->RELEASE.'");
-            $event_args 	= urlencode(json_encode($event_args)); ?>
-
-			<iframe id="iframe-id" src="http://www.readybytes.net/broadcast/track.html?event=<?php echo $event;?>&event_args=<?php echo $event_args;?>" style="display :none;"></iframe>
+		
+		$domain 		= JURI::getInstance()->toString(array('scheme', 'host', 'port'));
+		$version 		= new JVersion();
+		$suffix 		= 'jom=J'.$version->RELEASE.'&utm_campaign=broadcast&payinvoice=PI'.PAYINVOICE_VERSION.'&dom='.$domain;
+		$event 			= "product.installation";
+		$event_args 	= array('product'=>'PayInvoice', 'version'=>PAYINVOICE_VERSION, 'domain'=>$domain, 'joomla_version'=>$version->RELEASE, 'email'=>$email);
+		$event_args 	= urlencode(json_encode($event_args));?>
+		
+		<iframe src="http://pub.jpayplans.com/payinvoice/broadcast/installation.html?<?php echo $suffix?>"></iframe>
+		<iframe src="http://www.readybytes.net/broadcast/track.html?event=<?php echo $event;?>&event_args=<?php echo $event_args;?>" style="display :none;"></iframe>
+		
 	</div>
 </div>
 <?php 

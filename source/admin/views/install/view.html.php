@@ -24,4 +24,30 @@ class PayInvoiceAdminViewInstall extends PayInvoiceAdminBaseViewInstall
 	{
 		return true;
 	}
+
+	public function display()
+	{
+		$app 		= PayInvoiceFactory::getApplication();
+		$db_prefix 	= $app->get('dbprefix', '');
+		$db 		= PayInvoiceFactory::getDbo();
+		$tables 	= $db->getTableList();
+		$email 		= '';
+		
+		if (!in_array($db_prefix.'rbinstaller_config', $tables)){
+			$this->assign('email', $email);
+			return true;
+		}
+		
+		$query	= 'SELECT * FROM `#__rbinstaller_config`'
+		.'WHERE `key` = "email"';
+		$db->setQuery($query);
+		
+		$object = $db->loadObject();
+		if($object){
+			$email = $object->value;
+		}
+		
+		$this->assign('email', $email);
+		return true;
+	}
 }
