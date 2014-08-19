@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <extension version="2.5" type="plugin" group="payinvoice" method="upgrade">
 	<name>Pdf Export</name>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<creationDate>June 2013</creationDate>
 	<author>Team PayPlans</author>
 	<authorEmail>team@readybytes.in</authorEmail>
@@ -23,6 +23,6 @@
 	</config>
 
 <alias>pi-pdfexport</alias>
-<version_number>1.0.0</version_number>
+<version_number>1.0.1</version_number>
 <version_name>pdfExport 1.0</version_name>
 </extension>
