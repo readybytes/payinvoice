@@ -54,12 +54,12 @@ class PayInvoiceEvent extends JEvent
 		$email_view->assign('config_data', $config_data);
 
 		if($new->getstatus() == PayInvoiceInvoice::STATUS_INPROCESS && $rb_invoice['processor_type'] == 'offlinepay'){
+			
+			// Notify admin about Offline payment
+			$emailSubject 	= Rb_Text::_('COM_PAYINVOICE_INPROCESS_ADMIN_EMAIL_SUBJECT');
+			$emailBody 	= Rb_Text::sprintf('COM_PAYINVOICE_INPROCESS_ADMIN_EMAIL_BODY', $buyer->name, $buyer->email, $rb_invoice['serial']);
 
- 			// Notify admin about Offline payment
-			$emailSubject = Rb_Text::_('COM_PAYINVOICE_INPROCESS_ADMIN_EMAIL_SUBJECT');
-			$emailBody = Rb_Text::sprintf('COM_PAYINVOICE_INPROCESS_ADMIN_EMAIL_BODY', $buyer->name, $buyer->email, $rb_invoice['serial']);
-
-			$admins = Rb_HelperJoomla::getUsersToSendSystemEmail();
+			$admins		= Rb_HelperJoomla::getUsersToSendSystemEmail();
 			foreach ($admins as $admin){
 				$emails[] = $admin->email;
 			}
@@ -67,8 +67,8 @@ class PayInvoiceEvent extends JEvent
 			PayInvoiceFactory::getHelper('utils')->sendEmail($emails, $emailSubject, $emailBody);
 
 			//Notify Buyer's about Offline payment
-			$emailSubject = Rb_Text::_('COM_PAYINVOICE_INPROCESS_BUYER_EMAIL_SUBJECT');
-			$emailBody = Rb_Text::sprintf('COM_PAYINVOICE_INPROCESS_BUYER_EMAIL_BODY', $buyer->name);
+			$emailSubject	= Rb_Text::_('COM_PAYINVOICE_INPROCESS_BUYER_EMAIL_SUBJECT');
+			$emailBody		= Rb_Text::sprintf('COM_PAYINVOICE_INPROCESS_BUYER_EMAIL_BODY', $buyer->name);
 
 			PayInvoiceFactory::getHelper('utils')->sendEmail($buyer->email, $emailSubject, $emailBody);
 			return true;
@@ -77,7 +77,7 @@ class PayInvoiceEvent extends JEvent
 		if($new->getStatus()  == Rb_EcommerceInvoice::STATUS_PAID){
 			$suffix = 'paid';
 		}
-		else if($new->getStatus()	== Rb_EcommerceInvoice::STATUS_REFUNDED){
+		elseif($new->getStatus()	== Rb_EcommerceInvoice::STATUS_REFUNDED){
 			$suffix = 'refund';			
 		}
 		elseif($prev->getStatus() == PayInvoiceInvoice::STATUS_INPROCESS && $new->getStatus() == PayInvoiceInvoice::STATUS_DUE)

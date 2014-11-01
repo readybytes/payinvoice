@@ -59,13 +59,13 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 			<td height="110;" valign="top">
 				<h3 style="font-family: caption;">
 				<?php	$address 	= $buyer[$rb_invoice['buyer_id']]->address;
-						$city 		= $buyer[$rb_invoice['buyer_id']]->city;
-						$country 	= $buyer[$rb_invoice['buyer_id']]->country; ?>
-
-				<?php echo $buyer[$rb_invoice['buyer_id']]->name."<br>".$buyer[$rb_invoice['buyer_id']]->email; ?><br>
-				<?php if($address) echo $address;?><br>
-				<?php if($city) echo $city;?><br>
-				<?php if($country) echo ",".$country;?>
+						$city		= $buyer[$rb_invoice['buyer_id']]->city;
+						$country	= $buyer[$rb_invoice['buyer_id']]->country; ?>
+					
+				<?php	echo $buyer[$rb_invoice['buyer_id']]->name."<br>".$buyer[$rb_invoice['buyer_id']]->email; ?><br>
+				<?php 	if($address) echo $address;?><br>
+				<?php 	if($city) echo $city;?><br>
+				<?php 	if($country) echo ",".$country;?>
 		</h3>
 			</td>
 						

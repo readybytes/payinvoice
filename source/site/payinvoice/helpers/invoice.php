@@ -90,7 +90,7 @@ class PayInvoiceHelperInvoice extends JObject
     // get existing serial number
 	public function exist_serial_number($serial)
 	{
-		$filter			= array('serial' => $serial);
+		$filter			= array('serial' => $serial, 'object_type' => 'PayInvoiceInvoice');
 		$serial_number	= Rb_EcommerceAPI::invoice_get_records($filter);
 		if($serial_number){
 			return true;
@@ -194,9 +194,9 @@ class PayInvoiceHelperInvoice extends JObject
 	public function process_payment($request_name, $rb_invoice, $data)
 	{
 		while(true){
-			$req_response 		= Rb_EcommerceApi::invoice_request($request_name, $rb_invoice['invoice_id'], $data);			
-			$response 			= Rb_EcommerceApi::invoice_process($rb_invoice['invoice_id'], $req_response);
-						
+			$req_response 	= Rb_EcommerceApi::invoice_request($request_name, $rb_invoice['invoice_id'], $data);
+			$response 		= Rb_EcommerceApi::invoice_process($rb_invoice['invoice_id'], $req_response);
+
 			if($response->get('next_request', false) == false){
 				break;
 			}

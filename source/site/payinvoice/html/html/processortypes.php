@@ -18,7 +18,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 class PayInvoiceHtmlProcessortypes
 {
-	function edit($name, $value, $attr=null, $ignore=array())
+	static function edit($name, $value, $attr=null, $ignore=array())
 	{
 		$processor_data = Rb_EcommerceAPI::get_processors_list();		
 		

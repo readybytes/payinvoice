@@ -65,11 +65,10 @@ $config_data['company_phone']	= !empty($config_data['company_phone']) 		? $confi
 					                       		</td>
 											</tr>
 											
-									<tr>
-										<td valign="middle" height="30px" align="center" style="font-size:0;line-height:0;border-collapse:collapse">&nbsp;</td>
-									</tr>
-
 											<tr>
+												<tr>
+					                       			<td valign="middle" height="30px" align="center" style="font-size:0;line-height:0;border-collapse:collapse">&nbsp;</td>
+												</tr>
 												<td>
 													<p style="font-size:16px; color:#666"><?php echo Rb_Text::_('COM_PAYINVOICE_WEBSITE_DETAILS');?></p>
 												</td>

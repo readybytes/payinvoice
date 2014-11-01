@@ -138,7 +138,7 @@ payinvoice.admin.invoice = {
 					$('#payinvoice-invoice-subtotal').val(parseFloat(subtotal).toFixed(2));
 					
 					if($('#payinvoice-invoice-discount').val() != ''){
-						discount = parseFloat($('#payinvoice-invoice-discount').val());
+						var discount = parseFloat($('#payinvoice-invoice-discount').val());
 					}
 					var tax 	 = parseFloat($('#payinvoice-invoice-tax').val());
 					
