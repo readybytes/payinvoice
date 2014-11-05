@@ -1,11 +1,11 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Back-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -24,66 +24,66 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 	
   	<div class="row-fluid"> 
     	<div class="span6">
-		     <h2><?php echo Rb_Text::_('COM_PAYINVOICE_TRANSACTION_DETAILS' ); ?></h2><hr>
+		     <h2><?php echo JText::_('COM_PAYINVOICE_TRANSACTION_DETAILS' ); ?></h2><hr>
 	      	<div class="control-group">
-				<div class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_TRANSACTION_ID' ); ?></div>
+				<div class="control-label"><?php echo JText::_('COM_PAYINVOICE_TRANSACTION_ID' ); ?></div>
 				<div class="controls"><?php echo $transaction['transaction_id']; ?></div>	
 			 </div>		
 			 
 			<div class="control-group">
-				<div class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_TRANSACTION_INVOICE' ); ?> </div>
+				<div class="control-label"><?php echo JText::_('COM_PAYINVOICE_TRANSACTION_INVOICE' ); ?> </div>
 				<div class="controls"><?php echo PayInvoiceHtml::link('index.php?option=com_payinvoice&view=invoice&task=edit&id='.$invoice[$transaction['invoice_id']]->object_id, $invoice[$transaction['invoice_id']]->object_id.'('.$invoice[$transaction['invoice_id']]->title.')');?></div>
 			
 			</div>	
 		
 			<div class="control-group">
-				<div class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_TRANSACTION_BUYER' ); ?> </div>
+				<div class="control-label"><?php echo JText::_('COM_PAYINVOICE_TRANSACTION_BUYER' ); ?> </div>
 				<div class="controls"><?php echo PayInvoiceHtml::link('index.php?option=com_payinvoice&view=buyer&task=edit&id='.$transaction['buyer_id'], $transaction['buyer_id'].'('.$buyer[$transaction['buyer_id']]->name.')'); ?></div>	
 			 </div>	
 							   
 		   <div class="control-group">
-				<div class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_TRANSACTION_PROCESSOR' ); ?> </div>
+				<div class="control-label"><?php echo JText::_('COM_PAYINVOICE_TRANSACTION_PROCESSOR' ); ?> </div>
 				<div class="controls"><?php echo $transaction['processor_type']; ?></div>	
 		   </div>
 
 			<div class="control-group">
-				<div class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_TRANSACTION_PAYMENT_STATUS' ); ?> </div>
-				<div class="controls"><?php echo Rb_Text::_($statusList[$transaction['payment_status']]);?></div>	
+				<div class="control-label"><?php echo JText::_('COM_PAYINVOICE_TRANSACTION_PAYMENT_STATUS' ); ?> </div>
+				<div class="controls"><?php echo JText::_($statusList[$transaction['payment_status']]);?></div>	
 		   </div>	
 
  			<div class="control-group">
-				<div class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_TRANSACTION_GATEWAY_TXN_ID' ); ?> </div>
+				<div class="control-label"><?php echo JText::_('COM_PAYINVOICE_TRANSACTION_GATEWAY_TXN_ID' ); ?> </div>
 				<div class="controls"><?php echo $transaction['gateway_txn_id']; ?></div>	
 		   </div>	
 	
 			<div class="control-group">
-				<div class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_TRANSACTION_GATEWAY_PARENT_TXN' ); ?> </div>
+				<div class="control-label"><?php echo JText::_('COM_PAYINVOICE_TRANSACTION_GATEWAY_PARENT_TXN' ); ?> </div>
 				<div class="controls"><?php echo $transaction['gateway_parent_txn']; ?></div>	
 			 </div>	
 			 
 			 <div class="control-group">
-				<div class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_TRANSACTION_GATEWAY_SUBSCRIPTION_ID' ); ?> </div>
+				<div class="control-label"><?php echo JText::_('COM_PAYINVOICE_TRANSACTION_GATEWAY_SUBSCRIPTION_ID' ); ?> </div>
 				<div class="controls"><?php echo $transaction['gateway_subscr_id']; ?></div>	
 			 </div>
 			 
 			 <div class="control-group">
-				<div class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_TRANSACTION_AMOUNT' ); ?> </div>
+				<div class="control-label"><?php echo JText::_('COM_PAYINVOICE_TRANSACTION_AMOUNT' ); ?> </div>
 				<div class="controls"><?php echo $transaction['amount']; ?></div>	
 			 </div>
 
 			<div class="control-group">
-				<div class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_TRANSACTION_CREATED_DATE' ); ?> </div>
+				<div class="control-label"><?php echo JText::_('COM_PAYINVOICE_TRANSACTION_CREATED_DATE' ); ?> </div>
 				<div class="controls"><?php echo $transaction['created_date']; ?></div>	
 			 </div>
 			 
 			 <div class="control-group">
-				<div class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_TRANSACTION_MESSAGE' ); ?> </div>
-				<div class="controls"><?php echo Rb_Text::_($transaction['message']); ?></div>	
+				<div class="control-label"><?php echo JText::_('COM_PAYINVOICE_TRANSACTION_MESSAGE' ); ?> </div>
+				<div class="controls"><?php echo JText::_($transaction['message']); ?></div>	
 			 </div>
 		</div>
 			
 			<div class="span6">
-				<h2><?php echo Rb_Text::_('COM_PAYINVOICE_TRANSACTION_PARAMS'); ?></h2><hr>
+				<h2><?php echo JText::_('COM_PAYINVOICE_TRANSACTION_PARAMS'); ?></h2><hr>
 				<?php foreach ($transaction['params'] as $key => $value):?>
 					 <div class="control-group">
 						<div class="control-label"><?php echo $key;?> </div>

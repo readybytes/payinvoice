@@ -1,11 +1,11 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Back-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -23,7 +23,7 @@ JHtml::_('behavior.framework');
 					<input type="checkbox" name="toggle" value="" onclick="Joomla.checkAll(this);" />
 				</th>		
 				<th class="default-grid-sno hidden-phone">
-          			<?php echo Rb_Text::_("COM_PAYINVOICE_NUM"); ?>
+          			<?php echo JText::_("COM_PAYINVOICE_NUM"); ?>
         		</th> 
 				<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_BUYER_ID", 'buyer_id', $filter_order_Dir, $filter_order);?></th>
 				<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_BUYER_NAME", 'name', $filter_order_Dir, $filter_order);?></th>

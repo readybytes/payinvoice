@@ -1,11 +1,11 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Back-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -26,7 +26,7 @@ if(empty($record_id)){
 	<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="rb-validate-form">
 		<div class="span6">
 			<fieldset class="form">
-				<h3><?php echo Rb_Text::_('COM_PAYINVOICE_BUYER_LOGIN_DETAILS' ); ?></h3>
+				<h3><?php echo JText::_('COM_PAYINVOICE_BUYER_LOGIN_DETAILS' ); ?></h3>
 				<hr>		          
 	            <div class="control-group">
 					<?php echo $form->getLabel('name'); ?>
@@ -64,7 +64,7 @@ if(empty($record_id)){
 		
 		<div class="span6">
 			<fieldset class="form">
-				<h3><?php echo Rb_Text::_('COM_PAYINVOICE_BUYER_BASIC_DETAILS')?></h3><hr>
+				<h3><?php echo JText::_('COM_PAYINVOICE_BUYER_BASIC_DETAILS')?></h3><hr>
 							   
 				<div class="control-group">
 					<?php echo $form->getLabel('currency'); ?>

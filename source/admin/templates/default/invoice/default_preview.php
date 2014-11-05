@@ -1,10 +1,10 @@
 <?php
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Back-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
@@ -18,7 +18,7 @@ $config_data['company_phone']	= isset($config_data['company_phone'])		? $config_
 	<div>&nbsp;</div>
 	<div id="payinvoice-invoice-preview" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     	<div class="modal-header">
-    		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h3 id="myModalLabel"><?php echo Rb_Text::_('Invoice Preview');?></h3>
+    		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h3 id="myModalLabel"><?php echo JText::_('Invoice Preview');?></h3>
     	</div>
 
    	 	<div class="modal-body">
@@ -30,7 +30,7 @@ $config_data['company_phone']	= isset($config_data['company_phone'])		? $config_
 							<strong><?php echo $config_data['company_name'];?></strong><br>
 							<?php echo $config_data['company_address'];?> <br>
 							<?php if(!empty($config_data['company_phone'])):?>
-							<abbr title="Phone"><?php echo Rb_Text::_('COM_PAYINVOICE_COMPANY_PHONE_NO');?></abbr>&nbsp;<?php echo $config_data['company_phone'];?>
+							<abbr title="Phone"><?php echo JText::_('COM_PAYINVOICE_COMPANY_PHONE_NO');?></abbr>&nbsp;<?php echo $config_data['company_phone'];?>
 							<?php endif;?>
 						</address>
 			  	 		</div>	
@@ -60,13 +60,13 @@ $config_data['company_phone']	= isset($config_data['company_phone'])		? $config_
 				<div class="row-fluid">
 					<div class="span5">
 					    <ul class="unstyled">
-							<li><strong><?php echo Rb_Text::_('COM_PAYINVOICE_BUYER_NAME');?></strong></li>
+							<li><strong><?php echo JText::_('COM_PAYINVOICE_BUYER_NAME');?></strong></li>
 							<li><?php echo $buyer->getBuyername();?></li>
-							<li><strong><?php echo Rb_Text::_('COM_PAYINVOICE_BUYER_EMAIL');?></strong></li>
+							<li><strong><?php echo JText::_('COM_PAYINVOICE_BUYER_EMAIL');?></strong></li>
 							<li><?php echo $buyer->getEmail(); ?></li>
-							<li><strong><?php echo Rb_Text::_('COM_PAYINVOICE_BUYER_ADDRESS');?></strong></li>
+							<li><strong><?php echo JText::_('COM_PAYINVOICE_BUYER_ADDRESS');?></strong></li>
 							<li><?php echo $buyer->getAddress().",".$buyer->getCity(); ?></li>
-							<li><strong><?php echo Rb_Text::_('COM_PAYINVOICE_BUYER_TAX_NUMBER');?></strong></li>
+							<li><strong><?php echo JText::_('COM_PAYINVOICE_BUYER_TAX_NUMBER');?></strong></li>
 							<li><?php echo $buyer->getTaxnumber(); ?></li>
 						</ul>
 					</div>
@@ -74,14 +74,14 @@ $config_data['company_phone']	= isset($config_data['company_phone'])		? $config_
 					<div class="span2"></div>
 	   
 			   		<div class="span5">
-    					<dl class="dl-horizontal pull-right">	
-						    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_ISSUE_DATE');?></dt>
+						<dl class="dl-horizontal pull-right">	
+						    <dt><?php echo JText::_('COM_PAYINVOICE_INVOICE_ISSUE_DATE');?></dt>
 						   	<?php $issue_date = new Rb_Date($rb_invoice['issue_date']);?>
 						    <dd><?php echo $this->getHelper('format')->date($issue_date);?></dd>
 						    <?php $due_date = new Rb_Date($rb_invoice['due_date']);?>		    			    
-						    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_DUE_DATE');?></dt>
+						    <dt><?php echo JText::_('COM_PAYINVOICE_INVOICE_DUE_DATE');?></dt>
 						    <dd><?php echo $this->getHelper('format')->date($due_date);?></dd>		    
-		   				</dl>
+						</dl>
 					</div>
 				</div>
 	
@@ -92,16 +92,16 @@ $config_data['company_phone']	= isset($config_data['company_phone'])		? $config_
 					<div class="span7"></div>
 					<div class="span5">
 						<dl class="dl-horizontal pull-right">
-							<dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_SUBTOTAL');?></dt>
+							<dt><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_SUBTOTAL');?></dt>
 							<dd><?php echo $currency_symbol." ".$subtotal;?></dd>
-							<dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_DISCOUNT');?></dt>
+							<dt><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_DISCOUNT');?></dt>
 							<dd><?php echo $currency_symbol." ".$discount;?></dd>
-							<dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX');?></dt>
+							<dt><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX');?></dt>
 							<dd><?php echo $tax." %";?></dd><hr>
-							<dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TOTAL');?></dt>
+							<dt><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TOTAL');?></dt>
 							<dd><?php echo $currency_symbol." ".number_format($rb_invoice['total'], 2);?></dd><br>
 							<?php if($valid):?>
-							<dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_PAYMENT_METHOD');?></dt>
+							<dt><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_PAYMENT_METHOD');?></dt>
 							<dd><?php if(!empty($rb_invoice['processor_type'])){?>
 								<?php echo ucfirst($rb_invoice['processor_type']);?>
 								<?php	 }else {
@@ -119,7 +119,7 @@ $config_data['company_phone']	= isset($config_data['company_phone'])		? $config_
 				<?php 	if(!empty($invoiceParams->terms_and_conditions)):?>
 				<div class="row-fluid">
 					<div class="well well-small">
-						<h5><input type="checkbox" name="terms-and-conditions"><?php echo " ".Rb_Text::_('COM_PAYINVOICE_INVOICE_TERMS_AND_CONDITIONS');?></h5>
+						<h5><input type="checkbox" name="terms-and-conditions"><?php echo " ".JText::_('COM_PAYINVOICE_INVOICE_TERMS_AND_CONDITIONS');?></h5>
 						<?php echo JString::substr(strip_tags($invoiceParams->terms_and_conditions), 0, 340); ?>			
 					</div>
 				</div> 
@@ -128,7 +128,7 @@ $config_data['company_phone']	= isset($config_data['company_phone'])		? $config_
    				</div>
    				
    				<div class="modal-footer">
-	    			<a href="#" class="btn" data-dismiss="modal" aria-hidden="true"><?php echo Rb_Text::_('COM_PAYINVOICE_CLOSE');?></a>
+	    			<a href="#" class="btn" data-dismiss="modal" aria-hidden="true"><?php echo JText::_('COM_PAYINVOICE_CLOSE');?></a>
     			</div>			
 			</div>	
 	    </div>

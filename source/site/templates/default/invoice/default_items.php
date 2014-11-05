@@ -1,10 +1,10 @@
 <?php
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Front-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
@@ -21,10 +21,10 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
  	<table class="table table-bordered">
     	<thead>
 			<tr>
-				<th class="span5"><span><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEMS');?></span></th>
-				<th class="span2"><span class="pull-right"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_QUANTITY');?></span></th>
-				<th class="span2"><span class="pull-right"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_PRICE_PER_UNIT');?></span></th>
-				<th class="span3"><span class="pull-right"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_PRICE_TOTAL');?></span></th>
+				<th class="span5"><span><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEMS');?></span></th>
+				<th class="span2"><span class="pull-right"><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_QUANTITY');?></span></th>
+				<th class="span2"><span class="pull-right"><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_PRICE_PER_UNIT');?></span></th>
+				<th class="span3"><span class="pull-right"><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_PRICE_TOTAL');?></span></th>
 			</tr>
 		</thead>
 		

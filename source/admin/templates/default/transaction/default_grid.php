@@ -1,11 +1,11 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Back-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -22,7 +22,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 				</th>
 				
 				<th class="default-grid-sno hidden-phone">
-          			<?php echo Rb_Text::_("COM_PAYINVOICE_NUM"); ?>
+          			<?php echo JText::_("COM_PAYINVOICE_NUM"); ?>
         		</th>
 				
 				<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_TRANSACTION_ID", 'transaction_id', $filter_order_Dir, $filter_order);?></th>
@@ -48,7 +48,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 					     </td>
 					<td><?php echo PayInvoiceHtml::link('index.php?option=com_payinvoice&view=invoice&task=edit&id='.$invoice[$record->invoice_id]->object_id, $invoice[$record->invoice_id]->object_id.'('.$invoice[$record->invoice_id]->title.')');?></td>
 					<td><?php echo $record->amount;?></td>
-					<td><?php echo Rb_Text::_($statusList[$record->payment_status]);?></td>					
+					<td><?php echo JText::_($statusList[$record->payment_status]);?></td>					
 					<td class="nowrap hidden-phone"><?php echo Rb_date::timeago($record->created_date);?></td>
 			
 		<?php $count++;?>		

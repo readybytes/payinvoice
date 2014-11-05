@@ -1,10 +1,10 @@
 <?php
 /**
-* @copyright	Copyright (C) 2009 - 2013 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Back-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -34,7 +34,7 @@ class PayInvoiceAdminControllerAppstore extends PayInvoiceController
      		$response   = $curl->request('GET', $link);
       
       		if($response->code != 200){
-      			$msg = Rb_Text::_('COM_PAYINVOICE_UNABLE_TO_FIND_FILE');
+      			$msg = JText::_('COM_PAYINVOICE_UNABLE_TO_FIND_FILE');
        	 		PayInvoiceFactory::getApplication()->redirect("index.php?option=com_payinvoice", $msg, 'error');
       		}
                 
@@ -45,13 +45,13 @@ class PayInvoiceAdminControllerAppstore extends PayInvoiceController
 			$content_type 	=  $data->headers['Content-Type'];
     
    			 if ($content_type != 'application/zip'){ 
-   			 	$msg = Rb_Text::_('COM_PAYINVOICE_UNABLE_TO_FIND_FILE');
+   			 	$msg = JText::_('COM_PAYINVOICE_UNABLE_TO_FIND_FILE');
       			PayInvoiceFactory::getApplication()->redirect("index.php?option=com_payinvoice", $msg, 'error');
    		 	}
     		else {
       			$file =  $data->body;
 				if(!$this->getHelper('utils')->install($file)){
-					$msg  = Rb_Text::_('COM_PAYINVOICE_INSTALLATIN_FAILED');
+					$msg  = JText::_('COM_PAYINVOICE_INSTALLATIN_FAILED');
 					PayInvoiceFactory::getApplication()->redirect("index.php?option=com_payinvoice", $msg, 'error');
 				}
 			}

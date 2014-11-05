@@ -1,11 +1,11 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Back-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -14,11 +14,11 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 <div class="pull-right">
 	<?php if(!empty($record_id)):?>
 	<?php if($mark_paid):?>
-		<a href="#" onclick="payinvoice.admin.invoice.markpaid.confirm('<?php echo $record_id?>')" class="btn btn-success"><?php echo Rb_Text::_('Mark Paid');?></a>
+		<a href="#" onclick="payinvoice.admin.invoice.markpaid.confirm('<?php echo $record_id?>')" class="btn btn-success"><?php echo JText::_('Mark Paid');?></a>
 	<?php endif;?>
-	
-	<a href="#payinvoice-invoice-preview" id="payinvoice-preview-link" role="button" class="btn btn-success" data-toggle="modal"><i class="icon-search icon-white"></i>&nbsp;<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_PREVIEW_LINK');?></a>					
-	<a href="#" onclick="payinvoice.admin.invoice.email.confirm('<?php echo $record_id?>')" class="btn btn-success"><i class="icon-envelope icon-white"></i>&nbsp;<?php echo Rb_Text::_('PAYINVOCIE_TOOLBAR_EMAIL');?></a>		
+
+	<a href="#payinvoice-invoice-preview" id="payinvoice-preview-link" role="button" class="btn btn-success" data-toggle="modal"><i class="icon-search icon-white"></i>&nbsp;<?php echo JText::_('COM_PAYINVOICE_INVOICE_PREVIEW_LINK');?></a>					
+	<a href="#" onclick="payinvoice.admin.invoice.email.confirm('<?php echo $record_id?>')" class="btn btn-success"><i class="icon-envelope icon-white"></i>&nbsp;<?php echo JText::_('PAYINVOCIE_TOOLBAR_EMAIL');?></a>		
 	<?php endif;?>	
 	
 	<?php // PAYINOICE-TRIGGER-POSITION ?>

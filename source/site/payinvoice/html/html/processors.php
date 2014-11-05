@@ -1,11 +1,11 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Front-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -27,7 +27,7 @@ class PayInvoiceHtmlProcessors
 		
 		$options = array();
 		if(isset($attr['none']))
-			$options[] = PayInvoiceHtml::_('select.option', '', Rb_Text::_('Select Processor'));
+			$options[] = PayInvoiceHtml::_('select.option', '', JText::_('Select Processor'));
 			
 		foreach($processors  as $processor){
 			if(isset($processor_list[$processor->type])){

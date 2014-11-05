@@ -1,10 +1,10 @@
 <?php
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package		PAYINVOICE
 * @subpackage	Frontend
-* @contact 		team@readybytes.in
+* @contact 		support+payinvoice@readybytes.in
 */
 defined( '_JEXEC' ) or die( 'Restricted access' );
 ?>
@@ -17,8 +17,8 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 ?>
 <div class="row-fluid">
 	<div class="center">
-		<h2><?php echo Rb_Text::_($header);?></h2>
-		<?php echo Rb_Text::_($message);?>		
+		<h2><?php echo JText::_($header);?></h2>
+		<?php echo JText::_($message);?>		
 	</div>
 	
 	<div>&nbsp;</div>

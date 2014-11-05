@@ -1,10 +1,10 @@
 <?php
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Back-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
@@ -20,24 +20,24 @@ class PayInvoiceAdminViewProcessor extends PayInvoiceAdminBaseViewProcessor
 	{
 		$task = PayInvoiceFactory::getApplication()->input->get('task', '');
 		if($task == 'selectProcessor'){
-			Rb_HelperToolbar::back('COM_PAYINVOICE_JS_BACK', 'index.php?option=com_payinvoice&view=processor');
+			JToolbarHelper::back('COM_PAYINVOICE_JS_BACK', 'index.php?option=com_payinvoice&view=processor');
 		}else {
-			Rb_HelperToolbar::addNew('selectProcessor');
-			Rb_HelperToolbar::editList();
-			Rb_HelperToolbar::divider();
-			Rb_HelperToolbar::publish();
-			Rb_HelperToolbar::unpublish();
-			Rb_HelperToolbar::divider();
-			Rb_HelperToolbar::deleteList(Rb_Text::_('COM_PAYINVOICE_JS_ARE_YOU_SURE_TO_DELETE'));
+			JToolbarHelper::addNew('selectProcessor');
+			JToolbarHelper::editList();
+			JToolbarHelper::divider();
+			JToolbarHelper::publish();
+			JToolbarHelper::unpublish();
+			JToolbarHelper::divider();
+			JToolbarHelper::deleteList(JText::_('COM_PAYINVOICE_JS_ARE_YOU_SURE_TO_DELETE'));
 		}
 	}
 	
 	protected function _adminEditToolbar()
 	{	
-		Rb_HelperToolbar::apply();
-		Rb_HelperToolbar::save();
-		Rb_HelperToolbar::divider();
-		Rb_HelperToolbar::cancel();
+		JToolbarHelper::apply();
+		JToolbarHelper::save();
+		JToolbarHelper::divider();
+		JToolbarHelper::cancel();
 	}
 	
 	function _displayGrid($records)
@@ -54,7 +54,7 @@ class PayInvoiceAdminViewProcessor extends PayInvoiceAdminBaseViewProcessor
 		if(!$itemId){
 			$processor_type = $this->input->get('processor_type', $processor_type);
 			if(!$processor_type){
-				$message = Rb_Text::_('COM_PAYINVOICE_NO_PROCESSOR_TYPE');
+				$message	= JText::_('COM_PAYINVOICE_NO_PROCESSOR_TYPE');
 				PayInvoiceFactory::getApplication()->redirect('index.php?option=com_payinvoice&view=processor&task=selectProcessor', $message, 'error');
 			}
 			$processorType->set('type',$processor_type);

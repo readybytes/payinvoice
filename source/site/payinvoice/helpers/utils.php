@@ -1,10 +1,10 @@
 <?php
 /**
-* @copyright	Copyright (C) 2009 - 2009 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package		PAYINVOICE
 * @subpackage	Frontend
-* @contact 		team@readybytes.in
+* @contact 		support+payinvoice@readybytes.in
 */
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
@@ -29,7 +29,7 @@ class PayInvoiceHelperUtils extends JObject
 	  	//check if file has supported extensions or not
 		if(!in_array($extension, $supportedExtensions))
 		{
-			$app->enqueueMessage(Rb_Text::_('COM_PAYINVOICE_CONFIG_CUSTOMIZATION_EDIT_EXTENSION_NOT_SUPPORTED'));
+			$app->enqueueMessage(JText::_('COM_PAYINVOICE_CONFIG_CUSTOMIZATION_EDIT_EXTENSION_NOT_SUPPORTED'));
 			return false;
 		}
 
@@ -67,7 +67,7 @@ class PayInvoiceHelperUtils extends JObject
 		$fromname 	= $app->getCfg( 'fromname' );
 		
 		if( !$mailfrom  || !$fromname ) {
-			throw new Exception(Rb_Text::_('COM_PAYINVOCIE_EXCEPTION_UTILS_NO_EMAILFROM_AND_FROMNAME_EXISTS'));
+			throw new Exception(JText::_('COM_PAYINVOCIE_EXCEPTION_UTILS_NO_EMAILFROM_AND_FROMNAME_EXISTS'));
 		}
 		
 		$message = html_entity_decode($message, ENT_QUOTES);

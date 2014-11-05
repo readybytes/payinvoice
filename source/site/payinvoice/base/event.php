@@ -1,11 +1,11 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Front-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -56,8 +56,8 @@ class PayInvoiceEvent extends JEvent
 		if($new->getstatus() == PayInvoiceInvoice::STATUS_INPROCESS && $rb_invoice['processor_type'] == 'offlinepay'){
 			
 			// Notify admin about Offline payment
-			$emailSubject 	= Rb_Text::_('COM_PAYINVOICE_INPROCESS_ADMIN_EMAIL_SUBJECT');
-			$emailBody 	= Rb_Text::sprintf('COM_PAYINVOICE_INPROCESS_ADMIN_EMAIL_BODY', $buyer->name, $buyer->email, $rb_invoice['serial']);
+			$emailSubject 	= JText::_('COM_PAYINVOICE_INPROCESS_ADMIN_EMAIL_SUBJECT');
+			$emailBody 		= JText::sprintf('COM_PAYINVOICE_INPROCESS_ADMIN_EMAIL_BODY', $buyer->name, $buyer->email, $rb_invoice['serial']);
 
 			$admins		= Rb_HelperJoomla::getUsersToSendSystemEmail();
 			foreach ($admins as $admin){
@@ -67,8 +67,8 @@ class PayInvoiceEvent extends JEvent
 			PayInvoiceFactory::getHelper('utils')->sendEmail($emails, $emailSubject, $emailBody);
 
 			//Notify Buyer's about Offline payment
-			$emailSubject	= Rb_Text::_('COM_PAYINVOICE_INPROCESS_BUYER_EMAIL_SUBJECT');
-			$emailBody		= Rb_Text::sprintf('COM_PAYINVOICE_INPROCESS_BUYER_EMAIL_BODY', $buyer->name);
+			$emailSubject	= JText::_('COM_PAYINVOICE_INPROCESS_BUYER_EMAIL_SUBJECT');
+			$emailBody		= JText::sprintf('COM_PAYINVOICE_INPROCESS_BUYER_EMAIL_BODY', $buyer->name);
 
 			PayInvoiceFactory::getHelper('utils')->sendEmail($buyer->email, $emailSubject, $emailBody);
 			return true;
@@ -91,7 +91,7 @@ class PayInvoiceEvent extends JEvent
 		}
 		
 		$body 	 			= $email_view->loadTemplate('invoice_'.$suffix);
-		$subject 			= Rb_Text::_('COM_PAYINVOICE_INVOICE_SEND_EMAIL_ON_INVOICE_'.strtoupper($suffix));
+		$subject 			= JText::_('COM_PAYINVOICE_INVOICE_SEND_EMAIL_ON_INVOICE_'.strtoupper($suffix));
 		
 		$result = PayInvoiceFactory::getHelper('utils')->sendEmail($buyer->email, $subject, $body);
 		if($result){

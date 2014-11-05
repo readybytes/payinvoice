@@ -1,11 +1,11 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Front-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -164,12 +164,12 @@ class PayInvoiceHelperInvoice extends JObject
 			$issueDate    	= $issue_date->toUnix();
 			$dueDate 		= $due_date->toUnix();
 			
-			$title			= Rb_Text::_('COM_PAYINVOICE_INVOICE_LOCKED');
+			$title			= JText::_('COM_PAYINVOICE_INVOICE_LOCKED');
 			$message		= '';
 			if($currentDate < $issueDate){
-				$message	= Rb_Text::_('COM_PAYINVOICE_INVOICE_LOCKED_ISSUE_DATE_MSG');
+				$message	= JText::_('COM_PAYINVOICE_INVOICE_LOCKED_ISSUE_DATE_MSG');
 			}elseif ($currentDate > $dueDate) {
-				$message	= Rb_Text::_('COM_PAYINVOICE_INVOICE_LOCKED_DUE_DATE_MSG');
+				$message	= JText::_('COM_PAYINVOICE_INVOICE_LOCKED_DUE_DATE_MSG');
 			}
 
 			if($message){

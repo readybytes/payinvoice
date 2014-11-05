@@ -1,0 +1,75 @@
+/**
+* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @license		GNU/GPL, see LICENSE.php
+* @package		PAYINVOICE
+* @subpackage	Backend
+* @contact 		joomlaxi@readybytes.in
+*/
+
+/* Compatiblity with J2.5, radio buttons are not looking proper */
+.payinvoice fieldset.btn-group label.btn {
+	clear : none;
+}
+
+.daterangepicker.dropdown-menu{
+	display: none;
+}
+
+.payinvoice .payinvoice-border00{
+	border:none;
+}
+
+.payinvoice fieldset.form label{
+	float:none;
+}
+
+.payinvoice .powered-by{
+
+	background-color: #FAFAFA;
+	border-top: 1px dashed #D6D6D6;
+    margin-top: 10px;
+}
+
+/* CSS added for Invoice Preview template */
+#payinvoice-invoice-preview .row-fluid [class*="span"]{
+	 margin-left: 2.5641%;	
+}
+
+#payinvoice-invoice-preview .row-fluid [class*="span"]:FIRST-CHILD{
+	 margin-left: 0%;	
+}
+
+/* CSS added for Blue color text */
+.payinvoice .info {
+    color: #3A87AD;
+}
+
+#payinvoice-dashboard-chart-revenue svg{
+ 	height: 400px;
+}	
+
+/* css added for installation screen */
+.payinvoice .payinvoice-unit {
+	margin-bottom: 30px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+}
+
+.payinvoice .payinvoice-install-header {
+	font-size: 50px;
+	line-height: 1;
+}
+
+.payinvoice .payinvoice-unit p {
+	padding-top: 10px;
+	font-size: 18px;
+	color:#606060 ;
+	line-height: 27px;
+}
+
+.payinvoice .payinvoice-install-border {
+	border: 1px solid #E3E3E3;
+	border-radius: 4px 4px 4px 4px;
+    padding : 50px;
+}

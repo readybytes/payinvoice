@@ -1,11 +1,11 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Front-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -26,7 +26,7 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 								<p style="margin:0px 0px 5px;font-family: sans-serif;"><?php echo $config_data['company_name'];?></p>
 								<address style="font-family: Times New Roman;"><?php echo $config_data['company_address'];?><br>
 								 <?php if(!empty($config_data['company_phone'])):
-											echo Rb_Text::_('COM_PAYINVOICE_COMPANY_PHONE_NO');?><span href="tel:"></span>: <?php echo $config_data['company_phone'];?></address>																		
+											echo JText::_('COM_PAYINVOICE_COMPANY_PHONE_NO');?><span href="tel:"></span>: <?php echo $config_data['company_phone'];?></address>																		
 								 <?php endif;?>
 							</td>
 						</tr>
@@ -73,12 +73,12 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 				<table width="350px" cellspacing="0" cellpadding="8" border="1" align="right" style="font:14px Georgia, Serif;border-collapse: collapse;">
 					<tbody>
 						<tr>
-							<td style="background-color:#eee"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_STATUS');?></td>
+							<td style="background-color:#eee"><?php echo JText::_('COM_PAYINVOICE_INVOICE_STATUS');?></td>
 							<td style="text-align:right"><strong><?php echo $status_list[$rb_invoice['status']];?></strong></td>
 						</tr>
 						<tr>
 							<td style="background-color:#eee">
-								<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_NUMBER');?>
+								<?php echo JText::_('COM_PAYINVOICE_INVOICE_NUMBER');?>
 							</td>
 							<td style="text-align:right">
 									<?php echo $rb_invoice['serial'];?>
@@ -86,7 +86,7 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 						</tr>
 						<tr>
 							<td style="background-color:#eee">
-									<?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_DUE_DATE');?>
+									<?php echo JText::_('COM_PAYINVOICE_INVOICE_DUE_DATE');?>
 							</td>
 							<td style="text-align:right">
 									<?php echo $rb_invoice['due_date'];?>
@@ -94,7 +94,7 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 						</tr>
 						<tr>
 							<td style="background-color:#eee">
-									<?php echo Rb_Text::_('COM_PAYINVOICE_AMOUNT');?>
+									<?php echo JText::_('COM_PAYINVOICE_AMOUNT');?>
 							</td>
 							<td style="text-align:right">
 									<?php echo $rb_invoice['currency']." ".number_format($rb_invoice['total'], 2);?>

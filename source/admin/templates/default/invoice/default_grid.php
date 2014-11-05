@@ -1,11 +1,11 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Back-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -20,14 +20,14 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 				<th  width="1%" class="hidden-phone">
 					<input type="checkbox" name="toggle" value="" onclick="Joomla.checkAll(this);" />
 				</th>
-				<th class="default-grid-sno hidden-phone"><?php echo Rb_Text::_("COM_PAYINVOICE_NUM"); ?></th>
+				<th class="default-grid-sno hidden-phone"><?php echo JText::_("COM_PAYINVOICE_NUM"); ?></th>
 				<th class="default-grid-sno hidden-phone">
 					<?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_INVOICE_ID", 'invoice_id', 	$filter_order_Dir, $filter_order);?>
 				</th>
-				<th><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_TITLE');?></th>
-				<th class="hidden-phone"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_BUYER');?></th>				
-				<th><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_TOTAL');?></th>
-				<th><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_STATUS');?></th>
+				<th><?php echo JText::_('COM_PAYINVOICE_INVOICE_TITLE');?></th>
+				<th class="hidden-phone"><?php echo JText::_('COM_PAYINVOICE_INVOICE_BUYER');?></th>				
+				<th><?php echo JText::_('COM_PAYINVOICE_INVOICE_TOTAL');?></th>
+				<th><?php echo JText::_('COM_PAYINVOICE_INVOICE_STATUS');?></th>
 							
 			</tr>
 		<!-- TABLE HEADER END -->
@@ -45,7 +45,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 					<td><?php echo PayInvoiceHtml::link($uri.'&task=edit&id='.$record->{$record_key}, $invoice[$record->invoice_id]->title.' ('.$invoice[$record->invoice_id]->serial.')');?> </td>
                    	<td class="nowrap hidden-phone"><?php echo PayInvoiceHtml::link('index.php?option=com_payinvoice&view=buyer&task=edit&id='.$invoice[$record->invoice_id]->buyer_id, $invoice[$record->invoice_id]->buyer_id.'('.$buyer[$invoice[$record->invoice_id]->buyer_id]->name.')');?></td>
                     <td><?php echo $invoice[$record->invoice_id]->total;?></td>
-                    <td><?php echo Rb_Text::_($status_list[$invoice[$record->invoice_id]->status]);?></td>
+                    <td><?php echo JText::_($status_list[$invoice[$record->invoice_id]->status]);?></td>
 			<?php $count++;?>		
 			<?php endforeach;?>
 			</tbody>

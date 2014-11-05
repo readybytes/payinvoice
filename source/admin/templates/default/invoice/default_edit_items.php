@@ -1,11 +1,11 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Back-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -90,7 +90,7 @@ $params = $invoice->getParams();;
 </script>
 
 <!-- START : Item Table -->				
-<h3><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEMS' ); ?></h3>
+<h3><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEMS' ); ?></h3>
 <hr>
 <!--  ONE ITEM -->
 <div class="payinvoice-invoice-items">

@@ -1,11 +1,11 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Back-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -16,17 +16,17 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 	<div class="row-fluid">		
 		<div class="span4">
 			<h3><span id="payinvoice-dashboard-total">0</span></h3>
-			<strong><?php echo Rb_Text::_('COM_PAYINVOICE_DASHBOARD_HEADER_PAID');?></strong>
+			<strong><?php echo JText::_('COM_PAYINVOICE_DASHBOARD_HEADER_PAID');?></strong>
 		</div>	
 		
 		<div class="span4">
 			<h3><span id="payinvoice-dashboard-refund">0</span></h3>
-			<strong><?php echo Rb_Text::_('COM_PAYINVOICE_DASHBOARD_HEADER_REFUND');?></strong>
+			<strong><?php echo JText::_('COM_PAYINVOICE_DASHBOARD_HEADER_REFUND');?></strong>
 		</div>
 		
 		<div class="span4">
 			<h3><span id="payinvoice-dashboard-gross">0</span></h3>
-			<strong><?php echo Rb_Text::_('COM_PAYINVOICE_DASHBOARD_HEADER_TOTAL');?></strong>
+			<strong><?php echo JText::_('COM_PAYINVOICE_DASHBOARD_HEADER_TOTAL');?></strong>
 		</div>		
 	</div>	
 </div>
