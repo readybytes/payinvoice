@@ -22,9 +22,6 @@ JHtml::_('behavior.framework');
 				<th  width="1%" class="hidden-phone">
 					<input type="checkbox" name="toggle" value="" onclick="Joomla.checkAll(this);" />
 				</th>		
-				<th class="default-grid-sno hidden-phone">
-          			<?php echo JText::_("COM_PAYINVOICE_NUM"); ?>
-        		</th> 
 				<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_BUYER_ID", 'buyer_id', $filter_order_Dir, $filter_order);?></th>
 				<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_BUYER_NAME", 'name', $filter_order_Dir, $filter_order);?></th>
 				<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_BUYER_EMAIL",'email', $filter_order_Dir, $filter_order);?></th>
@@ -39,7 +36,6 @@ JHtml::_('behavior.framework');
 				    <th class="default-grid-chkbox nowrap hidden-phone">
 				    	<?php echo PayInvoiceHtml::_('grid.id', $count, $record->{$record_key} ); ?>
 				    </th>
-					<td class="nowrap hidden-phone"><?php echo $count+1; ?> </td>	
 					<td><?php echo PayInvoiceHtml::link($uri.'&task=edit&id='.$record->{$record_key}, $record->{$record_key}); ?></td>							
 					<td><?php echo $record->name;?></td>
 					<td><?php echo $record->email;?></td>

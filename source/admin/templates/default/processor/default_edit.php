@@ -44,9 +44,8 @@ JHtml::_('behavior.formvalidation');
 		<div class="span6">
 			<fieldset class="form">
 				<h3> <?php echo JText::_('COM_PAYINVOICE_PAYMENTMETHOD_EDIT_CONFIG_PARAMS' ); ?></h3><hr>
-				<?php $fieldset_name = 'processor_config';?>
 				<div class="row-fluid">
-					<?php echo $this->loadTemplate('edit_params', compact('fieldset_name', 'form'));?>
+					<?php echo $this->loadTemplate('fieldset');?>
 				</div>				
 		
 				<?php //XITODO : generalize the concept of toggle ?>

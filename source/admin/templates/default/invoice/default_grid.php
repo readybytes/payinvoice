@@ -20,7 +20,6 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 				<th  width="1%" class="hidden-phone">
 					<input type="checkbox" name="toggle" value="" onclick="Joomla.checkAll(this);" />
 				</th>
-				<th class="default-grid-sno hidden-phone"><?php echo JText::_("COM_PAYINVOICE_NUM"); ?></th>
 				<th class="default-grid-sno hidden-phone">
 					<?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_INVOICE_ID", 'invoice_id', 	$filter_order_Dir, $filter_order);?>
 				</th>
@@ -40,7 +39,6 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 				    <th class="default-grid-chkbox hidden-phone">
 				    	<?php echo PayInvoiceHtml::_('grid.id', $count, $record->{$record_key} ); ?>
 				    </th>
-					<td class="nowrap hidden-phone"><?php echo $count+1; ?> </td>	
 					<td class="nowrap hidden-phone"><?php echo $record->invoice_id;?></td>
 					<td><?php echo PayInvoiceHtml::link($uri.'&task=edit&id='.$record->{$record_key}, $invoice[$record->invoice_id]->title.' ('.$invoice[$record->invoice_id]->serial.')');?> </td>
                    	<td class="nowrap hidden-phone"><?php echo PayInvoiceHtml::link('index.php?option=com_payinvoice&view=buyer&task=edit&id='.$invoice[$record->invoice_id]->buyer_id, $invoice[$record->invoice_id]->buyer_id.'('.$buyer[$invoice[$record->invoice_id]->buyer_id]->name.')');?></td>
