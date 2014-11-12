@@ -89,7 +89,7 @@ class PayInvoiceAdminControllerBuyer extends PayInvoiceController
 		$response['value'] = $username;
 		if($existing_userid && $existing_userid != $buyer_id){	
 			$response['valid'] 	 = false;
-			$response['message'] = Rb_Text::_('COM_PAYINVOICE_USERNAME_ALREADY_EXIST');
+			$response['message'] = JText::_('COM_PAYINVOICE_USERNAME_ALREADY_EXIST');
 		}else {
 			$response['valid'] 	 = true;
 			$response['message'] = '';
