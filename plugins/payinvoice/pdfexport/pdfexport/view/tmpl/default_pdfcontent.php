@@ -45,7 +45,7 @@ if(isset($params->items)){
 			<td>
 				<div style="max-width:150px; width:150px;" align="right">
 					<?php if(!empty($config_data['company_logo'])):?>
-						<img src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);?>">																	
+						<img alt="" src="<?php echo JUri::root().$config_data['company_logo'];?>">												
 					 <?php endif;?>
 				</div>		
 			</td>

@@ -39,7 +39,7 @@ $config_data['company_phone']	= isset($config_data['company_phone'])		? $config_
 			  	 		   
 			   			<div class="span2">
 				   			<?php if(!empty($config_data['company_logo'])):?>
-				   				<img src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);?>">
+				   				<img alt="" src="<?php echo JUri::root(true).$config_data['company_logo'];?>">
 			   				<?php endif;?>
 		   				</div>
 					</div>

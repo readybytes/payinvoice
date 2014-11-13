@@ -49,7 +49,7 @@ $config_data['company_phone']	= !empty($config_data['company_phone']) 		? $confi
 											
 											<tr>
 					                       		<td style="padding-bottom: 30px;border-bottom: 1px solid #e8e8e8;">
-					                       			<img alt="company_Logo" src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);?>" height="60" width="140" />
+					                       			<img alt="" src="<?php echo JUri::root().$config_data['company_logo'];?>" height="140" width="60">
 					                       		</td>
 					                      	</tr>
 

@@ -32,7 +32,7 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 								<tr>
 									<?php if(!empty($config_data['company_logo'])):?>
 										<td align="left" height="100">
-											<img src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);?>" class="img-polaroid"/>
+											<img alt="" src="<?php echo JUri::root().$config_data['company_logo'];?>">
 										</td>
 									<?php endif;?>
 								</tr>

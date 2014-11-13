@@ -26,7 +26,7 @@ JHtml::_('behavior.framework');
 	
 	<div class="payinvoice-install-border">
 		<div class="row-fluid">
-			<div class="span5 center"><?php echo Rb_Html::image(Rb_HelperTemplate::mediaURI(PAYINVOICE_PATH_CORE_MEDIA."/admin/images/payinvoice-apps-banner.jpg", false), JText::_('COM_PAYINVOICE_APPS_BANNER'));?></div>	
+			<div class="span5 center"><img alt="<?php echo JText::_('COM_PAYINVOICE_APPS_BANNER');?>" src="<?php echo JUri::root(true).'/media/com_payinvoice/admin/images/payinvoice-apps-banner.jpg'?>"></div>	
 			
 			<div class="span2">&nbsp;</div>
 			
