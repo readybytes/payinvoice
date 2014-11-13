@@ -17,8 +17,8 @@ Rb_HelperTemplate::loadMedia();
 // load bootsrap css
 Rb_Html::_('bootstrap.loadcss');
 
-Rb_Html::script(PAYINVOICE_PATH_CORE_MEDIA.'/js/payinvoice.js');
-Rb_Html::stylesheet(PAYINVOICE_PATH_CORE_MEDIA.'/css/payinvoice.css');
+Rb_Html::script('com_payinvoice/payinvoice.js');
+Rb_Html::stylesheet('com_payinvoice/payinvoice.css');
 
 Rb_Html::script('com_payinvoice/admin/admin.js');
 Rb_Html::stylesheet('com_payinvoice/admin/admin.css');

@@ -28,7 +28,7 @@ class PayInvoiceAdminViewInstall extends PayInvoiceAdminBaseViewInstall
 	public function display($tpl=null)
 	{
 		$app 		= PayInvoiceFactory::getApplication();
-		$db_prefix 	= $app->get('dbprefix', '');
+		$db_prefix 	= $app->input->get('dbprefix', '');
 		$db 		= PayInvoiceFactory::getDbo();
 		$tables 	= $db->getTableList();
 		$email 		= '';
