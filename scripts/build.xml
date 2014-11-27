@@ -28,6 +28,7 @@
 
 		<phingcall target="export_sourcecode" />
 		<phingcall target="copy_default_plugin"/>
+		<phingcall target="copy_pdfexport"/>
 
 		<if>
 		 <equals arg1="${payinvoice.premium}" arg2="true" />
@@ -115,13 +116,13 @@
 		</copy>
 	</target>
 
-	<target name="copy_premium_plugin">
-		<copy todir="${dir.tmp}/admin/install/extensions/plg_payinvoice_support">
-			<fileset dir="${dir.root}/plugins/payinvoice/support">
+	<target name="copy_pdfexport">
+		<copy todir="${dir.tmp}/admin/install/extensions/plg_pdfexport">
+ 			<fileset dir="${dir.root}/plugins/payinvoice/pdfexport">
 				<include name="**/*.*" />
-			</fileset>
-		</copy>
-	</target>
+ 			</fileset>
+ 		</copy>
+ 	</target>
 
 	<target name="replace_tokens">
 		<!-- Apply the version change to all files. -->
