@@ -48,7 +48,17 @@ class PayInvoiceSiteControllerInvoice extends PayInvoiceController
 			Rb_EcommerceApi::invoice_update($rb_invoice['invoice_id'], $rb_invoice);	
 			return true;
 		}
-		$this->getView()->assign('response', Rb_EcommerceApi::invoice_request('build', $rb_invoice['invoice_id'], array()));
+
+		$build_data 				= Array();
+
+		$host_string 				= str_replace(JUri::root(true), "", JUri::root());
+		$url_string 				= "index.php?option=com_payinvoice&view=invoice&processor={$rb_invoice['processor_type']}";
+
+		$build_data['notify_url'] 	= JUri::root().$url_string.'&task=notify';
+		$build_data['cancel_url']	= JUri::root().$url_string.'&task=cancel';
+		$build_data['return_url'] 	= JUri::root().$url_string.'&task=complete';
+
+		$this->getView()->assign('response', Rb_EcommerceApi::invoice_request('build', $rb_invoice['invoice_id'], $build_data));
 		return true;		
 	}
 	
