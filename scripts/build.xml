@@ -96,16 +96,44 @@
 	</target>
 
 	<target name="copy_framework">
-		<copy todir="${dir.packages}">
-			<fileset dir="${rbframework.location}">
-				<include name="${rbframework.name}.${rbframework.build.version}.${file.extension}" />				
-			</fileset>
-		</copy>
+		<php expression="strpos('${rbframework.location}', 'http')" returnProperty="is_url" />
+
+		<if>
+			<equals arg1="${is_url}" arg2='false' />
+			<then>
+				<copy todir="${dir.packages}">
+					<fileset dir="${rbframework.location}">
+						<include name="${rbframework.name}.${rbframework.build.version}.${file.extension}" />
+					</fileset>
+				</copy>
+			</then>
+
+			<else>
+				<!-- Copy RB-Framework kit from URL -->
+				<httpget url="${rbframework.location}/${rbframework.name}.${rbframework.build.version}.${file.extension}" dir="${dir.packages}"/>
+			</else>
+		</if>
 	</target>
 
 	<target name="copy_processor">
 		<mkdir dir="${dir.packages}/processor" />
-		<copy file="${processor.location}/${processor.prefix}stripe.zip" tofile="${dir.packages}/processor/stripe.zip" overwrite="true"/>		
+		<php expression="strpos('${processor.location}', 'http')" returnProperty="is_url" />
+
+		<if>
+			<equals arg1="${is_url}" arg2='false' />
+			<then>
+				<copy todir="${dir.packages}">
+					<fileset dir="${processor.location}">
+						<include name="${processor.prefix}.${file.extension}" />
+					</fileset>
+				</copy>
+			</then>
+
+			<else>
+				<!-- Copy Stripe Processor kit from URL -->
+				<httpget url="${processor.location}/${processor.prefix}stripe.${file.extension}" dir="${dir.packages}/processor/"/>
+			</else>
+		</if>
 	</target>
 
 	<target name="copy_default_plugin">
