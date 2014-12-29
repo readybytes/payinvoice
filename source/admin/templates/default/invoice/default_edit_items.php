@@ -38,13 +38,13 @@ $params = $invoice->getParams();;
 			return false;						
 		});
 
-		$('.payinvoice-invoice-item_remove').live('click', function(){
+		$(document).on('click', '.payinvoice-invoice-item_remove',function(){
 			$(this).parents('.payinvoice-invoice-item').remove();
 			payinvoice.admin.invoice.calculate_total();
 			return false;			
 		});
 
-		$('.payinvoice-item-quantity').live('blur', function(){
+		$(document).on('blur', '.payinvoice-item-quantity',function(){
 			var quantity = parseFloat($(this).val());
 			var price 	 = parseFloat($(this).parents('.payinvoice-invoice-item').find('.payinvoice-item-price').val());
 			var total 	 = quantity * price;
@@ -60,7 +60,7 @@ $params = $invoice->getParams();;
 			payinvoice.admin.invoice.calculate_total();
 		});
 
-		$('.payinvoice-item-price').live('blur', function(){
+		$(document).on('blur','.payinvoice-item-price', function(){
 			var price	 = parseFloat($(this).val());
 			var quantity = parseFloat($(this).parents('.payinvoice-invoice-item').find('.payinvoice-item-quantity').val());
 			var total 	 = quantity * price;
