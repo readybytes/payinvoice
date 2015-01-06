@@ -175,7 +175,7 @@ class Com_payinvoiceInstallerScript
 		$query	= $db->getQuery(true);
 		$query->select('*')
 			  ->from($db->quoteName('#__extensions'))
-		      ->where('`type` = '.$db->quote('component'). ' AND `element` LIKE '.$db->quote('com_jxiforms'). ' OR `element` LIKE '.$db->quote('com_rbinstaller'));
+		      ->where('`type` = '.$db->quote('component'). ' AND `element` LIKE '.$db->quote('com_jxiforms'));
 		
 		$db->setQuery($query);
 		$installed_extensions = $db->loadObjectList();
@@ -192,8 +192,7 @@ class Com_payinvoiceInstallerScript
 			$installed_rb_version 	= explode('.', $params['version']);
 	
 			//if there is no change in the major version of rbframework then install else show message
-			if(version_compare($installed_rb_version[0].'.'.$installed_rb_version[1], $latest_rb_version[0].'.'.$latest_rb_version[1]) == 0
-				&& version_compare($content['rbframework']['version'], $params['version']) != 0){
+			if(version_compare($installed_rb_version[0].'.'.$installed_rb_version[1], $latest_rb_version[0].'.'.$latest_rb_version[1]) == 0){
 				$this->installRBFramework($content['rbframework']);
 				if(!$result->enabled){
 					$this->changeExtensionState(array(array('type'=>'system', 'name'=>'rbsl')));
