@@ -1,11 +1,11 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Back-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -38,13 +38,13 @@ $params = $invoice->getParams();;
 			return false;						
 		});
 
-		$('.payinvoice-invoice-item_remove').live('click', function(){
+		$(document).on('click', '.payinvoice-invoice-item_remove',function(){
 			$(this).parents('.payinvoice-invoice-item').remove();
 			payinvoice.admin.invoice.calculate_total();
 			return false;			
 		});
 
-		$('.payinvoice-item-quantity').live('blur', function(){
+		$(document).on('blur', '.payinvoice-item-quantity',function(){
 			var quantity = parseFloat($(this).val());
 			var price 	 = parseFloat($(this).parents('.payinvoice-invoice-item').find('.payinvoice-item-price').val());
 			var total 	 = quantity * price;
@@ -60,7 +60,7 @@ $params = $invoice->getParams();;
 			payinvoice.admin.invoice.calculate_total();
 		});
 
-		$('.payinvoice-item-price').live('blur', function(){
+		$(document).on('blur','.payinvoice-item-price', function(){
 			var price	 = parseFloat($(this).val());
 			var quantity = parseFloat($(this).parents('.payinvoice-invoice-item').find('.payinvoice-item-quantity').val());
 			var total 	 = quantity * price;
@@ -90,7 +90,7 @@ $params = $invoice->getParams();;
 </script>
 
 <!-- START : Item Table -->				
-<h3><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEMS' ); ?></h3>
+<h3><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEMS' ); ?></h3>
 <hr>
 <!--  ONE ITEM -->
 <div class="payinvoice-invoice-items">

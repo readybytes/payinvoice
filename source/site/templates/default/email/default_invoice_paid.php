@@ -1,11 +1,11 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Front-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -49,53 +49,59 @@ $config_data['company_phone']	= !empty($config_data['company_phone']) 		? $confi
 											
 											<tr>
 					                       		<td width="58px">
-					                       			<img alt="company_Logo" src="<?php echo Rb_HelperTemplate::mediaURI($config_data['company_logo'], false);?>" />
+					                       			<img alt="company_logo" src="<?php echo JUri::root().$config_data['company_logo']?>" height="140", width="60" >
 					                       		</td>
 					                      	</tr>
+
+								<tr>
+									<td valign="middle" height="30px" align="center" style="font-size:0;line-height:0;border-collapse:collapse">&nbsp;</td>
+								</tr>
 											
 											<tr>
 					                       		<td valign="middle" style="border-collapse:collapse;font-size:14px;color:#666;line-height:2;">
-					                       			<p><?php echo sprintf(Rb_Text::_('COM_PAYINVOICE_HELLO'), $buyer->name);?>,</p>
-					                       			<p><?php echo sprintf(Rb_Text::_('COM_PAYINVOICE_PAID_MESSAGE'), $rb_invoice['title']);?></p>
-					                       			
-					                       		
+					                       			<p><?php echo sprintf(JText::_('COM_PAYINVOICE_HELLO'), $buyer->name);?>,</p>
+					                       			<p><?php echo sprintf(JText::_('COM_PAYINVOICE_PAID_MESSAGE'), $rb_invoice['title']);?></p>
 					                       		</td>
+											</tr>
+											
+											<tr>
+				                       			<td valign="middle" height="30px" align="center" style="font-size:0;line-height:0;border-collapse:collapse">&nbsp;</td>
 											</tr>
 											
 											<tr>
 												<td>
-													<p style="font-size:18px;color:#444;"><?php echo Rb_Text::_('COM_PAYINVOICE_WEBSITE_DETAILS');?></p>
+													<p style="font-size:16px; color:#666"><?php echo JText::_('COM_PAYINVOICE_WEBSITE_DETAILS');?></p>
 												</td>
 											</tr>
 											<tr>
-					                       		<td valign="middle" height="30px" align="center" style="font-size:0;line-height:0;border-collapse:collapse">&nbsp;</td>
+					                       		<td valign="middle" height="10px" align="center" style="font-size:0;line-height:0;border-collapse:collapse">&nbsp;</td>
 											</tr>
 											<tr>
 												<td>
 													<table cellpadding="0" cellspacing="0" border="0" align="center" style="line-height: 36px;font-size: 14px;color: #333;">
 														<tbody>
 															<tr>
-																<td><span style="color:#666"><?php echo Rb_Text::_('COM_PAYINVOICE_BUYER_USERNAME');?></span></td>
+																<td><span style="color:#666"><?php echo JText::_('COM_PAYINVOICE_BUYER_USERNAME');?></span></td>
 																	<td><span style="padding: 0 10px;">:</span></td>
 																<td><span style="color:#333"><?php echo $buyer->username;?></span></td>
 															</tr>
 															<tr>
-																<td><span style="color:#666"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_NUMBER');?></span></td>
+																<td><span style="color:#666"><?php echo JText::_('COM_PAYINVOICE_INVOICE_NUMBER');?></span></td>
 																<td><span style="padding: 0 10px;">:</span></td>
 																<td><span style="color:#333"><?php echo $rb_invoice['serial'];?></span></td>
 															</tr>
 															<tr>
-																<td><span style="color:#666"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_ISSUE_DATE');?></span></td>
+																<td><span style="color:#666"><?php echo JText::_('COM_PAYINVOICE_INVOICE_ISSUE_DATE');?></span></td>
 																<td><span style="padding: 0 10px;">:</span></td>
 																<td><span style="color:#333"><?php echo $rb_invoice['issue_date'];?></span></td>
 															</tr>
 															<tr>
-																<td><span style="color:#666"><?php echo Rb_Text::_('COM_PAYINVOICE_PAID_DATE');?></span></td>
+																<td><span style="color:#666"><?php echo JText::_('COM_PAYINVOICE_PAID_DATE');?></span></td>
 																<td><span style="padding: 0 10px;">:</span></td>
 																<td><span style="color:#333"><?php echo $rb_invoice['paid_date'];?></span></td>
 															</tr>
 															<tr>
-																<td><span style="color:#666"><?php echo Rb_Text::_('COM_PAYINVOICE_AMOUNT_PAID');?></span></td>
+																<td><span style="color:#666"><?php echo JText::_('COM_PAYINVOICE_AMOUNT_PAID');?></span></td>
 																<td><span style="padding: 0 10px;">:</span></td>
 																<td><span style="color:#333"><?php echo $rb_invoice['currency']." ".number_format($rb_invoice['total'],2);?></span></td>
 															</tr>
@@ -113,7 +119,7 @@ $config_data['company_phone']	= !empty($config_data['company_phone']) 		? $confi
 					                       			<table cellpadding="0" cellspacing="0" border="0" style="line-height: 2;font-size:14px;color:#666;">
 					                       				<tbody>
 															<tr>
-																<td><p><?php echo Rb_Text::_('COM_PAYINVOICE_PAYINVOICING');?></p></td>
+																<td><p><?php echo JText::_('COM_PAYINVOICE_PAYINVOICING');?></p></td>
 															</tr>
 														</tbody>
 													</table>

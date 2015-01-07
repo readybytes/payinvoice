@@ -1,18 +1,17 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Back-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
-Rb_Html::_('rb_html.nvd3.load');
-Rb_Html::_('rb_html.daterangepicker.load');
+Rb_HelperTemplate::loadMedia(array('nvd3', 'daterangepicker'));
 ?>
 <script>
 (function($){

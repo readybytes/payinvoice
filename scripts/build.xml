@@ -28,6 +28,7 @@
 
 		<phingcall target="export_sourcecode" />
 		<phingcall target="copy_default_plugin"/>
+		<phingcall target="copy_pdfexport"/>
 
 		<if>
 		 <equals arg1="${payinvoice.premium}" arg2="true" />
@@ -46,7 +47,7 @@
 			basedir="${dir.tmp}" />
 
 		<!-- Copy framework from its defined location -->
-		<phingcall target="copy_framework"/>
+		<!-- <phingcall target="copy_framework"/> -->
 		<phingcall target="copy_processor"/>
 		
 		<delete dir="${dir.tmp}" includeemptydirs="true" />
@@ -63,8 +64,8 @@
 				<replacetokens>
 				    <token key="build.version" 			value="${build.version}" />
 				    <token key="build.number"   		value="${build.number}" />
-				    <token key="rbframework.name"   		value="${rbframework.name}" />
-				    <token key="rbframework.build.version"   	value="${rbframework.build.version}" />
+				   <!-- <token key="rbframework.name"   		value="${rbframework.name}" />
+				    <token key="rbframework.build.version"   	value="${rbframework.build.version}" /> -->
 				    <token key="project.shortform"   		value="${project.shortform}" />				
 				</replacetokens>
 			</filterchain>
@@ -94,17 +95,45 @@
 
 	</target>
 
-	<target name="copy_framework">
-		<copy todir="${dir.packages}">
-			<fileset dir="${rbframework.location}">
-				<include name="${rbframework.name}.${rbframework.build.version}.${file.extension}" />				
-			</fileset>
-		</copy>
-	</target>
+	<!--
+	 <target name="copy_framework">
+		<php expression="strpos('${rbframework.location}', 'http')" returnProperty="is_url" />
+
+		<if>
+			<equals arg1="${is_url}" arg2='false' />
+			<then>
+				<copy todir="${dir.packages}">
+					<fileset dir="${rbframework.location}">
+						<include name="${rbframework.name}.${rbframework.build.version}.${file.extension}" />
+					</fileset>
+				</copy>
+			</then>
+
+			<else>
+				<httpget url="${rbframework.location}/${rbframework.name}.${rbframework.build.version}.${file.extension}" dir="${dir.packages}"/>
+			</else>
+		</if>
+	</target> -->
 
 	<target name="copy_processor">
 		<mkdir dir="${dir.packages}/processor" />
-		<copy file="${processor.location}/${processor.prefix}stripe.zip" tofile="${dir.packages}/processor/stripe.zip" overwrite="true"/>		
+		<php expression="strpos('${processor.location}', 'http')" returnProperty="is_url" />
+
+		<if>
+			<equals arg1="${is_url}" arg2='false' />
+			<then>
+				<copy todir="${dir.packages}">
+					<fileset dir="${processor.location}">
+						<include name="${processor.prefix}.${file.extension}" />
+					</fileset>
+				</copy>
+			</then>
+
+			<else>
+				<!-- Copy Stripe Processor kit from URL -->
+				<httpget url="${processor.location}/${processor.prefix}stripe.${file.extension}" dir="${dir.packages}/processor/"/>
+			</else>
+		</if>
 	</target>
 
 	<target name="copy_default_plugin">
@@ -115,13 +144,13 @@
 		</copy>
 	</target>
 
-	<target name="copy_premium_plugin">
-		<copy todir="${dir.tmp}/admin/install/extensions/plg_payinvoice_support">
-			<fileset dir="${dir.root}/plugins/payinvoice/support">
+	<target name="copy_pdfexport">
+		<copy todir="${dir.tmp}/admin/install/extensions/plg_pdfexport">
+ 			<fileset dir="${dir.root}/plugins/payinvoice/pdfexport">
 				<include name="**/*.*" />
-			</fileset>
-		</copy>
-	</target>
+ 			</fileset>
+ 		</copy>
+ 	</target>
 
 	<target name="replace_tokens">
 		<!-- Apply the version change to all files. -->

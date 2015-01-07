@@ -1,11 +1,11 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Back-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -28,7 +28,7 @@ if(isset($response)){
 <?php endforeach;?>
 	<div class="row-fluid">
 		<div id ="payinvoice-paynow">
-			<button type="submit" class="btn btn-primary pull-right"><?php echo Rb_Text::_('COM_PAYINVOICE_PAY_NOW');?></button>
+			<button type="submit" class="btn btn-primary pull-right"><?php echo JText::_('COM_PAYINVOICE_PAY_NOW');?></button>
 		</div>
 	</div>
 <?php } 

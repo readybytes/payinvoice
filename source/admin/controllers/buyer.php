@@ -1,11 +1,11 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Back-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -40,7 +40,7 @@ class PayInvoiceAdminControllerBuyer extends PayInvoiceController
 		
 		if($isUserSA)
 		{
-			$this->setError(Rb_Text::_('COM_PAYINVOICE_CANNOT_DELETE_SUPER_ADMINISTRATOR'));
+			$this->setError(JText::_('COM_PAYINVOICE_CANNOT_DELETE_SUPER_ADMINISTRATOR'));
 			return false;
 
 		}else {
@@ -68,7 +68,7 @@ class PayInvoiceAdminControllerBuyer extends PayInvoiceController
 		$response['value'] = $email;
 		if($existing_userid && $existing_userid != $buyer_id){
 			$response['valid'] 	 = false;
-			$response['message'] = Rb_Text::_('COM_PAYINVOICE_EMAIL_ALREADY_EXIST');
+			$response['message'] = JText::_('COM_PAYINVOICE_EMAIL_ALREADY_EXIST');
 		}else {
 			$response['valid'] 	 = true;
 			$response['message'] = '';
@@ -89,7 +89,7 @@ class PayInvoiceAdminControllerBuyer extends PayInvoiceController
 		$response['value'] = $username;
 		if($existing_userid && $existing_userid != $buyer_id){	
 			$response['valid'] 	 = false;
-			$response['message'] = Rb_Text::_('COM_PAYINVOICE_USERNAME_ALREADY_EXIST');
+			$response['message'] = JText::_('COM_PAYINVOICE_USERNAME_ALREADY_EXIST');
 		}else {
 			$response['valid'] 	 = true;
 			$response['message'] = '';

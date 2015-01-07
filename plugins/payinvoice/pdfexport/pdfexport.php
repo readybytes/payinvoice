@@ -1,10 +1,10 @@
 <?php 
 /**
-* @copyright	Copyright (C) 2009 - 2013 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license	    GNU/GPL, see LICENSE.php
 * @package	    PAYINVOICE
 * @subpackage	PDFEXPORT
-* @contact 	    team@readybytes.in
+* @contact 	    support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -53,7 +53,7 @@ class plgPayinvoicePdfExport extends Rb_Plugin
 					ob_start();
 					?>
 
-					<a href="index.php?option=com_payinvoice&view=pdfexport&task=download&format=pdf&invoice_id=<?php echo $data['invoice']->getId();?>" class="btn btn-success"><i class="icon-download-alt icon-white"></i> <?php echo Rb_Text::_('PLG_PAYINVOICE_PDFEXPORT_DOWNLOAD_PDF');?></a>
+					<a href="index.php?option=com_payinvoice&view=pdfexport&task=download&format=pdf&invoice_id=<?php echo $data['invoice']->getId();?>" class="btn btn-success"><i class="icon-download-alt icon-white"></i> <?php echo JText::_('PLG_PAYINVOICE_PDFEXPORT_DOWNLOAD_PDF');?></a>
 					<?php
 	
 					$content = ob_get_contents();

@@ -5,7 +5,7 @@
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Back-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -13,7 +13,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 /** 
  * Buyer Model
- * @author Gaurav Jain
+ * @author Manisha Ranawat
  */
 class PayInvoiceModelBuyer extends PayInvoiceModel
 {
@@ -82,7 +82,7 @@ class PayInvoiceModelBuyer extends PayInvoiceModel
 		}
 		
     	JLog::add(isset($this->filterMatchOpeartor[$key]), "OPERATOR FOR $key IS NOT AVAILABLE FOR FILTER");
-    	JLog::add(is_array($value), Rb_Text::_('COM_PAYINVOICE_VALUE_FOR_FILTERS_MUST_BE_AN_ARRAY'));
+    	JLog::add(is_array($value), JText::_('COM_PAYINVOICE_VALUE_FOR_FILTERS_MUST_BE_AN_ARRAY'));
 
     	$cloneOP    = $this->filterMatchOpeartor[$key];
     	$cloneValue = $value;

@@ -1,11 +1,11 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Front-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -98,7 +98,7 @@ class PayInvoiceStatisticsRevenue extends PayInvoiceStatistics
 							  	return [
 								    {
 								      values: sin,
-								      key: "<?php echo Rb_Text::_('COM_PAYINVOICE_STATISTICS_REVENUE_HEADER');?>",
+								      key: "<?php echo JText::_('COM_PAYINVOICE_STATISTICS_REVENUE_HEADER');?>",
 								      color: "#468847"
 								    }
 							  	];
@@ -110,12 +110,12 @@ class PayInvoiceStatisticsRevenue extends PayInvoiceStatistics
 			  				.forceY([0,<?php echo $max;?>]);
 
 			  chart.xAxis
-			      .axisLabel('<?php echo Rb_Text::_('COM_PAYINVOICE_STATISTICS_REVENUE__X_AXIS_TITLE');?>')
+			      .axisLabel('<?php echo JText::_('COM_PAYINVOICE_STATISTICS_REVENUE__X_AXIS_TITLE');?>')
 			      .tickFormat(function(d) { return d3.time.format('%d-%b-%Y')(new Date(d)) })
 			      .rotateLabels(-30);
 
 			  chart.yAxis
-			      .axisLabel('<?php echo Rb_Text::sprintf('COM_PAYINVOICE_STATISTICS_REVENUE_Y_AXIS_TITLE', $this->currency);?>')
+			      .axisLabel('<?php echo JText::sprintf('COM_PAYINVOICE_STATISTICS_REVENUE_Y_AXIS_TITLE', $this->currency);?>')
 			      .tickFormat(d3.format('.02f'));
 
 			  d3.select('#payinvoice_dashboard_statistics_revenue svg')

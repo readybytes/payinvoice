@@ -1,11 +1,11 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Back-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -18,7 +18,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 	
 	<div class="span6">
 		<div class="control-group">
-			<label class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_SUBTOTAL');?></label>
+			<label class="control-label"><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_SUBTOTAL');?></label>
 	  		<div class="controls">
 	  			<div class="input-prepend">              			
 					<span class="add-on payinvoice-currency"></span>
@@ -27,7 +27,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 	  		</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_DISCOUNT');?></label>
+			<label class="control-label"><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_DISCOUNT');?></label>
 	  		<div class="controls">
 	  			<div class="input-prepend">
 					<span class="add-on payinvoice-currency"></span>
@@ -36,7 +36,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 	  		</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX');?></label>
+			<label class="control-label"><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX');?></label>
 	  		<div class="controls">
 	  			<div class="input-append">									
 					<input type="text" name="payinvoice_form[tax]" class="input-small validate-number" id="payinvoice-invoice-tax" min="0" value="<?php echo $tax;?>">
@@ -46,7 +46,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 		</div>
 		<hr>
 		<div class="control-group">
-			<label class="control-label"><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TOTAL');?></label>
+			<label class="control-label"><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TOTAL');?></label>
 	  		<div class="controls">
 	  			<div class="input-prepend">
 					<span class="add-on payinvoice-currency"></span>

@@ -1,11 +1,11 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2013 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Back-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -82,8 +82,8 @@ class PayInvoiceAdminViewPdfExport extends PayInvoiceAdminBaseViewPdfExport
 	
 	public function getContent($invoice_ids)
 	{
-		$filter 		= array('invoice_id' => array(array('IN', '('.implode(",", $invoice_ids).')')));
-		$invoices 		= $i_helper->get_rb_invoice_records($filter);
+		$filter 		= array('object_id' => array(array('IN', '('.implode(",", $invoice_ids).')')));
+		$invoices 		= $this->getHelper('invoice')->get_rb_invoice_records($filter);
 		$contents		= '';
 		foreach ($invoices as $invoice)
 		{
@@ -123,7 +123,7 @@ class PayInvoiceAdminViewPdfExport extends PayInvoiceAdminBaseViewPdfExport
 		if(!in_array($rb_invoice->status, array(PayInvoiceInvoice::STATUS_PAID, PayInvoiceInvoice::STATUS_REFUNDED))){			
 			$extra_data = array();
 			$extra_data['txn_key']  = '';
-			$extra_data['title']	= Rb_Text::_('PLG_PAYINVOICE_PDFEXPORT_DUE_ON');
+			$extra_data['title']	= JText::_('PLG_PAYINVOICE_PDFEXPORT_DUE_ON');
 			$extra_data['date']	 	= $rb_invoice->due_date;
 			$extra_data['status']   = PayInvoiceInvoice::STATUS_DUE;
 						
@@ -135,7 +135,7 @@ class PayInvoiceAdminViewPdfExport extends PayInvoiceAdminBaseViewPdfExport
 		$transaction   	    = Rb_EcommerceAPI::transaction_get_records(array('invoice_id' => $rb_invoice->invoice_id, 'payment_status' => 'payment_complete'), array(), '',$orderby='invoice_id');
 		
 		$extra_data = array();
-		$extra_data['title']	= Rb_Text::_('PLG_PAYINVOICE_PDFEXPORT_PAID_ON');
+		$extra_data['title']	= JText::_('PLG_PAYINVOICE_PDFEXPORT_PAID_ON');
 		$extra_data['date']		= $rb_invoice->paid_date;
 		$extra_data['txn_key'] 	= '';
 		$extra_data['status']  	= PayInvoiceInvoice::STATUS_PAID;
@@ -149,7 +149,7 @@ class PayInvoiceAdminViewPdfExport extends PayInvoiceAdminBaseViewPdfExport
 		
 		if($rb_invoice->status == PayInvoiceInvoice::STATUS_REFUNDED){
 			$transaction		 	= Rb_EcommerceAPI::transaction_get_records(array('invoice_id' => $rb_invoice->invoice_id, 'payment_status' => 'payment_refund'), array(), '',$orderby='invoice_id');
-			$extra_data['title']	= Rb_Text::_('PLG_PAYINVOICE_PDFEXPORT_REFUND_ON');
+			$extra_data['title']	= JText::_('PLG_PAYINVOICE_PDFEXPORT_REFUND_ON');
 			$extra_data['date']	 	= $rb_invoice->refund_date;
 			$extra_data['txn_key']  = '';
 			$extra_data['status']   = PayInvoiceInvoice::STATUS_REFUNDED;

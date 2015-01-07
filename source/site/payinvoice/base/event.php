@@ -1,11 +1,11 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Front-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -37,7 +37,7 @@ class PayInvoiceEvent extends JEvent
 			return true;
 		}
 
-		if($new->getStatus() != Rb_EcommerceInvoice::STATUS_PAID && $new->getStatus() != Rb_EcommerceInvoice::STATUS_REFUNDED){
+		if($new->getStatus() == Rb_EcommerceInvoice::STATUS_DUE){
 			return true;
 		}
 
@@ -52,11 +52,32 @@ class PayInvoiceEvent extends JEvent
 		$email_view->assign('rb_invoice', $rb_invoice);
 		$email_view->assign('buyer', $buyer);
 		$email_view->assign('config_data', $config_data);
+
+		if($new->getstatus() == PayInvoiceInvoice::STATUS_INPROCESS && $rb_invoice['processor_type'] == 'offlinepay'){
+			
+			// Notify admin about Offline payment
+			$emailSubject 	= JText::_('COM_PAYINVOICE_INPROCESS_ADMIN_EMAIL_SUBJECT');
+			$emailBody 		= JText::sprintf('COM_PAYINVOICE_INPROCESS_ADMIN_EMAIL_BODY', $buyer->name, $buyer->email, $rb_invoice['serial']);
+
+			$admins		= Rb_HelperJoomla::getUsersToSendSystemEmail();
+			foreach ($admins as $admin){
+				$emails[] = $admin->email;
+			}
+
+			PayInvoiceFactory::getHelper('utils')->sendEmail($emails, $emailSubject, $emailBody);
+
+			//Notify Buyer's about Offline payment
+			$emailSubject	= JText::_('COM_PAYINVOICE_INPROCESS_BUYER_EMAIL_SUBJECT');
+			$emailBody		= JText::sprintf('COM_PAYINVOICE_INPROCESS_BUYER_EMAIL_BODY', $buyer->name);
+
+			PayInvoiceFactory::getHelper('utils')->sendEmail($buyer->email, $emailSubject, $emailBody);
+			return true;
+ 		}
 		
 		if($new->getStatus()  == Rb_EcommerceInvoice::STATUS_PAID){
 			$suffix = 'paid';
 		}
-		else if($new->getStatus()	== Rb_EcommerceInvoice::STATUS_REFUNDED){
+		elseif($new->getStatus()	== Rb_EcommerceInvoice::STATUS_REFUNDED){
 			$suffix = 'refund';			
 		}
 		elseif($prev->getStatus() == PayInvoiceInvoice::STATUS_INPROCESS && $new->getStatus() == PayInvoiceInvoice::STATUS_DUE)
@@ -70,7 +91,7 @@ class PayInvoiceEvent extends JEvent
 		}
 		
 		$body 	 			= $email_view->loadTemplate('invoice_'.$suffix);
-		$subject 			= Rb_Text::_('COM_PAYINVOICE_INVOICE_SEND_EMAIL_ON_INVOICE_'.strtoupper($suffix));
+		$subject 			= JText::_('COM_PAYINVOICE_INVOICE_SEND_EMAIL_ON_INVOICE_'.strtoupper($suffix));
 		
 		$result = PayInvoiceFactory::getHelper('utils')->sendEmail($buyer->email, $subject, $body);
 		if($result){

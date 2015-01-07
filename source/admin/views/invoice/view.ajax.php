@@ -1,11 +1,11 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Back-end
-* @contact		team@readybytes.in
+support+payinvoice
 */
 
 // no direct access
@@ -33,11 +33,11 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
     // Confirm send email
 	public function _confirmSendmail($invoice_id)
 	{
-		$this->_setAjaxWinTitle(Rb_Text::_('COM_PAYINVOICE_INVOICE_EMAIL_WINDOW_TITLE'));
-		$this->_setAjaxWinBody(Rb_Text::_('COM_PAYINVOICE_INVOICE_EMAIL_CONFIRM_MESSAGE'));
+		$this->_setAjaxWinTitle(JText::_('COM_PAYINVOICE_INVOICE_EMAIL_WINDOW_TITLE'));
+		$this->_setAjaxWinBody(JText::_('COM_PAYINVOICE_INVOICE_EMAIL_CONFIRM_MESSAGE'));
 	
-		$this->_addAjaxWinAction(Rb_Text::_('COM_PAYINVOICE_CONFIRM'), 'payinvoice.admin.invoice.email.send('.$invoice_id.');', 'btn btn-success', 'id="payinvoice-invoice-email-confirm-button"');
-		$this->_addAjaxWinAction(Rb_Text::_('COM_PAYINVOICE_CLOSE'), 'rb.ui.dialog.close();', 'btn');
+		$this->_addAjaxWinAction(JText::_('COM_PAYINVOICE_CONFIRM'), 'payinvoice.admin.invoice.email.send('.$invoice_id.');', 'btn btn-success', 'id="payinvoice-invoice-email-confirm-button"');
+		$this->_addAjaxWinAction(JText::_('COM_PAYINVOICE_CLOSE'), 'rb.ui.dialog.close();', 'btn');
 		$this->_setAjaxWinAction();		
 	
 		$ajax = Rb_Factory::getAjaxResponse();
@@ -63,9 +63,9 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		//$currency = $this->getHelper('format')->getCurrency($rb_invoice['currency'], 'symbol');
 		//$email_view->assign('currency', $currency);
 		
-		$email_view->assign('tax', 		$this->_helper->get_tax($invoice_id));
-		$email_view->assign('discount', $this->_helper->get_discount($invoice_id));
-		$email_view->assign('subtotal', $this->_helper->get_subtotal($invoice_id));
+		$email_view->assign('tax', 			$this->_helper->get_tax($rb_invoice['invoice_id']));
+		$email_view->assign('discount', 	$this->_helper->get_discount($rb_invoice['invoice_id']));
+		$email_view->assign('subtotal', 	$this->_helper->get_subtotal($rb_invoice['invoice_id']));
 		
         // md5 key generated for authentication		
 		$key	= md5($rb_invoice['created_date']);
@@ -74,20 +74,20 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		
 		// email content
 		$body 	 = $email_view->loadTemplate('invoice');
-		$subject = Rb_Text::_('COM_PAYINVOICE_INVOICE_SEND_EMAIL_SUBJECT');
+		$subject = JText::_('COM_PAYINVOICE_INVOICE_SEND_EMAIL_SUBJECT');
 		$user 	 = PayInvoiceFactory::getUser($rb_invoice['buyer_id']);		
 		
 		$result = $this->getHelper('utils')->sendEmail($user->email, $subject, $body);
-		$msg = Rb_Text::_('COM_PAYINVOICE_INVOICE_EMAIL_SENT');
+		$msg = JText::_('COM_PAYINVOICE_INVOICE_EMAIL_SENT');
 		if(!$result){
-			$msg = Rb_Text::_('COM_PAYINVOICE_INVOICE_ERROR_SEND_ERROR');						
+			$msg = JText::_('COM_PAYINVOICE_INVOICE_ERROR_SEND_ERROR');						
 		}
 		elseif($result instanceof Exception){
-			$msg  = Rb_Text::_('COM_PAYINVOICE_INVOICE_ERROR_SEND_ERROR');
+			$msg  = JText::_('COM_PAYINVOICE_INVOICE_ERROR_SEND_ERROR');
 			$msg .= "<br/><div class='alert alert-error'>".$result->getMessage()."</div>";
 		}
 		
-		$this->_setAjaxWinTitle(Rb_Text::_('COM_PAYINVOICE_INVOICE_EMAIL_WINDOW_TITLE'));
+		$this->_setAjaxWinTitle(JText::_('COM_PAYINVOICE_INVOICE_EMAIL_WINDOW_TITLE'));
 		$this->_setAjaxWinBody($msg);
 		
 		$this->_addAjaxWinAction('close', 'rb.ui.dialog.close();', 'btn');
@@ -96,4 +96,51 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		$ajax = Rb_Factory::getAjaxResponse();
 		$ajax->sendResponse();
 	}
+	
+	public function markpaid()
+	{
+		// set by controller
+		$invoice_id = $this->getModel()->getId();	
+		
+		if(!$this->get('confirmed')){
+			$this->_confirmpayment($invoice_id);	
+		}
+		
+		$this->_paymentRequest($invoice_id);
+	}
+	
+ 	// Confirm send email
+	public function _confirmpayment($invoice_id)
+	{
+		$this->_setAjaxWinTitle(JText::_('COM_PAYINVOICE_INVOICE_MARKPAID_WINDOW_TITLE'));
+		$this->_setAjaxWinBody(JText::_('COM_PAYINVOICE_INVOICE_MARKPAID_CONFIRM_MESSAGE'));
+
+		$this->_addAjaxWinAction(JText::_('COM_PAYINVOICE_CONFIRM'), 'payinvoice.admin.invoice.markpaid.processpayment('.$invoice_id.');', 'btn btn-success', 'id="payinvoice-invoice-payment-confirm-button"');
+		$this->_addAjaxWinAction(JText::_('COM_PAYINVOICE_CLOSE'), 'rb.ui.dialog.close();', 'btn');
+		$this->_setAjaxWinAction();
+	
+		$ajax = Rb_Factory::getAjaxResponse();
+		$ajax->sendResponse();
+	}
+	
+	public function _paymentRequest($invoice_id)
+	{
+		$invoice_id 		= $this->input->get('invoice_id', 0);	
+		$rb_invoice			= $this->_helper->get_rb_invoice($invoice_id);
+		$request_name		= 'payment';
+		
+		$data   			= $rb_invoice['processor_type'];
+		
+		$this->_helper->process_payment($request_name, $rb_invoice, $data);
+
+		$this->_setAjaxWinTitle(JText::_('COM_PAYINVOICE_INVOICE_MARKPAID_WINDOW_TITLE'));
+		$this->_setAjaxWinBody(JText::_('COM_PAYINVOICE_INVOICE_MARKPAID_SUCCESSFULL_MESSAGE'));
+		$this->_addAjaxWinAction('close', 'rb.ui.dialog.close(); window.location.reload();', 'btn');
+		$this->_setAjaxWinAction();		
+		
+		$ajax = Rb_Factory::getAjaxResponse();
+		$ajax->sendResponse();
+		
+	}
+	
 }

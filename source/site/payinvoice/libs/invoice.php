@@ -1,11 +1,11 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Front-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -82,12 +82,12 @@ class PayInvoiceInvoice extends PayInvoiceLib
 	public static function getStatusList()
 	{
 		return array(
-            self::STATUS_NONE		=> Rb_Text::_('COM_PAYINVOICE_INVOICE_STATUS_NONE'),
-			self::STATUS_DUE 		=> Rb_Text::_('COM_PAYINVOICE_INVOICE_STATUS_DUE'),
-			self::STATUS_PAID		=> Rb_Text::_('COM_PAYINVOICE_INVOICE_STATUS_PAID'),
-			self::STATUS_REFUNDED	=> Rb_Text::_('COM_PAYINVOICE_INVOICE_STATUS_REFUNDED'),
-			self::STATUS_INPROCESS	=> Rb_Text::_('COM_PAYINVOICE_INVOICE_STATUS_INPROCESS'),
-			self::STATUS_EXPIRED	=> Rb_Text::_('COM_PAYINVOICE_INVOICE_STATUS_EXPIRED'),		
+            self::STATUS_NONE		=> JText::_('COM_PAYINVOICE_INVOICE_STATUS_NONE'),
+			self::STATUS_DUE 		=> JText::_('COM_PAYINVOICE_INVOICE_STATUS_DUE'),
+			self::STATUS_PAID		=> JText::_('COM_PAYINVOICE_INVOICE_STATUS_PAID'),
+			self::STATUS_REFUNDED	=> JText::_('COM_PAYINVOICE_INVOICE_STATUS_REFUNDED'),
+			self::STATUS_INPROCESS	=> JText::_('COM_PAYINVOICE_INVOICE_STATUS_INPROCESS'),
+			self::STATUS_EXPIRED	=> JText::_('COM_PAYINVOICE_INVOICE_STATUS_EXPIRED'),		
 		);
 	}
 	

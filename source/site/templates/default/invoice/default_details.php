@@ -1,10 +1,10 @@
 <?php
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Back-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
@@ -73,7 +73,7 @@ if(!$applicable){
 			<?php echo $buyer_country;?><br/>
 			<?php endif;?>
 			<?php if(!empty($tax_number)):?>
-			<?php echo "<b>".Rb_Text::_('COM_PAYINVOICE_BUYER_TAX_NUMBER')."</b> : ".$tax_number;?><br/>
+			<?php echo "<b>".JText::_('COM_PAYINVOICE_BUYER_TAX_NUMBER')."</b> : ".$tax_number;?><br/>
 			<?php endif;?>
 		</div>
    
@@ -81,11 +81,11 @@ if(!$applicable){
    
 	   	<div class="span4">
 	    	<dl class="dl-horizontal pull-right">	
-			    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_ISSUE_DATE');?></dt>
+			    <dt><?php echo JText::_('COM_PAYINVOICE_INVOICE_ISSUE_DATE');?></dt>
 			   	<?php $issue_date = new Rb_Date($rb_invoice['issue_date']);?>
 			    <dd><?php echo $this->getHelper('format')->date($issue_date);?></dd>
 			    <?php $due_date = new Rb_Date($rb_invoice['due_date']);?>		    			    
-			    <dt><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE_DUE_DATE');?></dt>
+			    <dt><?php echo JText::_('COM_PAYINVOICE_INVOICE_DUE_DATE');?></dt>
 			    <dd><?php echo $this->getHelper('format')->date($due_date);?></dd>		    
 		    </dl>
 		</div>

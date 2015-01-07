@@ -1,10 +1,10 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -34,7 +34,7 @@ Rb_HelperLoader::addAutoLoadFolder(PAYINVOICE_PATH_CORE.'/statistics',	'Statisti
 
 // load Ecommerce Package
 rb_import('ecommerce');
-Rb_HelperPlugin::loadPlugins('payinvoice');
+Rb_HelperJoomla::loadPlugins('payinvoice');
 
 //html
 Rb_HelperLoader::addAutoLoadFolder(PAYINVOICE_PATH_CORE.'/html/html',		'Html',		 'PayInvoice');

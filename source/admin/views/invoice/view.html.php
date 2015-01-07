@@ -1,11 +1,11 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Back-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -23,21 +23,21 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		$invoice_id 	= $this->getModel()->getState('id');
 		$editable		= $this->_helper->isEditable($invoice_id);
 		if($editable){
-			Rb_HelperToolbar::apply();
-			Rb_HelperToolbar::save();
-			Rb_HelperToolbar::save2new('savenew');
-			Rb_HelperToolbar::divider();
+			JToolbarHelper::apply();
+			JToolbarHelper::save();
+			JToolbarHelper::save2new('savenew');
+			JToolbarHelper::divider();
 		}
-		Rb_HelperToolbar::cancel();
+		JToolbarHelper::cancel();
 	}
 	
 	protected function _adminGridToolbar()
 	{
-		Rb_HelperToolbar::addNew('new');
-		Rb_HelperToolbar::editList();
-		Rb_HelperToolbar::divider();
-		Rb_HelperToolbar::deleteList(Rb_Text::_('COM_PAYINVOICE_JS_ARE_YOU_SURE_TO_DELETE'));
-		Rb_HelperToolbar::custom('download', 'download-alt', 'download-alt', Rb_Text::_('COM_PAYINVOICE_JS_EXPORT_PDF'));
+		JToolbarHelper::addNew('new');
+		JToolbarHelper::editList();
+		JToolbarHelper::divider();
+		JToolbarHelper::deleteList(JText::_('COM_PAYINVOICE_JS_ARE_YOU_SURE_TO_DELETE'));
+		JToolbarHelper::custom('download', 'download-alt', 'download-alt', JText::_('COM_PAYINVOICE_JS_EXPORT_PDF'));
 	}
 	
 	function _displayGrid($records)
@@ -124,6 +124,12 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		$editable		= $this->_helper->isEditable($itemId);
 		if(!$editable){
 			$this->setTpl('view');
+		}
+		
+		// Mark Inoice paid from backend itself 
+		$this->assign('mark_paid', false);
+		if($rb_invoice['status'] == PayInvoiceInvoice::STATUS_INPROCESS){
+			$this->assign('mark_paid', true);
 		}
 		
 		// Get transactions of an invoice

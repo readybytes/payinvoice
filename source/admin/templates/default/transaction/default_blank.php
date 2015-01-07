@@ -1,10 +1,10 @@
 <?php
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Back-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
@@ -18,8 +18,8 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 		</div>
 		
 		<div class="center">
-			<a href="http://www.jpayplans.com/support/forum/payinvoice-support.html" target="_blank" class="btn disabled"><i class="icon-question-sign "></i>&nbsp;<?php echo Rb_Text::_('COM_PAYINVOICE_SUPPORT_BUTTON');?></a>
-			<a href="http://www.jpayplans.com/payinvoice/documentation" target="_blank" class="btn disabled"><i class="icon-book"></i>&nbsp;<?php echo Rb_Text::_('COM_PAYINVOICE_DOCUMENTATION_BUTTON');?></a>
+			<a href="http://www.readybytes.net/payinvoice/forum.html" target="_blank" class="btn disabled"><i class="icon-question-sign "></i>&nbsp;<?php echo JText::_('COM_PAYINVOICE_SUPPORT_BUTTON');?></a>
+			<a href="http://www.readybytes.net/payinvoice/documentation" target="_blank" class="btn disabled"><i class="icon-book"></i>&nbsp;<?php echo JText::_('COM_PAYINVOICE_DOCUMENTATION_BUTTON');?></a>
 		</div>
 		
 	</div> 

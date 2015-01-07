@@ -1,11 +1,11 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Front-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -48,7 +48,17 @@ class PayInvoiceSiteControllerInvoice extends PayInvoiceController
 			Rb_EcommerceApi::invoice_update($rb_invoice['invoice_id'], $rb_invoice);	
 			return true;
 		}
-		$this->getView()->assign('response', Rb_EcommerceApi::invoice_request('build', $rb_invoice['invoice_id'], array()));
+
+		$build_data 				= Array();
+
+		$host_string 				= str_replace(JUri::root(true), "", JUri::root());
+		$url_string 				= "index.php?option=com_payinvoice&view=invoice&processor={$rb_invoice['processor_type']}";
+
+		$build_data['notify_url'] 	= JUri::root().$url_string.'&task=notify';
+		$build_data['cancel_url']	= JUri::root().$url_string.'&task=cancel';
+		$build_data['return_url'] 	= JUri::root().$url_string.'&task=complete';
+
+		$this->getView()->assign('response', Rb_EcommerceApi::invoice_request('build', $rb_invoice['invoice_id'], $build_data));
 		return true;		
 	}
 	
@@ -60,16 +70,7 @@ class PayInvoiceSiteControllerInvoice extends PayInvoiceController
 		
 		$request_name = 'payment';
 		
-		while(true){
-			$req_response 	= Rb_EcommerceApi::invoice_request($request_name, $rb_invoice['invoice_id'], $data);
-			$response 		= Rb_EcommerceApi::invoice_process($rb_invoice['invoice_id'], $req_response);
-						
-			if($response->get('next_request', false) == false){
-				break;
-			}
-
-			$request_name = $response->get('next_request_name', 'payment');
-		}
+		$this->_helper->process_payment($request_name, $rb_invoice, $data);
 
 		$this->setRedirect(Rb_Route::_('index.php?option=com_payinvoice&view=invoice&task=complete&invoice_id='.$itemid));
 		return false;

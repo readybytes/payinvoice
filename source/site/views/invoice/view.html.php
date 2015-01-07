@@ -1,11 +1,11 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Back-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -70,7 +70,7 @@ class PayInvoiceSiteViewInvoice extends PayInvoiceSiteBaseViewInvoice
 			// XITODO : get invoice number from response
 		}
 		else{	
-			$invoice = Rb_EcommerceAPI::invoice_get(array('invoice_id' => $itemId, 'object_type' => 'PayInvoiceInvoice'), false);						
+			$invoice = Rb_EcommerceAPI::invoice_get(array('object_id' => $itemId, 'object_type' => 'PayInvoiceInvoice'), false);						
 			$this->assign('rb_invoice', $invoice);
 			$suffix = '';
 			if($invoice['status'] == PayInvoiceInvoice::STATUS_DUE){

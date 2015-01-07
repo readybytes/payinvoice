@@ -1,10 +1,10 @@
 <?php
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Back-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
@@ -19,8 +19,8 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 						<input type="checkbox" name="toggle" value="" onclick="Joomla.checkAll(this);" />
 					</th>
 					<th class="default-grid-sno hidden-phone">
-		      			<?php echo Rb_Text::_("COM_PAYINVOICE_NUM"); ?>
-		    		</th> 
+						<?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_PROCESSOR_ID", 'processor_id', 	$filter_order_Dir, $filter_order);?>
+					</th>
 					<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_PROCESSOR_TITLE", 'title', 	$filter_order_Dir, $filter_order);?></th>
 					<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_PROCESSOR_TYPE", 'type', 	$filter_order_Dir, $filter_order);?></th>
 					<th><?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_PUBLISHED", 'published', $filter_order_Dir, $filter_order);?></th>
@@ -36,7 +36,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 				    <th class="default-grid-chkbox nowrap hidden-phone">
 				    	<?php echo PayInvoiceHtml::_('grid.id', $count, $record->{$record_key} ); ?>
 				    </th>
-					<td class="nowrap hidden-phone"><?php echo $count+1; ?> </td>	
+					<td class="nowrap hidden-phone"><?php echo $record->processor_id; ?> </td>	
 					<td><?php echo PayInvoiceHtml::link($uri.'&task=edit&id='.$record->{$record_key}, $record->title); ?>
 						 <p class="muted"><?php echo $record->description;?></p>
 					</td>	
@@ -48,7 +48,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 					<td><?php echo $record->title;?>
 						<p class="muted"><?php echo $record->description;?></p>
 					</td>
-    				<td colspan="3"><?php echo sprintf(Rb_Text::_('COM_PAYINVOICE_PROCESSOR_GRID_PROCESSOR_PLUGIN_DISABLE'), $record->type);?></td>	
+    				<td colspan="3"><?php echo sprintf(JText::_('COM_PAYINVOICE_PROCESSOR_GRID_PROCESSOR_PLUGIN_DISABLE'), $record->type);?></td>	
 			   <?php endif;?>
 			
 			<?php $count++;?>		

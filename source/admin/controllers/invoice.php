@@ -1,11 +1,11 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Back-end
-* @contact		team@readybytes.in
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -26,7 +26,7 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 		// If Serial number already exist then do nothing
 		$serial_exist	= $this->_helper->exist_serial_number($data['rb_invoice']['serial']);
 		if(!$itemId && $serial_exist){
-			$message  = Rb_Text::_('COM_PAYINVOICE_ENTER_VALID_SERIAL_NUMBER');
+			$message  = JText::_('COM_PAYINVOICE_ENTER_VALID_SERIAL_NUMBER');
 			$type	  = 'error'; 		
 			return JFactory::getApplication()->redirect(Rb_Route::_('index.php?option=com_payinvoice&view=invoice&task=edit'), $message, $type);
 		}
@@ -121,12 +121,20 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 		$response['value'] = $invoice_serial;
 		if($serial){	
 			$response['valid'] 	 = false;
-			$response['message'] = Rb_Text::_('COM_PAYINVOICE_INVOICE_SERIAL_ALREADY_EXIST');
+			$response['message'] = JText::_('COM_PAYINVOICE_INVOICE_SERIAL_ALREADY_EXIST');
 		}else {
 			$response['valid'] 	 = true;
 			$response['message'] = '';
 		}
 		echo json_encode($response);
 		exit();
+	}
+
+	public function markpaid()
+	{
+		$confirmed = $this->input->getBool('confirmed', 0);
+		$this->getView()->assign('confirmed', $confirmed);	
+		
+		return true;
 	}
 }

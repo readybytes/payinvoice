@@ -1,6 +1,6 @@
 <?php
 /**
-* @copyright	Copyright (C) 2009 - 2009 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package		PAYINVOICE
 * @subpackage	Frontend
@@ -16,24 +16,18 @@ class PayInvoiceHelperConfig extends JObject
 {
 	static $configuration = null;
 	
-	public function get($key = null, PayInvoiceModelConfig $cModel = null, PayInvoiceModelformConfig $cModelform = null)
+	public function get($key = null, $default = null)
 	{
 		if(self::$configuration === null || ($key !== null && !isset(self::$configuration[$key])))
 		{
-			if($cModel === null){
-				$cModel = PayInvoiceFactory::getInstance('config', 'model');
-			}			
-			$config = $cModel->loadRecords();
+			$config = PayInvoiceFactory::getInstance('config', 'model')->loadRecords();
 			
 			foreach ($config as $record){
 				self::$configuration[$record->key] = $record->value;
 			}
-
-			if($cModelform == null){
-				$cModelform = PayInvoiceFactory::getInstance('config', 'Modelform' , 'PayInvoice');
-			}
 			
-			$form		= $cModelform->getForm();
+			$modelform  = PayInvoiceFactory::getInstance('config', 'Modelform' , 'PayInvoice');
+			$form		= $modelform->getForm();
 			$fieldset   = $form->getFieldset('config_params');
 			
 			foreach ($fieldset as $index => $field){
@@ -52,12 +46,7 @@ class PayInvoiceHelperConfig extends JObject
 		}
 		
 		if($key !== null){
-			if(isset(self::$configuration[$key])){
-				return self::$configuration[$key];
-			}
-			
-			// else return blank
-			return '';
+			return self::$configuration[$key];
 		}
 		
 		return self::$configuration;

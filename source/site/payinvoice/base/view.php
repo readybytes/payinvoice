@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+ * @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
  * @license		GNU/GPL, see LICENSE.php
  * @package 	PAYINVOICE
  * @subpackage	Front-end
- * @contact		team@readybytes.in
+ * @contact		support+payinvoice@readybytes.in
  */
 
 // no direct access
@@ -75,7 +75,7 @@ class PayInvoiceView extends PayInvoiceViewbase
 	protected function _showFooter()
 	{
 		// avoid ajax request
-		if(JRequest::getVar('tmpl')=='component'){
+		if(Rb_Factory::getApplication()->input->get('tmpl') == 'component'){
 			return '';
 		}
 		
@@ -84,11 +84,7 @@ class PayInvoiceView extends PayInvoiceViewbase
 			return $this->_showAdminFooter();
 		}
 
-		if(defined('PAYINVOICE_PREMIUM_BUILD')){
-			return '';
-		}
-		
-		return '<p align="center">'.Rb_Text::_('COM_PAYINVOICE_POWERED_BY') .'<a id="payinvoicePowerdBy" href="http://www.readybytes.net/payinvoice.html" target="_blank" >PayInvoice</a></p>';
+		return ;
 	}
 	
 	
@@ -98,11 +94,11 @@ class PayInvoiceView extends PayInvoiceViewbase
        
          	 <div class="powered-by">
 				<div class="pull-right muted">
-				   <?php echo Rb_Text::_('COM_PAYINVOICE_POWERED_BY') .'<a href="http://www.readybytes.net/payinvoice.html" target="_blank" >PayInvoice</a>';?>
-				   <?php echo ' | '.Rb_Text::_('COM_PAYINVOICE_FOOTER_VERSION').' <strong>'.PAYINVOICE_VERSION .'</strong> | '. Rb_Text::_('COM_PAYINVOICE_FOOTER_BUILD').PAYINVOICE_REVISION; ?>	  	
+				   <?php echo JText::_('COM_PAYINVOICE_POWERED_BY') .'<a href="http://www.readybytes.net/payinvoice.html" target="_blank" >PayInvoice</a>';?>
+				   <?php echo ' | '.JText::_('COM_PAYINVOICE_FOOTER_VERSION').' <strong>'.PAYINVOICE_VERSION .'</strong> | '. JText::_('COM_PAYINVOICE_FOOTER_BUILD').PAYINVOICE_REVISION; ?>	  	
 			    	<?php echo '<br />'
-			    		.Rb_Text::_('COM_PAYINVOICE_FOOTER_MESSAGE')
-			    		.'<a href="http://bit.ly/14LBgOB" target="_blank">'.Rb_Text::_('COM_PAYINVOICE_FOOTER_MESSAGE_JED_LINK').'</a>'
+			    		.JText::_('COM_PAYINVOICE_FOOTER_MESSAGE')
+			    		.'<a href="http://bit.ly/14LBgOB" target="_blank">'.JText::_('COM_PAYINVOICE_FOOTER_MESSAGE_JED_LINK').'</a>'
 			    	?>
 		    	</div>
 			</div>
@@ -114,7 +110,7 @@ class PayInvoiceView extends PayInvoiceViewbase
 	
 	public function _adminSubmenu($selMenu = 'dashboard')
 	{
-		$selMenu	= strtolower(JRequest::getVar('view',$selMenu));
+		$selMenu	= strtolower(Rb_Factory::getApplication()->input->get('view', $selMenu));
 
 		if($this->getTask() == 'display' || $this->getTask() == ''){
 			foreach(self::$_submenus as $menu){
@@ -128,6 +124,6 @@ class PayInvoiceView extends PayInvoiceViewbase
 	public function loadPosition($position, $data = array())
 	{
 		$args = array($position, $this, $data);
-		return Rb_HelperPlugin::trigger('onPayinvoiceLoadPosition', $args);
+		return Rb_HelperJoomla::triggerPlugin('onPayinvoiceLoadPosition', $args);
 	}
 }
