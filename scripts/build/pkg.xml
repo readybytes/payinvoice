@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension type="package" version="2.5" method="install">
+	<name>payinvoice</name>
+	<author>Team Readybytes</author>
+	<creationDate>May 2013</creationDate>
+	<packagename>payinvoice</packagename>
+	<license>This component in released under the GNU/GPL v3 or later license</license>
+	<version>@build.version@</version>
+	<url>http://www.readybytes.net/</url>
+	<packager>Team Readybytes</packager>
+	<packagerurl>http://www.readybytes.net/</packagerurl>
+	<files>
+	    <file type="plugin" group="rb_ecommerceprocessor" id="stripe">processor/plg_rb_ecommerceprocessor_stripe.zip</file>
+	    <file type="component" id="com_payinvoice">@project.shortform@.@build.version@.@build.number@.zip</file>
+	</files>
+	<scriptfile>script.php</scriptfile>
+</extension>

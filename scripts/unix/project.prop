@@ -1,24 +1,24 @@
 #change project code names
-project.shortform	= payinvoice
-project.shortform.small = payinvoice
-project.codename	= payinvoice
+project.shortform			= payinvoice
+project.shortform.small 	= payinvoice
+project.codename			= payinvoice
 
 # Version
-build.version 	= 1.0.0
-#build.number	= Will be created dynamically
+build.version 				= 1.1.0
+#build.number				= Will be created dynamically
 
 # Output settings
-file.package		= ${project.shortform}
-file.compression	= gzip
-file.extension		= zip
+file.package				= ${project.shortform}
+file.compression			= gzip
+file.extension				= zip
 
 # RbFramework
-rbframework.build.version = 1.0.2
-rbframework.name	  = RBSL
-rbframework.location	  = ${user.home}/Dropbox/TEAM/dev/rbframework
+rbframework.build.version 	= 1.1.0
+rbframework.name	 	 	= RBSL
+rbframework.location	  	= http://10.0.0.91/intranet/downloads/SetupKits/RbFramework
 
-processor.location	  = ${user.home}/Dropbox/TEAM/dev/payinvoice/processor
-processor.prefix	  = plg_rb_ecommerceprocessor_
+processor.location	  		= http://10.0.0.91/intranet/downloads/payinvoice/processor
+processor.prefix	  		= plg_rb_ecommerceprocessor_
 
-build.package.location	  = ${user.home}/Dropbox/TEAM/dev/payinvoice/build/
-build.package.name	  = pkg_payinvoice
+build.package.location	  	= ${dir.root}/scripts/build/
+build.package.name	  		= pkg_payinvoice

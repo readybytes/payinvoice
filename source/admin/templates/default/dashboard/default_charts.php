@@ -11,11 +11,7 @@
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' );
 
-Rb_HelperTemplate::loadSetupEnv();
-Rb_HelperTemplate::loadMedia();
-
-Rb_Html::_('rb_html.nvd3.load');
-Rb_Html::_('rb_html.daterangepicker.load');
+Rb_HelperTemplate::loadMedia(array('nvd3', 'daterangepicker'));
 ?>
 <script>
 (function($){
