@@ -142,14 +142,12 @@ class Com_payinvoiceInstallerScript
 		$response 	= $curl->request('GET', $link);
 	
 		if($response->code != 200){
-			JFactory::getApplication()->enqueueMessage($message, 'error');
-			return false;
+			JFactory::getApplication()->redirect('index.php?option=com_installer&view=install', $message, 'error');
 		}
 
 		$content 	= json_decode($response->body, true);
 		if(!isset($content['rbframework']) || !isset($content['rbframework']['file_path'])){
-			JFactory::getApplication()->enqueueMessage($message, 'error');
-			return false;
+			JFactory::getApplication()->redirect('index.php?option=com_installer&view=install', $message, 'error');
 		}
 
 		// check if already exists
@@ -175,7 +173,7 @@ class Com_payinvoiceInstallerScript
 		$query	= $db->getQuery(true);
 		$query->select('*')
 			  ->from($db->quoteName('#__extensions'))
-		      ->where('`type` = '.$db->quote('component'). ' AND `element` LIKE '.$db->quote('com_jxiforms'). ' OR `element` LIKE '.$db->quote('com_rbinstaller'));
+		      ->where('`type` = '.$db->quote('component'). ' AND `element` LIKE '.$db->quote('com_jxiforms'));
 		
 		$db->setQuery($query);
 		$installed_extensions = $db->loadObjectList();
@@ -192,8 +190,7 @@ class Com_payinvoiceInstallerScript
 			$installed_rb_version 	= explode('.', $params['version']);
 	
 			//if there is no change in the major version of rbframework then install else show message
-			if(version_compare($installed_rb_version[0].'.'.$installed_rb_version[1], $latest_rb_version[0].'.'.$latest_rb_version[1]) == 0
-				&& version_compare($content['rbframework']['version'], $params['version']) != 0){
+			if(version_compare($installed_rb_version[0].'.'.$installed_rb_version[1], $latest_rb_version[0].'.'.$latest_rb_version[1]) == 0){
 				$this->installRBFramework($content['rbframework']);
 				if(!$result->enabled){
 					$this->changeExtensionState(array(array('type'=>'system', 'name'=>'rbsl')));
@@ -202,8 +199,7 @@ class Com_payinvoiceInstallerScript
 			}
 
 			$message = JText::_('ERROR_RB_MAJOR_VERSION_CHANGE : Major version change in the RB-Framework. Refer <a href="http://www.readybytes.net/support/forum/knowledge-base/201257-error-codes.html" target="_blank">Error Codes </a> to resolve this issue.');
-			JFactory::getApplication()->enqueueMessage($message, 'error');
-			return false;
+			JFactory::getApplication()->redirect('index.php?option=com_installer&view=install', $message, 'error');
 		}
 		return true;
 	}
