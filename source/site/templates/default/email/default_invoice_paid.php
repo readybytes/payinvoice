@@ -49,7 +49,7 @@ $config_data['company_phone']	= !empty($config_data['company_phone']) 		? $confi
 											
 											<tr>
 					                       		<td width="58px">
-					                       			<img alt="company_logo" src="<?php echo JUri::root().$config_data['company_logo']?>" height="140", width="60" >
+					                       			<img alt="company_logo" src="<?php echo JUri::root().$config_data['company_logo']?>">
 					                       		</td>
 					                      	</tr>
 
@@ -93,12 +93,22 @@ $config_data['company_phone']	= !empty($config_data['company_phone']) 		? $confi
 															<tr>
 																<td><span style="color:#666"><?php echo JText::_('COM_PAYINVOICE_INVOICE_ISSUE_DATE');?></span></td>
 																<td><span style="padding: 0 10px;">:</span></td>
-																<td><span style="color:#333"><?php echo $rb_invoice['issue_date'];?></span></td>
+																<td>
+																	<span style="color:#333">
+																			<?php $issueDate = new Rb_Date($rb_invoice['issue_date']);
+																				  echo $this->getHelper('format')->date($issueDate);?>
+																	</span>
+																</td>
 															</tr>
 															<tr>
 																<td><span style="color:#666"><?php echo JText::_('COM_PAYINVOICE_PAID_DATE');?></span></td>
 																<td><span style="padding: 0 10px;">:</span></td>
-																<td><span style="color:#333"><?php echo $rb_invoice['paid_date'];?></span></td>
+																<td>
+																	<span style="color:#333">
+																		<?php $paidDate = new Rb_Date($rb_invoice['paid_date']);
+																			  echo $this->getHelper('format')->date($paidDate);?>
+																	</span>
+																</td>
 															</tr>
 															<tr>
 																<td><span style="color:#666"><?php echo JText::_('COM_PAYINVOICE_AMOUNT_PAID');?></span></td>
