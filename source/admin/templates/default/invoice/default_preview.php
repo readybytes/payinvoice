@@ -1,6 +1,6 @@
 <?php
 /**
-* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2015 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Back-end
@@ -71,9 +71,8 @@ $config_data['company_phone']	= isset($config_data['company_phone'])		? $config_
 						</ul>
 					</div>
 					
-					<div class="span2"></div>
-	   
-			   		<div class="span5">
+   
+			   		<div class="span7">
 						<dl class="dl-horizontal pull-right">	
 						    <dt><?php echo JText::_('COM_PAYINVOICE_INVOICE_ISSUE_DATE');?></dt>
 						   	<?php $issue_date = new Rb_Date($rb_invoice['issue_date']);?>
@@ -89,8 +88,8 @@ $config_data['company_phone']	= isset($config_data['company_phone'])		? $config_
 				<?php echo $this->loadTemplate('view_items');?>
 	
 				<div class="row-fluid">
-					<div class="span7"></div>
-					<div class="span5">
+					<div class="span6"></div>
+					<div class="span6">
 						<dl class="dl-horizontal pull-right">
 							<dt><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_SUBTOTAL');?></dt>
 							<dd><?php echo $currency_symbol." ".$subtotal;?></dd>

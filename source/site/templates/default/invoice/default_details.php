@@ -77,9 +77,9 @@ if(!$applicable){
 			<?php endif;?>
 		</div>
    
-   		<div class="span2">&nbsp;</div>
+   		<div class="span1">&nbsp;</div>
    
-	   	<div class="span4">
+	   	<div class="span5">
 	    	<dl class="dl-horizontal pull-right">	
 			    <dt><?php echo JText::_('COM_PAYINVOICE_INVOICE_ISSUE_DATE');?></dt>
 			   	<?php $issue_date = new Rb_Date($rb_invoice['issue_date']);?>
