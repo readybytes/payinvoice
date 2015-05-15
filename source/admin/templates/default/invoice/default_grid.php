@@ -1,7 +1,7 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2015 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Back-end
@@ -27,6 +27,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 				<th class="hidden-phone"><?php echo JText::_('COM_PAYINVOICE_INVOICE_BUYER');?></th>				
 				<th><?php echo JText::_('COM_PAYINVOICE_INVOICE_TOTAL');?></th>
 				<th><?php echo JText::_('COM_PAYINVOICE_INVOICE_STATUS');?></th>
+				<th><?php echo JText::_('COM_PAYINVOICE_INVOICE_EMAIL_SENT');?></th>
 							
 			</tr>
 		<!-- TABLE HEADER END -->
@@ -44,6 +45,14 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
                    	<td class="nowrap hidden-phone"><?php echo PayInvoiceHtml::link('index.php?option=com_payinvoice&view=buyer&task=edit&id='.$invoice[$record->invoice_id]->buyer_id, $invoice[$record->invoice_id]->buyer_id.'('.$buyer[$invoice[$record->invoice_id]->buyer_id]->name.')');?></td>
                     <td><?php echo $invoice[$record->invoice_id]->total;?></td>
                     <td><?php echo JText::_($status_list[$invoice[$record->invoice_id]->status]);?></td>
+                    <td>
+						<?php 	$params = json_decode($record->params);
+                    			$class 	= 'icon-unpublish';
+				            	if(isset($params->emailSent) && $params->emailSent){
+				            		$class = 'icon-publish';
+				            	}?>
+                    	<span class="<?php echo $class;?>"></span>
+                    </td>
 			<?php $count++;?>		
 			<?php endforeach;?>
 			</tbody>

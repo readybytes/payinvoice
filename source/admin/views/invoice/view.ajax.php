@@ -1,11 +1,11 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2015 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Back-end
-support+payinvoice
+* @contact 		support+payinvoice
 */
 
 // no direct access
@@ -79,13 +79,21 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		
 		$result = $this->getHelper('utils')->sendEmail($user->email, $subject, $body);
 		$msg = JText::_('COM_PAYINVOICE_INVOICE_EMAIL_SENT');
+		$sentEmail	= true;
 		if(!$result){
-			$msg = JText::_('COM_PAYINVOICE_INVOICE_ERROR_SEND_ERROR');						
+			$msg = JText::_('COM_PAYINVOICE_INVOICE_ERROR_SEND_ERROR');	
+			$sentEmail	= false;					
 		}
 		elseif($result instanceof Exception){
 			$msg  = JText::_('COM_PAYINVOICE_INVOICE_ERROR_SEND_ERROR');
 			$msg .= "<br/><div class='alert alert-error'>".$result->getMessage()."</div>";
+			$sentEmail	= false;
 		}
+		
+		// Save parameter to ensure email being sent or not
+		$invoice  = PayInvoiceInvoice::getInstance($invoice_id);
+		$invoice->setParam('emailSent' , $sentEmail);
+		$invoice->save();
 		
 		$this->_setAjaxWinTitle(JText::_('COM_PAYINVOICE_INVOICE_EMAIL_WINDOW_TITLE'));
 		$this->_setAjaxWinBody($msg);
