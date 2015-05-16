@@ -90,6 +90,55 @@ class plgPayinvoicePdfExport extends Rb_Plugin
 			Rb_HelperLoader::addAutoLoadFile(DOMPDF_INC_DIR.'/'."$file",$class);
 		}
 	}
+
+	public function onPayInvoiceEmailBeforSend($invoice_id, $email, $subject, $body, $attachment)
+	{
+		$this->__loadFiles();
+		$this->__loadDomPdfClass();	// Load class of DomPdf
+		
+		$rb_invoice		= PayInvoiceFactory::getHelper('invoice')->get_rb_invoice($invoice_id);
+		$rb_invoice		= (object)$rb_invoice;
+		
+		$pdf_controller	= PayInvoiceFactory::getInstance('pdfexport', 'controller', 'PayInvoiceadmin');
+		$pdf_view 		= $pdf_controller->getView('pdfexport', 'pdf');
+		
+		$i_helper = PayInvoiceFactory::getHelper('invoice');
+		$f_helper = PayInvoiceFactory::getHelper('format');	
+			
+		//get instances of Invoice and Buyer
+		$invoice	= PayInvoiceInvoice::getInstance($rb_invoice->object_id);
+		$buyer		= PayInvoiceBuyer::getInstance($rb_invoice->buyer_id);
+	
+		$pdf_view->assign('invoice',	 		$invoice);
+		$pdf_view->assign('rb_invoice', 		$rb_invoice);	
+		$pdf_view->assign('buyer', 				$buyer);
+		$pdf_view->assign('currency_symbol',	$f_helper->getCurrency($rb_invoice->currency, 'symbol'));
+		$pdf_view->assign('tax', 				$i_helper->get_tax($rb_invoice->invoice_id));
+		$pdf_view->assign('discount', 			$i_helper->get_discount($rb_invoice->invoice_id));
+		$pdf_view->assign('subtotal', 			$i_helper->get_subtotal($rb_invoice->invoice_id));
+		$pdf_view->assign('config_data',		PayInvoiceFactory::getHelper('config')->get());
+		$pdf_view->assign('status_list', 		PayInvoiceInvoice::getStatusList());
+		
+	
+	 	// Delete folder and contained files before generating new folder
+		$filePath = dirname(__FILE__).'/pdfexport'.$rb_invoice->buyer_id;
+		$pdf_view->deleteFolder($filePath);
+		
+		$content	= $pdf_view->getPdfContent($rb_invoice);
+		$pdf		= $pdf_view->genratePdf($content);
+		$pdf_view->createFolder($pdf, $invoice_id, $rb_invoice->buyer_id);
+		
+		$filePath = dirname(__FILE__).'/pdfexport'.$rb_invoice->buyer_id;
+		$filename = 'invoice'.$rb_invoice->invoice_id.'.pdf';
+			
+		//check whether file exists or not
+		if(file_exists($filePath.'/'.$filename)){
+			$attachment = $filePath.'/'.$filename;
+			return true;
+		}
+		
+		return false;
+	}
 }
 
 

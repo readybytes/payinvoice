@@ -93,7 +93,12 @@ class PayInvoiceEvent extends JEvent
 		$body 	 			= $email_view->loadTemplate('invoice_'.$suffix);
 		$subject 			= JText::_('COM_PAYINVOICE_INVOICE_SEND_EMAIL_ON_INVOICE_'.strtoupper($suffix));
 		
-		$result = PayInvoiceFactory::getHelper('utils')->sendEmail($buyer->email, $subject, $body);
+		$attachment			= array();
+		// attach Pdf Invoice with email		
+		$args				= array($rb_invoice['object_id'], &$buyer->email, &$body, &$subject, &$attachment);
+		Rb_HelperPlugin::trigger('onPayInvoiceEmailBeforSend', $args, '' ,$this);
+		
+		$result = PayInvoiceFactory::getHelper('utils')->sendEmail($buyer->email, $subject, $body, $attachment);
 		if($result){
 			return true;
 		}else{
@@ -101,8 +106,15 @@ class PayInvoiceEvent extends JEvent
 		}
 			
 	}
+	
+	public function onPayInvoiceEmailBeforSend($invoice_id, &$email, &$subject, &$body, &$attachment)
+	{
+		return true;
+	}
+
 }
 
 $dispatcher = JDispatcher::getInstance();
 $dispatcher->register('onRb_EcommerceAfterSave', 'PayInvoiceEvent');
+$dispatcher->register('onRb_EcommerceEmailBeforSend', 'PayInvoiceEvent');
 
