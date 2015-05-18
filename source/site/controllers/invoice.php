@@ -54,6 +54,7 @@ class PayInvoiceSiteControllerInvoice extends PayInvoiceController
 		$host_string 				= str_replace(JUri::root(true), "", JUri::root());
 		$url_string 				= "index.php?option=com_payinvoice&view=invoice&processor={$rb_invoice['processor_type']}";
 
+		$build_data['build_type'] 	= 'html';
 		$build_data['notify_url'] 	= JUri::root().$url_string.'&task=notify';
 		$build_data['cancel_url']	= JUri::root().$url_string.'&task=cancel';
 		$build_data['return_url'] 	= JUri::root().$url_string.'&task=complete';

@@ -1,11 +1,11 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2012 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2015 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
-* @subpackage	Back-end
-* @contact		team@readybytes.in
+* @subpackage	Front-end
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -20,8 +20,9 @@ class PayInvoiceSiteViewInvoice extends PayInvoiceSiteBaseViewInvoice
 {
 	public function ajaxRequestBuildForm()
 	{
-		$invoice_id = $this->getModel()->getId();
-		$post_url 	= !empty($this->get('response')->data->post_url) ? $this->get('response')->data->post_url : JUri::root().'index.php?option=com_payinvoice&view=invoice&task=paynow&invoice_id='.$invoice_id;
+		$invoice_id 	= $this->getModel()->getId();
+		$post_url 		= !empty($this->get('response')->data->post_url) ? $this->get('response')->data->post_url : JUri::root().'index.php?option=com_payinvoice&view=invoice&task=paynow&invoice_id='.$invoice_id;
+		$response->html	=  $processResponseData->data->form;
 		
 		$ajax 		= Rb_Factory::getAjaxResponse();		
 		$ajax->addScriptCall('payinvoice.jQuery("form#paynowForm").attr', 'action', $post_url); 
