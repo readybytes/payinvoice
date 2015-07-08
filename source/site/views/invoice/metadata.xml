@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<view title="COM_PAYINVOICE_INVOICE" >
+		<message><![CDATA[COM_PAYINVOICE_MENU_INVOICE_VIEW_TITLE_MESSAGE]]></message>
+		
+		<options var="task">
+ 			<option value="display"   	name="COM_PAYINVOICE_INVOICE_INVOICE" msg="COM_PAYINVOICE_INVOICE_DISPLAY_VIEW_TITLE_MESSAGE"/>
+			<option value="paynow" 		name="COM_PAYINVOICE_INVOICE_PAYNOW" msg="COM_PAYINVOICE_INVOICE_PAYNOW_VIEW_TITLE_MESSAGE"/>
+			<option value="complete"   	name="COM_PAYINVOICE_INVOICE_COMPLETE" msg="COM_PAYINVOICE_INVOICE_COMPLETE_VIEW_TITLE_MESSAGE"/>	
+ 		</options>
+	</view>
+		
+</metadata>

@@ -78,7 +78,7 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		$user 	 = PayInvoiceFactory::getUser($rb_invoice['buyer_id']);		
 		
 		// attach Pdf Invoice with email		
-		$args			= array($rb_invoice['object_id'], &$user->email, &$body, &$subject, &$attachment);
+		$args			= array($rb_invoice['object_id'], &$user->email, &$subject, &$body, &$attachment);
 		Rb_HelperPlugin::trigger('onPayInvoiceEmailBeforSend', $args, '' ,$this);
 
 		$result = $this->getHelper('utils')->sendEmail($user->email, $subject, $body, $attachment);

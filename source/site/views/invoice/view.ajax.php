@@ -21,7 +21,8 @@ class PayInvoiceSiteViewInvoice extends PayInvoiceSiteBaseViewInvoice
 	public function ajaxRequestBuildForm()
 	{
 		$invoice_id 	= $this->getModel()->getId();
-		$post_url 		= !empty($this->get('response')->data->post_url) ? $this->get('response')->data->post_url : JUri::root().'index.php?option=com_payinvoice&view=invoice&task=paynow&invoice_id='.$invoice_id;
+		$url 			= PayInvoiceRoute::_('index.php?option=com_payinvoice&view=invoice&task=paynow&invoice_id='.$invoice_id);
+		$post_url 		= !empty($this->get('response')->data->post_url) ? $this->get('response')->data->post_url : $url;
 		$response->html	=  $processResponseData->data->form;
 		
 		$ajax 		= Rb_Factory::getAjaxResponse();		

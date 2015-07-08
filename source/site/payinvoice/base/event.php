@@ -95,7 +95,7 @@ class PayInvoiceEvent extends JEvent
 		
 		$attachment			= array();
 		// attach Pdf Invoice with email		
-		$args				= array($rb_invoice['object_id'], &$buyer->email, &$body, &$subject, &$attachment);
+		$args				= array($rb_invoice['object_id'], &$buyer->email, &$subject, &$body, &$attachment);
 		Rb_HelperPlugin::trigger('onPayInvoiceEmailBeforSend', $args, '' ,$this);
 		
 		$result = PayInvoiceFactory::getHelper('utils')->sendEmail($buyer->email, $subject, $body, $attachment);

@@ -50,7 +50,7 @@ JHtml::_('behavior.formvalidation');
 
 <?php echo $this->loadTemplate('edit_item');?>
 <div class="row-fluid">
-<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="rb-validate-form">	
+<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="rb-validate-form form-horizontal">	
 	<div class="row-fluid">
 		<div class="span9"><h2><?php echo JText::_('COM_PAYINVOICE_INVOICE_DETAILS' ); ?></h2></div>		
 		<?php if($form->getValue('invoice_id')):?>
@@ -70,36 +70,36 @@ JHtml::_('behavior.formvalidation');
 					<div class="row-fluid">											
 						<div class="span6">		
 							<div class="control-group">
-								<?php echo $rb_invoice_fields['title']->label;?>
+								<div class="control-label"><?php echo $rb_invoice_fields['title']->label;?></div>
 								<div class="controls"><?php echo $rb_invoice_fields['title']->input;?></div>								
 							</div>
 							<div class="control-group">
-								<?php echo $rb_invoice_fields['buyer_id']->label;?>
+								<div class="control-label"><?php echo $rb_invoice_fields['buyer_id']->label;?></div>
 								<div class="controls"><?php echo $rb_invoice_fields['buyer_id']->input;?></div>								
 							</div>
 							<div class="control-group">
-								<?php echo $rb_invoice_fields['serial']->label;?>
+								<div class="control-label"><?php echo $rb_invoice_fields['serial']->label;?></div>
 								<div class="controls">
 								  	<input 	type="text" 
 								  			name="payinvoice_form[rb_invoice][serial]" 
 								  			class="required"
 								  			value="<?php echo $rb_invoice_fields['serial']->value; ?>"
-								  			data-validation-ajax-ajax="<?php echo Rb_Route::_('index.php?option=com_payinvoice&view=invoice&task=ajaxchangeserial');?>"/>								
+								  			data-validation-ajax-ajax="<?php echo Rb_Route::_('index.php?option=com_payinvoice&view=invoice&task=ajaxchangeserial&invoice_id='.$invoice->getInvoiceId());?>"/>								
 								</div>							
 							</div>
 						</div>
 						<?php // IMP : we are skiping one span, to fix ui issue ?>
 						<div class="span5">
 							<div class="control-group">
-								<?php echo $rb_invoice_fields['currency']->label;?>
+								<div class="control-label"><?php echo $rb_invoice_fields['currency']->label;?></div>
 								<div class="controls"><?php echo $rb_invoice_fields['currency']->input;?></div>								
 							</div>						
 							<div class="control-group">
-								<?php echo $rb_invoice_fields['issue_date']->label;?>
+								<div class="control-label"><?php echo $rb_invoice_fields['issue_date']->label;?></div>
 								<div class="controls"><?php echo $rb_invoice_fields['issue_date']->input;?></div>								
 							</div>
 							<div class="control-group">
-								<?php echo $rb_invoice_fields['due_date']->label;?>
+								<div class="control-label"><?php echo $rb_invoice_fields['due_date']->label;?></div>
 								<div class="controls"><?php echo $rb_invoice_fields['due_date']->input;?></div>								
 							</div>
 						</div>	

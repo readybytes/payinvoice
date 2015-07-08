@@ -20,4 +20,9 @@ class PayInvoiceSiteControllerDashboard extends PayInvoiceController
 	{
 		return true;
 	}
+	
+	function getModel($name = '', $prefix = '', $config = array())
+	{
+		return null;
+	}
 }

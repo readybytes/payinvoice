@@ -14,25 +14,25 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 <?php if (!PayInvoiceFactory::getUser()->id) :?>
 	<div class="well well-large">
 		<div class="page-header">
-			<h2 class="text-center"><?php echo XiText::_('Access Prohibited.');?></h2>
-			<h3 class="text-center"><small><?php echo XiText::_('Please login to see your Invoices.');?></small></h3>
+			<h2 class="text-center"><?php echo Rb_Text::_('COM_PAYINVOICE_ACCESS_PROHIBITED');?></h2>
+			<h3 class="text-center"><small><?php echo Rb_Text::_('COM_PAYINVOICE_PLEASE_LOGIN_TO_SEE_YOUR_INVOICES');?></small></h3>
 		</div>
 	</div>
 <?php else :?>
 
 <div class="container-fluid">
 	<div class="row-fluid page-header">
-		<h2><?php echo XiText::_('My Invoices');?></h2>
+		<h2><?php echo Rb_Text::_('COM_PAYINVOICE_MY_INVOICES');?></h2>
 	</div>
 	<table class="table">
 	<thead>
 			<tr>
-				<th class="span2"><span><?php echo Rb_Text::_('Invoice #');?></span></th>
-				<th class="span2"><span><?php echo Rb_Text::_('Due On');?></span></th>
-				<th class="span2"><span><?php echo Rb_Text::_('Paid On');?></span></th>
-				<th class="span2"><span><?php echo Rb_Text::_('Payment Method');?></span></th>
-				<th class="span2"><span><?php echo Rb_Text::_('Amount');?></span></th>
-				<th class="span2"><span><?php echo Rb_Text::_('Status')?></span></th>
+				<th class="span2"><span><?php echo Rb_Text::_('COM_PAYINVOICE_INVOICE');?></span></th>
+				<th class="span2"><span><?php echo Rb_Text::_('COM_PAYINVOICE_DUE_ON');?></span></th>
+				<th class="span2"><span><?php echo Rb_Text::_('COM_PAYINVOICE_PAID_ON');?></span></th>
+				<th class="span2"><span><?php echo Rb_Text::_('COM_PAYINVOICE_PAYMENT_METHOD');?></span></th>
+				<th class="span2"><span><?php echo Rb_Text::_('COM_PAYINVOICE_AMOUNT');?></span></th>
+				<th class="span2"><span><?php echo Rb_Text::_('COM_PAYINVOICE_STATUS')?></span></th>
 				<th class="span1"></th>
 			</tr>
 		</thead>
@@ -74,7 +74,8 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 					<td class="span2"><span><?php echo $invoice->total; ?></span></td>
 					<td class="span2"><span class="label <?php echo $class;?>"><?php echo Rb_Text::_($status_list[$invoice->status]); ?></span></td>
 					<td class="span1">
-						<a href="index.php?option=com_payinvoice&view=pdfexport&action=sitePdfAction&invoice_id=<?php echo $invoice->invoice_id; ?>">
+						<?php $url = PayInvoiceRoute::_('index.php?option=com_payinvoice&view=pdfexport&action=sitePdfAction&invoice_id='.$invoice->invoice_id);?>
+						<a href="<?php echo $url; ?>">
 							<i class="icon-download-alt"></i>
 						</a>						
 					</td>

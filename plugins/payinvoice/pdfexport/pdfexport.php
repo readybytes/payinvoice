@@ -101,7 +101,7 @@ class plgPayinvoicePdfExport extends Rb_Plugin
 		}
 	}
 
-	public function onPayInvoiceEmailBeforSend($invoice_id, $email, $subject, $body, $attachment)
+	public function onPayInvoiceEmailBeforSend($invoice_id, &$email, &$subject, &$body, &$attachment)
 	{
 		$this->__loadFiles();
 		$this->__loadDomPdfClass();	// Load class of DomPdf

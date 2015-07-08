@@ -28,14 +28,15 @@ class PayInvoiceSiteViewDashboard extends PayInvoiceSiteBaseViewDashboard
 		$buyer		 	= PayInvoiceBuyer::getInstance($userId);	
 		$filter 		= array('buyer_id' => $buyer->getBuyer(), 'object_type' => 'PayInvoiceInvoice');
 		$invoices 		= $this->getHelper('invoice')->get_rb_invoice_records($filter);	
+		$payurls		= array();
 		
 		foreach ($invoices as $data){
 			$invoice 					= PayInvoiceInvoice::getInstance($data->object_id);
 			$payurls[$data->invoice_id] = $invoice->getPayUrl();
 		}
 		
-		$this->assign('invoices',		$invoices);
-		$this->assign('payurls', 		$payurls);
+		$this->assign('invoices',		$invoices);		
+		$this->assign('payurls', 		$payurls);		
 		$this->assign('buyer', 			$buyer);
 		$this->assign('status_list', 	PayInvoiceInvoice::getStatusList());
 		

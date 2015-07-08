@@ -20,7 +20,7 @@ JHtml::_('behavior.formvalidation');
 </div>
 
 <div class="row-fluid">
-	<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="rb-validate-form">
+	<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="rb-validate-form form-horizontal">
 		<div class="span6">		
 			<fieldset class="form">
 				<h3> <?php echo ucfirst(JText::_($processor->getType()))." - ".JText::_('COM_PAYINVOICE_PROCESSOR_EDIT_DETAILS' ); ?></h3><hr>

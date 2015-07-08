@@ -30,25 +30,33 @@ JHtml::_('behavior.formvalidation');
 })(payinvoice.jQuery);
 </script>
 <div class="row-fluid">
-<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" enctype="multipart/form-data" class="rb-validate-form">	
+<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="form-horizontal" enctype="multipart/form-data" class="rb-validate-form">	
    	<div class="span6">
    		<fieldset class="form">	
 			<h3> <?php echo JText::_('COM_PAYINVOICE_CONFIG_BASIC_SETTING' ); ?> </h3><hr>	
-			
+					
 			<div class="control-group">
 				<div class="control-label"><?php echo $form->getLabel('currency'); ?> </div>
 				<div class="controls"><?php echo $form->getInput('currency'); ?></div>								
-			</div>	
-			
+			</div>
+		
+					
 			<div class="control-group">
 				<div class="control-label"><?php echo $form->getLabel('date_format'); ?> </div>
 				<div class="controls"><?php echo $form->getInput('date_format'); ?></div>								
 			</div>
+		
 			
 			<div class="control-group">
 				<div class="control-label"><?php echo $form->getLabel('terms_and_conditions'); ?> </div>
 				<div class="controls"><?php echo $form->getInput('terms_and_conditions'); ?></div>								
 			</div>
+			
+			<div class="control-group">
+				<div class="control-label"><?php echo $form->getLabel('invoice_sno_prefix'); ?> </div>
+				<div class="controls"><?php echo $form->getInput('invoice_sno_prefix'); ?></div>								
+			</div>
+			
 	  </fieldset>
 	</div>				
 			
@@ -69,21 +77,22 @@ JHtml::_('behavior.formvalidation');
 					<?php echo $form->getInput('company_logo'); ?>
 				</div>								
 			</div>
-			
+		
 			<div class="control-group">
 				<div class="control-label"><?php echo $form->getLabel('company_name'); ?> </div>
 				<div class="controls"><?php echo $form->getInput('company_name'); ?></div>								
 			</div>
-			
+
 			<div class="control-group">
 				<div class="control-label"><?php echo $form->getLabel('company_address'); ?> </div>
 				<div class="controls"><?php echo $form->getInput('company_address'); ?></div>								
 			</div>
-			
+				
 			<div class="control-group">
 				<div class="control-label"><?php echo $form->getLabel('company_phone'); ?> </div>
 				<div class="controls"><?php echo $form->getInput('company_phone'); ?></div>								
-			</div>			
+			</div>
+	
 		</fieldset>
 	</div>	
 	<input type="hidden" name="task" value="save" />

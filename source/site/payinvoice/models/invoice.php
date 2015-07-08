@@ -17,6 +17,14 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
  */
 class PayInvoiceModelInvoice extends PayInvoiceModel
 {
+	public function getLastSerial()
+	{
+		$db		 = JFactory::getDbo();
+		$query	 = 'SELECT MAX(invoice_id) FROM `#__payinvoice_invoice`';
+		$db->setQuery($query);
+		
+		return $db->loadResult();
+	}
 }
 
 class PayInvoiceModelformInvoice extends PayInvoiceModelform { }

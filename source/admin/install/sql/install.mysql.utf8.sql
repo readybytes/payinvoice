@@ -42,3 +42,5 @@ CREATE TABLE IF NOT EXISTS `#__payinvoice_config` (
   PRIMARY KEY (`config_id`),
   UNIQUE KEY `idx_key` (`key`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+INSERT INTO `#__payinvoice_config`(`key`, `value`) VALUES ('invoice_sno_prefix' , 'INV-01-')

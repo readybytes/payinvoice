@@ -88,12 +88,22 @@ class PayInvoiceHelperInvoice extends JObject
 	}
 	
     // get existing serial number
-	public function exist_serial_number($serial)
+	public function exist_serial_number($serial , $invoice_id = null)
 	{
 		$filter			= array('serial' => $serial, 'object_type' => 'PayInvoiceInvoice');
 		$serial_number	= Rb_EcommerceAPI::invoice_get_records($filter);
-		if($serial_number){
+		
+		//if its a new invoice, then return true if serial number exists
+		if(is_null($invoice_id) && !empty($serial_number)){
 			return true;
+		}
+
+		//if user is editing previously made invoice, then restrict only if the serial number entered is of another invoice 
+		if(!empty($serial_number) && $invoice_id){
+			$keys = array_keys($serial_number);			
+			if(!in_array($invoice_id,$keys)){
+				return true;
+			}
 		}
 		
 		return false;

@@ -43,6 +43,13 @@
 	           	 <file driver="mysql" charset="utf8">install/sql/install.mysql.utf8.sql</file>
 	   		 </sql>
         </install>
+        
+    <!-- Runs on update -->
+    	<update>
+			<schemas>
+				<schemapath type="mysql">install/sql/updates/mysql</schemapath>
+			</schemas>
+		</update>
 
 	<!-- Administrator back-end section -->
 	<administration>

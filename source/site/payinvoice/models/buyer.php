@@ -28,17 +28,16 @@ class PayInvoiceModelBuyer extends PayInvoiceModel
      */
     protected function _buildQueryFrom(Rb_Query &$query)
     {
-    	$db			=	PayInvoiceFactory::getDBO();
-    	$table		=	$this->getTable();
-    	$tname		=	$table->getTableName();
+    	$tname		=	$this->getTable()->getTableName();
 
-    	$queryString = '';
-    	$query->_q1  = new Rb_Query();
-    	$query->_q2  = new Rb_Query();
+    	// Join payinvoice buyer table
+    	$join1 = " `$tname` AS t  ON ( t.`buyer_id` = joomlausertbl.`id` ) ";
+    	// Join usergroup-map table (get user-type id)
+    	$join2 = " `#__user_usergroup_map` AS g  ON ( g.`user_id` = joomlausertbl.`id` ) ";
     	
-    	$join = ' `#__payinvoice_buyer` AS t  ON ( t.`buyer_id` = joomlausertbl.`id` ) ';
+    	$sql  = new Rb_Query();
     	
-    	$query->_q1->select(' joomlausertbl.`id` AS buyer_id ')
+    	$sql->select(' joomlausertbl.`id` AS buyer_id ')
     			   ->select(' joomlausertbl.`name` AS name ')
     			   ->select(' joomlausertbl.`username` AS username ')
     			   ->select(' joomlausertbl.`email` AS email ')
@@ -52,23 +51,12 @@ class PayInvoiceModelBuyer extends PayInvoiceModel
     			   ->select(' t.`zipcode` ')
     			   ->select(' t.`tax_number`')
     			   ->select(' t.`params` ')
-    			   ->leftJoin($join);
-    			   
-    			   
-    	$query->_q2->select(' * ')
-    			   ->from(' `#__users` ')
-    			   ->where(' `id` = '.$this->recordId.' ');
-
-    	//if working on single record then append the subquery in FROM
-    	if(is_numeric($this->recordId)){
-    		$queryString = $query->_q1->from('( '.$query->_q2->__toString().' ) AS joomlausertbl ')->__toString();		    		
-    	}
-		    		
-    	else {
-    		$queryString = $query->_q1->from(' `#__users` AS joomlausertbl ')->__toString();
-    	}
+    			   ->from(' `#__users` AS joomlausertbl ')
+    	    	   ->leftJoin($join1)
+    	   		   ->leftJoin($join2)
+    	  		   ->group("  g.`user_id` ");
     	
-	    $query->from('( '.$queryString.') AS tbl ');
+	    $query->from('( '.$sql->__toString().') AS tbl ');
 	    
     }
 	

@@ -65,6 +65,7 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 	function edit($tpl= null, $itemId = null)
 	{
 		$itemId  = ($itemId === null) ? $this->getModel()->getState('id') : $itemId ;
+
 		$invoice = PayInvoiceInvoice::getInstance($itemId);
 		$form 	 = $invoice->getModelform()->getForm($invoice);
 
@@ -97,9 +98,16 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 			// add 7 days in due date
 			$binddata['rb_invoice']['issue_date'] = $rb_invoice['issue_date'];
 			$due_date = new Rb_Date($rb_invoice['due_date']);
+			
 			// Previously add is used instead of modify(fix for php 5.2 compatibility)			
 			$due_date->modify('+7 day');
 			$binddata['rb_invoice']['due_date'] = (string)$due_date;
+			
+			//assign serial no to Invoice
+			$model			 = PayinvoiceFactory::getInstance('invoice', 'model');
+			$lastSerial		 = $model->getLastSerial();
+			$prefix			 = PayInvoiceHelperConfig::get('invoice_sno_prefix');
+			$binddata['rb_invoice']['serial'] = $prefix.($lastSerial+1);
 	
 			$helper					= $this->getHelper('config');
 			$currency 				= $helper->get('currency');
@@ -118,7 +126,7 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		$invoice_params_fieldset	= $form->getFieldset('params');
 		$invoice_params_fields		= array();
 		foreach ($invoice_params_fieldset as $field){		 
-				$invoice_params_fields[$field->fieldname] = $field->input;
+			$invoice_params_fields[$field->fieldname] = $field->input;
 		}
 		
 		$editable		= $this->_helper->isEditable($itemId);

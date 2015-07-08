@@ -23,13 +23,6 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 	public $_helper = null;
 	public function _save(array $data, $itemId=null, $type=null)
 	{
-		// If Serial number already exist then do nothing
-		$serial_exist	= $this->_helper->exist_serial_number($data['rb_invoice']['serial']);
-		if(!$itemId && $serial_exist){
-			$message  = JText::_('COM_PAYINVOICE_ENTER_VALID_SERIAL_NUMBER');
-			$type	  = 'error'; 		
-			return JFactory::getApplication()->redirect(Rb_Route::_('index.php?option=com_payinvoice&view=invoice&task=edit'), $message, $type);
-		}
 		//create new lib instance
 		$invoice = Rb_Lib::getInstance($this->_component->getPrefixClass(), $this->getName(), $itemId, $data)
 						->save();
@@ -111,20 +104,36 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 		return true;
 	}
 
-	// Check serial number is already exist or not
+	// Check serial number is valid & already exist or not
 	function ajaxchangeserial()
 	{
-		$invoice_serial 	= $this->input->get('value');	
-		$serial				= $this->_helper->exist_serial_number($invoice_serial);
+		$invoice_id 		= $this->input->get('invoice_id');				
+		$invoice_serial 	= $this->input->get('value');
+		
+		$serial_exists			= $this->_helper->exist_serial_number($invoice_serial , $invoice_id);
 
 		$response = array();
-		$response['value'] = $invoice_serial;
-		if($serial){	
+		$response['value']  = $invoice_serial;
+		if($serial_exists)
+		{	
 			$response['valid'] 	 = false;
-			$response['message'] = JText::_('COM_PAYINVOICE_INVOICE_SERIAL_ALREADY_EXIST');
-		}else {
-			$response['valid'] 	 = true;
-			$response['message'] = '';
+			$response['message'] = JText::sprintf('COM_PAYINVOICE_INVOICE_SERIAL_ALREADY_EXIST');
+		}
+		else
+		{
+			//check if serial number contain valid prefix or not
+			$prefix			= PayInvoiceHelperConfig::get('invoice_sno_prefix');
+			if ((strpos($invoice_serial, $prefix) !== false) && ($invoice_serial != $prefix)) 
+			{
+		    	$response['valid'] 	 = true;
+				$response['message'] = '';
+			}
+			else
+			{
+				$response['valid'] 	 = false;
+				$response['message'] = JText::sprintf('COM_PAYINVOICE_INVOICE_SERIAL_PREFIX_ERROR' , $prefix);
+			}
+			
 		}
 		echo json_encode($response);
 		exit();

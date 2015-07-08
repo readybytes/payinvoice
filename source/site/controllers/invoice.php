@@ -55,9 +55,9 @@ class PayInvoiceSiteControllerInvoice extends PayInvoiceController
 		$url_string 				= "index.php?option=com_payinvoice&view=invoice&processor={$rb_invoice['processor_type']}";
 
 		$build_data['build_type'] 	= 'html';
-		$build_data['notify_url'] 	= JUri::root().$url_string.'&task=notify';
-		$build_data['cancel_url']	= JUri::root().$url_string.'&task=cancel';
-		$build_data['return_url'] 	= JUri::root().$url_string.'&task=complete';
+		$build_data['notify_url']   = JUri::root().$url_string.'&task=notify';
+		$build_data['cancel_url']   = JUri::root().$url_string.'&task=cancel';
+		$build_data['return_url']   = JUri::root().$url_string.'&task=complete';
 
 		$this->getView()->assign('response', Rb_EcommerceApi::invoice_request('build', $rb_invoice['invoice_id'], $build_data));
 		return true;		
@@ -73,7 +73,7 @@ class PayInvoiceSiteControllerInvoice extends PayInvoiceController
 		
 		$this->_helper->process_payment($request_name, $rb_invoice, $data);
 
-		$this->setRedirect(Rb_Route::_('index.php?option=com_payinvoice&view=invoice&task=complete&invoice_id='.$itemid));
+		$this->setRedirect(PayInvoiceRoute::_('index.php?option=com_payinvoice&view=invoice&task=complete&invoice_id='.$itemid));
 		return false;
 	}
 	

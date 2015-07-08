@@ -28,6 +28,13 @@
 				filter="JComponentHelper::filterText"
 				label="COM_PAYINVOICE_CONFIG_TERMS_AND_CONDITIONS" 
 				description="COM_PAYINVOICE_CONFIG_TERMS_AND_CONDITIONS_DESC" />
+				
+		<field 	name="invoice_sno_prefix" 
+				type="text"
+				default="Inv-01-"
+				label="COM_PAYINVOICE_CONFIG_INVOICE_SNO_PREFIX" 
+				description="COM_PAYINVOICE_CONFIG_INVOICE_SNO_PREFIX_DESC"
+		        />
 		
 	</fieldset>
         
