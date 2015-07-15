@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS `#__payinvoice_invoice` (
   `type` 	varchar(25) NOT NULL,
   `template` 	varchar(25) NOT NULL,
   `params` 	text,
+  `invoice_serial` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`invoice_id`),
   INDEX `idx_type` (`type`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 ;
@@ -43,4 +44,4 @@ CREATE TABLE IF NOT EXISTS `#__payinvoice_config` (
   UNIQUE KEY `idx_key` (`key`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
-INSERT INTO `#__payinvoice_config`(`key`, `value`) VALUES ('invoice_sno_prefix' , 'INV-01-')
+INSERT INTO `#__payinvoice_config`(`key`, `value`) VALUES ('invoice_rno_prefix' , 'INV-01-')

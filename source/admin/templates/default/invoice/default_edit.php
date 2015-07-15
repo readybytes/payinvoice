@@ -54,8 +54,23 @@ JHtml::_('behavior.formvalidation');
 	<div class="row-fluid">
 		<div class="span9"><h2><?php echo JText::_('COM_PAYINVOICE_INVOICE_DETAILS' ); ?></h2></div>		
 		<?php if($form->getValue('invoice_id')):?>
-			<div class="span3 center <?php echo $statusbutton['class']?>">
-				<h4><?php echo $statusbutton['status']?></h4>
+			<div class="span3 center">
+				<div class="row-fluid <?php echo $statusbutton['class']?>">
+					<h4><?php echo $statusbutton['status']?></h4>
+				</div>
+				<div class="row-fluid">
+					<br/>
+					<?php echo JText::_("COM_PAYINVOICE_INVOICE_SERIAL")." : ";
+						  if(empty($invoice->getInvoiceSerial()))
+						  {
+						  		echo JText::_('COM_PAYINVOICE_NOT_APPLICABLE');
+						  }
+						  else
+						  {
+						  		echo $invoice->getInvoiceSerial();
+						  }
+					?>
+				</div>
 			</div>
 		<?php endif;?>
 	</div>
@@ -78,12 +93,12 @@ JHtml::_('behavior.formvalidation');
 								<div class="controls"><?php echo $rb_invoice_fields['buyer_id']->input;?></div>								
 							</div>
 							<div class="control-group">
-								<div class="control-label"><?php echo $rb_invoice_fields['serial']->label;?></div>
+								<div class="control-label"><?php echo $rb_invoice_fields['reference_no']->label;?></div>
 								<div class="controls">
 								  	<input 	type="text" 
-								  			name="payinvoice_form[rb_invoice][serial]" 
+								  			name="payinvoice_form[rb_invoice][reference_no]" 
 								  			class="required"
-								  			value="<?php echo $rb_invoice_fields['serial']->value; ?>"
+								  			value="<?php echo $rb_invoice_fields['reference_no']->value; ?>"
 								  			data-validation-ajax-ajax="<?php echo Rb_Route::_('index.php?option=com_payinvoice&view=invoice&task=ajaxchangeserial&invoice_id='.$invoice->getInvoiceId());?>"/>								
 								</div>							
 							</div>
@@ -186,7 +201,7 @@ JHtml::_('behavior.formvalidation');
 				
 				<?php if(!empty($record_id)):?>
 					<div class="row-fluid">
-						<div class="well well-small">
+						<div class="well well-small payinvoice-word-wrap">
 							<h5><?php echo JText::_('COM_PAYINVOICE_COPY_LINK');?></h5><hr>
 							<p class="info"><?php echo $invoice->getPayUrl();;?></p>
 						</div>

@@ -94,7 +94,7 @@ $config_data['company_phone']	= isset($config_data['company_phone'])		? $config_
 							<dt><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_SUBTOTAL');?></dt>
 							<dd><?php echo $currency_symbol." ".$subtotal;?></dd>
 							<dt><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_DISCOUNT');?></dt>
-							<dd><?php echo $currency_symbol." ".$discount;?></dd>
+							<dd><?php echo $discount;?></dd>
 							<dt><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX');?></dt>
 							<dd><?php echo $tax." %";?></dd><hr>
 							<dt><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TOTAL');?></dt>

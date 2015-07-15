@@ -24,6 +24,9 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 					<?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_INVOICE_ID", 'invoice_id', 	$filter_order_Dir, $filter_order);?>
 				</th>
 				<th><?php echo JText::_('COM_PAYINVOICE_INVOICE_TITLE');?></th>
+				<th>
+					<?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_INVOICE_SERIAL", 'invoice_serial', 	$filter_order_Dir, $filter_order);?>
+				</th>
 				<th class="hidden-phone"><?php echo JText::_('COM_PAYINVOICE_INVOICE_BUYER');?></th>				
 				<th><?php echo JText::_('COM_PAYINVOICE_INVOICE_TOTAL');?></th>
 				<th><?php echo JText::_('COM_PAYINVOICE_INVOICE_STATUS');?></th>
@@ -43,6 +46,16 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 				    </th>
 					<td class="nowrap hidden-phone"><?php echo $record->invoice_id;?></td>
 					<td><?php echo PayInvoiceHtml::link($uri.'&task=edit&id='.$record->{$record_key}, $invoice[$record->invoice_id]->title.' ('.$invoice[$record->invoice_id]->serial.')');?> </td>
+					<td><?php if(empty($record->invoice_serial))
+							  {
+							  		echo JText::_('COM_PAYINVOICE_NOT_APPLICABLE');
+							  }
+							  else
+							  {
+							  		echo $record->invoice_serial;
+							  }
+						?>
+					</td>
                    	<td class="nowrap hidden-phone"><?php echo PayInvoiceHtml::link('index.php?option=com_payinvoice&view=buyer&task=edit&id='.$invoice[$record->invoice_id]->buyer_id, $invoice[$record->invoice_id]->buyer_id.'('.$buyer[$invoice[$record->invoice_id]->buyer_id]->name.')');?></td>
                     <td><?php echo $invoice[$record->invoice_id]->total;?></td>
                     <td><?php echo JText::_($status_list[$invoice[$record->invoice_id]->status]);?></td>

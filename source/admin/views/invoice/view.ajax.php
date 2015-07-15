@@ -143,7 +143,7 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		
 		$data   			= $rb_invoice['processor_type'];
 		
-		$this->_helper->process_payment($request_name, $rb_invoice, $data);
+		$this->_helper->process_payment($request_name, $rb_invoice, $data , $invoice_id);
 
 		$this->_setAjaxWinTitle(JText::_('COM_PAYINVOICE_INVOICE_MARKPAID_WINDOW_TITLE'));
 		$this->_setAjaxWinBody(JText::_('COM_PAYINVOICE_INVOICE_MARKPAID_SUCCESSFULL_MESSAGE'));

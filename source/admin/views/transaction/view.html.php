@@ -27,7 +27,6 @@ class PayInvoiceAdminViewTransaction extends PayInvoiceAdminBaseViewTransaction
 	{
 		JToolbarHelper::editList();
 		JToolbarHelper::divider();
-		JToolbarHelper::deleteList(JText::_('COM_PAYINVOICE_JS_ARE_YOU_SURE_TO_DELETE'));
 	}
 	
 	protected function _adminEditToolbar()
@@ -35,8 +34,21 @@ class PayInvoiceAdminViewTransaction extends PayInvoiceAdminBaseViewTransaction
 		JToolbarHelper::cancel();
 	}
 	
-	function _displayGrid($records)
+	function display($tpl= null)
 	{
+		$records    = Rb_EcommerceAPI::transaction_get_object_type_records('PayInvoiceInvoice');
+        
+		// if total of records is more than 0
+		if(count($records) > 0)
+		{
+			return $this->_displayGrid($records);
+		}
+
+		return $this->_displayBlank();
+	}
+	
+	function _displayGrid($records)
+	{		
 		$buyerIds 	= array();
 		$InvoiceIds	= array();
 		foreach($records as $record){
@@ -44,15 +56,28 @@ class PayInvoiceAdminViewTransaction extends PayInvoiceAdminBaseViewTransaction
 			$InvoiceIds[] = $record->invoice_id;
 		}
 		
+		//do processing for default display page
+		$model 		= $this->getModel();
+		$count		= Rb_EcommerceAPI::transaction_get_object_type_record_count('PayInvoiceInvoice');
+
+		//there is no way to update the existing pagiation object with these parameters, 
+ 		//so create new instance
+		$pagination = new JPagination($count, $model->getState('limitstart'),$model->getState('limit'));
+		
 		//XITODO : Not Proper fix for fetch transactions 
 		$filter 	= array('invoice_id' => array(array('IN', '('.implode(",", $InvoiceIds).')')), 'object_type' => 'PayInvoiceInvoice');
 		$invoices 	= $this->getHelper('invoice')->get_rb_invoice_records($filter);				
 		$helper		= $this->getHelper('buyer');
 		$buyer 		= $helper->get($buyerIds);
         $statusList = Rb_EcommerceAPI::response_get_status_list();
+
 		$this->assign('buyer', $buyer);
 		$this->assign('statusList', $statusList);
         $this->assign('invoice', $invoices);
+        $this->assign('pagination',$pagination );
+		$this->assign('filter_order', $model->getState('filter_order'));
+		$this->assign('filter_order_Dir', $model->getState('filter_order_Dir'));
+		$this->assign('limitstart', $model->getState('limitstart'));
 		
 		if(!empty($invoices)){
 			return parent::_displayGrid($records);

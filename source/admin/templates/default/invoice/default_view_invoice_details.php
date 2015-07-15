@@ -29,7 +29,7 @@ JHtml::_('behavior.formvalidation');
 					<div class="controls"><?php echo $rb_invoice['buyer_id']. '('.$buyer->getBuyername().')';?></div>								
 				</div>
 				<div class="control-group">
-				<strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_SERIAL');?></strong>
+				<strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_REFERENCE_NUMBER');?></strong>
 					<div class="controls"><?php echo $rb_invoice['serial'];?></div>						
 				</div>
 			</div>

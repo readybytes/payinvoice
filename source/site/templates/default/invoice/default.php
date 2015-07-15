@@ -48,7 +48,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 				    <dt><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_SUBTOTAL');?></dt>
 				    <dd><?php echo $currency." ". number_format($subtotal, 2);?></dd>
 				    <dt><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_DISCOUNT');?></dt>
-				    <dd><?php echo $currency." ". number_format($discount, 2);?></dd>
+				    <dd><?php echo $discount;?></dd>
 				    <dt><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX');?></dt>
 				    <dd><?php echo number_format($tax, 2)." %";?></dd><hr>
 			     	<dt><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TOTAL');?></dt>

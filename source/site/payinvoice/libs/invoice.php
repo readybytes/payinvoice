@@ -17,16 +17,17 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
  */
 class PayInvoiceInvoice extends PayInvoiceLib
 {
-	protected $invoice_id 	= 0;
-	protected $type			= '';
-	protected $template		= '';
+	protected $invoice_id 	  = 0;
+	protected $type			  = '';
+	protected $template		  = '';
+	protected $invoice_serial = '';
 	
-	const STATUS_NONE		= 0;	
-	const STATUS_DUE		= 401;
-	const STATUS_PAID 		= 402;
-	const STATUS_REFUNDED	= 403;
-	const STATUS_INPROCESS	= 404;
-	const STATUS_EXPIRED	= 405;
+	const STATUS_NONE		  = 0;	
+	const STATUS_DUE		  = 401;
+	const STATUS_PAID 		  = 402;
+	const STATUS_REFUNDED	  = 403;
+	const STATUS_INPROCESS	  = 404;
+	const STATUS_EXPIRED	  = 405;
 	
 	/**
 	 * @var Rb_Registry
@@ -54,10 +55,11 @@ class PayInvoiceInvoice extends PayInvoiceLib
 	 */
 	function reset()
 	{
-		$this->invoice_id 	= 0;
-		$this->type			= 'invoice';
-		$this->template		= '';
-		$this->params		= new Rb_Registry();
+		$this->invoice_id 	  = 0;
+		$this->type			  = 'invoice';
+		$this->template		  = '';
+		$this->invoice_serial = '';
+		$this->params		  = new Rb_Registry();
 	
 		return $this;
 	}
@@ -76,7 +78,7 @@ class PayInvoiceInvoice extends PayInvoiceLib
 		$invoice_id		= $this->invoice_id;
 		$rb_invoice 	= $this->getHelper('invoice')->get_rb_invoice($invoice_id);
 		$key			= md5($rb_invoice['created_date']);
-		return PayInvoiceRoute::_('index.php?option=com_payinvoice&view=invoice&task=display&invoice_id='.$invoice_id.'&key='.$key);
+		return JUri::root().('index.php?option=com_payinvoice&view=invoice&task=display&invoice_id='.$invoice_id.'&key='.$key);
 	}
 	
 	public static function getStatusList()
@@ -120,5 +122,10 @@ class PayInvoiceInvoice extends PayInvoiceLib
 	public function getInvoiceId()
 	{
 		return $this->invoice_id;
+	}
+	
+	public function getInvoiceSerial()
+	{
+		return $this->invoice_serial;
 	}
 }

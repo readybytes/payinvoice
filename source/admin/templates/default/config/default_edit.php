@@ -53,10 +53,10 @@ JHtml::_('behavior.formvalidation');
 			</div>
 			
 			<div class="control-group">
-				<div class="control-label"><?php echo $form->getLabel('invoice_sno_prefix'); ?> </div>
-				<div class="controls"><?php echo $form->getInput('invoice_sno_prefix'); ?></div>								
+				<div class="control-label"><?php echo $form->getLabel('invoice_rno_prefix'); ?> </div>
+				<div class="controls"><?php echo $form->getInput('invoice_rno_prefix'); ?></div>								
 			</div>
-			
+
 	  </fieldset>
 	</div>				
 			

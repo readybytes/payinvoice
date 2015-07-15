@@ -29,10 +29,14 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 		<div class="control-group">
 			<label class="control-label"><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_DISCOUNT');?></label>
 	  		<div class="controls">
-	  			<div class="input-prepend">
-					<span class="add-on payinvoice-currency"></span>
-					<input type="text" name="payinvoice_form[discount]" class="input-small validate-number" min="0" id="payinvoice-invoice-discount" value="<?php echo $discount;?>">
-				</div>
+	  			<input type="text" 
+	  				   name="payinvoice_form[discount]"
+	  				   class="input-small"
+	  				   id="payinvoice-invoice-discount"
+	  				   value="<?php echo $discount;?>"
+	  				   data-validation-ajax-ajax="<?php echo Rb_Route::_('index.php?option=com_payinvoice&view=invoice&task=ajaxcheckdiscount');?>"/>
+	  			<i class="icon-question-sign icon-white" title="<?php echo JText::_('COM_PAYINVOICE_DISCOUNT_LABEL_DESC');?>"></i>
+	  			
 	  		</div>
 		</div>
 		<div class="control-group">

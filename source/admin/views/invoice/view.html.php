@@ -82,16 +82,23 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		$discount	= 0.00;
 		$tax		= 0.00;
 		
-		if($itemId){
+		if($itemId){			
+			$rb_invoice['reference_no'] = $rb_invoice['serial'];
 			$form->bind(array('rb_invoice' => $rb_invoice)); 
 			
 			$discount	= $this->_helper->get_discount($rb_invoice['invoice_id']);
 			$tax		= $this->_helper->get_tax($rb_invoice['invoice_id']);
 	 		$currency 	= $rb_invoice['currency'];
 	 		
-	 		$this->assign('statusbutton', 	$this->_helper->get_status_button($rb_invoice['status']));
-	 		$this->assign('rb_invoice', 	$rb_invoice);
- 	        $this->assign('currency_symbol', 	$this->getHelper('format')->getCurrency($currency, 'symbol'));	
+	 		//check whether discount is implemented in % and add % after discount-value if its implemented in %
+			$discount_modifier = Rb_EcommerceAPI::modifier_get($rb_invoice['invoice_id'], 'PayInvoiceDiscount');
+			$discount_modifier = array_pop($discount_modifier);
+			$is_percent 	   = $discount_modifier->percentage;
+			$discount		   = ($is_percent) ? $discount.'%' : number_format($discount, 2);
+	 		
+	 		$this->assign('statusbutton', 		$this->_helper->get_status_button($rb_invoice['status']));
+	 		$this->assign('rb_invoice', 		$rb_invoice);
+ 	        $this->assign('currency_symbol', 	$this->getHelper('format')->getCurrency($currency, 'symbol'));
 		}
 		else{
 			// XITODO : need to fix it properly
@@ -106,8 +113,8 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 			//assign serial no to Invoice
 			$model			 = PayinvoiceFactory::getInstance('invoice', 'model');
 			$lastSerial		 = $model->getLastSerial();
-			$prefix			 = PayInvoiceHelperConfig::get('invoice_sno_prefix');
-			$binddata['rb_invoice']['serial'] = $prefix.($lastSerial+1);
+			$prefix			 = PayInvoiceHelperConfig::get('invoice_rno_prefix');
+			$binddata['rb_invoice']['reference_no'] = $prefix.($lastSerial+1);
 	
 			$helper					= $this->getHelper('config');
 			$currency 				= $helper->get('currency');
@@ -147,7 +154,7 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		$processor	= PayInvoiceProcessor::getInstance($processor_id)->toArray();
 		$this->assign('processor_title', $processor['title']);
 		
-		$this->assign('discount', 			number_format($discount, 2));
+		$this->assign('discount', 			$discount);
 		$this->assign('tax', 				number_format($tax, 2));
 		$this->assign('rb_invoice_fields', 	$rb_invoice_fields);
         $this->assign('processor_id', 		$processor_id);   

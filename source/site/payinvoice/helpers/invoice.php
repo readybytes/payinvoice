@@ -87,20 +87,20 @@ class PayInvoiceHelperInvoice extends JObject
 	   return array('class' => $class, 'status' => $status_list[$status]);
 	}
 	
-    // get existing serial number
-	public function exist_serial_number($serial , $invoice_id = null)
+    // get existing reference number
+	public function exist_reference_number($ref_no , $invoice_id = null)
 	{
-		$filter			= array('serial' => $serial, 'object_type' => 'PayInvoiceInvoice');
-		$serial_number	= Rb_EcommerceAPI::invoice_get_records($filter);
+		$filter			= array('serial' => $ref_no, 'object_type' => 'PayInvoiceInvoice');
+		$ref_number	= Rb_EcommerceAPI::invoice_get_records($filter);
 		
-		//if its a new invoice, then return true if serial number exists
-		if(is_null($invoice_id) && !empty($serial_number)){
+		//if its a new invoice, then return true if reference number exists
+		if((is_null($invoice_id) || ($invoice_id == 0)) && !empty($ref_number)){
 			return true;
 		}
 
-		//if user is editing previously made invoice, then restrict only if the serial number entered is of another invoice 
-		if(!empty($serial_number) && $invoice_id){
-			$keys = array_keys($serial_number);			
+		//if user is editing previously made invoice, then restrict only if the reference number entered is of another invoice 
+		if(!empty($ref_number) && $invoice_id){
+			$keys = array_keys($ref_number);			
 			if(!in_array($invoice_id,$keys)){
 				return true;
 			}
@@ -201,11 +201,11 @@ class PayInvoiceHelperInvoice extends JObject
 		return false;
 	}
 
-	public function process_payment($request_name, $rb_invoice, $data)
+	public function process_payment($request_name, $rb_invoice, $data , $itemid)
 	{
 		while(true){
 			$req_response 	= Rb_EcommerceApi::invoice_request($request_name, $rb_invoice['invoice_id'], $data);
-			$response 		= Rb_EcommerceApi::invoice_process($rb_invoice['invoice_id'], $req_response);
+			$response 		= $this->process_invoice($rb_invoice['invoice_id'], $req_response , $itemid);
 
 			if($response->get('next_request', false) == false){
 				break;
@@ -215,5 +215,43 @@ class PayInvoiceHelperInvoice extends JObject
 		}
 	}
 	
+	//function to process invoice and assign serial number accordingly
+	public function process_invoice($invoice_id , $req_response , $itemid)
+	{
+		$response = Rb_EcommerceApi::invoice_process($invoice_id , $req_response);
+		
+		//assign serial number to paid invoice when its paid online   		
+   		//don't do anything if it is an offline payment, because in offline payment, invoice serial would be assigned when it would be marked paid
+   		
+   		if($response && ($response->get('payment_status') == Rb_EcommerceResponse::PAYMENT_COMPLETE))
+   		{
+   			PayInvoiceHelperInvoice::setInvoiceSerial($itemid);
+   		}
+   		
+   		return $response;
+	}
+	
+	// Assign invoice serial number to paid invoices
+	public function setInvoiceSerial($invoice_id)
+	{
+		$config_records	 = PayInvoiceFactory::getConfig();
+		$lastCounter 	 = $config_records['expert_invoice_last_serial'];
+			
+		if (empty($lastCounter)) {
+			$lastCounter = 0;
+		}
+		
+		$lastCounter++;
+
+		$db 		= JFactory::getDbo();
+		$query 		= "UPDATE `#__payinvoice_invoice` SET `invoice_serial` = $lastCounter WHERE `invoice_id` = $invoice_id";
+		$db->setQuery($query);
+		
+		if($db->execute())
+		{		
+			$config_records['expert_invoice_last_serial'] = $lastCounter;
+			PayInvoiceFactory::saveConfig($config_records);			
+		}
+	}
 	
 }

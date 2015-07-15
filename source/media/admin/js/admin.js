@@ -137,7 +137,17 @@ payinvoice.admin.invoice = {
 					$('#payinvoice-invoice-subtotal').val(parseFloat(subtotal).toFixed(2));
 					
 					if($('#payinvoice-invoice-discount').val() != ''){
-						var discount = parseFloat($('#payinvoice-invoice-discount').val());
+						var discount		= $('#payinvoice-invoice-discount').val();
+						var is_percent		= discount.indexOf("%");
+						if(is_percent != -1){
+							discount 		= discount.replace("%" , "");
+							discount 		= parseFloat(discount);
+							discount 		= discount * 0.01 * subtotal;
+						}
+						else{
+							discount 		= parseFloat(discount);
+						}
+						
 					}
 					var tax 	 = parseFloat($('#payinvoice-invoice-tax').val());
 					

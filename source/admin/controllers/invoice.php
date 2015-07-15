@@ -39,6 +39,7 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 						
 		// create invoice in Rb_Ecommerce, in $itemId is null
 		if(!$itemId){
+			$data['rb_invoice']['serial'] 	 		= $data['rb_invoice']['reference_no'];
 			$data['rb_invoice']['status'] 	 		= PayInvoiceInvoice::STATUS_DUE;
 			$data['rb_invoice']['object_type'] 	 	= 'PayInvoiceInvoice';
 			$data['rb_invoice']['object_id'] 	 	= $invoice->getId();
@@ -52,8 +53,11 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 		}
 		
 		// XITODO : use constants
+		$discount		= explode('%', $data['discount']);
+		$is_percentage = (count($discount) > 1) ? true : false;
+		
 		$this->_helper->create_modifier($invoice_id, 'PayInvoiceItem', $data['subtotal'], 10);
-		$this->_helper->create_modifier($invoice_id, 'PayInvoiceDiscount', -$data['discount'], 20);
+		$this->_helper->create_modifier($invoice_id, 'PayInvoiceDiscount', -$discount[0], 20 , $is_percentage);		
 		$this->_helper->create_modifier($invoice_id, 'PayInvoiceTax', $data['tax'], 45, true);
 		
 		$invoice_id = Rb_EcommerceAPI::invoice_update($invoice_id, $data['rb_invoice'], true);
@@ -104,26 +108,26 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 		return true;
 	}
 
-	// Check serial number is valid & already exist or not
+	// Check reference number is valid & already exist or not
 	function ajaxchangeserial()
 	{
 		$invoice_id 		= $this->input->get('invoice_id');				
-		$invoice_serial 	= $this->input->get('value');
+		$invoice_ref_no 	= $this->input->get('value');
 		
-		$serial_exists			= $this->_helper->exist_serial_number($invoice_serial , $invoice_id);
+		$ref_no_exists			= $this->_helper->exist_reference_number($invoice_ref_no , $invoice_id);
 
 		$response = array();
-		$response['value']  = $invoice_serial;
-		if($serial_exists)
+		$response['value']  = $invoice_ref_no;
+		if($ref_no_exists)
 		{	
 			$response['valid'] 	 = false;
-			$response['message'] = JText::sprintf('COM_PAYINVOICE_INVOICE_SERIAL_ALREADY_EXIST');
+			$response['message'] = JText::sprintf('COM_PAYINVOICE_INVOICE_REFERENCE_NO_ALREADY_EXIST');
 		}
 		else
 		{
-			//check if serial number contain valid prefix or not
-			$prefix			= PayInvoiceHelperConfig::get('invoice_sno_prefix');
-			if ((strpos($invoice_serial, $prefix) !== false) && ($invoice_serial != $prefix)) 
+			//check if reference number contain valid prefix or not
+			$prefix			= PayInvoiceHelperConfig::get('invoice_rno_prefix');
+			if ((strpos($invoice_ref_no, $prefix) !== false) && ($invoice_ref_no != $prefix)) 
 			{
 		    	$response['valid'] 	 = true;
 				$response['message'] = '';
@@ -131,7 +135,7 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 			else
 			{
 				$response['valid'] 	 = false;
-				$response['message'] = JText::sprintf('COM_PAYINVOICE_INVOICE_SERIAL_PREFIX_ERROR' , $prefix);
+				$response['message'] = JText::sprintf('COM_PAYINVOICE_INVOICE_REFERENCE_NO_PREFIX_ERROR' , $prefix);
 			}
 			
 		}
@@ -145,5 +149,39 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 		$this->getView()->assign('confirmed', $confirmed);	
 		
 		return true;
+	}
+	
+	// Check if discount entered is valid or not
+	function ajaxcheckdiscount()
+	{
+		$discount_value			= $this->input->get('value','','string');
+		
+		$response = array();
+		$response['value']  = $discount_value;
+		
+		//check if discount given in %, if yes get the numeric part out of it
+		//also show error if user provides data like num%num
+		$discount		= explode('%', $discount_value);
+		if(!empty($discount[1]))
+		{
+			$response['valid'] 	 = false;
+			$response['message'] = JText::sprintf('COM_PAYINVOICE_INVOICE_DISCOUNT_ERROR' , $discount_value);
+			
+			echo json_encode($response);
+			exit();
+		}
+		
+		if(is_numeric($discount[0]))
+		{
+			$response['valid'] 	 = true;
+			$response['message'] = '';
+		}
+		else
+		{
+			$response['valid'] 	 = false;
+			$response['message'] = JText::sprintf('COM_PAYINVOICE_INVOICE_DISCOUNT_ERROR' , $discount_value);
+		}
+		echo json_encode($response);
+		exit();
 	}
 }

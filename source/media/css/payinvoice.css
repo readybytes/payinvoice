@@ -13,3 +13,6 @@
 	background-position: center center;	
 }
 	
+.payinvoice-word-wrap{
+	word-wrap : break-word;
+}
