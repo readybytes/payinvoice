@@ -16,3 +16,7 @@
 .payinvoice-word-wrap{
 	word-wrap : break-word;
 }
+
+.payinvoice-margin-left{
+	margin-left:15px;
+}

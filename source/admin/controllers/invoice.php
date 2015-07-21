@@ -155,6 +155,7 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 	function ajaxcheckdiscount()
 	{
 		$discount_value			= $this->input->get('value','','string');
+		$discount_value			= trim($discount_value);
 		
 		$response = array();
 		$response['value']  = $discount_value;
@@ -162,7 +163,7 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 		//check if discount given in %, if yes get the numeric part out of it
 		//also show error if user provides data like num%num
 		$discount		= explode('%', $discount_value);
-		if(!empty($discount[1]))
+		if(!empty($discount[1]) || empty($discount[0]))
 		{
 			$response['valid'] 	 = false;
 			$response['message'] = JText::sprintf('COM_PAYINVOICE_INVOICE_DISCOUNT_ERROR' , $discount_value);
@@ -184,4 +185,18 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 		echo json_encode($response);
 		exit();
 	}
+	
+	//Send bulk mails
+	public function sendmail()
+	{
+		$invoice_ids = JRequest::getVar('cid');
+		
+		foreach($invoice_ids as $invoice_id)
+		{
+			$this->_helper->sendMailToClient($invoice_id);
+		}
+		
+		JFactory::getApplication()->redirect('index.php?option=com_payinvoice&view=invoice' , 'Email sent successfully');
+	}
+
 }

@@ -73,12 +73,16 @@ class PayInvoiceInvoice extends PayInvoiceLib
 		return $this->params->toArray();
 	} 
 	
-	public function getPayUrl()
+	public function getPayUrl($site = false)
 	{
 		$invoice_id		= $this->invoice_id;
 		$rb_invoice 	= $this->getHelper('invoice')->get_rb_invoice($invoice_id);
 		$key			= md5($rb_invoice['created_date']);
-		return JUri::root().('index.php?option=com_payinvoice&view=invoice&task=display&invoice_id='.$invoice_id.'&key='.$key);
+		if($site){
+			return PayInvoiceRoute::_('index.php?option=com_payinvoice&view=invoice&task=display&invoice_id='.$invoice_id.'&key='.$key);
+		}else{
+			return JUri::root().'index.php?option=com_payinvoice&view=invoice&task=display&invoice_id='.$invoice_id.'&key='.$key;
+		}		
 	}
 	
 	public static function getStatusList()

@@ -32,7 +32,7 @@ class PayInvoiceSiteViewDashboard extends PayInvoiceSiteBaseViewDashboard
 		
 		foreach ($invoices as $data){
 			$invoice 					= PayInvoiceInvoice::getInstance($data->object_id);
-			$payurls[$data->invoice_id] = $invoice->getPayUrl();
+			$payurls[$data->invoice_id] = $invoice->getPayUrl(true);
 		}
 		
 		$this->assign('invoices',		$invoices);		

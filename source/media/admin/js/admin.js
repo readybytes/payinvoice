@@ -69,6 +69,8 @@ payinvoice.admin.grid = {
 					$('#adminForm').submit();
 				}
 			}else{
+				//prevent form from validating data when action is "cancel"
+				$(document.getElementById('adminForm')).unbind("submit");
 				Joomla.submitform(action, document.getElementById('adminForm'));
 			}
 		},
@@ -200,7 +202,45 @@ payinvoice.admin.invoice = {
 				var url = 'index.php?option=com_payinvoice&view=invoice&task=markpaid&confirmed=1&invoice_id='+invoice_id;
 				payinvoice.ajax.go(url);
 			}
-		} 
+		}, 
+		
+		addbuyer :{
+			save : function(){
+				
+				var msgHtml = "<div id='payinvoice-msghtml' class='text-center text-warning'><h3>Please do not refresh. Window will be closed automatically after adding new user!<br/></h3></div>";
+				$('#payinvoice-invoice-addbuyer').append(msgHtml);
+				
+				var url   = 'index.php?option=com_payinvoice&view=buyer&task=addbuyer';				
+				var data  = $('.payinvoice-add-buyer-form').serializeArray();
+				
+				payinvoice.ajax.go(url , data , payinvoice.admin.invoice.addbuyerSuccess);				
+			},
+			
+			cancel : function(){
+				//code to close the modal window
+				$('#payinvoice-invoice-addbuyer').modal('hide');
+			}
+		},
+		
+		addbuyerSuccess : function(json){
+			
+			//from json, get buyer_id, name and username
+			var data 		= json[0][1];
+
+			//code to add new buyer in selectbox
+			var key 	= data.buyer_id;
+			var value  	= data.name+" ("+data.username+")";
+			
+			$('#payinvoice_form_rb_invoice_buyer_id')
+	         .append($("<option></option>")
+	         .attr("value" , key)
+	         .attr("selected" , true)
+	         .text(value));
+			
+			//code to close the modal window
+			$('#payinvoice-invoice-addbuyer').modal('hide');
+		}
+		
 	
 };
 

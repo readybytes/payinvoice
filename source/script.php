@@ -204,6 +204,14 @@ class Com_payinvoiceInstallerScript
 		return true;
 	}
 
+	public function postFlight( $type, $parent ) 
+	{
+		// Create default Front end menus
+		require_once JPATH_ADMINISTRATOR.'/components/com_payinvoice/install/script/menu.php';
+		
+		PayinvoiceInstallScriptMenu::createMenus();
+	}
+	
 	protected function installRBFramework($content)
 	{
 		// get file

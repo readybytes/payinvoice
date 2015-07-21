@@ -70,9 +70,7 @@ class PayinvoiceRouter extends Rb_Router
 		        		
 		        			//Invoice {view}/{task}
 		        			'invoice/display'					=>	Array('invoice_id' , 'key'),
-		        			'invoice/complete'					=>	Array('invoice_id' , 'processor'),
-		        			'invoice/paynow'					=>	Array('invoice_id'),
-		        			'invoice/ajaxRequestBuildForm'		=>	Array('invoice_id')
+		        			'invoice/complete'					=>	Array('invoice_id')
 		        		);
 		        		
 	/**
@@ -122,12 +120,6 @@ class PayinvoiceRouter extends Rb_Router
     		
     		case 'key' :
     			return $query[$var];
-    			
-    		case 'processor' :
-    			return $query[$var];
-    		
-    		case 'action' :
-    			return $query[$var];
     		
     		default:
     			return $query[$var];
@@ -147,13 +139,7 @@ class PayinvoiceRouter extends Rb_Router
     			
     		case 'key' :
     			return array_shift($segments);
-    			
-    		case 'processor' :
-    			return array_shift($segments);
-    		
-    		case 'action' :
-    			return array_shift($segments);
-    			
+
     		default:
     			return parent::_deSlugify($var, array_shift($segments), $parts );
     		

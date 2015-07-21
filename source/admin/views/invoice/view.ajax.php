@@ -27,7 +27,17 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 			$this->_confirmSendmail($invoice_id);	
 		}
 		
-		$this->_sendMailToClient($invoice_id);
+		$msg = $this->_helper->sendMailToClient($invoice_id);
+		
+		$this->_setAjaxWinTitle(JText::_('COM_PAYINVOICE_INVOICE_EMAIL_WINDOW_TITLE'));
+		$this->_setAjaxWinBody($msg);
+		
+		$this->_addAjaxWinAction('close', 'rb.ui.dialog.close();', 'btn');
+		$this->_setAjaxWinAction();		
+		
+		$ajax = Rb_Factory::getAjaxResponse();
+		$ajax->sendResponse();
+		
 	}
 
     // Confirm send email
@@ -40,71 +50,6 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		$this->_addAjaxWinAction(JText::_('COM_PAYINVOICE_CLOSE'), 'rb.ui.dialog.close();', 'btn');
 		$this->_setAjaxWinAction();		
 	
-		$ajax = Rb_Factory::getAjaxResponse();
-		$ajax->sendResponse();
-	}
-	
-	// Send email to client
-	public function _sendMailToClient($invoice_id)
-	{
-		// get instance of front end email view
-		$email_controller 	= PayInvoiceFactory::getInstance('email', 'controller', 'PayInvoicesite');
-		$email_view 		= $email_controller->getView();
-		
-		$rb_invoice =  $this->_helper->get_rb_invoice($invoice_id);
-		
-		$email_view->assign('rb_invoice', 	$rb_invoice);
-		$email_view->assign('invoice', 		PayInvoiceInvoice::getInstance($invoice_id)->toArray());
-		$email_view->assign('status_list', 	PayInvoiceInvoice::getStatusList());
-		$email_view->assign('config_data', 	$this->getHelper('config')->get());
-		$email_view->assign('buyer', 		$this->getHelper('buyer')->get($rb_invoice['buyer_id']));
-		
-		//XITODO : Currency Symbol not shown in email template	
-		//$currency = $this->getHelper('format')->getCurrency($rb_invoice['currency'], 'symbol');
-		//$email_view->assign('currency', $currency);
-		
-		$email_view->assign('tax', 			$this->_helper->get_tax($rb_invoice['invoice_id']));
-		$email_view->assign('discount', 	$this->_helper->get_discount($rb_invoice['invoice_id']));
-		$email_view->assign('subtotal', 	$this->_helper->get_subtotal($rb_invoice['invoice_id']));
-		
-        // md5 key generated for authentication		
-		$key	= md5($rb_invoice['created_date']);
-		$url	= JUri::root().'index.php?option=com_payinvoice&view=invoice&invoice_id='.$invoice_id.'&key='.$key;
-		$email_view->assign('pay_url', $url);
-		
-		// email content
-		$body 	 = $email_view->loadTemplate('invoice');
-		$subject = JText::_('COM_PAYINVOICE_INVOICE_SEND_EMAIL_SUBJECT');
-		$user 	 = PayInvoiceFactory::getUser($rb_invoice['buyer_id']);		
-		
-		// attach Pdf Invoice with email		
-		$args			= array($rb_invoice['object_id'], &$user->email, &$subject, &$body, &$attachment);
-		Rb_HelperPlugin::trigger('onPayInvoiceEmailBeforSend', $args, '' ,$this);
-
-		$result = $this->getHelper('utils')->sendEmail($user->email, $subject, $body, $attachment);
-		$msg = JText::_('COM_PAYINVOICE_INVOICE_EMAIL_SENT');
-		$sentEmail	= true;
-		if(!$result){
-			$msg = JText::_('COM_PAYINVOICE_INVOICE_ERROR_SEND_ERROR');	
-			$sentEmail	= false;					
-		}
-		elseif($result instanceof Exception){
-			$msg  = JText::_('COM_PAYINVOICE_INVOICE_ERROR_SEND_ERROR');
-			$msg .= "<br/><div class='alert alert-error'>".$result->getMessage()."</div>";
-			$sentEmail	= false;
-		}
-		
-		// Save parameter to ensure email being sent or not
-		$invoice  = PayInvoiceInvoice::getInstance($invoice_id);
-		$invoice->setParam('emailSent' , $sentEmail);
-		$invoice->save();
-		
-		$this->_setAjaxWinTitle(JText::_('COM_PAYINVOICE_INVOICE_EMAIL_WINDOW_TITLE'));
-		$this->_setAjaxWinBody($msg);
-		
-		$this->_addAjaxWinAction('close', 'rb.ui.dialog.close();', 'btn');
-		$this->_setAjaxWinAction();		
-		
 		$ajax = Rb_Factory::getAjaxResponse();
 		$ajax->sendResponse();
 	}

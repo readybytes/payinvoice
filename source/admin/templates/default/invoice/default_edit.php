@@ -90,7 +90,10 @@ JHtml::_('behavior.formvalidation');
 							</div>
 							<div class="control-group">
 								<div class="control-label"><?php echo $rb_invoice_fields['buyer_id']->label;?></div>
-								<div class="controls"><?php echo $rb_invoice_fields['buyer_id']->input;?></div>								
+								<div class="controls">
+									<?php echo $rb_invoice_fields['buyer_id']->input;?>	
+									<a href="#payinvoice-invoice-addbuyer" id="payinvoice_add_buyer_link" role="button" class="btn btn-success" data-toggle="modal"><i class="icon-search icon-plus"></i>&nbsp;<?php echo JText::_('COM_PAYINVOICE_INVOICE_ADD_NEW');?></a>
+								</div>								
 							</div>
 							<div class="control-group">
 								<div class="control-label"><?php echo $rb_invoice_fields['reference_no']->label;?></div>
@@ -203,7 +206,7 @@ JHtml::_('behavior.formvalidation');
 					<div class="row-fluid">
 						<div class="well well-small payinvoice-word-wrap">
 							<h5><?php echo JText::_('COM_PAYINVOICE_COPY_LINK');?></h5><hr>
-							<p class="info"><?php echo $invoice->getPayUrl();;?></p>
+							<p class="info"><a href="<?php echo $invoice->getPayUrl();?>" target="_blank"><?php echo $invoice->getPayUrl();?></a></p>
 						</div>
 					</div>
 
@@ -229,4 +232,8 @@ JHtml::_('behavior.formvalidation');
 <!--Load Preview template-->
 <?php if(!empty($record_id)):?>
 <?php echo $this->loadTemplate('preview');?>
-<?php endif;
+<?php endif;?>
+
+<!--Load Add Buyer template-->
+<?php echo $this->loadTemplate('addbuyer');?>
+<?php 

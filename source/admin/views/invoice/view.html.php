@@ -38,6 +38,7 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		JToolbarHelper::divider();
 		JToolbarHelper::deleteList(JText::_('COM_PAYINVOICE_JS_ARE_YOU_SURE_TO_DELETE'));
 		JToolbarHelper::custom('download', 'download-alt', 'download-alt', JText::_('COM_PAYINVOICE_JS_EXPORT_PDF'));
+		JToolbarHelper::custom('sendmail', 'envelope', 'envelope', JText::_('COM_PAYINVOICE_SEND_MAIL'));
 	}
 	
 	function _displayGrid($records)
@@ -166,6 +167,13 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		$this->assign('buyer', 				PayInvoiceBuyer::getInstance($rb_invoice['buyer_id']));
 		$this->assign('config_data',        $this->getHelper('config')->get());
 		$this->assign('subtotal', 			number_format($this->_helper->get_subtotal($rb_invoice['invoice_id']), 2));
+		
+		//For Buyer Form
+		
+		$buyer   =  PayInvoiceBuyer::getInstance();		
+		$this->assign('buyer', $buyer);
+		$this->assign('buyer_form',  $buyer->getModelform()->getForm($buyer));
+        $this->assign('user', $buyer->getbuyer(true));
         return true;
-	}	
+	}
 }
