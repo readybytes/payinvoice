@@ -114,7 +114,7 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 			//assign serial no to Invoice
 			$model			 = PayinvoiceFactory::getInstance('invoice', 'model');
 			$lastSerial		 = $model->getLastSerial();
-			$prefix			 = PayInvoiceHelperConfig::get('invoice_rno_prefix');
+			$prefix			 = $this->getHelper('config')->get('invoice_rno_prefix');
 			$binddata['rb_invoice']['reference_no'] = $prefix.($lastSerial+1);
 	
 			$helper					= $this->getHelper('config');

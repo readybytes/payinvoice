@@ -60,15 +60,17 @@ JHtml::_('behavior.formvalidation');
 				</div>
 				<div class="row-fluid">
 					<br/>
-					<?php echo JText::_("COM_PAYINVOICE_INVOICE_SERIAL")." : ";
-						  if(empty($invoice->getInvoiceSerial()))
-						  {
-						  		echo JText::_('COM_PAYINVOICE_NOT_APPLICABLE');
-						  }
-						  else
-						  {
-						  		echo $invoice->getInvoiceSerial();
-						  }
+					<?php 
+							$invoice_serial = $invoice->getInvoiceSerial();
+							echo JText::_("COM_PAYINVOICE_INVOICE_SERIAL")." : ";
+							if(empty($invoice_serial))
+							{
+								echo JText::_('COM_PAYINVOICE_NOT_APPLICABLE');
+							}
+							else
+							{
+								echo $invoice_serial;
+							}
 					?>
 				</div>
 			</div>
