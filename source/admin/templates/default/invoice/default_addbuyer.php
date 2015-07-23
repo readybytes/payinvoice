@@ -18,7 +18,7 @@ $config_data['company_phone']	= isset($config_data['company_phone'])		? $config_
 	<div>&nbsp;</div>
 
 	<div id="payinvoice-invoice-addbuyer" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<form action="<?php echo $uri; ?>" method="post" class="rb-validate-form form-horizontal payinvoice-add-buyer-form">
+		<form id="payinvoice-invoice-addbuyer-form" action="<?php echo $uri; ?>" method="post" class="rb-validate-form form-horizontal payinvoice-add-buyer-form">
 			<div class="span6">
 				<fieldset class="form payinvoice-margin-left">
 					<h3><?php echo JText::_('COM_PAYINVOICE_BUYER_LOGIN_DETAILS' ); ?></h3>

@@ -108,9 +108,13 @@ class PayInvoiceAdminControllerBuyer extends PayInvoiceController
 		}
 
 		$buyer_id = $this->_helper->storeUser($data);
+
 		if(!$buyer_id){
 			JFactory::getApplication()->enqueueMessage(JText::sprintf('COM_PAYINVOICE_BUYER_NOT_SAVED'));
 			return true;
+		}else {
+			$buyer = PayInvoiceBuyer::getInstance($buyer_id);
+			$buyer->bind($data)->save();
 		}
 
 		$json		= array(

@@ -207,7 +207,7 @@ payinvoice.admin.invoice = {
 		addbuyer :{
 			save : function(){
 				
-				var msgHtml = "<div id='payinvoice-msghtml' class='text-center text-warning'><h3>Please do not refresh. Window will be closed automatically after adding new user!<br/></h3></div>";
+				var msgHtml = "<div id='payinvoice-msghtml' class='payinvoice-msghtml text-center text-warning'><h3>Please do not refresh. Window will be closed automatically after adding new user!<br/></h3></div>";
 				$('#payinvoice-invoice-addbuyer').append(msgHtml);
 				
 				var url   = 'index.php?option=com_payinvoice&view=buyer&task=addbuyer';				
@@ -237,8 +237,18 @@ payinvoice.admin.invoice = {
 	         .attr("selected" , true)
 	         .text(value));
 			
-			//code to close the modal window
+			//reset the form
+			$("form#payinvoice-invoice-addbuyer-form :input").each(function(){
+				 var input = $(this); // This is the jquery object of the input, do what you will
+				 input.val("");
+				});			
+			$('div.payinvoice-msghtml').remove();
+			
+			//close the modal window
 			$('#payinvoice-invoice-addbuyer').modal('hide');
+			
+			//change the currency as given by the buyer
+			payinvoice.admin.invoice.on_buyer_change(key);
 		}
 		
 	

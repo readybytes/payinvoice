@@ -17,6 +17,7 @@
 		<folder>templates</folder>
 		<folder>payinvoice</folder>
 		<filename>payinvoice.php</filename>
+		<filename>router.php</filename>
 		<filename>index.html</filename>
 	</files>
 

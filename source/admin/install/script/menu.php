@@ -106,7 +106,7 @@ class PayinvoiceInstallScriptMenu
 		
 		$query	= 'INSERT INTO ' . $db->quoteName( '#__menu_types' ) . ' (' . $db->quoteName('menutype') .',' . $db->quoteName('title') .',' . $db->quoteName('description') .') 
 					VALUES '
-		    			. '( ' .  $db->Quote( self::MENUTYPE) . ',' . $db->Quote( 'Invoice' ) . ',' . $db->Quote( 'Menu items for payinvoice') . ')';
+		    			. '( ' .  $db->Quote( self::MENUTYPE) . ',' . $db->Quote( 'Payinvoice Hidden Menu' ) . ',' . $db->Quote( 'Hidden menu items for payinvoice routing') . ')';
 		$db->setQuery( $query );
 		$db->execute();
 		if ($db->getErrorNum())

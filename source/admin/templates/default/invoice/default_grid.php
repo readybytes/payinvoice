@@ -40,6 +40,38 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 		<tbody>
 			<?php $count= $limitstart;
 			  foreach ($records as $record):?>
+			  
+			  	<?php 
+			  		// get the label color for each invoice	
+					$status_css;
+					$status = $invoice[$record->invoice_id]->status;
+					switch ($status) {
+						case PayInvoiceInvoice::STATUS_DUE :
+								$status_css = "label-warning";
+								break;
+							
+						case PayInvoiceInvoice::STATUS_PAID :
+								$status_css = "label-success";
+								break;
+							
+						case PayInvoiceInvoice::STATUS_INPROCESS:
+								$status_css = "label-info";
+								break;
+							
+						case PayInvoiceInvoice::STATUS_EXPIRED:
+								$status_css = "label-danger";
+								break;
+							
+						case PayInvoiceInvoice::STATUS_REFUNDED:
+								$status_css = "label-default";
+								break;
+							
+						default:
+								$status_css = "label-primary";
+								break;
+					}
+				?>
+			  
 				<tr class="<?php echo "row".$count%2; ?>">
 				    <th class="default-grid-chkbox hidden-phone">
 				    	<?php echo PayInvoiceHtml::_('grid.id', $count, $record->{$record_key} ); ?>
@@ -58,7 +90,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 					</td>
                    	<td class="nowrap hidden-phone"><?php echo PayInvoiceHtml::link('index.php?option=com_payinvoice&view=buyer&task=edit&id='.$invoice[$record->invoice_id]->buyer_id, $invoice[$record->invoice_id]->buyer_id.'('.$buyer[$invoice[$record->invoice_id]->buyer_id]->name.')');?></td>
                     <td><?php echo $invoice[$record->invoice_id]->total;?></td>
-                    <td><?php echo JText::_($status_list[$invoice[$record->invoice_id]->status]);?></td>
+                    <td><label class="label <?php echo $status_css?>"><?php echo JText::_($status_list[$invoice[$record->invoice_id]->status]);?></label></td>
 					<td><?php 	if(!empty($invoice[$record->invoice_id]->processor_type)){
                     				echo $invoice[$record->invoice_id]->processor_type;
                     			}else {
