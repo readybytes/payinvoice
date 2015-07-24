@@ -314,7 +314,8 @@ class PayInvoiceHelperInvoice extends JObject
 		$invoice->setParam('emailSent' , $sentEmail);
 		$invoice->save();
 		
-		return $msg;
+		$mail_status = array('sentEmail' => $sentEmail , 'msg' => $msg);
+		return $mail_status;
 	}
 	
 }

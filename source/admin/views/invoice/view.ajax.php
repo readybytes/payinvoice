@@ -27,7 +27,8 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 			$this->_confirmSendmail($invoice_id);	
 		}
 		
-		$msg = $this->_helper->sendMailToClient($invoice_id);
+		$mail_status = $this->_helper->sendMailToClient($invoice_id);
+		$msg		 = $mail_status['msg'];
 		
 		$this->_setAjaxWinTitle(JText::_('COM_PAYINVOICE_INVOICE_EMAIL_WINDOW_TITLE'));
 		$this->_setAjaxWinBody($msg);
