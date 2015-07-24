@@ -13,7 +13,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 $component_name = $this->_component->getNameSmall();
 ?>
-<div class="payinvoice-invoice-item">
+<div class="payinvoice-invoice-item payinvoice-display-none">
 	<div class="row-fluid">
 		<div class="span5"> 
 			<div class="control-group">	

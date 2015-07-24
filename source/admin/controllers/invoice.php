@@ -193,10 +193,10 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 		
 		foreach($invoice_ids as $invoice_id)
 		{
-			$this->_helper->sendMailToClient($invoice_id);
+			$msg = $this->_helper->sendMailToClient($invoice_id);
 		}
 		
-		JFactory::getApplication()->redirect('index.php?option=com_payinvoice&view=invoice' , 'Email sent successfully');
+		JFactory::getApplication()->redirect('index.php?option=com_payinvoice&view=invoice' , $msg);
 	}
 
 }

@@ -35,7 +35,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 	  				   id="payinvoice-invoice-discount"
 	  				   value="<?php echo $discount;?>"
 	  				   data-validation-ajax-ajax="<?php echo Rb_Route::_('index.php?option=com_payinvoice&view=invoice&task=ajaxcheckdiscount');?>"/>
-	  			<i class="icon-question-sign icon-white" title="<?php echo JText::_('COM_PAYINVOICE_DISCOUNT_LABEL_DESC');?>"></i>
+	  			<i class="icon-question-sign icon-white payinvoice-cursor-pointer" title="<?php echo JText::_('COM_PAYINVOICE_DISCOUNT_LABEL_DESC');?>"></i>
 	  			
 	  		</div>
 		</div>

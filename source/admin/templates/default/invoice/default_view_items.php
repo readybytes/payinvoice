@@ -9,16 +9,7 @@
 
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' ); 
-?>
 
-<script type="text/javascript">
-(function($){
-	$(document).ready(function(){
-		$('.payinvoice-invoice-item:first').hide();
-	});	
-})(payinvoice.jQuery);	
-</script>
-<?php 
 $params = $invoice->getParams();
 $items = array();
 if(isset($params->items)){

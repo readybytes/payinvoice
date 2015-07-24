@@ -104,7 +104,8 @@ JHtml::_('behavior.formvalidation');
 								  			name="payinvoice_form[rb_invoice][reference_no]" 
 								  			class="required"
 								  			value="<?php echo $rb_invoice_fields['reference_no']->value; ?>"
-								  			data-validation-ajax-ajax="<?php echo Rb_Route::_('index.php?option=com_payinvoice&view=invoice&task=ajaxchangeserial&invoice_id='.$invoice->getInvoiceId());?>"/>								
+								  			data-validation-ajax-ajax="<?php echo Rb_Route::_('index.php?option=com_payinvoice&view=invoice&task=ajaxchangeserial&invoice_id='.$invoice->getInvoiceId());?>"/>
+								  	<i class="icon-question-sign icon-white payinvoice-cursor-pointer" title="<?php echo JText::_('COM_PAYINVOICE_REFRENECE_NUMBER_DESC');?>"></i>								
 								</div>							
 							</div>
 						</div>

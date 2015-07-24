@@ -170,8 +170,7 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		
 		//For Buyer Form
 		
-		$buyer   =  PayInvoiceBuyer::getInstance();		
-		$this->assign('buyer', $buyer);
+		$buyer   =  PayInvoiceBuyer::getInstance();
 		$this->assign('buyer_form',  $buyer->getModelform()->getForm($buyer));
         $this->assign('user', $buyer->getbuyer(true));
         return true;
