@@ -26,7 +26,7 @@ if(!empty($city)){
 }
 
 if(!empty($zip_code)){
-	$buyer_address = $buyer_address." -".$zip_code;
+	$buyer_address = $buyer_address."</br>".$zip_code;
 }
 
 $buyer_country = '';
@@ -48,23 +48,12 @@ if(!$applicable){
 }else {
 	$status = $applicable;
 }
-?>	
+?>
+<div class="pi-payinvoice-default-details">
 <div class="row-fluid">
-	
-	<div class="row-fluid">
-		<div class="span8"><h4><?php echo $rb_invoice['serial']." : ". $rb_invoice['title'];?></h4></div>
-		<?php if(!$applicable){?>
-			<div class="span4 center <?php echo $statusbutton['class']?>"><h4><?php echo $statusbutton['status']?></h4></div>
-		<?php }else {?>
-			<div class="span4 center label">
-				<i class="pull-right icon-question-sign" title='<?php echo $applicable['message']?>'></i><h4><i class='icon-lock'></i>&nbsp;<?php echo $applicable['title']?></h4></div>
-		<?php }?>
-	</div><hr>
-	
-	
-	<div class="row-fluid">
-	    <div class="span6">
-	    	<?php echo $buyer->getBuyername(); ?><br/>
+	<div class="span7 pull-left">
+		<address>
+			<?php echo $buyer->getBuyername(); ?><br/>
 			<?php echo $buyer->getEmail();?><br/>
 			<?php if(!empty($buyer_address)):?>
 			<?php echo $buyer_address; ?><br/>
@@ -75,20 +64,45 @@ if(!$applicable){
 			<?php if(!empty($tax_number)):?>
 			<?php echo "<b>".JText::_('COM_PAYINVOICE_BUYER_TAX_NUMBER')."</b> : ".$tax_number;?><br/>
 			<?php endif;?>
-		</div>
-   
-   		<div class="span1">&nbsp;</div>
-   
-	   	<div class="span5">
-	    	<dl class="dl-horizontal pull-right">	
-			    <dt><?php echo JText::_('COM_PAYINVOICE_INVOICE_ISSUE_DATE');?></dt>
-			   	<?php $issue_date = new Rb_Date($rb_invoice['issue_date']);?>
-			    <dd><?php echo $this->getHelper('format')->date($issue_date);?></dd>
-			    <?php $due_date = new Rb_Date($rb_invoice['due_date']);?>		    			    
-			    <dt><?php echo JText::_('COM_PAYINVOICE_INVOICE_DUE_DATE');?></dt>
-			    <dd><?php echo $this->getHelper('format')->date($due_date);?></dd>		    
-		    </dl>
+		</address>
+	</div>
+	<div class="span5 pull-right">
+	   	<table class="table">
+			<tr>
+				<td class="text-right"><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE');?></strong></td>
+				<td><?php echo " : ";?></td>
+				<td><?php echo $rb_invoice['serial'];?></td>
+			</tr>
+			<tr>
+				<td class="text-right"><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_ISSUE_DATE');?></strong></td>
+				<td><?php echo " : ";?></td>
+					<?php $issue_date = new Rb_Date($rb_invoice['issue_date']);?>
+				<td><?php echo $this->getHelper('format')->date($issue_date);?></td>
+			</tr>
+			<tr>
+			       <?php if ($statusbutton['status'] == JText::_('COM_PAYINVOICE_INVOICE_STATUS_PAID')){
+					$paid_date = new Rb_Date($rb_invoice['paid_date']);?>
+					<td class="text-right"><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_PAID_DATE');?></strong></td>
+					<td><?php echo " : ";?></td>
+					<td><?php echo $this->getHelper('format')->date($paid_date);?></td>
+				<?php }
+				     else{
+					$due_date = new Rb_Date($rb_invoice['due_date']);?>
+					<td class="text-right"><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_DUE_DATE');?></strong></td>
+					<td><?php echo " : ";?></td>
+					<td><?php echo $this->getHelper('format')->date($due_date);?></td>
+				<?php }?>
+			</tr>
+		</table>
+	  	<div>
+			<?php if(!$applicable){?>
+				<div class="center label <?php echo $statusbutton['class']?> status-display"><h4><?php echo $statusbutton['status']?></h4></div>
+			<?php }else {?>
+				<div class="center label status display">
+					<i class="pull-right icon-question-sign" title='<?php echo $applicable['message']?>'></i><h4><i class='icon-lock'></i>&nbsp;<?php echo $applicable['title']?></h4></div>
+			<?php }?>
 		</div>
 	</div>
+</div>
 </div>
 <?php 

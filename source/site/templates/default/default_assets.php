@@ -20,3 +20,5 @@ Rb_Html::script('com_payinvoice/site.js');
 // load bootsrap css
 Rb_Html::_('bootstrap.loadcss');
 
+//load css
+Rb_Html::stylesheet('com_payinvoice/site.css');
