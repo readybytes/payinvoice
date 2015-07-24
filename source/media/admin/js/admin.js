@@ -207,8 +207,8 @@ payinvoice.admin.invoice = {
 		addbuyer :{
 			save : function(){
 				
-				var msgHtml = "<div id='payinvoice-msghtml' class='payinvoice-msghtml text-center text-warning'><h3>Please do not refresh. Window will be closed automatically after adding new user!<br/></h3></div>";
-				$('#payinvoice-invoice-addbuyer').append(msgHtml);
+				var msgHtml = "<div id='payinvoice-msghtml' class='payinvoice-msghtml text-center text-warning'><h3><br/>Please do not refresh. Window will be closed automatically after adding new user!<br/></h3></div>";
+				$('#payinvoice-invoice-addbuyer').prepend(msgHtml);
 				
 				var url   = 'index.php?option=com_payinvoice&view=buyer&task=addbuyer';				
 				var data  = $('.payinvoice-add-buyer-form').serializeArray();
