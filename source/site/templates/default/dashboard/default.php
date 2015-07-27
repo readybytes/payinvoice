@@ -75,7 +75,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 						}?>
 					</span>
 				</td>
-				<td class="span3 hidden-phone">
+				<td class="span2 hidden-phone">
 					<span><?php
 						if($invoice->processor_type){
 							echo $invoice->processor_type;
