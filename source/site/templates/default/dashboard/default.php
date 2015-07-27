@@ -100,7 +100,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 						<?php }?>
 				</td>
 				<td class="span1 center">
-					<?php $url = PayInvoiceRoute::_('index.php?option=com_payinvoice&view=pdfexport&action=sitePdfAction&invoice_id='.$invoice->invoice_id);?>
+					<?php $url = PayInvoiceRoute::_('index.php?option=com_payinvoice&view=pdfexport&action=sitePdfAction&invoice_id='.$invoice->object_id);?>
 					<a title="download invoice" href="<?php echo $url;  ?>">
 						<i class="icon-download-alt"></i>
 					</a>						
