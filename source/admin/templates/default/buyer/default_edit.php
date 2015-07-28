@@ -23,18 +23,18 @@ if(empty($record_id)){
 
 ?>
 <div class="row-fluid">	
-	<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="rb-validate-form">
+	<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="rb-validate-form form-horizontal">
 		<div class="span6">
 			<fieldset class="form">
 				<h3><?php echo JText::_('COM_PAYINVOICE_BUYER_LOGIN_DETAILS' ); ?></h3>
 				<hr>		          
 	            <div class="control-group">
-					<?php echo $form->getLabel('name'); ?>
+					<div class="control-label"><?php echo $form->getLabel('name'); ?></div>
 					<div class="controls"><?php echo $form->getInput('name'); ?></div>	
 				</div>	
 	
 				<div class="control-group">
-					<?php echo $form->getLabel('username'); ?>
+					<div class="control-label"><?php echo $form->getLabel('username'); ?></div>
 					<div class="controls">
 						<input 	type="text" 
 								name="payinvoice_form[username]" 
@@ -45,7 +45,7 @@ if(empty($record_id)){
 				</div>		
 						 
 				<div class="control-group">
-					<?php echo $form->getLabel('email'); ?>
+					<div class="control-label"><?php echo $form->getLabel('email'); ?></div>
 					<div class="controls">
 						<input 	type="text" 
 								name="payinvoice_form[email]" 
@@ -56,7 +56,7 @@ if(empty($record_id)){
 				</div>	
 						
 				<div class="control-group">
-					<?php echo $form->getLabel('password'); ?>
+					<div class="control-label"><?php echo $form->getLabel('password'); ?></div>
 					<div class="controls"><?php echo $form->getInput('password'); ?></div>	
 				</div>	
 			</fieldset>
@@ -67,37 +67,37 @@ if(empty($record_id)){
 				<h3><?php echo JText::_('COM_PAYINVOICE_BUYER_BASIC_DETAILS')?></h3><hr>
 							   
 				<div class="control-group">
-					<?php echo $form->getLabel('currency'); ?>
+					<div class="control-label"><?php echo $form->getLabel('currency'); ?></div>
 					<div class="controls"><?php echo $form->getInput('currency'); ?></div>	
 			   	</div>
 			   	
 				<div class="control-group">
-					<?php echo $form->getLabel('tax_number'); ?>
+					<div class="control-label"><?php echo $form->getLabel('tax_number'); ?></div>
 					<div class="controls"><?php echo $form->getInput('tax_number'); ?></div>	
 				</div>
 				
 				<div class="control-group">
-					<?php echo $form->getLabel('address'); ?>
+					<div class="control-label"><?php echo $form->getLabel('address'); ?></div>
 					<div class="controls"><?php echo $form->getInput('address'); ?></div>	
 				</div>	
 					
 				<div class="control-group">
-					<?php echo $form->getLabel('city'); ?>
+					<div class="control-label"><?php echo $form->getLabel('city'); ?></div>
 					<div class="controls"><?php echo $form->getInput('city'); ?></div>	
 				</div>	
 						
 				<div class="control-group">
-					<?php echo $form->getLabel('zipcode'); ?>
+					<div class="control-label"><?php echo $form->getLabel('zipcode'); ?></div>
 					<div class="controls"><?php echo $form->getInput('zipcode'); ?></div>	
 				</div>
 				 
 				<div class="control-group">
-					<?php echo $form->getLabel('state'); ?>
+					<div class="control-label"><?php echo $form->getLabel('state'); ?></div>
 					<div class="controls"><?php echo $form->getInput('state'); ?></div>	
 				</div>
 						 
 				<div class="control-group">
-					<?php echo $form->getLabel('country'); ?>
+					<div class="control-label"><?php echo $form->getLabel('country'); ?></div>
 					<div class="controls"><?php echo $form->getInput('country'); ?></div>	
 				</div>
 			</fieldset>

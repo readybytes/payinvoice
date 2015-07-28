@@ -87,13 +87,23 @@ class PayInvoiceHelperInvoice extends JObject
 	   return array('class' => $class, 'status' => $status_list[$status]);
 	}
 	
-    // get existing serial number
-	public function exist_serial_number($serial)
+    // get existing reference number
+	public function exist_reference_number($ref_no , $invoice_id = null)
 	{
-		$filter			= array('serial' => $serial, 'object_type' => 'PayInvoiceInvoice');
-		$serial_number	= Rb_EcommerceAPI::invoice_get_records($filter);
-		if($serial_number){
+		$filter			= array('serial' => $ref_no, 'object_type' => 'PayInvoiceInvoice');
+		$ref_number	= Rb_EcommerceAPI::invoice_get_records($filter);
+		
+		//if its a new invoice, then return true if reference number exists
+		if((is_null($invoice_id) || ($invoice_id == 0)) && !empty($ref_number)){
 			return true;
+		}
+
+		//if user is editing previously made invoice, then restrict only if the reference number entered is of another invoice 
+		if(!empty($ref_number) && $invoice_id){
+			$keys = array_keys($ref_number);			
+			if(!in_array($invoice_id,$keys)){
+				return true;
+			}
 		}
 		
 		return false;
@@ -191,13 +201,18 @@ class PayInvoiceHelperInvoice extends JObject
 		return false;
 	}
 
-	public function process_payment($request_name, $rb_invoice, $data)
+	public function process_payment($request_name, $rb_invoice, $data , $itemid)
 	{
 		while(true){
 			$req_response 	= Rb_EcommerceApi::invoice_request($request_name, $rb_invoice['invoice_id'], $data);
-			$response 		= Rb_EcommerceApi::invoice_process($rb_invoice['invoice_id'], $req_response);
+			$response 		= $this->process_invoice($rb_invoice['invoice_id'], $req_response , $itemid);
 
 			if($response->get('next_request', false) == false){
+				
+				//Give proper message if the transaction fails due to configuration settings or anything else
+				if($response->get('payment_status') == Rb_EcommerceResponse::FAIL){
+					JFactory::getApplication()->enqueueMessage($response->get('message') , 'error');
+				}
 				break;
 			}
 
@@ -205,5 +220,102 @@ class PayInvoiceHelperInvoice extends JObject
 		}
 	}
 	
+	//function to process invoice and assign serial number accordingly
+	public function process_invoice($invoice_id , $req_response , $itemid)
+	{
+		$response = Rb_EcommerceApi::invoice_process($invoice_id , $req_response);
+		
+		//assign serial number to paid invoice when its paid online   		
+   		//don't do anything if it is an offline payment, because in offline payment, invoice serial would be assigned when it would be marked paid
+   		
+   		if($response && ($response->get('payment_status') == Rb_EcommerceResponse::PAYMENT_COMPLETE))
+   		{
+   			PayInvoiceHelperInvoice::setInvoiceSerial($itemid);
+   		}
+   		
+   		return $response;
+	}
+	
+	// Assign invoice serial number to paid invoices
+	public function setInvoiceSerial($invoice_id)
+	{
+		$config_records	 = PayInvoiceFactory::getConfig();
+		$lastCounter 	 = $config_records['expert_invoice_last_serial'];
+			
+		if (empty($lastCounter)) {
+			$lastCounter = 0;
+		}
+		
+		$lastCounter++;
+
+		$db 		= JFactory::getDbo();
+		$query 		= "UPDATE `#__payinvoice_invoice` SET `invoice_serial` = $lastCounter WHERE `invoice_id` = $invoice_id";
+		$db->setQuery($query);
+		
+		if($db->execute())
+		{		
+			$config_records['expert_invoice_last_serial'] = $lastCounter;
+			PayInvoiceFactory::saveConfig($config_records);			
+		}
+	}
+	
+	// Send email to client
+	public function sendMailToClient($invoice_id)
+	{
+		// get instance of front end email view
+		$email_controller 	= PayInvoiceFactory::getInstance('email', 'controller', 'PayInvoicesite');
+		$email_view 		= $email_controller->getView();
+		
+		$rb_invoice =  $this->get_rb_invoice($invoice_id);
+		
+		$email_view->assign('rb_invoice', 	$rb_invoice);
+		$email_view->assign('invoice', 		PayInvoiceInvoice::getInstance($invoice_id)->toArray());
+		$email_view->assign('status_list', 	PayInvoiceInvoice::getStatusList());
+		$email_view->assign('config_data', 	PayInvoiceFactory::getHelper('config')->get());
+		$email_view->assign('buyer', 		PayInvoiceFactory::getHelper('buyer')->get($rb_invoice['buyer_id']));
+		
+		//XITODO : Currency Symbol not shown in email template	
+		//$currency = $this->getHelper('format')->getCurrency($rb_invoice['currency'], 'symbol');
+		//$email_view->assign('currency', $currency);
+		
+		$email_view->assign('tax', 			$this->get_tax($rb_invoice['invoice_id']));
+		$email_view->assign('discount', 	$this->get_discount($rb_invoice['invoice_id']));
+		$email_view->assign('subtotal', 	$this->get_subtotal($rb_invoice['invoice_id']));
+		
+        // md5 key generated for authentication		
+		$key	= md5($rb_invoice['created_date']);
+		$url	= JUri::root().'index.php?option=com_payinvoice&view=invoice&invoice_id='.$invoice_id.'&key='.$key;
+		$email_view->assign('pay_url', $url);
+		
+		// email content
+		$body 	 = $email_view->loadTemplate('invoice');
+		$subject = JText::_('COM_PAYINVOICE_INVOICE_SEND_EMAIL_SUBJECT');
+		$user 	 = PayInvoiceFactory::getUser($rb_invoice['buyer_id']);		
+		
+		// attach Pdf Invoice with email		
+		$args			= array($rb_invoice['object_id'], &$user->email, &$subject, &$body, &$attachment);
+		Rb_HelperPlugin::trigger('onPayInvoiceEmailBeforSend', $args, '' ,$this);
+
+		$result = PayInvoiceFactory::getHelper('utils')->sendEmail($user->email, $subject, $body, $attachment);
+		$msg = JText::_('COM_PAYINVOICE_INVOICE_EMAIL_SENT');
+		$sentEmail	= true;
+		if(!$result){
+			$msg = JText::_('COM_PAYINVOICE_INVOICE_ERROR_SEND_ERROR');	
+			$sentEmail	= false;					
+		}
+		elseif($result instanceof Exception){
+			$msg  = JText::_('COM_PAYINVOICE_INVOICE_ERROR_SEND_ERROR');
+			$msg .= "<br/><div class='alert alert-error'>".$result->getMessage()."</div>";
+			$sentEmail	= false;
+		}
+		
+		// Save parameter to ensure email being sent or not
+		$invoice  = PayInvoiceInvoice::getInstance($invoice_id);
+		$invoice->setParam('emailSent' , $sentEmail);
+		$invoice->save();
+		
+		$mail_status = array('sentEmail' => $sentEmail , 'msg' => $msg);
+		return $mail_status;
+	}
 	
 }

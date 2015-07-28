@@ -97,4 +97,36 @@ class PayInvoiceAdminControllerBuyer extends PayInvoiceController
 		echo json_encode($response);
 		exit();
 	}
+	
+	//Save new buyer
+	public function addbuyer()
+	{
+		$data = JRequest::getVar('payinvoice_form');
+		
+		if(empty($data['username'])){
+		   $data['username'] = $data['email'];
+		}
+
+		$buyer_id = $this->_helper->storeUser($data);
+
+		if(!$buyer_id ){
+			JFactory::getApplication()->enqueueMessage(JText::sprintf('COM_PAYINVOICE_BUYER_NOT_SAVED'));
+			return true;
+		}else {
+			$buyer 				= PayInvoiceBuyer::getInstance($buyer_id);
+			$data['buyer_id'] 	= $buyer_id;
+			$buyer->bind($data)->save();
+		}
+
+		$json		= array(
+							'buyer_id' => $buyer_id,
+							'name' 	   => $data['name'],
+							'username' => $data['username']
+						   );
+						   
+		$ajax = Rb_Factory::getAjaxResponse();
+		$ajax->addRawData('data' , $json);
+		$ajax->sendResponse();
+
+	}
 }

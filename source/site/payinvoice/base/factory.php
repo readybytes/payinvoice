@@ -17,6 +17,8 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
  */
 class PayInvoiceFactory extends Rb_Factory
 {
+	static $records; 
+	
 	static function getInstance($name, $type='', $prefix='PayInvoice', $refresh=false)
 	{
 		return parent::getInstance($name, $type, $prefix, $refresh);
@@ -47,5 +49,42 @@ class PayInvoiceFactory extends Rb_Factory
 		}
 		
 		return $helper;	
-	} 
+	}
+	
+	public static function getConfig($file = null, $type = 'PHP', $namespace = '')
+	{
+		if(self::$records) {
+			return self::$records;
+		}
+
+		$payinvoiceModelConfig = self::getInstance('config', 'model');
+		
+		$payinvoiceConfig = $payinvoiceModelConfig->loadRecords();
+
+		$records	=	Array();
+		foreach ($payinvoiceConfig as $record) {
+			$value = $record->value;
+			
+			// if $value is a json string then convert decode it and use
+			json_decode($value);
+ 			if(json_last_error() == JSON_ERROR_NONE){
+ 				$value = json_decode($value);
+ 			}
+			
+			$records[$record->key] = $value;
+		}
+		
+		return $records;
+	}
+	
+	public static function saveConfig($data, $file = null, $type = 'PHP', $namespace = '')
+	{	
+		$payinvoiceConfig = self::getInstance('config', 'model');
+		if($payinvoiceConfig->save($data))
+		{
+			return true;
+		}
+		
+		return false;			
+	}
 }

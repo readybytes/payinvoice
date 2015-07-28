@@ -1,7 +1,7 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2015 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Front-end
@@ -40,7 +40,7 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 						<tr>
 							<?php if(!empty($config_data['company_logo'])):?>
 								<td>
-									<img alt="" src="<?php echo JUri::root().$config_data['company_logo'];?>" class="img-polaroid" height="140" width="60">										
+									<img alt="" src="<?php echo JUri::root().$config_data['company_logo'];?>" class="img-polaroid">	
 								</td>
 							<?php endif;?>
 						</tr>
@@ -89,7 +89,8 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 									<?php echo JText::_('COM_PAYINVOICE_INVOICE_DUE_DATE');?>
 							</td>
 							<td style="text-align:right">
-									<?php echo $rb_invoice['due_date'];?>
+									<?php 	$dueDate	= new Rb_Date($rb_invoice['due_date']);
+											echo $this->getHelper('format')->date($dueDate);?>
 							</td>
 						</tr>
 						<tr>

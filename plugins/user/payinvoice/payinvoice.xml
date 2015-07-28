@@ -3,13 +3,13 @@
 	<name>User - PayInvoice Users</name>
   	<version>@build.version@</version>
 	<creationDate>April 2013</creationDate>
- 	<author>Team PayPlans</author>
-	<authorEmail>team@readybytes.in</authorEmail>
+ 	<author>Team Readybytes</author>
+	<authorEmail>support+payinvoice@readybytes.in</authorEmail>
 	<authorUrl>http://www.jpayplans.com</authorUrl>
 	<copyright>GNU GPL</copyright>
 	<license>GPL License</license>
-	<authorEmail>team@readybytes.in</authorEmail>
-	<authorUrl>http://www.readybytes.in</authorUrl>
+	<authorEmail>support+payinvoice@readybytes.in</authorEmail>
+	<authorUrl>http://www.readybytes.net</authorUrl>
 	<description>This Plugin is used to create and delete user in OSInvoice Buyer while creating from joomla user manager</description>
 	<files>
 		<filename plugin="payinvoice">payinvoice.php</filename>

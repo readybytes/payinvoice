@@ -38,6 +38,7 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		JToolbarHelper::divider();
 		JToolbarHelper::deleteList(JText::_('COM_PAYINVOICE_JS_ARE_YOU_SURE_TO_DELETE'));
 		JToolbarHelper::custom('download', 'download-alt', 'download-alt', JText::_('COM_PAYINVOICE_JS_EXPORT_PDF'));
+		JToolbarHelper::custom('sendmail', 'envelope', 'envelope', JText::_('COM_PAYINVOICE_SEND_MAIL'));
 	}
 	
 	function _displayGrid($records)
@@ -65,6 +66,7 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 	function edit($tpl= null, $itemId = null)
 	{
 		$itemId  = ($itemId === null) ? $this->getModel()->getState('id') : $itemId ;
+
 		$invoice = PayInvoiceInvoice::getInstance($itemId);
 		$form 	 = $invoice->getModelform()->getForm($invoice);
 
@@ -81,25 +83,39 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		$discount	= 0.00;
 		$tax		= 0.00;
 		
-		if($itemId){
+		if($itemId){			
+			$rb_invoice['reference_no'] = $rb_invoice['serial'];
 			$form->bind(array('rb_invoice' => $rb_invoice)); 
 			
 			$discount	= $this->_helper->get_discount($rb_invoice['invoice_id']);
 			$tax		= $this->_helper->get_tax($rb_invoice['invoice_id']);
 	 		$currency 	= $rb_invoice['currency'];
 	 		
-	 		$this->assign('statusbutton', 	$this->_helper->get_status_button($rb_invoice['status']));
-	 		$this->assign('rb_invoice', 	$rb_invoice);
- 	        $this->assign('currency_symbol', 	$this->getHelper('format')->getCurrency($currency, 'symbol'));	
+	 		//check whether discount is implemented in % and add % after discount-value if its implemented in %
+			$discount_modifier = Rb_EcommerceAPI::modifier_get($rb_invoice['invoice_id'], 'PayInvoiceDiscount');
+			$discount_modifier = array_pop($discount_modifier);
+			$is_percent 	   = $discount_modifier->percentage;
+			$discount		   = ($is_percent) ? $discount.'%' : number_format($discount, 2);
+	 		
+	 		$this->assign('statusbutton', 		$this->_helper->get_status_button($rb_invoice['status']));
+	 		$this->assign('rb_invoice', 		$rb_invoice);
+ 	        $this->assign('currency_symbol', 	$this->getHelper('format')->getCurrency($currency, 'symbol'));
 		}
 		else{
 			// XITODO : need to fix it properly
 			// add 7 days in due date
 			$binddata['rb_invoice']['issue_date'] = $rb_invoice['issue_date'];
 			$due_date = new Rb_Date($rb_invoice['due_date']);
+			
 			// Previously add is used instead of modify(fix for php 5.2 compatibility)			
 			$due_date->modify('+7 day');
 			$binddata['rb_invoice']['due_date'] = (string)$due_date;
+			
+			//assign serial no to Invoice
+			$model			 = PayinvoiceFactory::getInstance('invoice', 'model');
+			$lastSerial		 = $model->getLastSerial();
+			$prefix			 = $this->getHelper('config')->get('invoice_rno_prefix');
+			$binddata['rb_invoice']['reference_no'] = $prefix.($lastSerial+1);
 	
 			$helper					= $this->getHelper('config');
 			$currency 				= $helper->get('currency');
@@ -118,7 +134,7 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		$invoice_params_fieldset	= $form->getFieldset('params');
 		$invoice_params_fields		= array();
 		foreach ($invoice_params_fieldset as $field){		 
-				$invoice_params_fields[$field->fieldname] = $field->input;
+			$invoice_params_fields[$field->fieldname] = $field->input;
 		}
 		
 		$editable		= $this->_helper->isEditable($itemId);
@@ -139,7 +155,7 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		$processor	= PayInvoiceProcessor::getInstance($processor_id)->toArray();
 		$this->assign('processor_title', $processor['title']);
 		
-		$this->assign('discount', 			number_format($discount, 2));
+		$this->assign('discount', 			$discount);
 		$this->assign('tax', 				number_format($tax, 2));
 		$this->assign('rb_invoice_fields', 	$rb_invoice_fields);
         $this->assign('processor_id', 		$processor_id);   
@@ -151,6 +167,12 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		$this->assign('buyer', 				PayInvoiceBuyer::getInstance($rb_invoice['buyer_id']));
 		$this->assign('config_data',        $this->getHelper('config')->get());
 		$this->assign('subtotal', 			number_format($this->_helper->get_subtotal($rb_invoice['invoice_id']), 2));
+		
+		//For Buyer Form
+		
+		$buyer   =  PayInvoiceBuyer::getInstance();
+		$this->assign('buyer_form',  $buyer->getModelform()->getForm($buyer));
+        $this->assign('user', $buyer->getbuyer(true));
         return true;
-	}	
+	}
 }

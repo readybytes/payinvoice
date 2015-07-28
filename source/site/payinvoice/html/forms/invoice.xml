@@ -42,11 +42,10 @@
 					<option value="">COM_PAYINVOICE_SELECT_OPTION</option>
 			</field>			
 			
-			<field 	name="serial" 
+			<field 	name="reference_no" 
 					type="text"
-					default="Inv-01-"
-					label="COM_PAYINVOICE_INVOICE_SERIAL"
-					description="COM_PAYINVOICE_INVOICE_SERIAL_DESC"
+					label="COM_PAYINVOICE_INVOICE_REFERENCE_NUMBER"
+					description="COM_PAYINVOICE_INVOICE_REFERENCE_NUMBER_DESC"
 					required="true"										
 					labelclass="control-label"/>
 			

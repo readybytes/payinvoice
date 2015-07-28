@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+<!-- Display into Menu Select list -->
+<layout title="COM_PAYINVOICE_DASHBOARD">
+<message><![CDATA[COM_PAYINVOICE_MENU_DASHBOARD_VIEW_TITLE_MESSAGE]]></message>
+</layout>
+	<fields name="request">
+		<fieldset name="request">
+			<field name="task" type="hidden"
+			required="required"	
+			default="display"
+			value="display"
+			/>
+		</fieldset>
+	</fields>
+</metadata>

@@ -1,7 +1,7 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2015 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Front-end
@@ -49,7 +49,7 @@ $config_data['company_phone']	= !empty($config_data['company_phone']) 		? $confi
 											
 											<tr>
 					                       		<td style="padding-bottom: 30px;border-bottom: 1px solid #e8e8e8;">
-					                       			<img alt="" src="<?php echo JUri::root().$config_data['company_logo'];?>" height="140" width="60">
+					                       			<img alt="" src="<?php echo JUri::root().$config_data['company_logo'];?>">
 					                       		</td>
 					                      	</tr>
 
@@ -93,12 +93,22 @@ $config_data['company_phone']	= !empty($config_data['company_phone']) 		? $confi
 															<tr>
 																<td><span style="color:#666"><?php echo JText::_('COM_PAYINVOICE_INVOICE_ISSUE_DATE');?></span></td>
 																<td><span style="padding: 0 10px;">:</span></td>
-																<td><span style="color:#333"><?php echo $rb_invoice['issue_date'];?></span></td>
+																<td>
+																	<span style="color:#333">
+																		<?php   $issueDate = new Rb_Date($rb_invoice['issue_date']);
+																				echo $this->getHelper('format')->date($issueDate);?>
+																	</span>
+																</td>
 															</tr>
 															<tr>
 																<td><span style="color:#666"><?php echo JText::_('COM_PAYINVOICE_REFUNDED_DATE');?></span></td>
 																<td><span style="padding: 0 10px;">:</span></td>
-																<td><span style="color:#333"><?php echo $rb_invoice['refund_date'];?></span></td>
+																<td>
+																	<span style="color:#333">
+																		<?php $refundDate = new Rb_Date($rb_invoice['refund_date']);
+																			  echo $this->getHelper('format')->date($refundDate);?>
+																	</span>
+																</td>
 															</tr>
 															<tr>
 																<td><span style="color:#666"><?php echo JText::_('COM_PAYINVOICE_AMOUNT_PAID');?></span></td>

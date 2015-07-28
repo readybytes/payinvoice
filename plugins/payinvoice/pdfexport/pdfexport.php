@@ -29,19 +29,29 @@ class plgPayinvoicePdfExport extends Rb_Plugin
 
 	public function onRbControllerCreation(&$option, &$view, &$controller, &$task, &$format)
 	{
+		$action = PayInvoiceFactory::getApplication()->input->get('action');
+		
 		if($controller === 'pdfexport'){			
 			$this->__loadFiles($format);
 			// load class of dompdf
 			$this->__loadDomPdfClass();
 		}
 		
-		if($controller === 'invoice' && $task === 'download'){	
+		if($controller === 'invoice' && $task === 'download' || $action == 'sitePdfAction'){	
 			$controller	= 'PdfExport';
 			$this->__loadFiles();
 
 			// load class of dompdf
 			$this->__loadDomPdfClass();
 		}
+		
+		
+		if(!( $option == 'com_payinvoice' && (isset($action) && $action == 'sitePdfAction'))){
+			return;
+		}
+		
+		$this->getsitepdf();
+		
 	}
 
 	public function onPayinvoiceLoadPosition($position, $view, $data)
@@ -89,6 +99,97 @@ class plgPayinvoicePdfExport extends Rb_Plugin
 			$class = implode ('_',$frags);
 			Rb_HelperLoader::addAutoLoadFile(DOMPDF_INC_DIR.'/'."$file",$class);
 		}
+	}
+
+	public function onPayInvoiceEmailBeforSend($invoice_id, &$email, &$subject, &$body, &$attachment)
+	{
+		$this->__loadFiles();
+		$this->__loadDomPdfClass();	// Load class of DomPdf
+		
+		$rb_invoice		= PayInvoiceFactory::getHelper('invoice')->get_rb_invoice($invoice_id);
+		$rb_invoice		= (object)$rb_invoice;
+		
+		$pdf_controller	= PayInvoiceFactory::getInstance('pdfexport', 'controller', 'PayInvoiceadmin');
+		$pdf_view 		= $pdf_controller->getView('pdfexport', 'pdf');
+		
+		$i_helper = PayInvoiceFactory::getHelper('invoice');
+		$f_helper = PayInvoiceFactory::getHelper('format');	
+			
+		//get instances of Invoice and Buyer
+		$invoice	= PayInvoiceInvoice::getInstance($rb_invoice->object_id);
+		$buyer		= PayInvoiceBuyer::getInstance($rb_invoice->buyer_id);
+	
+		$pdf_view->assign('invoice',	 		$invoice);
+		$pdf_view->assign('rb_invoice', 		$rb_invoice);	
+		$pdf_view->assign('buyer', 				$buyer);
+		$pdf_view->assign('currency_symbol',	$f_helper->getCurrency($rb_invoice->currency, 'symbol'));
+		$pdf_view->assign('tax', 				$i_helper->get_tax($rb_invoice->invoice_id));
+		$pdf_view->assign('discount', 			$i_helper->get_discount($rb_invoice->invoice_id));
+		$pdf_view->assign('subtotal', 			$i_helper->get_subtotal($rb_invoice->invoice_id));
+		$pdf_view->assign('config_data',		PayInvoiceFactory::getHelper('config')->get());
+		$pdf_view->assign('status_list', 		PayInvoiceInvoice::getStatusList());
+		
+	
+	 	// Delete folder and contained files before generating new folder
+		$filePath = dirname(__FILE__).'/pdfexport'.$rb_invoice->buyer_id;
+		$pdf_view->deleteFolder($filePath);
+		
+		$content	= $pdf_view->getPdfContent($rb_invoice);
+		$pdf		= $pdf_view->genratePdf($content);
+		$pdf_view->createFolder($pdf, $invoice_id, $rb_invoice->buyer_id);
+		
+		$filePath = dirname(__FILE__).'/pdfexport'.$rb_invoice->buyer_id;
+		$filename = 'invoice'.$rb_invoice->invoice_id.'.pdf';
+			
+		//check whether file exists or not
+		if(file_exists($filePath.'/'.$filename)){
+			$attachment = $filePath.'/'.$filename;
+			return true;
+		}
+		
+		return false;
+	}
+
+	// Download Padf of invoice from frontend
+	function getsitepdf()
+	{
+		$invoice_id = PayInvoiceFactory::getApplication()->input->get('invoice_id',0);
+		if (empty($invoice_id)){
+			$invoice_id = $this->_session->get('invoice_id',0);
+		}
+		$this->doSiteActionPdf($invoice_id);
+		exit();
+	}
+	
+	function doSiteActionPdf($invoiceId = 0)
+	{
+		$invoice		= PayInvoiceInvoice::getInstance($invoiceId);
+		
+		$rb_invoice		= PayInvoiceFactory::getHelper('invoice')->get_rb_invoice($invoiceId);
+		$rb_invoice		= (object)$rb_invoice;
+		
+		$pdf_controller	= PayInvoiceFactory::getInstance('pdfexport', 'controller', 'PayInvoiceadmin');
+		$pdf_view 		= $pdf_controller->getView('pdfexport', 'pdf');
+		
+		$i_helper 		= PayInvoiceFactory::getHelper('invoice');
+		$f_helper 		= PayInvoiceFactory::getHelper('format');	
+			
+		//get instances of Invoice and Buyer
+		$buyer			= PayInvoiceBuyer::getInstance($rb_invoice->buyer_id);
+	
+		$pdf_view->assign('invoice',	 		$invoice);
+		$pdf_view->assign('rb_invoice', 		$rb_invoice);	
+		$pdf_view->assign('buyer', 				$buyer);
+		$pdf_view->assign('currency_symbol',	$f_helper->getCurrency($rb_invoice->currency, 'symbol'));
+		$pdf_view->assign('tax', 				$i_helper->get_tax($rb_invoice->invoice_id));
+		$pdf_view->assign('discount', 			$i_helper->get_discount($rb_invoice->invoice_id));
+		$pdf_view->assign('subtotal', 			$i_helper->get_subtotal($rb_invoice->invoice_id));
+		$pdf_view->assign('config_data',		PayInvoiceFactory::getHelper('config')->get());
+		$pdf_view->assign('status_list', 		PayInvoiceInvoice::getStatusList());
+		
+		$content	= $pdf_view->getPdfContent($rb_invoice);
+		$pdf        = $pdf_view->genratePdf($content);
+		$pdf->stream('invoice'.$invoiceId.'.pdf');
 	}
 }
 

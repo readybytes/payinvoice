@@ -1,7 +1,7 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2015 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
 * @subpackage	Front-end
@@ -53,7 +53,10 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 								</tr>						
 								<tr>
 									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_ISSUE_DATE')." ";?></strong></span></td>
-									<td class="col"><span style="font-size: 12pt; color: #4d4d4d;"><?php echo $rb_invoice['issue_date'];?></span></td>
+									<td class="col"><span style="font-size: 12pt; color: #4d4d4d;">
+										<?php 	$issueDate = new Rb_Date($rb_invoice['issue_date']);
+												echo $this->getHelper('format')->date($issueDate);?></span>
+									</td>
 								</tr>
 								<tr>
 									<td class="col" align="right"><span style="font-size: 12pt; color: #4d4d4d;"><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_PAYMENT_METHOD')." ";?></strong></span></td>

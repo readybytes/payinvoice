@@ -22,8 +22,25 @@ JHtml::_('behavior.formvalidation');
 		<div class="row-fluid">
 			<div class="span9"><h2><?php echo JText::_('COM_PAYINVOICE_INVOICE_DETAILS' ); ?></h2></div>		
 			<?php if($form->getValue('invoice_id')):?>
-				<div class="span3 center <?php echo $statusbutton['class']?>">
-					<h4><?php echo $statusbutton['status']?></h4>
+				<div class="span3 center">
+					<div class="row-fluid <?php echo $statusbutton['class']?>">
+						<h4><?php echo $statusbutton['status']?></h4>
+					</div>
+					<div class="row-fluid">
+						<br/>
+						<?php 
+							  $invoice_serial = $invoice->getInvoiceSerial();
+							  echo JText::_("COM_PAYINVOICE_INVOICE_SERIAL")." : ";
+							  if(empty($invoice_serial))
+							  {
+							  		echo JText::_('COM_PAYINVOICE_NOT_APPLICABLE');
+							  }
+							  else
+							  {
+							  		echo $invoice_serial;
+							  }
+						?>
+					</div>
 				</div>
 			<?php endif;?>
 		</div><hr>

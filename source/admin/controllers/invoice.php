@@ -23,13 +23,6 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 	public $_helper = null;
 	public function _save(array $data, $itemId=null, $type=null)
 	{
-		// If Serial number already exist then do nothing
-		$serial_exist	= $this->_helper->exist_serial_number($data['rb_invoice']['serial']);
-		if(!$itemId && $serial_exist){
-			$message  = JText::_('COM_PAYINVOICE_ENTER_VALID_SERIAL_NUMBER');
-			$type	  = 'error'; 		
-			return JFactory::getApplication()->redirect(Rb_Route::_('index.php?option=com_payinvoice&view=invoice&task=edit'), $message, $type);
-		}
 		//create new lib instance
 		$invoice = Rb_Lib::getInstance($this->_component->getPrefixClass(), $this->getName(), $itemId, $data)
 						->save();
@@ -46,6 +39,7 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 						
 		// create invoice in Rb_Ecommerce, in $itemId is null
 		if(!$itemId){
+			$data['rb_invoice']['serial'] 	 		= $data['rb_invoice']['reference_no'];
 			$data['rb_invoice']['status'] 	 		= PayInvoiceInvoice::STATUS_DUE;
 			$data['rb_invoice']['object_type'] 	 	= 'PayInvoiceInvoice';
 			$data['rb_invoice']['object_id'] 	 	= $invoice->getId();
@@ -59,8 +53,11 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 		}
 		
 		// XITODO : use constants
+		$discount		= explode('%', $data['discount']);
+		$is_percentage = (count($discount) > 1) ? true : false;
+		
 		$this->_helper->create_modifier($invoice_id, 'PayInvoiceItem', $data['subtotal'], 10);
-		$this->_helper->create_modifier($invoice_id, 'PayInvoiceDiscount', -$data['discount'], 20);
+		$this->_helper->create_modifier($invoice_id, 'PayInvoiceDiscount', -$discount[0], 20 , $is_percentage);		
 		$this->_helper->create_modifier($invoice_id, 'PayInvoiceTax', $data['tax'], 45, true);
 		
 		$invoice_id = Rb_EcommerceAPI::invoice_update($invoice_id, $data['rb_invoice'], true);
@@ -111,20 +108,36 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 		return true;
 	}
 
-	// Check serial number is already exist or not
+	// Check reference number is valid & already exist or not
 	function ajaxchangeserial()
 	{
-		$invoice_serial 	= $this->input->get('value');	
-		$serial				= $this->_helper->exist_serial_number($invoice_serial);
+		$invoice_id 		= $this->input->get('invoice_id');				
+		$invoice_ref_no 	= $this->input->get('value');
+		
+		$ref_no_exists			= $this->_helper->exist_reference_number($invoice_ref_no , $invoice_id);
 
 		$response = array();
-		$response['value'] = $invoice_serial;
-		if($serial){	
+		$response['value']  = $invoice_ref_no;
+		if($ref_no_exists)
+		{	
 			$response['valid'] 	 = false;
-			$response['message'] = JText::_('COM_PAYINVOICE_INVOICE_SERIAL_ALREADY_EXIST');
-		}else {
-			$response['valid'] 	 = true;
-			$response['message'] = '';
+			$response['message'] = JText::sprintf('COM_PAYINVOICE_INVOICE_REFERENCE_NO_ALREADY_EXIST');
+		}
+		else
+		{
+			//check if reference number contain valid prefix or not
+			$prefix			= PayInvoiceHelperConfig::get('invoice_rno_prefix');
+			if ((strpos($invoice_ref_no, $prefix) !== false) && ($invoice_ref_no != $prefix)) 
+			{
+		    	$response['valid'] 	 = true;
+				$response['message'] = '';
+			}
+			else
+			{
+				$response['valid'] 	 = false;
+				$response['message'] = JText::sprintf('COM_PAYINVOICE_INVOICE_REFERENCE_NO_PREFIX_ERROR' , $prefix);
+			}
+			
 		}
 		echo json_encode($response);
 		exit();
@@ -137,4 +150,56 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 		
 		return true;
 	}
+	
+	// Check if discount entered is valid or not
+	function ajaxcheckdiscount()
+	{
+		$discount_value			= $this->input->get('value','','string');
+		$discount_value			= trim($discount_value);
+		
+		$response = array();
+		$response['value']  = $discount_value;
+		
+		//check if discount given in %, if yes get the numeric part out of it
+		//also show error if user provides data like num%num
+		$discount		= explode('%', $discount_value);
+		if(!empty($discount[1]) || empty($discount[0]))
+		{
+			$response['valid'] 	 = false;
+			$response['message'] = JText::sprintf('COM_PAYINVOICE_INVOICE_DISCOUNT_ERROR' , $discount_value);
+			
+			echo json_encode($response);
+			exit();
+		}
+		
+		if(is_numeric($discount[0]))
+		{
+			$response['valid'] 	 = true;
+			$response['message'] = '';
+		}
+		else
+		{
+			$response['valid'] 	 = false;
+			$response['message'] = JText::sprintf('COM_PAYINVOICE_INVOICE_DISCOUNT_ERROR' , $discount_value);
+		}
+		echo json_encode($response);
+		exit();
+	}
+	
+	//Send bulk mails
+	public function sendmail()
+	{
+		$invoice_ids = JRequest::getVar('cid');
+		
+		foreach($invoice_ids as $invoice_id)
+		{
+			$mail_status = $this->_helper->sendMailToClient($invoice_id);
+		}
+		
+		$type = ($mail_status['sentEmail']) ? 'message' : 'error';
+		
+		JFactory::getApplication()->enqueueMessage($mail_status['msg'] , $type);
+		JFactory::getApplication()->redirect('index.php?option=com_payinvoice&view=invoice');
+	}
+
 }

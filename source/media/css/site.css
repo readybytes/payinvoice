@@ -1,0 +1,64 @@
+.pi-payinvoice-default-details .table th, 
+.pi-payinvoice-default-details .table td {
+	border-top:0px;padding: 5px;
+}
+
+.pi-invoice-wraper .pi-invoice-amount .table td {
+	border-top:0px;padding:5px;
+}
+
+.pi-invoice-wraper .pi-invoice-item {
+	border: 1px solid #ddd;
+}
+
+.pi-invoice-wraper .pi-invoice-item-layout {
+	margin-top:30px;
+}
+
+.pi-invoice-wraper .pi-invoice-item.table th {
+	padding: 18px 8px;
+}
+
+.pi-invoice-wraper address {
+	line-height: 1.6;
+}
+
+.pi-invoice-wraper .pi-payinvoice-header-layout {
+	margin-top:25px;
+}
+
+.pi-invoice-wraper .pi-payinvoice-default-details .status-display {
+	display:block;
+}
+
+.pi-invoice-dashboard-wraper .line-height {
+	line-height: 23px;
+}
+
+.pi-invoice-dashboard-wraper .pi-invoice-item {
+	border: 1px solid #ddd;
+}
+
+.pi-invoice-dashboard-wraper .pi-invoice-item th {
+	background-color:#F5F5F5;
+}
+
+.pi-invoice-dashboard-wraper .pi-invoice-header-margin {
+	margin-top:11px;
+}
+
+@media (min-width:768px) {
+	.pi-invoice-wraper {
+		border: 10px solid #ddd;
+		padding: 10px;
+	}
+	.pi-invoice-dashboard-wraper {
+		border: 10px solid #ddd;
+		padding: 0px;
+	}
+	.pi-payinvoice-default-details .invoice-details {
+		float:right;
+	}
+}
+
+

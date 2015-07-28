@@ -1,11 +1,10 @@
 <?php
-
 /**
-* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2015 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
-* @subpackage	Back-end
-* @contact		Rb_Html::script(PAYINVOICE_PATH_CORE_MEDIA.'/js/payinvoice.js');@readybytes.in
+* @subpackage	Front-end
+* @contact		support+payinvoice@readybytes.in
 */
 
 // no direct access
@@ -51,7 +50,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 											<tbody>
 											<tr>
 												<?php if($rb_invoice['status'] == PayInvoiceInvoice::STATUS_PAID || $rb_invoice['status'] == PayInvoiceInvoice::STATUS_REFUNDED){?>
-													<td><span><strong><?php echo JText::_('COM_PAYINVOICE_COPY_LINK');?></strong><?php echo $pay_url;?></span></td>
+													<td><span><strong><?php echo JText::_('COM_PAYINVOICE_COPY_LINK');?></strong><a target="_blank" href="<?php echo $pay_url;?>"><?php echo $pay_url;?></a></span></td>
 												<?php } else {?>
 														<td><a href="<?php echo $pay_url;?>" style="float: right;font-size: 16px;color: white;border: 1px #0056AE solid;width: 150px;font-weight: 600;background-color: #0056AE;border-radius: 3px;padding: 8px 5px;font-family: arial;text-align: center;text-decoration: none;margin: 0px auto 0px auto;display: block;;"><?php echo JText::_('COM_PAYINVOICE_PAY_NOW');?></a></td>
 												<?php }?>

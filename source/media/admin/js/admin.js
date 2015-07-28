@@ -69,6 +69,8 @@ payinvoice.admin.grid = {
 					$('#adminForm').submit();
 				}
 			}else{
+				//prevent form from validating data when action is "cancel"
+				$(document.getElementById('adminForm')).unbind("submit");
 				Joomla.submitform(action, document.getElementById('adminForm'));
 			}
 		},
@@ -137,7 +139,17 @@ payinvoice.admin.invoice = {
 					$('#payinvoice-invoice-subtotal').val(parseFloat(subtotal).toFixed(2));
 					
 					if($('#payinvoice-invoice-discount').val() != ''){
-						var discount = parseFloat($('#payinvoice-invoice-discount').val());
+						var discount		= $('#payinvoice-invoice-discount').val();
+						var is_percent		= discount.indexOf("%");
+						if(is_percent != -1){
+							discount 		= discount.replace("%" , "");
+							discount 		= parseFloat(discount);
+							discount 		= discount * 0.01 * subtotal;
+						}
+						else{
+							discount 		= parseFloat(discount);
+						}
+						
 					}
 					var tax 	 = parseFloat($('#payinvoice-invoice-tax').val());
 					
@@ -190,7 +202,55 @@ payinvoice.admin.invoice = {
 				var url = 'index.php?option=com_payinvoice&view=invoice&task=markpaid&confirmed=1&invoice_id='+invoice_id;
 				payinvoice.ajax.go(url);
 			}
-		} 
+		}, 
+		
+		addbuyer :{
+			save : function(){
+				
+				var msgHtml = "<div id='payinvoice-msghtml' class='payinvoice-msghtml text-center text-warning'><h3><br/>Please do not refresh. Window will be closed automatically after adding new user!<br/></h3></div>";
+				$('#payinvoice-invoice-addbuyer').prepend(msgHtml);
+				
+				var url   = 'index.php?option=com_payinvoice&view=buyer&task=addbuyer';				
+				var data  = $('.payinvoice-add-buyer-form').serializeArray();
+				
+				payinvoice.ajax.go(url , data , payinvoice.admin.invoice.addbuyerSuccess);				
+			},
+			
+			cancel : function(){
+				//code to close the modal window
+				$('#payinvoice-invoice-addbuyer').modal('hide');
+			}
+		},
+		
+		addbuyerSuccess : function(json){
+			
+			//from json, get buyer_id, name and username
+			var data 		= json[0][1];
+
+			//code to add new buyer in selectbox
+			var key 	= data.buyer_id;
+			var value  	= data.name+" ("+data.username+")";
+			
+			$('#payinvoice_form_rb_invoice_buyer_id')
+	         .append($("<option></option>")
+	         .attr("value" , key)
+	         .attr("selected" , true)
+	         .text(value));
+			
+			//reset the form
+			$("form#payinvoice-invoice-addbuyer-form :input").each(function(){
+				 var input = $(this); // This is the jquery object of the input, do what you will
+				 input.val("");
+				});			
+			$('div.payinvoice-msghtml').remove();
+			
+			//close the modal window
+			$('#payinvoice-invoice-addbuyer').modal('hide');
+			
+			//change the currency as given by the buyer
+			payinvoice.admin.invoice.on_buyer_change(key);
+		}
+		
 	
 };
 

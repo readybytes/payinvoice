@@ -16,11 +16,11 @@ JHtml::_('behavior.keepalive');
 JHtml::_('behavior.formvalidation');
 ?>
 <div class="row-fluid">
-	<a class="btn btn-success pull-right" target="_blank" href="http://www.jpayplans.com/payinvoice/documentation/item/paypal-payment-gateway.html"><i class="icon-white icon-book"></i>&nbsp;<?php echo JText::_('COM_PAYINVOICE_DOCUMENTATION_BUTTON');?></a>
+	<a class="btn btn-success pull-right" target="_blank" href="http://www.readybytes.net/payinvoice/documentation/item/how-to-setup-payment-methods-in-payinvoice.html"><i class="icon-white icon-book"></i>&nbsp;<?php echo JText::_('COM_PAYINVOICE_DOCUMENTATION_BUTTON');?></a>
 </div>
 
 <div class="row-fluid">
-	<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="rb-validate-form">
+	<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="rb-validate-form form-horizontal">
 		<div class="span6">		
 			<fieldset class="form">
 				<h3> <?php echo ucfirst(JText::_($processor->getType()))." - ".JText::_('COM_PAYINVOICE_PROCESSOR_EDIT_DETAILS' ); ?></h3><hr>

@@ -1,10 +1,10 @@
 <?php
 
 /**
-* @copyright	Copyright (C) 2009 - 2014 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
+* @copyright	Copyright (C) 2009 - 2015 Ready Bytes Software Labs Pvt. Ltd. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php
 * @package 		PAYINVOICE
-* @subpackage	Back-end
+* @subpackage	PdfExport
 * @contact		support+payinvoice@readybytes.in
 */
 
@@ -64,7 +64,7 @@ class PayInvoiceAdminViewPdfExport extends PayInvoiceAdminBaseViewPdfExport
 		}else { 
 			$contents	= $this->getContent($InvoiceIds);
 			$pdf   		= $this->genratePdf($contents);
-			$pdf->stream(invoice.pdf);
+			$pdf->stream('invoice.pdf');
 		}
 			
 		return true;

@@ -12,18 +12,13 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 if(!empty($payinvoice_invoice['params']['terms_and_conditions'])): ?>
       
 <div class="well">
-     	<h5>
+     	<label class="checkbox">
 			<input type="checkbox" name="terms-and-conditions" required="true">
-			<?php echo " ".JText::_('COM_PAYINVOICE_INVOICE_TERMS_AND_CONDITIONS');?>
-		</h5>
-
-    	<?php echo JString::substr(strip_tags($payinvoice_invoice['params']['terms_and_conditions']), 0, 340); ?>	
-
-      	<a href="#payinvoice-terms-and-conditions" role="button" class="" data-toggle="modal">...more</a>
-		
-       	<div>&nbsp;</div>
-    	
-		<div id="payinvoice-terms-and-conditions" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<?php echo JText::_('COM_PAYINVOICE_INVOICE_I_ACCEPT');?><a href="#payinvoice-terms-and-conditions" role="button" class="" data-toggle="modal">
+			<?php echo JText::_('COM_PAYINVOICE_INVOICE_TERMS_AND_CONDITIONS');?></a>
+		</label>
+				
+       	<div id="payinvoice-terms-and-conditions" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     		<div class="modal-header">
     			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     			<h3 id="myModalLabel"><?php echo JText::_('COM_PAYINVOICE_INVOICE_TERMS_AND_CONDITIONS');?></h3>

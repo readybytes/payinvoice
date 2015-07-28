@@ -50,12 +50,29 @@ JHtml::_('behavior.formvalidation');
 
 <?php echo $this->loadTemplate('edit_item');?>
 <div class="row-fluid">
-<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="rb-validate-form">	
+<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="rb-validate-form form-horizontal">	
 	<div class="row-fluid">
 		<div class="span9"><h2><?php echo JText::_('COM_PAYINVOICE_INVOICE_DETAILS' ); ?></h2></div>		
 		<?php if($form->getValue('invoice_id')):?>
-			<div class="span3 center <?php echo $statusbutton['class']?>">
-				<h4><?php echo $statusbutton['status']?></h4>
+			<div class="span3 center">
+				<div class="row-fluid <?php echo $statusbutton['class']?>">
+					<h4><?php echo $statusbutton['status']?></h4>
+				</div>
+				<div class="row-fluid">
+					<br/>
+					<?php 
+							$invoice_serial = $invoice->getInvoiceSerial();
+							echo JText::_("COM_PAYINVOICE_INVOICE_SERIAL")." : ";
+							if(empty($invoice_serial))
+							{
+								echo JText::_('COM_PAYINVOICE_NOT_APPLICABLE');
+							}
+							else
+							{
+								echo $invoice_serial;
+							}
+					?>
+				</div>
 			</div>
 		<?php endif;?>
 	</div>
@@ -70,36 +87,40 @@ JHtml::_('behavior.formvalidation');
 					<div class="row-fluid">											
 						<div class="span6">		
 							<div class="control-group">
-								<?php echo $rb_invoice_fields['title']->label;?>
+								<div class="control-label"><?php echo $rb_invoice_fields['title']->label;?></div>
 								<div class="controls"><?php echo $rb_invoice_fields['title']->input;?></div>								
 							</div>
 							<div class="control-group">
-								<?php echo $rb_invoice_fields['buyer_id']->label;?>
-								<div class="controls"><?php echo $rb_invoice_fields['buyer_id']->input;?></div>								
+								<div class="control-label"><?php echo $rb_invoice_fields['buyer_id']->label;?></div>
+								<div class="controls">
+									<?php echo $rb_invoice_fields['buyer_id']->input;?>	
+									<a href="#payinvoice-invoice-addbuyer" id="payinvoice_add_buyer_link" role="button" class="btn btn-success" data-toggle="modal"><i class="icon-search icon-plus"></i>&nbsp;<?php echo JText::_('COM_PAYINVOICE_INVOICE_ADD_NEW');?></a>
+								</div>								
 							</div>
 							<div class="control-group">
-								<?php echo $rb_invoice_fields['serial']->label;?>
+								<div class="control-label"><?php echo $rb_invoice_fields['reference_no']->label;?></div>
 								<div class="controls">
 								  	<input 	type="text" 
-								  			name="payinvoice_form[rb_invoice][serial]" 
+								  			name="payinvoice_form[rb_invoice][reference_no]" 
 								  			class="required"
-								  			value="<?php echo $rb_invoice_fields['serial']->value; ?>"
-								  			data-validation-ajax-ajax="<?php echo Rb_Route::_('index.php?option=com_payinvoice&view=invoice&task=ajaxchangeserial');?>"/>								
+								  			value="<?php echo $rb_invoice_fields['reference_no']->value; ?>"
+								  			data-validation-ajax-ajax="<?php echo Rb_Route::_('index.php?option=com_payinvoice&view=invoice&task=ajaxchangeserial&invoice_id='.$invoice->getInvoiceId());?>"/>
+								  	<i class="icon-question-sign icon-white payinvoice-cursor-pointer" title="<?php echo JText::_('COM_PAYINVOICE_REFRENECE_NUMBER_DESC');?>"></i>								
 								</div>							
 							</div>
 						</div>
 						<?php // IMP : we are skiping one span, to fix ui issue ?>
 						<div class="span5">
 							<div class="control-group">
-								<?php echo $rb_invoice_fields['currency']->label;?>
+								<div class="control-label"><?php echo $rb_invoice_fields['currency']->label;?></div>
 								<div class="controls"><?php echo $rb_invoice_fields['currency']->input;?></div>								
 							</div>						
 							<div class="control-group">
-								<?php echo $rb_invoice_fields['issue_date']->label;?>
+								<div class="control-label"><?php echo $rb_invoice_fields['issue_date']->label;?></div>
 								<div class="controls"><?php echo $rb_invoice_fields['issue_date']->input;?></div>								
 							</div>
 							<div class="control-group">
-								<?php echo $rb_invoice_fields['due_date']->label;?>
+								<div class="control-label"><?php echo $rb_invoice_fields['due_date']->label;?></div>
 								<div class="controls"><?php echo $rb_invoice_fields['due_date']->input;?></div>								
 							</div>
 						</div>	
@@ -186,9 +207,9 @@ JHtml::_('behavior.formvalidation');
 				
 				<?php if(!empty($record_id)):?>
 					<div class="row-fluid">
-						<div class="well well-small">
+						<div class="well well-small payinvoice-word-wrap">
 							<h5><?php echo JText::_('COM_PAYINVOICE_COPY_LINK');?></h5><hr>
-							<p class="info"><?php echo $invoice->getPayUrl();;?></p>
+							<p class="info"><a href="<?php echo $invoice->getPayUrl();?>" target="_blank"><?php echo $invoice->getPayUrl();?></a></p>
 						</div>
 					</div>
 
@@ -214,4 +235,8 @@ JHtml::_('behavior.formvalidation');
 <!--Load Preview template-->
 <?php if(!empty($record_id)):?>
 <?php echo $this->loadTemplate('preview');?>
-<?php endif;
+<?php endif;?>
+
+<!--Load Add Buyer template-->
+<?php echo $this->loadTemplate('addbuyer');?>
+<?php 

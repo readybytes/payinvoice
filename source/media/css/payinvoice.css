@@ -13,3 +13,18 @@
 	background-position: center center;	
 }
 	
+.payinvoice-word-wrap{
+	word-wrap : break-word;
+}
+
+.payinvoice-margin-left{
+	margin-left:15px;
+}
+
+.payinvoice-cursor-pointer{
+	cursor:pointer;
+}
+
+.payinvoice-display-none{
+	display:none;
+}

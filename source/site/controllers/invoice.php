@@ -54,9 +54,10 @@ class PayInvoiceSiteControllerInvoice extends PayInvoiceController
 		$host_string 				= str_replace(JUri::root(true), "", JUri::root());
 		$url_string 				= "index.php?option=com_payinvoice&view=invoice&processor={$rb_invoice['processor_type']}";
 
-		$build_data['notify_url'] 	= JUri::root().$url_string.'&task=notify';
-		$build_data['cancel_url']	= JUri::root().$url_string.'&task=cancel';
-		$build_data['return_url'] 	= JUri::root().$url_string.'&task=complete';
+		$build_data['build_type'] 	= 'html';
+		$build_data['notify_url']   = JUri::root().$url_string.'&task=notify&invoice_id='.$itemid;
+		$build_data['cancel_url']   = JUri::root().$url_string.'&task=cancel';
+		$build_data['return_url']   = JUri::root().$url_string.'&task=complete';
 
 		$this->getView()->assign('response', Rb_EcommerceApi::invoice_request('build', $rb_invoice['invoice_id'], $build_data));
 		return true;		
@@ -70,14 +71,16 @@ class PayInvoiceSiteControllerInvoice extends PayInvoiceController
 		
 		$request_name = 'payment';
 		
-		$this->_helper->process_payment($request_name, $rb_invoice, $data);
+		$this->_helper->process_payment($request_name, $rb_invoice, $data , $itemid);
 
-		$this->setRedirect(Rb_Route::_('index.php?option=com_payinvoice&view=invoice&task=complete&invoice_id='.$itemid));
+		$this->setRedirect(PayInvoiceRoute::_('index.php?option=com_payinvoice&view=invoice&task=complete&invoice_id='.$itemid));
 		return false;
 	}
 	
 	public function notify()
 	{
+		$itemid = $this->_getId();
+		
 		$get         = Rb_Request::get('GET'); // XITODO :
 		$post        = Rb_Request::get('POST');// XITODO :
 		$data        = array_merge($get, $post);
@@ -95,7 +98,7 @@ class PayInvoiceSiteControllerInvoice extends PayInvoiceController
 		
 		$processor_type   = $data['processor'];
 		$invoice_id 	  = Rb_EcommerceAPI::invoice_get_from_response($processor_type, $response);		
-		$response 		  = Rb_EcommerceApi::invoice_process($invoice_id, $response);			
+		$response 		  = $this->_helper->process_invoice($invoice_id, $response , $itemid);
 	}
 
 	public function display($cachable = false, $urlparams = array())
@@ -138,7 +141,7 @@ class PayInvoiceSiteControllerInvoice extends PayInvoiceController
                        
        		$processor_type   = $data['processor'];
          	$invoice_id       = Rb_EcommerceAPI::invoice_get_from_response($processor_type, $response);                
-       		$response         = Rb_EcommerceApi::invoice_process($invoice_id, $response);
+       		$response         = $this->_helper->process_invoice($invoice_id, $response , $itemid);
        	}  
     
 		if($itemid <= 0){
@@ -148,7 +151,8 @@ class PayInvoiceSiteControllerInvoice extends PayInvoiceController
   			// XITODO : check rb_invoice had data or not      
   			$rb_invoice     	= array_shift($rb_invoice);
   			$this->getModel()->setState('id', $rb_invoice->object_id);
-   		 } 
+   		 } 		
+   		
 		return true;
 	}
 	

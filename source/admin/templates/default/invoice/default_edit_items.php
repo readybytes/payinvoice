@@ -24,8 +24,6 @@ $params = $invoice->getParams();;
 	
 	$(document).ready(function(){
 
-		$('.payinvoice-invoice-item:first').hide();
-
 		for(var e in payinvoice_invoice_items){
 			if(payinvoice_invoice_items.hasOwnProperty(e)){
 				payinvoice.admin.invoice.item.add(payinvoice_invoice_items[e].title, payinvoice_invoice_items[e].quantity, payinvoice_invoice_items[e].price, payinvoice_invoice_items[e].total);
