@@ -15,6 +15,7 @@ JHtml::_('behavior.framework');
 ?>
 
 <form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm">
+  <?php echo $this->loadTemplate('filter'); ?>
   <table class="table table-hover">
     <thead>
 		<!-- TABLE HEADER START -->

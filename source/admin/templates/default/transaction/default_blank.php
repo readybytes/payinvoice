@@ -11,6 +11,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 ?>
 
 <form action="<?php echo $uri; ?>" method="post" name="adminForm">
+	<?php echo $this->loadTemplate('filter'); ?>
 	<div class="row-fluid">
 		<div class="span12">
 			<p class="lead center"><?php echo $heading; ?></p>
