@@ -42,21 +42,12 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 	}
 	
 	function _displayGrid($records)
-	{
-		$InvoiceIds = array();
-		foreach($records as $record){
-			$InvoiceIds[] = $record->invoice_id;
-		}
-		
-		$filter = array('object_id' => array(array('IN', '('.implode(",", $InvoiceIds).')')), 'master_invoice_id' => 0, 'object_type' => 'PayInvoiceInvoice');
-		$invoices = Rb_EcommerceAPI::invoice_get_records($filter, array(), '',$orderby='object_id');
-		
+	{	
 		$buyerIds  = array();
-		foreach ($invoices as $invoice){
-			$buyerIds[] = $invoice->buyer_id;
+		foreach ($records as $record){
+			$buyerIds[] = $record->buyer_id;
 		}
 		
-		$this->assign('invoice', 	 $invoices);
 		$this->assign('buyer', 		 $this->getHelper('buyer')->get($buyerIds));
 		$this->assign('status_list', PayInvoiceInvoice::getStatusList());
 

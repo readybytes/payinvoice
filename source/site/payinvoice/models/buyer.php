@@ -20,8 +20,39 @@ class PayInvoiceModelBuyer extends PayInvoiceModel
 	protected $recordId ;
 	public $filterMatchOpeartor = array(
 										'username' 	=> array('LIKE'),
-										'usertype'	=> array('=')
+										'country'=> array('LIKE')
 										);
+	
+	/**
+    * (non-PHPdoc)
+    * @see plugins/system/rbsl/rb/rb/Rb_AbstractModel::_populateGenericFilters()
+    * 
+    * Overrided to add specific filters directly
+    */
+    public function _populateGenericFilters(Array &$filters=array())
+	{
+		parent::_populateGenericFilters($filters);
+
+		$app  = Rb_Factory::getApplication();
+				
+		//now add the filters
+		$data = array('username', 'country');
+		foreach ($data as $key){
+			$context = $this->getContext();
+			$filterName  = "filter_{$context}_{$key}";
+			$oldValue    = $app->getUserState($filterName);
+			$value       = $app->getUserStateFromRequest($filterName ,$filterName);
+		
+			//offset is set to 0 in case previous value is not equals to current value
+			//otherwise it will filter according to the pagination offset
+			if(!empty($oldValue) && $oldValue != $value){
+				$filters['limitstart']=0;
+			}
+			$filters[$context][$key] = $value;
+		}
+
+		return;		
+	}									
 	
 	/**
      * Builds FROM tables list for the query
@@ -57,7 +88,6 @@ class PayInvoiceModelBuyer extends PayInvoiceModel
     	  		   ->group("  g.`user_id` ");
     	
 	    $query->from('( '.$sql->__toString().') AS tbl ');
-	    
     }
 	
 	//added filter for user so it is necessary to override _buildQueryFilter function here 
@@ -69,8 +99,8 @@ class PayInvoiceModelBuyer extends PayInvoiceModel
 			return $this;
 		}
 		
-    	JLog::add(isset($this->filterMatchOpeartor[$key]), "OPERATOR FOR $key IS NOT AVAILABLE FOR FILTER");
-    	JLog::add(is_array($value), JText::_('COM_PAYINVOICE_VALUE_FOR_FILTERS_MUST_BE_AN_ARRAY'));
+		Rb_Error::assert(isset($this->filterMatchOpeartor[$key]), "OPERATOR FOR $key IS NOT AVAILABLE FOR FILTER");
+    	Rb_Error::assert(is_array($value), JText::_('PLG_SYSTEM_RBSL_VALUE_FOR_FILTERS_MUST_BE_AN_ARRAY'));
 
     	$cloneOP    = $this->filterMatchOpeartor[$key];
     	$cloneValue = $value;
@@ -83,26 +113,28 @@ class PayInvoiceModelBuyer extends PayInvoiceModel
     		if(!isset($val) || '' == JString::trim($val))
     			continue;
 
+    		if($key == 'country'){
+    			$db = JFactory::getDbo();
+    			$country_query	= "SELECT country.`isocode2`, country.`isocode3` FROM `#__rb_ecommerce_country` AS country 
+    								                 WHERE country.`country_id` = '{$val}'";
+    			$country = $db->setQuery($country_query)->loadRow();
+				
+    			$query->where(" `tbl`.`country` LIKE '{$country[0]}' ||
+    							`tbl`.`country` LIKE '{$country[1]}'"	);
+    			continue;
+    		}
 			
-    		if(JString::strtoupper($op) != 'LIKE'){
-				if(($key == 'usertype')){
-					//this subquery will fetch all the users with the desired usertype 
-					$query->where("  buyer_id IN( SELECT map.`user_id` 
-											     FROM `#__usergroups` as groups, `#__user_usergroup_map` as map 
-											     WHERE ( map.group_id = groups.id AND groups.title = '$val'))	");
-						continue;
-					}
+    		if(JString::strtoupper($op) == 'LIKE'){
+    			if($key == 'username'){
+	    			$query->where("`tbl`.`buyer_id` IN( SELECT `id` FROM `#__users` 
+	    								                 WHERE `$key` $op '%{$val}%' || 
+	    								                 `name` $op '%{$val}%' || 
+	    								                 `email` $op '%{$val}%' )");
+	    			continue;
+	    		}
 				$query->where("`$key` $op '$val'");
 				continue;
 			}
-		
-			// filter according to username, name and email
-   			if($key == 'username'){
-    	  		$query->where("( `$key` $op '%{$val}%' || `name` $op '%{$val}%' || `email` $op '%{$val}%' )");
-    	  	}
-	    	else {
-	    	  	$query->where("`$key` $op '%{$val}%'");			
-	    	}
 		}
     }
 

@@ -13,6 +13,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 ?>
 <form action="<?php echo $uri; ?>" method="post" id="adminForm" name="adminForm">
+	<?php echo $this->loadTemplate('filter'); ?>
 	<table class="table table-hover">
 		<thead>
 			<!-- TABLE HEADER START -->
@@ -21,16 +22,26 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 					<input type="checkbox" name="toggle" value="" onclick="Joomla.checkAll(this);" />
 				</th>
 				<th class="default-grid-sno hidden-phone">
-					<?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_INVOICE_ID", 'invoice_id', 	$filter_order_Dir, $filter_order);?>
+					<?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_INVOICE_ID", 'object_id', 	$filter_order_Dir, $filter_order);?>
 				</th>
-				<th><?php echo JText::_('COM_PAYINVOICE_INVOICE_TITLE');?></th>
 				<th>
-					<?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_INVOICE_SERIAL", 'invoice_serial', 	$filter_order_Dir, $filter_order);?>
+					<?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_INVOICE_TITLE", 'title', 	$filter_order_Dir, $filter_order);?>
 				</th>
-				<th class="hidden-phone"><?php echo JText::_('COM_PAYINVOICE_INVOICE_BUYER');?></th>				
-				<th><?php echo JText::_('COM_PAYINVOICE_INVOICE_TOTAL');?></th>
-				<th><?php echo JText::_('COM_PAYINVOICE_INVOICE_STATUS');?></th>
-				<th><?php echo JText::_("COM_PAYINVOICE_INVOICE_PAYMENT_METHOD");?></th>		
+				<th>
+					<?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_INVOICE_SERIAL", 'paid_date', 	$filter_order_Dir, $filter_order);?>
+				</th>
+				<th class="hidden-phone">
+					<?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_INVOICE_BUYER", 'buyer_id', 	$filter_order_Dir, $filter_order);?>
+				</th>				
+				<th>
+					<?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_INVOICE_TOTAL", 'total', 	$filter_order_Dir, $filter_order);?>
+				</th>
+				<th>
+					<?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_INVOICE_STATUS", 'status', 	$filter_order_Dir, $filter_order);?>
+				</th>
+				<th>
+					<?php echo PayInvoiceHtml::_('grid.sort', "COM_PAYINVOICE_INVOICE_PAYMENT_METHOD", 'processor_type', 	$filter_order_Dir, $filter_order);?>
+				</th>		
 				<th><?php echo JText::_('COM_PAYINVOICE_INVOICE_EMAIL_SENT');?></th>
 							
 			</tr>
@@ -44,7 +55,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 			  	<?php 
 			  		// get the label color for each invoice	
 					$status_css;
-					$status = $invoice[$record->invoice_id]->status;
+					$status = $record->status;
 					switch ($status) {
 						case PayInvoiceInvoice::STATUS_DUE :
 								$status_css = "label-warning";
@@ -74,10 +85,10 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 			  
 				<tr class="<?php echo "row".$count%2; ?>">
 				    <th class="default-grid-chkbox hidden-phone">
-				    	<?php echo PayInvoiceHtml::_('grid.id', $count, $record->{$record_key} ); ?>
+				    	<?php echo PayInvoiceHtml::_('grid.id', $count, $record->object_id ); ?>
 				    </th>
-					<td class="nowrap hidden-phone"><?php echo $record->invoice_id;?></td>
-					<td><?php echo PayInvoiceHtml::link($uri.'&task=edit&id='.$record->{$record_key}, $invoice[$record->invoice_id]->title.' ('.$invoice[$record->invoice_id]->serial.')');?> </td>
+					<td class="nowrap hidden-phone"><?php echo $record->object_id;?></td>
+					<td><?php echo PayInvoiceHtml::link($uri.'&task=edit&id='.$record->object_id, $record->title.' ('.$record->serial.')');?> </td>
 					<td><?php if(empty($record->invoice_serial))
 							  {
 							  		echo JText::_('COM_PAYINVOICE_NOT_APPLICABLE');
@@ -88,17 +99,17 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 							  }
 						?>
 					</td>
-                   	<td class="nowrap hidden-phone"><?php echo PayInvoiceHtml::link('index.php?option=com_payinvoice&view=buyer&task=edit&id='.$invoice[$record->invoice_id]->buyer_id, $invoice[$record->invoice_id]->buyer_id.'('.$buyer[$invoice[$record->invoice_id]->buyer_id]->name.')');?></td>
-                    <td><?php echo $invoice[$record->invoice_id]->total;?></td>
-                    <td><label class="label <?php echo $status_css?>"><?php echo JText::_($status_list[$invoice[$record->invoice_id]->status]);?></label></td>
-					<td><?php 	if(!empty($invoice[$record->invoice_id]->processor_type)){
-                    				echo $invoice[$record->invoice_id]->processor_type;
+                   	<td class="nowrap hidden-phone"><?php echo PayInvoiceHtml::link('index.php?option=com_payinvoice&view=buyer&task=edit&id='.$record->buyer_id, $record->buyer_id.'('.$buyer[$record->buyer_id]->name.')');?></td>
+                    <td><?php echo $record->total;?></td>
+                    <td><label class="label <?php echo $status_css?>"><?php echo JText::_($status_list[$record->status]);?></label></td>
+					<td><?php 	if(!empty($record->processor_type)){
+                    				echo $record->processor_type;
                     			}else {
                     				echo JText::_('JNONE');
                     			}?>
                     </td>
                     <td>
-						<?php 	$params = json_decode($record->params);
+						<?php 	$params = json_decode($record->pi_invoice_params);
                     			$class 	= 'icon-unpublish';
 				            	if(isset($params->emailSent) && $params->emailSent){
 				            		$class = 'icon-publish';

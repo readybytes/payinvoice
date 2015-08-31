@@ -33,4 +33,15 @@ class PayInvoiceHtmlProcessortypes
 		$style = isset($attr['style']) ? $attr['style'] : '';
 		return PayInvoiceHtml::_('select.genericlist', $options, $name, $style, 'value', 'text', $value);
 	}
+	
+	static function filter($name, $view, Array $filters = array(), $type = '', $prefix='filter_payinvoice', $attr = "")
+	{
+		$elementName  = $prefix.'_'.$view.'_'.$name;
+		$elementValue = @array_shift($filters[$name]);
+		
+		$attr['none']  = true;
+		$attr['style'] = (isset($attr['style']) ? $attr['style'] : '').' onchange="document.adminForm.submit();"';
+
+		return PayinvoiceHtml::_('payinvoicehtml.processortypes.edit', $elementName.'[]', $elementValue, $attr, $type);
+	}
 }

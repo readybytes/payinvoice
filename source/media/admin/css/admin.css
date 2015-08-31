@@ -73,3 +73,15 @@
 	border-radius: 4px 4px 4px 4px;
     padding : 50px;
 }
+
+/*-----------------------------------------------------------------
+					PayInvoice Filters
+-------------------------------------------------------------------*/
+
+.payinvoice .pi-filter-width {
+	width : 90% ! important;
+}
+
+.payinvoice .pi-filter-gap-top{
+	margin-top : 5px;
+}
