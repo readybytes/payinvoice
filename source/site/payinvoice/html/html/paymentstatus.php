@@ -25,6 +25,6 @@ class PayinvoiceHtmlPaymentStatus
 		foreach ($status as $key => $value){			
 			$options[$key] = array('title' => JText::_($value), 'value' => $key);
 		}
-		echo JHtml::_('select.genericlist', $options, $elementName.'[]', $attr, 'value', 'title', $elementValue);
+		echo JHtml::_('select.genericlist', $options, $elementName.'[]', $attr['style'], 'value', 'title', $elementValue);
 	}
 }
