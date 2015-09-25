@@ -15,7 +15,7 @@ $config_data['company_phone']	= isset($config_data['company_phone'])		? $config_
 ?>
 <div class="pi-payinvoice-header-layout">
 <div class="row-fluid">
-		<div class="span6">
+		<div class="span7">
 			<address>
 				<strong><?php echo $config_data['company_name'];?></strong><br>
 				<?php echo $config_data['company_address'];?> <br>
@@ -24,7 +24,7 @@ $config_data['company_phone']	= isset($config_data['company_phone'])		? $config_
 				<?php endif;?>
 			</address>
 		</div>
-		<div class="span4 offset2 pull-right">
+		<div class="span5 pull-right text-right">
 	   		<?php if(!empty($config_data['company_logo'])):?>
 	   			<img class="img-rounded" alt="" src="<?php echo JUri::root(true).$config_data['company_logo'];?>">
    			<?php endif;?>

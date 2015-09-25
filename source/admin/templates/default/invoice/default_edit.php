@@ -49,6 +49,9 @@ JHtml::_('behavior.formvalidation');
 </script>	
 
 <?php echo $this->loadTemplate('edit_item');?>
+<?php echo $this->loadTemplate('edit_task');?>
+<?php echo $this->loadTemplate('add_new_item');?>
+
 <div class="row-fluid">
 <form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="rb-validate-form form-horizontal">	
 	<div class="row-fluid">

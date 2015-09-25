@@ -49,7 +49,7 @@ if(!$applicable){
 	$status = $applicable;
 }
 ?>
-<div class="pi-payinvoice-default-details">
+<div class="pi-payinvoice-header-layout">
 <div class="row-fluid">
 	<div class="span7 pull-left">
 		<address>
@@ -66,42 +66,34 @@ if(!$applicable){
 			<?php endif;?>
 		</address>
 	</div>
-	<div class="span5 pull-right">
+	<div class="span5 pull-right pi-payinvoice-default-details">
 	   	<table class="table">
 			<tr>
-				<td class="text-right"><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE');?></strong></td>
+				<td class="text-right"><?php echo JText::_('COM_PAYINVOICE_INVOICE');?></td>
 				<td><?php echo " : ";?></td>
 				<td><?php echo $rb_invoice['serial'];?></td>
 			</tr>
 			<tr>
-				<td class="text-right"><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_ISSUE_DATE');?></strong></td>
+				<td class="text-right"><?php echo JText::_('COM_PAYINVOICE_INVOICE_ISSUE_DATE');?></td>
 				<td><?php echo " : ";?></td>
 					<?php $issue_date = new Rb_Date($rb_invoice['issue_date']);?>
 				<td><?php echo $this->getHelper('format')->date($issue_date);?></td>
 			</tr>
 			<tr>
-			       <?php if ($statusbutton['status'] == JText::_('COM_PAYINVOICE_INVOICE_STATUS_PAID')){
-					$paid_date = new Rb_Date($rb_invoice['paid_date']);?>
-					<td class="text-right"><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_PAID_DATE');?></strong></td>
-					<td><?php echo " : ";?></td>
-					<td><?php echo $this->getHelper('format')->date($paid_date);?></td>
+		        <?php if ($statusbutton['status'] == JText::_('COM_PAYINVOICE_INVOICE_STATUS_PAID')){
+				$paid_date = new Rb_Date($rb_invoice['paid_date']);?>
+				<td class="text-right"><?php echo JText::_('COM_PAYINVOICE_INVOICE_PAID_DATE');?></td>
+				<td><?php echo " : ";?></td>
+				<td><?php echo $this->getHelper('format')->date($paid_date);?></td>
 				<?php }
-				     else{
-					$due_date = new Rb_Date($rb_invoice['due_date']);?>
-					<td class="text-right"><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_DUE_DATE');?></strong></td>
-					<td><?php echo " : ";?></td>
-					<td><?php echo $this->getHelper('format')->date($due_date);?></td>
+			     else{
+				$due_date = new Rb_Date($rb_invoice['due_date']);?>
+				<td class="text-right"><?php echo JText::_('COM_PAYINVOICE_INVOICE_DUE_DATE');?></td>
+				<td><?php echo " : ";?></td>
+				<td><?php echo $this->getHelper('format')->date($due_date);?></td>
 				<?php }?>
 			</tr>
 		</table>
-	  	<div>
-			<?php if(!$applicable){?>
-				<div class="center label <?php echo $statusbutton['class']?> status-display"><h4><?php echo $statusbutton['status']?></h4></div>
-			<?php }else {?>
-				<div class="center label status display">
-					<i class="pull-right icon-question-sign" title='<?php echo $applicable['message']?>'></i><h4><i class='icon-lock'></i>&nbsp;<?php echo $applicable['title']?></h4></div>
-			<?php }?>
-		</div>
 	</div>
 </div>
 </div>

@@ -16,7 +16,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 	<div class="span6">
 	</div>
 	
-	<div class="span6">
+	<div class="span5 offset1 pull-right">
 		<div class="control-group">
 			<label class="control-label"><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_SUBTOTAL');?></label>
 	  		<div class="controls">

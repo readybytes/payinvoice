@@ -7,50 +7,60 @@
 	border-top:0px;padding:5px;
 }
 
-.pi-invoice-wraper .pi-invoice-item {
+.pi-invoice-wraper .pi-invoice-item-table-layout {
 	border: 1px solid #ddd;
 }
 
-.pi-invoice-wraper .pi-invoice-item-layout {
-	margin-top:30px;
-}
-
 .pi-invoice-wraper .pi-invoice-item.table th {
-	padding: 18px 8px;
+	padding: 9px 8px;
+	background-color:#E3E3E3;
 }
-
+.pi-invoice-wraper .pi-invoice-item td {
+	padding: 9px 8px;
+	background-color:#E3E3E3;
+	font-weight:bold;
+}
+.pi-invoice-item-layout .table td:not(:first-child) {
+	text-align: right;
+}
 .pi-invoice-wraper address {
 	line-height: 1.6;
 }
 
 .pi-invoice-wraper .pi-payinvoice-header-layout {
-	margin-top:25px;
+	margin-left: 40px;
 }
-
-.pi-invoice-wraper .pi-payinvoice-default-details .status-display {
-	display:block;
+.pi-invoice-wraper .status-display{
+    left: -54px;
+    position: relative;
+    text-align: center;
+    top: -27px;
+    transform: rotate(-45deg);
+    width: 180px;
 }
 
 .pi-invoice-dashboard-wraper .line-height {
 	line-height: 23px;
 }
-
-.pi-invoice-dashboard-wraper .pi-invoice-item {
+.pi-invoice-dashboard-wraper .pi-invoice-item{
 	border: 1px solid #ddd;
 }
-
-.pi-invoice-dashboard-wraper .pi-invoice-item th {
-	background-color:#F5F5F5;
+.pi-invoice-dashboard-wraper .pi-invoice-item  th{
+	background-color:#F6F6F6;
 }
 
 .pi-invoice-dashboard-wraper .pi-invoice-header-margin {
 	margin-top:11px;
 }
-
+.pi-invoice-wraper {
+	border: 1px solid #eee;
+    	overflow: hidden;
+	}
+   
 @media (min-width:768px) {
 	.pi-invoice-wraper {
 		border: 10px solid #ddd;
-		padding: 10px;
+    	 padding: 10px;
 	}
 	.pi-invoice-dashboard-wraper {
 		border: 10px solid #ddd;

@@ -22,6 +22,9 @@ class PayInvoiceInvoice extends PayInvoiceLib
 	protected $template		  = '';
 	protected $invoice_serial = '';
 	
+	protected $_items		 = array();
+	protected $_tasks		 = array();
+	
 	const STATUS_NONE		  = 0;	
 	const STATUS_DUE		  = 401;
 	const STATUS_PAID 		  = 402;
@@ -61,7 +64,69 @@ class PayInvoiceInvoice extends PayInvoiceLib
 		$this->invoice_serial = '';
 		$this->params		  = new Rb_Registry();
 	
+		$this->items		 = array();
+		$this->tasks		 = array();
 		return $this;
+	}
+	
+	public function bind($data, $ignore = Array())
+	{
+		if(is_object($data)){
+			$data = (array) ($data);
+		}
+
+		parent::bind($data, $ignore);
+		
+		if(! (isset($data['items']) || isset($data['tasks']) ) ) {
+			 $this->items = $this->getModel()->getItemMapping($this->getId(), 'item');
+			 $this->tasks = $this->getModel()->getItemMapping($this->getId(), 'task');
+		}
+		//else{
+		//	if (empty($data['items']))
+		//	{
+		//		$this->items = array();
+		//		$this->tasks = $data['tasks'];
+		//		return $this;
+		//	}
+		//	if (empty($data['tasks']))
+		//	{
+		//		$this->tasks = array();
+		//		$this->items = $data['items'];
+		//		return $this;
+		//	}
+		else {
+			$this->items = $data['items'];
+			$this->tasks = $data['tasks'];
+		}
+		//}
+	
+		return $this;
+	}
+
+	//save items and tasks data in mapping table payinvoice_invoice_x_item
+	public function _save($previousObject)
+	{
+		$id = parent::_save($previousObject);
+
+		if (empty($this->tasks))
+		{
+			$items = array_merge($this->items, $this->tasks);
+		}
+		if (empty($this->items))
+		{
+			$items = array_merge($this->tasks, $this->items);
+		}
+		else {
+			$items = array_merge($this->items, $this->tasks);
+		}
+		// if save fail
+		if (!$id) { 
+			return false;
+		}
+		
+		$model = $this->getModel();
+		$model->saveItemMapping($id, $items);
+		return $id;
 	}
 	
 	public function getParams($object = true, $default = null, $property='params')

@@ -22,7 +22,28 @@ class PayInvoiceSiteViewInvoice extends PayInvoiceSiteBaseViewInvoice
 	{
 		$itemid  = $this->getModel()->getId();
 		$payinvoice_invoice = PayInvoiceInvoice::getInstance($itemid)->toArray();	
-
+		
+		//get title of items from item table
+		if (!empty($payinvoice_invoice['items']))
+		{	
+			$item = $payinvoice_invoice['items'];
+	        for ($i = 0 ;$i < count($item); $i++)
+	        {
+	        	$data = PayInvoiceItem::getInstance($item[$i]['item_id']);
+	        	$data1 = $data->toArray();
+	        	$payinvoice_invoice['items'][$i]['title']=$data1['title'];
+	        }
+		}
+		if (!empty($payinvoice_invoice['tasks']))
+		{	
+			$item = $payinvoice_invoice['tasks'];
+	        for ($i = 0 ;$i < count($item); $i++)
+	        {
+	        	$data = PayInvoiceItem::getInstance($item[$i]['item_id']);
+	        	$data1 = $data->toArray();
+	        	$payinvoice_invoice['tasks'][$i]['title']=$data1['title'];
+	        }
+		}
 		// XITODO : use helper function
 		$rb_invoice	= $this->getHelper('invoice')->get_rb_invoice($itemid);
 
@@ -35,10 +56,14 @@ class PayInvoiceSiteViewInvoice extends PayInvoiceSiteBaseViewInvoice
 		$due_date		= $formatHelper->date($dueDate);
 		
 		//check whether discount is implemented in % and add % after discount-value if its implemented in %
+		$subtotal		   = $this->_helper->get_subtotal($rb_invoice['invoice_id']);
+		$tax			   = $this->_helper->get_tax($rb_invoice['invoice_id']);
+		
 		$discount	= $this->_helper->get_discount($rb_invoice['invoice_id']);
 		$discount_modifier = Rb_EcommerceAPI::modifier_get($rb_invoice['invoice_id'], 'PayInvoiceDiscount');
 		$discount_modifier = array_pop($discount_modifier);
 		$is_percent 	   = $discount_modifier->percentage;
+		$discount_amount   = ($is_percent) ? $this->_helper->get_discount_amount($subtotal , $discount) : number_format($discount, 2);
 		$discount		   = ($is_percent) ? $discount.'%' : $currency.' '.number_format($discount, 2);
 
 		$valid       	= $this->getHelper('invoice')->is_valid_date($rb_invoice['issue_date'], $rb_invoice['due_date']);
@@ -47,10 +72,15 @@ class PayInvoiceSiteViewInvoice extends PayInvoiceSiteBaseViewInvoice
 			$this->assign('processor_title', $processor['title']);
 		}
 		
-		//XITODO : Clean the code		
-		$this->assign('tax', 				$this->_helper->get_tax($rb_invoice['invoice_id']));
+		//XITODO : Clean the code
+		
+
+		$this->assign('is_percent' , 			$is_percent);
+		$this->assign('discount_amount' ,   		$discount_amount);	
+		$this->assign('tax_amount',			$this->_helper->get_tax_amount($subtotal , $discount_amount , $tax));
+		$this->assign('tax', 				$tax);
 		$this->assign('discount', 			$discount);
-		$this->assign('subtotal', 			$this->_helper->get_subtotal($rb_invoice['invoice_id']));
+		$this->assign('subtotal', 			$subtotal);
 		$this->assign('buyer', 				PayInvoiceBuyer::getInstance($rb_invoice['buyer_id']));
 		$this->assign('payinvoice_invoice', $payinvoice_invoice);
 		$this->assign('rb_invoice', 		$rb_invoice);

@@ -318,4 +318,18 @@ class PayInvoiceHelperInvoice extends JObject
 		return $mail_status;
 	}
 	
+	//TODO: change it to getTaxAmount
+	public function get_tax_amount($subtotal , $discount_amount , $tax)
+	{
+		$value = $subtotal-$discount_amount;
+		$amount = $tax*$value*0.01;
+		return $amount;
+	}
+
+	//TODO: change it to getDiscountAmount
+	public function get_discount_amount($subtotal , $discount)
+	{
+		return $subtotal*$discount*0.01;
+	}
+	
 }

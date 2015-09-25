@@ -167,6 +167,82 @@ class PayInvoiceModelInvoice extends PayInvoiceModel
 		
 		return $db->loadResult();
 	}
+
+	public function saveItemMapping($pk, $values)
+	{
+		// remove empty values [0, null, false, ''] 
+		$values = array_filter($values);
+		 
+		$query = new Rb_Query();
+		$query->delete()
+				->from('#__payinvoice_invoice_x_item')
+				->where('`invoice_id` = '.$pk);
+				
+		if(!$query->dbLoadQuery()->execute()){
+			throw new Exception('Error in deleting item invoice Mapping');
+		}
+		
+		if(empty($values)){
+			return $this;
+		}
+		
+		$sql = 'INSERT INTO `#__payinvoice_invoice_x_item` (`invoice_id`, `item_id`, `type`, `quantity`, `unit_cost`, `tax`, `line_total`) VALUES';		
+		
+		$insert = array();
+		foreach($values as $value){
+			if(empty($value)){
+				continue;
+			}
+			
+			$insert[] = '('.$pk.', '.$value['item_id'].', "'.$value['type'].'", '.$value['quantity'].', '.$value['unit_cost'].', '.$value['tax'].', '.$value['line_total'].')';
+		}
+		$sql .= implode(', ', $insert);
+		
+		$db = PayInvoiceFactory::getDbo();
+		$db->setQuery($sql);
+		if(!$db->execute()){
+			throw new Exception('Error in inserting invoice item Mapping');
+		}
+		
+		return $this;
+	}
+
+	public function getItemMapping($pk, $type)
+	{
+		$query = new Rb_Query();
+		$query->select('*')
+				->from('#__payinvoice_invoice_x_item')
+				->where('`type` = "'.$type.'"')
+				->where('`invoice_id` = '.$pk);
+				
+		return   $query->dbLoadQuery()->loadAssocList();
+	}
+
+	public function delete($pk=null)
+	{
+		//try to calculate automatically
+		if($pk === null){
+			$pk = (int) $this->getId();
+		}
+		
+		if(!$pk){
+			$this->setError('Invalid itemid to delete for model : '.$this->getName());
+			return false;
+		}
+		
+		$query = new Rb_Query();
+		$query->delete()
+				->from('#__payinvoice_invoice_x_item')
+				->where('`invoice_id` = '.$pk);
+				
+		if(!$query->dbLoadQuery()->execute()){
+			$this->setError('Error in deleting invoice item Mapping');
+			return false;
+		}
+		
+		return parent::delete($pk);
+	}
+	
 }
 
 class PayInvoiceModelformInvoice extends PayInvoiceModelform { }

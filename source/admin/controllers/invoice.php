@@ -22,7 +22,11 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 	 */
 	public $_helper = null;
 	public function _save(array $data, $itemId=null, $type=null)
-	{
+	{	
+		//validation on item & task quantity
+ 		$data['items'] = $this->validateQuantity($data['items']);	
+ 		$data['tasks'] = $this->validateQuantity($data['tasks']);	
+		
 		//create new lib instance
 		$invoice = Rb_Lib::getInstance($this->_component->getPrefixClass(), $this->getName(), $itemId, $data)
 						->save();
@@ -64,8 +68,36 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 		
 		return $invoice;
 	}
-    
-    // Show currency symbol in all price fiel when cureency change
+	//for adding new item in item table and call from ajax
+	function addNewItem()
+	{
+		$data 			= JRequest::getVar('payinvoice_form');
+		$id		= JRequest::getVar('id');
+		$item 			= PayInvoiceItem::getInstance();
+		$items			= $item->bind($data)->save();
+		$item_data		= $items->toArray();
+		$item_data['id']=$id;					   
+		$response  		= PayInvoiceFactory::getAjaxResponse();
+		$response->addScriptCall('payinvoice.admin.invoice.addNewItem_on_success', $item_data);
+		 $response->sendResponse();
+
+	}
+	
+	// for changing item from invoice screen
+	function ajaxchangeitem()
+	{
+		$args     	= $this->_getArgs();
+		$item_id 	= $args['item_id'];
+		$id			= $args['id'];
+		$item 		= PayInvoiceItem::getInstance($item_id);
+		$data		= $item->toArray();
+		$data['id'] = $id;	
+		$response   = PayInvoiceFactory::getAjaxResponse();
+		$response->addScriptCall('payinvoice.admin.invoice.on_item_change_success', $data);
+		$response->sendResponse();
+	}
+	
+	// Show currency symbol in all price fiel when cureency changes
 	function ajaxchangecurrency()
 	{
 		$args     	= $this->_getArgs();
@@ -201,5 +233,79 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 		JFactory::getApplication()->enqueueMessage($mail_status['msg'] , $type);
 		JFactory::getApplication()->redirect('index.php?option=com_payinvoice&view=invoice');
 	}
+	
+	// validating the quantity
+	protected function validateQuantity($items)
+	{			
+		for($i = 0 ; $i < count($items) ; $i++)
+		{		
+			$items[$i]['quantity'] = ltrim(($items[$i]['quantity']) , "0");	
+		}
+		return $items;
+	}
 
+	// copy function of invoice
+	public function _copy($itemId)
+	{	
+		$id 				= array('object_id' => $itemId);	
+		$invoice			= PayInvoiceInvoice::getInstance($itemId);
+		$invoice ->setId(0);
+		//reset payinvoice invoice serial no.
+		$invoice->set('invoice_serial','');
+
+		$model			 = PayinvoiceFactory::getInstance('invoice', 'model');
+		$lastSerial		 = $model->getLastSerial();
+		
+		$invoice->save();
+		$invoice_id 		= $invoice->getInvoiceId();
+		$invoice_record 	= Rb_EcommerceAPI::invoice_get($id, false);
+		$invoice_record['object_id'] = $invoice_id;
+		$rb_invoice_id 		= $invoice_record['invoice_id'];
+		
+		//reset payment status for paid invoice
+		$invoice_record['status'] = PayInvoiceInvoice::STATUS_DUE;
+		$invoice_record['processor_type']   = '';
+		$invoice_record['processor_config'] = '';
+		$invoice_record['processor_data']   = '';
+		//verify issue date and due date 
+ 		
+ 		$currentDate 	=  gmdate("Y-m-d H:i:s");
+ 		$invoice_record['issue_date']	= $currentDate;
+ 		$invoice_record['created_date']	= $currentDate;
+ 		$due_date 						= new Rb_Date($rb_invoice['due_date']);
+ 		$due_date->modify('+7 day');
+ 		$invoice_record['due_date'] 	= (string)$due_date;
+		
+		//assign serial no to Invoice
+		$prefix			 = $this->getHelper('config')->get('invoice_rno_prefix');
+		$invoice_record['serial'] = $prefix.($lastSerial+1);
+
+ 		//creating new copy invoice in rb_ecommerce table
+		$invoice_create_Id 		= Rb_EcommerceAPI::invoice_create($invoice_record,true);
+		$invoice_record['invoice_id']   = $invoice_create_Id;
+		//get modifier data and create new modifier for copy invoice
+		$modifiers 			= Rb_EcommerceAPI::modifier_get($rb_invoice_id);
+		
+		foreach ($modifiers as $key => $value)
+		{
+			$value->invoice_id = $invoice_create_Id;
+			$modifiers[$key]->amount;
+			if ($value->serial == 10)
+			{
+				$this->_helper->create_modifier($value->invoice_id, 'PayInvoiceItem', $value->amount, 10);
+			}
+			else if ($value->serial == 20)
+				 {
+					$this->_helper->create_modifier($value->invoice_id, 'PayInvoiceDiscount', $value->amount, 20 , $value->percentage);
+		   		 }
+			else if ($value->serial == 45)
+				{
+					$this->_helper->create_modifier($value->invoice_id, 'PayInvoiceTax', $value->amount, 45, true);
+				}
+		}
+		//change rb_ecommerce invoice title for copy
+		$invoice_record['title'] = JText::_("COM_PAYPLANS_COPY_OF").$itemId;
+		$invoice_id = Rb_EcommerceAPI::invoice_update($invoice_create_Id, $invoice_record, true);
+		return $invoice_id;
+	}
 }
