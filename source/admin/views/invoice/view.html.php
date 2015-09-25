@@ -36,6 +36,7 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		JToolbarHelper::addNew('new');
 		JToolbarHelper::editList();
 		JToolbarHelper::divider();
+		JToolbarHelper::custom( 'copy', 'copy.png', 'copy_f2.png', 'COM_PAYINVOICE_COPY', true );
 		JToolbarHelper::deleteList(JText::_('COM_PAYINVOICE_JS_ARE_YOU_SURE_TO_DELETE'));
 		JToolbarHelper::custom('download', 'download-alt', 'download-alt', JText::_('COM_PAYINVOICE_JS_EXPORT_PDF'));
 		JToolbarHelper::custom('sendmail', 'envelope', 'envelope', JText::_('COM_PAYINVOICE_SEND_MAIL'));
@@ -60,10 +61,32 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 
 		$invoice = PayInvoiceInvoice::getInstance($itemId);
 		$form 	 = $invoice->getModelform()->getForm($invoice);
+		
+		//get title of the items from item table
+		$invoiceArray = $invoice->toArray();
+		if (!empty($invoiceArray['items'])){	
+			$item = $invoiceArray['items'];
+			for ($i = 0 ;$i < count($item); $i++){
+				$data = PayInvoiceItem::getInstance($item[$i]['item_id']);
+				$data1 = $data->toArray();
+				$invoiceArray['items'][$i]['title']=$data1['title'];
+			}
+		}
 
+
+		if (!empty($invoiceArray['tasks'])){	
+			$item = $invoiceArray['tasks'];
+			for ($i = 0 ;$i < count($item); $i++){
+				$data = PayInvoiceItem::getInstance($item[$i]['item_id']);
+				$data1 = $data->toArray();
+				$invoiceArray['tasks'][$i]['title']=$data1['title'];
+			}
+		}
+       
 		$this->assign('invoice', $invoice);
 		$this->assign('form',  $form);
-		
+		//$this->assign('invoiceArray' ,$invoiceArray);
+			
 		$params        = $invoice->getParams();
 		$processor_id  = 0;
 		if(!empty($params->processor_id)){
@@ -108,9 +131,9 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 			$prefix			 = $this->getHelper('config')->get('invoice_rno_prefix');
 			$binddata['rb_invoice']['reference_no'] = $prefix.($lastSerial+1);
 	
-			$helper					= $this->getHelper('config');
-			$currency 				= $helper->get('currency');
-			$terms					= $helper->get('terms_and_conditions');
+			$helper							 = $this->getHelper('config');
+			$currency 						 = $helper->get('currency');
+			$terms							 = $helper->get('terms_and_conditions');
 			$binddata['rb_invoice']['currency'] = $currency;
 			$binddata['params'] 	=  array('terms_and_conditions' => $terms);
 			$form->bind($binddata);	
@@ -145,7 +168,7 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		
 		$processor	= PayInvoiceProcessor::getInstance($processor_id)->toArray();
 		$this->assign('processor_title', $processor['title']);
-		
+		$this->assign('invoiceArray', 		$invoiceArray);
 		$this->assign('discount', 			$discount);
 		$this->assign('tax', 				number_format($tax, 2));
 		$this->assign('rb_invoice_fields', 	$rb_invoice_fields);
@@ -164,6 +187,11 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		$buyer   =  PayInvoiceBuyer::getInstance();
 		$this->assign('buyer_form',  $buyer->getModelform()->getForm($buyer));
         $this->assign('user', $buyer->getbuyer(true));
+        
+        //For Item Form
+        $item      = PayInvoiceItem::getInstance();
+	$item_form = $item->getModelform()->getForm($item);
+	$this->assign('item_form',  $item_form);
         return true;
 	}
 }

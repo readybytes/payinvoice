@@ -35,8 +35,16 @@ defined( '_JEXEC' ) or die( 'Restricted access' );?>
 <div class="container-fluid">
 <div class="pi-invoice-wraper">
     <div class="row-fluid">
+    	
     	 <h3 class="text-center"><?php echo JText::_('COM_PAYINVOICE_INVOICE_HEADING_TITLE');?></h3>
-
+		<div>
+			<?php if(!$applicable){?>
+				<div class="center label <?php echo $statusbutton['class']?> status-display"><h4><?php echo $statusbutton['status']?></h4></div>
+			<?php }else {?>
+				<div class="center label status-display">
+					<i class="pull-right icon-question-sign" title='<?php echo $applicable['message']?>'></i><h4><i class='icon-lock'></i>&nbsp;<?php echo $applicable['title']?></h4></div>
+			<?php }?>
+		</div>
 		  <?php echo $this->loadTemplate('header');?>
 		  <?php echo $this->loadTemplate('details');?><br>
 		  <?php echo $this->loadTemplate('items');?>
@@ -49,24 +57,33 @@ defined( '_JEXEC' ) or die( 'Restricted access' );?>
 				    			<td><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_SUBTOTAL');?></strong></td>
 				    			<td class="pull-right"><?php echo $currency." ". number_format($subtotal, 2);?></td>
 				    		</tr>
+				    		<?php if($is_percent){?>
+				    		<tr>
+				    			<td><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_DISCOUNT')."(".$discount.")";?></strong></td>
+				    			<td class="pull-right"><?php echo $currency." ".number_format($discount_amount , 2);?></td>
+				    		</tr>
+				    		<?php }else{?>
 				    		<tr>
 				    			<td><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_DISCOUNT');?></strong></td>
-				    			<td class="pull-right"><?php echo $discount;?></td>
+				    			<td class="pull-right"><?php echo " - ".$discount;?></td>
 				    		</tr>
+				    		<?php }?>
 				    		<tr>
-				    			<td><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX');?></strong></td>
-				    			<td class="pull-right"><?php echo number_format($tax,2)." %";?></td>
+				    			<td><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX')."(".number_format($tax,2)."%)";?></strong></td>
+				    			<td class="pull-right"><?php echo $currency." ".number_format($tax_amount , 2);?></td>
 				    		</tr>
 				    	</table><hr>
 				    	<table class="table">
 				    		<tr>
 				    			<td><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TOTAL');?></strong></td>
 				    			<td class="pull-right"><strong><?php echo $currency." ".number_format($rb_invoice['total'], 2);?></strong></td>
-				    	</table>
+				    		</tr>
+
+				        </table>
 				    </div>
 			</div>
 			<div class="row">
-				    <div class="span5 pull-right ">
+				    <div class="span5 pull-right">
 				    	<table>
 				    		<tr>
 				    			<?php if($valid && $rb_invoice['total'] != floatval(0) && $rb_invoice['status'] == PayInvoiceInvoice::STATUS_DUE):?>
@@ -93,6 +110,12 @@ defined( '_JEXEC' ) or die( 'Restricted access' );?>
 	 			
 				<div class="row-fluid">
 					<?php echo $this->loadTemplate('terms');?>
+				</div>
+				<div>
+					<?php if (!empty($rb_invoice['notes'])):?>
+					<p><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_NOTES')." :";?></strong></p>
+					<p><?php echo $rb_invoice['notes'];?></p>
+					<?php endif;?>
 				</div>
 	 		</form>
 	 	</div>

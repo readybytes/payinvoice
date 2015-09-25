@@ -63,6 +63,7 @@
 			<menu view="invoice">COM_PAYINVOICE_INVOICE</menu>		
 			<menu view="transaction">COM_PAYINVOICE_TRANSACTION</menu>	
 			<menu view="appstore">COM_PAYINVOICE_APPSTORE</menu>
+			<menu view="item">COM_PAYINVOICE_ITEM</menu>
 		</submenu>
 
 		<!-- Back-end files -->

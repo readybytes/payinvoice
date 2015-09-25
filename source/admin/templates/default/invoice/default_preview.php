@@ -23,67 +23,79 @@ $config_data['company_phone']	= isset($config_data['company_phone'])		? $config_
 
    	 	<div class="modal-body">
    		 	<div class="container-fluid">
-   		 	 	<div class="row-fluid">	
-					<div class="row-fluid well well-small">
-			  		 	<div class="span8">
-					  	 <address>
+   		 			<div>
+						<?php if(!$applicable){?>
+							<div class="center label <?php echo $statusbutton['class']?> status-display"><h4><?php echo $statusbutton['status']?></h4></div>
+						<?php }else {?>
+							<div class="center label status-display">
+								<i class="pull-right icon-question-sign" title='<?php echo $applicable['message']?>'></i><h4><i class='icon-lock'></i>&nbsp;<?php echo $applicable['title']?></h4></div>
+						<?php }?>
+					</div>
+				<div class="pi-payinvoice-header-layout">
+   	  	 	 	<div class="row-fluid ">
+   		 	 		<div class="span7">
+						<address>
 							<strong><?php echo $config_data['company_name'];?></strong><br>
 							<?php echo $config_data['company_address'];?> <br>
 							<?php if(!empty($config_data['company_phone'])):?>
 							<abbr title="Phone"><?php echo JText::_('COM_PAYINVOICE_COMPANY_PHONE_NO');?></abbr>&nbsp;<?php echo $config_data['company_phone'];?>
 							<?php endif;?>
 						</address>
-			  	 		</div>	
-			  	 		
-			  	 		<div class="span2"></div>	
-			  	 		   
-			   			<div class="span2">
-				   			<?php if(!empty($config_data['company_logo'])):?>
-				   				<img alt="" src="<?php echo JUri::root(true).$config_data['company_logo'];?>">
-			   				<?php endif;?>
-		   				</div>
 					</div>
+					<div class="span5 pull-right text-right">
+				   		<?php if(!empty($config_data['company_logo'])):?>
+				   			<img class="img-rounded" alt="" src="<?php echo JUri::root(true).$config_data['company_logo'];?>">
+			   			<?php endif;?>
+			   		</div>
 				</div>
-   	 	
+   	 	<hr>
 	   	 		<div class="row-fluid">
-					<div class="span8"><h5><?php echo $rb_invoice['serial'];?> : <?php echo $rb_invoice['title'];?></h5></div>
-						<?php if(!$applicable){?>
-						 	<div class="span4 center <?php echo $statusbutton['class']?>"><h4><?php echo $statusbutton['status']?></h4></div>
-                        <?php }else {?>
- 							<div class="span4 center label">
-	      						<i class="pull-right icon-question-sign" title='<?php echo $applicable['message']?>'></i>
-								<h4><i class='icon-lock'></i>&nbsp;<?php echo $applicable['title']?></h4>
-							</div>
- 						<?php }?>
-				</div>
-				<hr>
-				<div class="row-fluid">
-					<div class="span5">
-					    <ul class="unstyled">
-							<li><strong><?php echo JText::_('COM_PAYINVOICE_BUYER_NAME');?></strong></li>
-							<li><?php echo $buyer->getBuyername();?></li>
-							<li><strong><?php echo JText::_('COM_PAYINVOICE_BUYER_EMAIL');?></strong></li>
-							<li><?php echo $buyer->getEmail(); ?></li>
-							<li><strong><?php echo JText::_('COM_PAYINVOICE_BUYER_ADDRESS');?></strong></li>
-							<li><?php echo $buyer->getAddress().",".$buyer->getCity(); ?></li>
-							<li><strong><?php echo JText::_('COM_PAYINVOICE_BUYER_TAX_NUMBER');?></strong></li>
-							<li><?php echo $buyer->getTaxnumber(); ?></li>
-						</ul>
+					<div class="span7 pull-left">
+						<address>
+							<?php echo $buyer->getBuyername(); ?><br/>
+							<?php echo $buyer->getEmail();?><br/>
+							<?php if(!empty($buyer_address)):?>
+							<?php echo $buyer_address; ?><br/>
+							<?php endif;?>
+							<?php if(!empty($buyer_country)):?>
+							<?php echo $buyer_country;?><br/>
+							<?php endif;?>
+							<?php if(!empty($tax_number)):?>
+							<?php echo "<b>".JText::_('COM_PAYINVOICE_BUYER_TAX_NUMBER')."</b> : ".$tax_number;?><br/>
+							<?php endif;?>
+						</address>
 					</div>
-					
-   
-			   		<div class="span7">
-						<dl class="dl-horizontal pull-right">	
-						    <dt><?php echo JText::_('COM_PAYINVOICE_INVOICE_ISSUE_DATE');?></dt>
-						   	<?php $issue_date = new Rb_Date($rb_invoice['issue_date']);?>
-						    <dd><?php echo $this->getHelper('format')->date($issue_date);?></dd>
-						    <?php $due_date = new Rb_Date($rb_invoice['due_date']);?>		    			    
-						    <dt><?php echo JText::_('COM_PAYINVOICE_INVOICE_DUE_DATE');?></dt>
-						    <dd><?php echo $this->getHelper('format')->date($due_date);?></dd>		    
-						</dl>
+					<div class="span5 pull-right pi-payinvoice-default-details">
+					   	<table class="table">
+							<tr>
+								<td class="text-right"><?php echo JText::_('COM_PAYINVOICE_INVOICE_NUMBER');?></td>
+								<td><?php echo " : ";?></td>
+								<td><?php echo $rb_invoice['serial'];?></td>
+							</tr>
+							<tr>
+								<td class="text-right"><?php echo JText::_('COM_PAYINVOICE_INVOICE_ISSUE_DATE');?></td>
+								<td><?php echo " : ";?></td>
+									<?php $issue_date = new Rb_Date($rb_invoice['issue_date']);?>
+								<td><?php echo $this->getHelper('format')->date($issue_date);?></td>
+							</tr>
+							<tr>
+						        <?php if ($statusbutton['status'] == JText::_('COM_PAYINVOICE_INVOICE_STATUS_PAID')){
+								$paid_date = new Rb_Date($rb_invoice['paid_date']);?>
+								<td class="text-right"><?php echo JText::_('COM_PAYINVOICE_INVOICE_PAID_DATE');?></td>
+								<td><?php echo " : ";?></td>
+								<td><?php echo $this->getHelper('format')->date($paid_date);?></td>
+								<?php }
+							     else{
+								$due_date = new Rb_Date($rb_invoice['due_date']);?>
+								<td class="text-right"><?php echo JText::_('COM_PAYINVOICE_INVOICE_DUE_DATE');?></td>
+								<td><?php echo " : ";?></td>
+								<td><?php echo $this->getHelper('format')->date($due_date);?></td>
+								<?php }?>
+							</tr>
+						</table>
 					</div>
 				</div>
-	
+			</div>
 				<!--Load Item's table-->
 				<?php echo $this->loadTemplate('view_items');?>
 	

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form>
+	<fieldset >
+		<field 	name="item_id" 
+			type="hidden"
+			default="0"			 
+			readonly="true">
+		</field>
+		
+		<field 	name="type"					
+			label="COM_PAYINVOICE_ITEM_TYPE"
+			description="COM_PAYINVOICE_ITEM_TYPE" 
+			type="radio"
+			default="0"
+			class="btn-group">
+			<option value="item">Item</option>
+ 			<option value="task">Task</option>
+		</field>
+		
+		<field 	name="title" 
+			type="text"
+			default=""			 
+			required="true"
+			label="COM_PAYINVOICE_ITEM_TITLE"
+			description="COM_PAYINVOICE_ITEM_TITLE">
+		</field>
+		<field  name="unit_cost"
+				type="decimal"
+				default=""
+				required="true"
+				label="COM_PAYINVOICE_ITEM_UNIT_COST"
+				description="COM_PAYINVOICE_ITEM_UNIT_COST"
+				class="validate-number">
+		</field>
+		<field  name="quantity"
+				type="decimal"
+				default="0"
+				required="true"
+				label="COM_PAYINVOICE_ITEM_QUANTITY"
+				description="COM_PAYINVOICE_ITEM_QUANTITY"
+				class="validate-numeber">
+		</field>
+		<field  name="tax"
+				type="decimal"
+				default="0"
+				required="true"
+				label="COM_PAYINVOICE_ITEM_TAX"
+				description="COM_PAYINVOICE_ITEM_TAX"
+				class="validate-number">
+		</field>
+		<field  name="line_total"
+				type="decimal"
+				default="0"
+				readonly="readonly"
+				label="COM_PAYINVOICE_ITEM_LINE_TOTAL"
+				description="COM_PAYINVOICE_ITEM_LINE_TOTAL">
+		</field>
+		
+	</fieldset>
+</form>

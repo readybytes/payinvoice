@@ -104,6 +104,12 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
                     <td><label class="label <?php echo $status_css?>"><?php echo JText::_($status_list[$record->status]);?></label></td>
 					<td><?php 	if(!empty($record->processor_type)){
                     				echo $record->processor_type;
+
+                   	<td class="nowrap hidden-phone"><?php echo PayInvoiceHtml::link('index.php?option=com_payinvoice&view=buyer&task=edit&id='.$invoice[$record->invoice_id]->buyer_id, $invoice[$record->invoice_id]->buyer_id.'('.$buyer[$invoice[$record->invoice_id]->buyer_id]->name.')');?></td>
+                    <td><?php echo number_format($invoice[$record->invoice_id]->total , 2);?></td>
+                    <td><label class="label <?php echo $status_css?>"><?php echo JText::_($status_list[$invoice[$record->invoice_id]->status]);?></label></td>
+					<td><?php 	if(!empty($invoice[$record->invoice_id]->processor_type)){
+                    				echo $invoice[$record->invoice_id]->processor_type;
                     			}else {
                     				echo JText::_('JNONE');
                     			}?>
