@@ -62,10 +62,10 @@ $component_name = $this->_component->getNameSmall();
 		});
 
 		$(document).on('change',  "select",function(){
-			var counter	= $(this).attr('data-counter');
-			var id	 = $(this).attr('id');
-			var type = $(this).attr('type');
-			var item_id   = $(this).val();
+			var counter		 = $(this).attr('data-counter');
+			var element_id	 = $(this).attr('id');
+			var data_type 	 = $(this).attr('data-type');
+			var item_id  	 = $(this).val();
 //			for(i=counter-1;i>=0;i--)
 //			{	
 //				//restriction for select item can't select again
@@ -86,11 +86,11 @@ $component_name = $this->_component->getNameSmall();
 						
 			if(item_id == '#addnew')
 			{
-				payinvoice.admin.invoice.addNewItem.showModal(type,id);
+				payinvoice.admin.invoice.addNewItem.showModal(data_type,element_id);
 				return false;		
 			}
 			
-			payinvoice.admin.invoice.on_item_change(item_id,counter,id);
+			payinvoice.admin.invoice.on_item_change(item_id,counter,element_id);
 			return false;			
 		});
 

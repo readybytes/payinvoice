@@ -44,11 +44,20 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 	
 	function _displayGrid($records)
 	{	
-		$buyerIds  = array();
-		foreach ($records as $record){
-			$buyerIds[] = $record->buyer_id;
+		$InvoiceIds = array();
+		foreach($records as $record){
+			$InvoiceIds[] = $record->invoice_id;
 		}
 		
+		$filter = array('object_id' => array(array('IN', '('.implode(",", $InvoiceIds).')')), 'master_invoice_id' => 0, 'object_type' => 'PayInvoiceInvoice');
+		$invoices = Rb_EcommerceAPI::invoice_get_records($filter, array(), '',$orderby='object_id');
+		
+		$buyerIds  = array();
+		foreach ($invoices as $invoice){
+			$buyerIds[] = $invoice->buyer_id;
+		}
+		
+		$this->assign('invoice', 	 $invoices);
 		$this->assign('buyer', 		 $this->getHelper('buyer')->get($buyerIds));
 		$this->assign('status_list', PayInvoiceInvoice::getStatusList());
 
@@ -64,24 +73,7 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		
 		//get title of the items from item table
 		$invoiceArray = $invoice->toArray();
-		if (!empty($invoiceArray['items'])){	
-			$item = $invoiceArray['items'];
-			for ($i = 0 ;$i < count($item); $i++){
-				$data = PayInvoiceItem::getInstance($item[$i]['item_id']);
-				$data1 = $data->toArray();
-				$invoiceArray['items'][$i]['title']=$data1['title'];
-			}
-		}
-
-
-		if (!empty($invoiceArray['tasks'])){	
-			$item = $invoiceArray['tasks'];
-			for ($i = 0 ;$i < count($item); $i++){
-				$data = PayInvoiceItem::getInstance($item[$i]['item_id']);
-				$data1 = $data->toArray();
-				$invoiceArray['tasks'][$i]['title']=$data1['title'];
-			}
-		}
+		$invoiceArray = $invoice->getItems($invoiceArray);
        
 		$this->assign('invoice', $invoice);
 		$this->assign('form',  $form);
@@ -107,10 +99,15 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 	 		
 	 		//check whether discount is implemented in % and add % after discount-value if its implemented in %
 			$discount_modifier = Rb_EcommerceAPI::modifier_get($rb_invoice['invoice_id'], 'PayInvoiceDiscount');
+			if (!empty($discount_modifier)){
 			$discount_modifier = array_pop($discount_modifier);
 			$is_percent 	   = $discount_modifier->percentage;
+			}
+			else {
+				$is_percent = false;
+				$discount_modifier = 0.00;
+			}
 			$discount		   = ($is_percent) ? $discount.'%' : number_format($discount, 2);
-	 		
 	 		$this->assign('statusbutton', 		$this->_helper->get_status_button($rb_invoice['status']));
 	 		$this->assign('rb_invoice', 		$rb_invoice);
  	        $this->assign('currency_symbol', 	$this->getHelper('format')->getCurrency($currency, 'symbol'));
@@ -134,7 +131,9 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 			$helper							 = $this->getHelper('config');
 			$currency 						 = $helper->get('currency');
 			$terms							 = $helper->get('terms_and_conditions');
-			$binddata['rb_invoice']['currency'] = $currency;
+			$binddata['rb_invoice']['currency']			 = $currency;
+			$invoiceArray['params']['late_fee_value']    	 = $helper->get('invoice_late_fee_amount');
+			$invoiceArray['params']['late_fee_type']	 = $helper->get('invoice_late_fee_type');
 			$binddata['params'] 	=  array('terms_and_conditions' => $terms);
 			$form->bind($binddata);	
 		}	

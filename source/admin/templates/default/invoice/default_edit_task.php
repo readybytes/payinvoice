@@ -25,19 +25,19 @@ $component_name = $this->_component->getNameSmall();
 				</td>
 				<td class="span2">
 					<div class="control-group">
-						<input class="input-small payinvoice-item-price validate-number" required="true" type="text" name="<?php echo $component_name;?>_form[tasks][##counter##][unit_cost]" value='##price##'>
+						<input class="input-small payinvoice-item-price validate-number" required="true" type="text" name="<?php echo $component_name;?>_form[tasks][##counter##][unit_cost]" value='##price##' placeholder="<?php echo JText::_('COM_PAYINVOICE_TASK_RATE');?>">
 						<p class="help-block"></p>
 					</div>
 				</td>
 				<td class="span2">
 					<div class="control-group">
-						<input class="input-small payinvoice-item-quantity validate-number" required="true" type="text" name="<?php echo $component_name;?>_form[tasks][##counter##][quantity]" value="##quantity##">
+						<input class="input-small payinvoice-item-quantity validate-number" required="true" type="text" name="<?php echo $component_name;?>_form[tasks][##counter##][quantity]" value="##quantity##" placeholder="<?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_HOURS');?>">
 						<p class="help-block"></p>
 					</div>
 				</td>
 				<td class="span2">
 					<div class="control-group">
-						<input class="input-small payinvoice-item-tax validate-number" required="true" type="text" name="<?php echo $component_name;?>_form[tasks][##counter##][tax]" value="##tax##" >
+						<input class="input-small payinvoice-item-tax validate-number" required="true" type="text" name="<?php echo $component_name;?>_form[tasks][##counter##][tax]" value="##tax##" placeholder="<?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX');?>">
 						<p class="help-block"></p>
 					</div>
 				</td>

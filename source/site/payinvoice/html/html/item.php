@@ -33,8 +33,8 @@ class PayInvoiceHtmlItem
 		}
 		
 		$attr['class'] = isset($attr['class']) ? $attr['class'] : '';
-		$attr['data-counter'] = '##counter##' ;
-		$attr['type'] = $type;
+		$attr['data-counter'] 	= '##counter##' ;
+		$attr['data-type'] 	= $type;
 		$html= PayInvoiceHtml::_('select.genericlist', $options, $name, $attr, 'value', 'text');
 		return $html;
 	}

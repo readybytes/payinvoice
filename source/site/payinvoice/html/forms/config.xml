@@ -35,7 +35,24 @@
 				label="COM_PAYINVOICE_CONFIG_INVOICE_RNO_PREFIX" 
 				description="COM_PAYINVOICE_CONFIG_INVOICE_RNO_PREFIX_DESC"
 		        />
+		 
+		 <field name="invoice_late_fee_amount" 
+				type="text"
+				default=""
+				label="COM_PAYINVOICE_CONFIG_INVOICE_LATE_FEE_AMOUNT" 
+				description="COM_PAYINVOICE_CONFIG_INVOICE_LATE_FEE_AMOUNT_DESC"
+		        />
 		        
+		<field 	name="invoice_late_fee_type" 
+				type="radio"
+				default="0"
+				label="COM_PAYINVOICE_CONFIG_INVOICE_LATE_FEE_INPERCENT" 
+				description="COM_PAYINVOICE_CONFIG_INVOICE_LATE_FEE_TYPE_DESC"
+				class="btn-group">
+		        <option value="0">COM_PAYINVOICE_NO</option>
+	         	<option value="1">COM_PAYINVOICE_YES</option>
+	   </field>
+	          
 		<field	name="expert_invoice_last_serial"	
 					type="hidden" 
 					default="0" />		

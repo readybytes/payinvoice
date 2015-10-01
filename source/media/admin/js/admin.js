@@ -210,32 +210,32 @@ payinvoice.admin.invoice = {
 					$('#payinvoice-invoice-total').val(parseFloat(total).toFixed(2));
 		},
 		
-		on_item_change : function(item_id,counter,id){
+		on_item_change : function(item_id,counter,element_id){
 			
-			var item_id   = {'event_args' :{'item_id' : item_id ,'id' : id} };
+			var item_id   = {'event_args' :{'item_id' : item_id ,'element_id' : element_id} };
 			var url	      = 'index.php?option=com_payinvoice&view=invoice&task=ajaxchangeitem';
 			payinvoice.ajax.go(url,item_id);
 			return false;
 		},
 		on_item_change_success : function(data){
-			var rate	= data['unit_cost'];
-			var tax		= data['tax'];
+			var rate		= data['unit_cost'];
+			var tax			= data['tax'];
 			var line_total	= rate * 1 + rate * tax * 0.01;
-			var id		= data['id'];
+			var element_id	= data['element_id'];
 			
-			$('[id='+id+']').parent().parent().parent().find('.payinvoice-item-price').val(rate);
-			$('[id='+id+']').parent().parent().parent().find('.payinvoice-item-tax').val(tax);
-			$('[id='+id+']').parent().parent().parent().find('.payinvoice-item-quantity').val('1');
-			$('[id='+id+']').parent().parent().parent().find('.payinvoice-item-total').val(line_total.toFixed(2));
+			$('[id='+element_id+']').parent().parent().parent().find('.payinvoice-item-price').val(rate);
+			$('[id='+element_id+']').parent().parent().parent().find('.payinvoice-item-tax').val(tax);
+			$('[id='+element_id+']').parent().parent().parent().find('.payinvoice-item-quantity').val('1');
+			$('[id='+element_id+']').parent().parent().parent().find('.payinvoice-item-total').val(line_total.toFixed(2));
 			payinvoice.admin.invoice.calculate_total();
 			return false;
 		},
 		
 		//adding new item in item table from invoice and show in select box
 		addNewItem :{
-			showModal : function(type,id){
-				$('#payinvoice-invoice-additem').find('#payinvoice-invoice-additem-row-counter').val(id);
-				$('#payinvoice-invoice-additem').find('#payinvoice-invoice-additem-type').val(type);
+			showModal : function(data_type,element_id){
+				$('#payinvoice-invoice-additem').find('#payinvoice-invoice-additem-row-counter').val(element_id);
+				$('#payinvoice-invoice-additem').find('#payinvoice-invoice-additem-type').val(data_type);
 				$('#payinvoice-invoice-additem').modal('show');
 			},
 			
@@ -259,24 +259,23 @@ payinvoice.admin.invoice = {
 		},
 		addNewItem_on_success : function(json){
 			
-			var type		= json['type'];
 			var key 		= json['item_id'];
 			var title		= json['title'];
-			var id			= json['id'];
+			var element_id	= json['element_id'];alert(element_id);
 			var rate		= json['unit_cost'];
 			var tax			= json['tax'];
 			var line_total	= rate * 1 + rate * tax * 0.01;
 			//code to add new item in selectbox
-			$('[id='+id+']')
+			$('[id='+element_id+']')
 			 .append($("<option></option>")
 			 .attr("value" , key)
 			 .attr("selected" , true)
 			 .text(title));
 			
-			$('[id='+id+']').parent().parent().parent().find('.payinvoice-item-price').val(rate);
-			$('[id='+id+']').parent().parent().parent().find('.payinvoice-item-tax').val(tax);
-			$('[id='+id+']').parent().parent().parent().find('.payinvoice-item-quantity').val('1');
-			$('[id='+id+']').parent().parent().parent().find('.payinvoice-item-total').val(line_total.toFixed(2));
+			$('[id='+element_id+']').parent().parent().parent().find('.payinvoice-item-price').val(rate);
+			$('[id='+element_id+']').parent().parent().parent().find('.payinvoice-item-tax').val(tax);
+			$('[id='+element_id+']').parent().parent().parent().find('.payinvoice-item-quantity').val('1');
+			$('[id='+element_id+']').parent().parent().parent().find('.payinvoice-item-total').val(line_total.toFixed(2));
 			payinvoice.admin.invoice.calculate_total();
 			//reset the form
 			$("form#payinvoice-invoice-additem-form :input").each(function(){
