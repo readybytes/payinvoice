@@ -197,4 +197,28 @@ class PayInvoiceInvoice extends PayInvoiceLib
 	{
 		return $this->invoice_serial;
 	}
+	//get title of the items and tasks from item table
+	function getItems($invoiceArray){
+		if (!empty($invoiceArray['items']))
+			{	
+				$item = $invoiceArray['items'];
+				foreach ($item as $key => $value)
+				{
+					$data = PayInvoiceItem::getInstance($value['item_id']);
+					$data1 = $data->toArray();
+					$invoiceArray['items'][$key]['title']=$data1['title'];
+				}
+			}
+		if (!empty($invoiceArray['tasks']))
+			{	
+				$item = $invoiceArray['tasks'];
+				foreach ($item as $key => $value)
+				{
+					$data = PayInvoiceItem::getInstance($value['item_id']);
+					$data1 = $data->toArray();
+					$invoiceArray['tasks'][$key]['title']=$data1['title'];
+				}
+			}
+		return $invoiceArray;
+	} 
 }

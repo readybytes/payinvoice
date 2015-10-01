@@ -129,13 +129,18 @@ $config_data['company_phone']	= isset($config_data['company_phone'])		? $config_
 				<?php 	$invoiceParams	= $invoice->getParams();?>
 				<?php 	if(!empty($invoiceParams->terms_and_conditions)):?>
 				<div class="row-fluid">
-					<div class="well well-small">
-						<h5><input type="checkbox" name="terms-and-conditions"><?php echo " ".JText::_('COM_PAYINVOICE_INVOICE_TERMS_AND_CONDITIONS');?></h5>
+					<div>
+						<p><strong><?php echo " ".JText::_('COM_PAYINVOICE_INVOICE_TERMS_AND_CONDITIONS');?></strong></p>
 						<?php echo JString::substr(strip_tags($invoiceParams->terms_and_conditions), 0, 340); ?>			
 					</div>
 				</div> 
 				<?php endif;?>
-		
+				<div>
+					<?php if (!empty($rb_invoice['notes'])):?>
+					<p><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_NOTES')." :";?></strong></p>
+					<p><?php echo $rb_invoice['notes'];?></p>
+					<?php endif;?>
+				</div>
    				</div>
    				
    				<div class="modal-footer">

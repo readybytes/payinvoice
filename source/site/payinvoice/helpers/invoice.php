@@ -19,36 +19,35 @@ class PayInvoiceHelperInvoice extends JObject
 {
 	public function create_modifier($invoice_id, $type, $amount, $serial, $is_percentage = false)
 	{
-		// get modifiers of item type on the current invoice
-		$modifiers = Rb_EcommerceAPI::modifier_get($invoice_id, $type);
-		
-		$found = false;
-		// there will be only modifier of each type
-		foreach($modifiers as $modifier){
-			if($modifier->object_type === $type){
-				$found = $modifier;
-				break;
-			}
+		//deleting existing invoice if exist
+		$query = new Rb_Query();
+		$query->delete()
+			->from('#__rb_ecommerce_modifier')
+			->where('`object_type` = "'.$type.'"')
+			->where('`invoice_id` = '.$invoice_id);
+			
+		if(!$query->dbLoadQuery()->execute()){
+		throw new Exception('Error in deleting modifier table');
 		}
 		
-		if($found){
-			$modifier->amount 	  = $amount;
-			$modifier->percentage = $is_percentage;			
+		if($amount == 0)
+		{
+			return false;
 		}
-		else{
-			$invoice = Rb_EcommerceAPI::invoice_get(array('object_type' => 'PayInvoiceInvoice', 'invoice_id' => $invoice_id));
-			$modifier = new stdClass();
-			$modifier->modifier_id 	= 0;				
-			$modifier->invoice_id 	= $invoice_id;
-			$modifier->buyer_id 	= $invoice['buyer_id'];
-			$modifier->amount	 	= $amount;			
-			$modifier->object_type	= $type;
-			$modifier->object_id	= 0;
-			$modifier->message 		= 'COM_PAYINVOICE_MODIFIER_'.strtoupper($type);
-			$modifier->percentage	= $is_percentage;			
-			$modifier->serial 		= $serial;
-			$modifier->frequency	= 'ONLY_THIS';	
-		}
+		
+		
+		$invoice = Rb_EcommerceAPI::invoice_get(array('object_type' => 'PayInvoiceInvoice', 'invoice_id' => $invoice_id));
+		$modifier = new stdClass();
+		$modifier->modifier_id 	= 0;				
+		$modifier->invoice_id 	= $invoice_id;
+		$modifier->buyer_id 	= $invoice['buyer_id'];
+		$modifier->amount	 	= $amount;			
+		$modifier->object_type	= $type;
+		$modifier->object_id	= 0;
+		$modifier->message 		= 'COM_PAYINVOICE_MODIFIER_'.strtoupper($type);
+		$modifier->percentage	= $is_percentage;			
+		$modifier->serial 		= $serial;
+		$modifier->frequency	= 'ONLY_THIS';	
 		
 		Rb_EcommerceAPI::modifier_create($modifier);
 	}
@@ -114,7 +113,7 @@ class PayInvoiceHelperInvoice extends JObject
 	{
 		$discount 	= 0.00;		
 		$discount_modifier = Rb_EcommerceAPI::modifier_get($invoice_id, 'PayInvoiceDiscount');
-		if($discount_modifier != false){
+		if (!empty($discount_modifier)){
 			$discount_modifier = array_pop($discount_modifier);
 			$discount = -$discount_modifier->amount;
 		}
@@ -126,7 +125,7 @@ class PayInvoiceHelperInvoice extends JObject
 	{
 		$tax 		= 0.00;
 		$tax_modifier = Rb_EcommerceAPI::modifier_get($invoice_id, 'PayInvoiceTax');
-		if($tax_modifier != false){
+		if (!empty($tax_modifier)){
 			$tax_modifier = array_pop($tax_modifier);
 			$tax = $tax_modifier->amount;
 		}
@@ -138,7 +137,7 @@ class PayInvoiceHelperInvoice extends JObject
 	{
 		$subtotal = 0.00;
 		$items_modifier = Rb_EcommerceAPI::modifier_get($invoice_id, 'PayInvoiceItem');
-		if($items_modifier != false){
+		if (!empty($items_modifier)){
 			$items_modifier = array_pop($items_modifier);
 			$subtotal = $items_modifier->amount;
 		}
@@ -330,6 +329,13 @@ class PayInvoiceHelperInvoice extends JObject
 	public function get_discount_amount($subtotal , $discount)
 	{
 		return $subtotal*$discount*0.01;
+	}
+
+	// get late fee amount
+	public function get_latefee_amount($late_fee , $subtotal ,$discount_amount,$tax_amount){
+		$total = $subtotal - $discount_amount + $tax_amount;
+		$amount = $total * $late_fee * 0.01;
+		return $amount;
 	}
 	
 }

@@ -57,7 +57,7 @@ class PayInvoiceModelInvoice extends PayInvoiceModel
     		->select('rb_ecom_invoice.`subtotal`')
     		->select('rb_ecom_invoice.`total`')
     		->select('rb_ecom_invoice.`notes`')
-    		->select('rb_ecom_invoice.`params`')
+    		->select('rb_ecom_invoice.`params` AS `rb_params`')
     		->select('rb_ecom_invoice.`created_date`')
     		->select('rb_ecom_invoice.`modified_date`')
     		->select('rb_ecom_invoice.`paid_date`')
@@ -69,7 +69,7 @@ class PayInvoiceModelInvoice extends PayInvoiceModel
     		->select('rb_ecom_invoice.`processor_data`')
     		->select('pi_invoice.`invoice_id`')
     		->select('pi_invoice.`invoice_serial`')
-    		->select('pi_invoice.`params` AS `pi_invoice_params`')
+    		->select('pi_invoice.`params` AS `params`')
     		->from('`'.$tname.'` AS pi_invoice')
     		->leftJoin($join1);
     	

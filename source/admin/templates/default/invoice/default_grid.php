@@ -99,12 +99,6 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 							  }
 						?>
 					</td>
-                   	<td class="nowrap hidden-phone"><?php echo PayInvoiceHtml::link('index.php?option=com_payinvoice&view=buyer&task=edit&id='.$record->buyer_id, $record->buyer_id.'('.$buyer[$record->buyer_id]->name.')');?></td>
-                    <td><?php echo $record->total;?></td>
-                    <td><label class="label <?php echo $status_css?>"><?php echo JText::_($status_list[$record->status]);?></label></td>
-					<td><?php 	if(!empty($record->processor_type)){
-                    				echo $record->processor_type;
-
                    	<td class="nowrap hidden-phone"><?php echo PayInvoiceHtml::link('index.php?option=com_payinvoice&view=buyer&task=edit&id='.$invoice[$record->invoice_id]->buyer_id, $invoice[$record->invoice_id]->buyer_id.'('.$buyer[$invoice[$record->invoice_id]->buyer_id]->name.')');?></td>
                     <td><?php echo number_format($invoice[$record->invoice_id]->total , 2);?></td>
                     <td><label class="label <?php echo $status_css?>"><?php echo JText::_($status_list[$invoice[$record->invoice_id]->status]);?></label></td>
@@ -115,7 +109,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
                     			}?>
                     </td>
                     <td>
-						<?php 	$params = json_decode($record->pi_invoice_params);
+						<?php 	$params = json_decode($record->params);
                     			$class 	= 'icon-unpublish';
 				            	if(isset($params->emailSent) && $params->emailSent){
 				            		$class = 'icon-publish';

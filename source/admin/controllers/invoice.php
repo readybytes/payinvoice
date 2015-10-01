@@ -72,11 +72,11 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 	function addNewItem()
 	{
 		$data 			= JRequest::getVar('payinvoice_form');
-		$id		= JRequest::getVar('id');
+		$element_id		= JRequest::getVar('element_id');
 		$item 			= PayInvoiceItem::getInstance();
 		$items			= $item->bind($data)->save();
 		$item_data		= $items->toArray();
-		$item_data['id']=$id;					   
+		$item_data['element_id']=$element_id;					   
 		$response  		= PayInvoiceFactory::getAjaxResponse();
 		$response->addScriptCall('payinvoice.admin.invoice.addNewItem_on_success', $item_data);
 		 $response->sendResponse();
@@ -86,13 +86,13 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 	// for changing item from invoice screen
 	function ajaxchangeitem()
 	{
-		$args     	= $this->_getArgs();
-		$item_id 	= $args['item_id'];
-		$id			= $args['id'];
-		$item 		= PayInvoiceItem::getInstance($item_id);
-		$data		= $item->toArray();
-		$data['id'] = $id;	
-		$response   = PayInvoiceFactory::getAjaxResponse();
+		$args     			= $this->_getArgs();
+		$item_id 			= $args['item_id'];
+		$element_id			= $args['element_id'];
+		$item 				= PayInvoiceItem::getInstance($item_id);
+		$data				= $item->toArray();
+		$data['element_id'] = $element_id;	
+		$response  		 	= PayInvoiceFactory::getAjaxResponse();
 		$response->addScriptCall('payinvoice.admin.invoice.on_item_change_success', $data);
 		$response->sendResponse();
 	}
@@ -304,7 +304,7 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 				}
 		}
 		//change rb_ecommerce invoice title for copy
-		$invoice_record['title'] = JText::_("COM_PAYPLANS_COPY_OF").$itemId;
+		$invoice_record['title'] = JText::_("COM_PAYINVOICE_COPY_OF").$itemId;
 		$invoice_id = Rb_EcommerceAPI::invoice_update($invoice_create_Id, $invoice_record, true);
 		return $invoice_id;
 	}

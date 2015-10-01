@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `#__payinvoice_config` (
   UNIQUE KEY `idx_key` (`key`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
-INSERT INTO `#__payinvoice_config`(`key`, `value`) VALUES ('invoice_rno_prefix' , 'INV-01-')
+INSERT INTO `#__payinvoice_config`(`key`, `value`) VALUES ('invoice_rno_prefix' , 'INV-01-');
 
 CREATE TABLE IF NOT EXISTS `#__payinvoice_item` (
 `item_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -57,7 +57,7 @@ PRIMARY KEY (`item_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 CREATE TABLE IF NOT EXISTS `#__payinvoice_invoice_x_item` (
- `invoice_id` 	int(11) NOT NULL, 
+ `invoice_id` int(11) NOT NULL, 
 `item_id` int(11) NOT NULL,
 `type` varchar(255) NOT NULL,
 `unit_cost` decimal(15,5) NOT NULL,

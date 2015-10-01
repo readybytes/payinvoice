@@ -69,8 +69,8 @@ if(defined('_JEXEC')===false) die();?>
 
 			<div style="min-width: 85px;" class="span1">
 				<div class="row-fluid">&nbsp;</div>
-				<div><input type="submit" name="filter_submit" class="btn btn-primary pi-filter-width pi-filter-gap-top" value="<?php echo XiText::_('COM_PAYINVOICE_FILTERS_GO');?>" /></div>
-				<div><input type="reset"  name="filter_reset"  class="btn pi-filter-width pi-filter-gap-top" value="<?php echo XiText::_('COM_PAYINVOICE_FILTERS_RESET');?>" onclick="payinvoice.admin.grid.filters.reset(this.form);" /></div>
+				<div><input type="submit" name="filter_submit" class="btn btn-primary pi-filter-width pi-filter-gap-top" value="<?php echo JText::_('COM_PAYINVOICE_FILTERS_GO');?>" /></div>
+				<div><input type="reset"  name="filter_reset"  class="btn pi-filter-width pi-filter-gap-top" value="<?php echo JText::_('COM_PAYINVOICE_FILTERS_RESET');?>" onclick="payinvoice.admin.grid.filters.reset(this.form);" /></div>
 			</div>
 
 		</div>

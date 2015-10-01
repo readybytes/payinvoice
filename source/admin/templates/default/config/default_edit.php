@@ -57,6 +57,15 @@ JHtml::_('behavior.formvalidation');
 				<div class="controls"><?php echo $form->getInput('invoice_rno_prefix'); ?></div>								
 			</div>
 
+			<div class="control-group">
+				<div class="control-label"><?php echo $form->getLabel('invoice_late_fee_type'); ?> </div>
+				<div class="controls"><?php echo $form->getInput('invoice_late_fee_type'); ?></div>							
+			</div>
+			
+			<div class="control-group">
+				<div class="control-label"><?php echo $form->getLabel('invoice_late_fee_amount'); ?> </div>
+				<div class="controls"><?php echo $form->getInput('invoice_late_fee_amount'); ?></div>							
+			</div>
 	  </fieldset>
 	</div>				
 			

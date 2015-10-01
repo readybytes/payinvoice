@@ -126,6 +126,23 @@ JHtml::_('behavior.formvalidation');
 								<div class="control-label"><?php echo $rb_invoice_fields['due_date']->label;?></div>
 								<div class="controls"><?php echo $rb_invoice_fields['due_date']->input;?></div>								
 							</div>
+							<div class="control-group">
+								<div class="control-label"><?php echo JText::_('COM_PAYINVOICE_CONFIG_INVOICE_LATE_FEE_INPERCENT');?></div>				
+								<div class="controls"><fieldset class="radio btn-group" id="payinvoice_form_params_late_fee_type">
+														<input type="radio" value="0" name="payinvoice_form[params][late_fee_type]" id="payinvoice_form_params_late_fee_type0" <?php echo $invoiceArray['params']['late_fee_type']=='0' ? 'checked="checked"':'';?>">
+														<label for="payinvoice_form_params_late_fee_type0" class="btn">No</label>
+														<input type="radio" value="1" name="payinvoice_form[params][late_fee_type]" id="payinvoice_form_params_late_fee_type1" <?php echo $invoiceArray['params']['late_fee_type']=='1' ? 'checked="checked"':'';?>" >
+														<label for="payinvoice_form_params_late_fee_type1" class="btn">Yes</label>
+													</fieldset>
+								</div>
+														
+							</div>
+							<div class="control-group">
+								<div class="control-label"><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_LATE_FEE');?></div>
+								<div class="controls">
+									<input type="text" class="input-medium" name=payinvoice_form[params][late_fee_value] value="<?php echo $invoiceArray['params']['late_fee_value']?>" >
+								</div>
+							</div>
 						</div>	
 					</div>
 				</div>				

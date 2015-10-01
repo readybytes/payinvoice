@@ -61,7 +61,7 @@ JHtml::_('behavior.formvalidation');
 			</div>
 				<?php echo $item_form->getInput('buyer_id'); ?>
 			<input type="hidden" name="boxchecked" value="1" />	
-			<input type="hidden" name="id" value="0" id="payinvoice-invoice-additem-row-counter"/>
+			<input type="hidden" name="element_id" value="0" id="payinvoice-invoice-additem-row-counter"/>
 			</form>
 	</div>
 	  
