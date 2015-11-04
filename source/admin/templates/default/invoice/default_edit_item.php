@@ -18,33 +18,35 @@ $component_name = $this->_component->getNameSmall();
 		<table class="table" cellpadding="0" cellspacing="0" style="width: 100%;">
 		<tbody>
 			<tr>
-				<td class="span3">
+				<td class="span4">
 					<div class="control-group">
-							<?php echo PayInvoiceHtml::_('payinvoicehtml.item.edit', "payinvoice_form[items][##counter##][item_id]", 'item', array('none'=>true, 'class' => "input-medium")); ?>
+							<?php echo PayInvoiceHtml::_('payinvoicehtml.item.edit', "payinvoice_form[items][##counter##][item_id]", 'item', array('none'=>true, 'class' => "input-medium")); ?><span> OR </span>
+						<input type="text" class="input-medium payinvoice-item-title" required="true" min="0" name="<?php echo $component_name;?>_form[items][##counter##][title]" value="##title##" placeholder="<?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TITLE');?>">						
+						<p class="help-block"></p>
 						</div>
 				</td>
 				<td class="span2">
 					<div class="control-group">
-						<input type="text" class="input-small payinvoice-item-price validate-number" required="true" min="0" name="<?php echo $component_name;?>_form[items][##counter##][unit_cost]" value="##price##" placeholder="<?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_UNIT_COST');?>">						
+						<input type="text" class="input-medium payinvoice-item-price validate-number" required="true" min="0" name="<?php echo $component_name;?>_form[items][##counter##][unit_cost]" value="##price##" placeholder="<?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_UNIT_COST');?>">						
 						<p class="help-block"></p>
 					</div>
 				</td>
 				<td class="span2">	
 					<div class="control-group">		
-						<input type="text" class="input-small payinvoice-item-quantity validate-number" required="true" min="0" name="<?php echo $component_name;?>_form[items][##counter##][quantity]"  value="##quantity##" placeholder="<?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_QUANTITY');?>">
+						<input type="text" class="input-medium payinvoice-item-quantity validate-number" required="true" min="0" name="<?php echo $component_name;?>_form[items][##counter##][quantity]"  value="##quantity##" placeholder="<?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_QUANTITY');?>">
 						<p class="help-block"></p>
 					</div>	
 					
 				</td>
 				<td class="span2">
 					<div class="control-group">
-						<input type="text" class="input-small payinvoice-item-tax validate-number" required="true" name="<?php echo $component_name;?>_form[items][##counter##][tax]" min="0" value="##tax##" placeholder="<?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX');?>">
+						<input type="text" class="input-medium payinvoice-item-tax validate-number" required="true" name="<?php echo $component_name;?>_form[items][##counter##][tax]" min="0" value="##tax##" placeholder="<?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX');?>">
 						<p class="help-block"></p>
 					</div>
 				</td>
 				<td class="span2">
 					<div class="control-group">
-						<input type="text" class="input-small payinvoice-item-total" name="<?php echo $component_name;?>_form[items][##counter##][line_total]" value="##line_total##" readonly="readonly">
+						<input type="text" class="input-medium payinvoice-item-total" name="<?php echo $component_name;?>_form[items][##counter##][line_total]" value="##line_total##" readonly="readonly">
 						<p class="help-block"></p>
 					</div>
 				</td>

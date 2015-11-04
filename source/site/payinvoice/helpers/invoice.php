@@ -71,11 +71,13 @@ class PayInvoiceHelperInvoice extends JObject
 	
 	public function get_status_button($status)
 	{
-		if(in_array($status, array(PayInvoiceInvoice::STATUS_PAID, PayInvoiceInvoice::STATUS_REFUNDED))){
+		if($status == PayInvoiceInvoice::STATUS_PAID){
 	   		$class = 'label label-success';
 	   	}
 	   	elseif ($status == PayInvoiceInvoice::STATUS_DUE){
 	   	 	$class = 'label label-warning';
+	   	}elseif ($status == PayInvoiceInvoice::STATUS_REFUNDED){
+	   		$class =  'label label-default';
 	   	}
 	   	else {
 	   		$class = 'label label-info';

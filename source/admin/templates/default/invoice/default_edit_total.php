@@ -54,8 +54,9 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 	  		<div class="controls">
 	  			<div class="input-prepend">
 					<span class="add-on payinvoice-currency"></span>
-					<input type="text" name="payinvoice_form[total]" class="input-small" readonly="readonly" id="payinvoice-invoice-total" min="0">
+					<input type="text" name="payinvoice_form[total]" class="input-small" readonly="readonly" id="payinvoice-invoice-total" min="0"/>
 				</div>
+				<i class="icon-question-sign icon-white payinvoice-cursor-pointer" title="<?php echo JText::_('COM_PAYINVOICE_TOTAL_LABEL_DESC');?>"></i>
 	  		</div>
 		</div>
 	</div>

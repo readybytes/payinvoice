@@ -14,14 +14,9 @@ defined('_JEXEC') OR die();
 	<div class="row-fluid">
 		<div class="span8">
 			<div class="row-fluid">
-				<div class="span3" style="min-width: 100px;">
-					<label><?php echo JText::_("COM_PAYINVOICE_USER_GRID_FILTER_USERNAME").' / '.JText::_("COM_PAYINVOICE_BUYER_ID")?></label>
-					<?php echo payinvoiceHtml::_('payinvoicehtml.text.filter', 'username', 'buyer', $filters, 'filter_payinvoice',array('class'=>'pi-filter-width'));?>
-				</div>
-				
 				<div class="span3" style="min-width: 150px;">
-					<label><?php echo JText::_('COM_PAYINVOICE_BUYER_COUNTRY');?></label>
-					<?php echo rb_ecommerceHtml::_('rb_ecommercehtml.countries.filter','country','buyer',$filters,'filter_payinvoice')?>
+					<label><?php echo JText::_('COM_PAYINVOICE_ITEM_TYPE');?></label>
+					<?php echo rb_ecommerceHtml::_('payinvoicehtml.item.filter','type','item',$filters,'filter_payinvoice')?>
 				</div>
 				
 				<div class="span2 pi-filter-gap-top" style="min-width: 150px;">

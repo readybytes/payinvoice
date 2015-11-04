@@ -35,7 +35,7 @@ $component_name = $this->_component->getNameSmall();
 
 		for(var e in payinvoice_invoice_items){
 			if(payinvoice_invoice_items.hasOwnProperty(e)){
-				payinvoice.admin.invoice.item.add(payinvoice_invoice_items[e].item_id, payinvoice_invoice_items[e].quantity, payinvoice_invoice_items[e].unit_cost, payinvoice_invoice_items[e].tax, payinvoice_invoice_items[e].line_total);
+				payinvoice.admin.invoice.item.add(payinvoice_invoice_items[e].item_id,payinvoice_invoice_items[e].title, payinvoice_invoice_items[e].quantity, payinvoice_invoice_items[e].unit_cost, payinvoice_invoice_items[e].tax, payinvoice_invoice_items[e].line_total);
 			}
 		}
 
@@ -43,7 +43,7 @@ $component_name = $this->_component->getNameSmall();
 		
 		for(var e in payinvoice_invoice_tasks){
 			if(payinvoice_invoice_tasks.hasOwnProperty(e)){
-				payinvoice.admin.invoice.addtask(payinvoice_invoice_tasks[e].item_id, payinvoice_invoice_tasks[e].quantity, payinvoice_invoice_tasks[e].unit_cost, payinvoice_invoice_tasks[e].tax, payinvoice_invoice_tasks[e].line_total);
+				payinvoice.admin.invoice.addtask(payinvoice_invoice_tasks[e].item_id, payinvoice_invoice_tasks[e].title, payinvoice_invoice_tasks[e].quantity, payinvoice_invoice_tasks[e].unit_cost, payinvoice_invoice_tasks[e].tax, payinvoice_invoice_tasks[e].line_total);
 			}
 		}
 		
@@ -90,12 +90,12 @@ $component_name = $this->_component->getNameSmall();
 				return false;		
 			}
 			
-			payinvoice.admin.invoice.on_item_change(item_id,counter,element_id);
+			payinvoice.admin.invoice.on_item_change(item_id, element_id);
 			return false;			
 		});
 
 		//for give css to option list
-		$(".input-medium option[value='#addnew']").css({"background-color": "#5bb75b" , "color": "#fff", "padding": "6px 4px"}); 
+		$(".input-medium option[value='#addnew']").css({"background-color": "#5bb75b" , "color": "#fff", "padding": "6px 4px", "font-size": "16px"}); 
 		
 		$(document).on('click', '.payinvoice-invoice-item_remove',function(){
 			$(this).parents('.payinvoice-invoice-item').remove();
@@ -179,7 +179,7 @@ $component_name = $this->_component->getNameSmall();
 	<table class="table" cellpadding="0" cellspacing="0" style="width: 100%;">
 		<thead>
 		<tr>
-			<th class="span3"><?php echo JText::_('COM_PAYINVOICE_INVOICE_TITLE');?></th>
+			<th class="span3 center"><?php echo JText::_('COM_PAYINVOICE_INVOICE_TITLE');?></th>
 			<th class="span2"><?php echo JText::_('COM_PAYINVOICE_TASK_RATE');?></th>
 			<th class="span2"><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_HOURS');?></th>
 			<th class="span2"><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX');?></th>
@@ -210,7 +210,7 @@ $component_name = $this->_component->getNameSmall();
 <table class="table table-striped" cellpadding="0" cellspacing="0" style="width: 100%;">
 	<thead>
 		<tr>
-			<th class="span3"><?php echo JText::_('COM_PAYINVOICE_INVOICE_TITLE');?></th>
+			<th class="span3 center"><?php echo JText::_('COM_PAYINVOICE_INVOICE_TITLE');?></th>
 			<th class="span2"><?php echo JText::_('COM_PAYINVOICE_ITEM_UNIT_COST');?></th>
 			<th class="span2"><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_QUANTITY');?></th>
 			<th class="span2"><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX');?></th>

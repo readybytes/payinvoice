@@ -50,7 +50,7 @@ JHtml::_('behavior.formvalidation');
 
 <?php echo $this->loadTemplate('edit_item');?>
 <?php echo $this->loadTemplate('edit_task');?>
-<?php echo $this->loadTemplate('add_new_item');?>
+
 
 <div class="row-fluid">
 <form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="rb-validate-form form-horizontal">	
@@ -111,13 +111,13 @@ JHtml::_('behavior.formvalidation');
 								  	<i class="icon-question-sign icon-white payinvoice-cursor-pointer" title="<?php echo JText::_('COM_PAYINVOICE_REFRENECE_NUMBER_DESC');?>"></i>								
 								</div>							
 							</div>
-						</div>
-						<?php // IMP : we are skiping one span, to fix ui issue ?>
-						<div class="span5">
 							<div class="control-group">
 								<div class="control-label"><?php echo $rb_invoice_fields['currency']->label;?></div>
 								<div class="controls"><?php echo $rb_invoice_fields['currency']->input;?></div>								
-							</div>						
+							</div>	
+						</div>
+						<?php // IMP : we are skiping one span, to fix ui issue ?>
+						<div class="span5">					
 							<div class="control-group">
 								<div class="control-label"><?php echo $rb_invoice_fields['issue_date']->label;?></div>
 								<div class="controls"><?php echo $rb_invoice_fields['issue_date']->input;?></div>								
@@ -134,8 +134,7 @@ JHtml::_('behavior.formvalidation');
 														<input type="radio" value="1" name="payinvoice_form[params][late_fee_type]" id="payinvoice_form_params_late_fee_type1" <?php echo $invoiceArray['params']['late_fee_type']=='1' ? 'checked="checked"':'';?>" >
 														<label for="payinvoice_form_params_late_fee_type1" class="btn">Yes</label>
 													</fieldset>
-								</div>
-														
+								</div>							
 							</div>
 							<div class="control-group">
 								<div class="control-label"><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_LATE_FEE');?></div>
@@ -259,4 +258,6 @@ JHtml::_('behavior.formvalidation');
 
 <!--Load Add Buyer template-->
 <?php echo $this->loadTemplate('addbuyer');?>
+<!-- Load add new item from invoice in reusable item table -->
+<?php echo $this->loadTemplate('add_new_item');?>
 <?php 

@@ -40,12 +40,15 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 		<tbody>
 			<?php foreach ($invoices as $invoice) :?>
 			<?php $class = '';?>
-			<?php 	if($invoice->status == PayInvoiceInvoice::STATUS_PAID || $invoice->status == PayInvoiceInvoice::STATUS_REFUNDED){
+			<?php 	if($invoice->status == PayInvoiceInvoice::STATUS_PAID){
 					$class  = 'label label-success';
 				}
 				elseif ($invoice->status == PayInvoiceInvoice::STATUS_DUE){
 					$class  = 'label label-warning';
-				}else {
+				}elseif($invoice->status == PayInvoiceInvoice::STATUS_REFUNDED){
+					$class  = "label label-default";
+				}
+				else {
 					$class  = 'label label-info';
 				} ?>
 			<tr>

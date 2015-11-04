@@ -119,12 +119,46 @@ class plgPayinvoicePdfExport extends Rb_Plugin
 		$invoice	= PayInvoiceInvoice::getInstance($rb_invoice->object_id);
 		$buyer		= PayInvoiceBuyer::getInstance($rb_invoice->buyer_id);
 	
+		$discount		= array();
+		$discount['value']= $i_helper->get_discount($rb_invoice->invoice_id);
+		$subtotal 		= $i_helper->get_subtotal($rb_invoice->invoice_id);
+		$tax 			= $i_helper->get_tax($rb_invoice->invoice_id);
+		$discount_modifier = Rb_EcommerceAPI::modifier_get($rb_invoice->invoice_id, 'PayInvoiceDiscount');
+		if (!empty($discount_modifier)){
+		$discount_modifier = array_pop($discount_modifier);
+		$discount['is_percent'] 	   = $discount_modifier->percentage;
+		$discount['amount']   = ($discount['is_percent']) ? $i_helper->get_discount_amount($subtotal , $discount['value']) :$discount['value'];
+		}
+		else {
+			$discount['is_percent'] = false;
+			$discount['amount'] = 0.00;	
+		}
+		//for get late fee amount if apply
+	//for get late fee amount if apply
+		$late_fee			= array();
+		$tax_amount			= $i_helper->get_tax_amount($subtotal , $discount['amount'] , $tax);
+		$late_fee_modifier = Rb_EcommerceAPI::modifier_get($rb_invoice->invoice_id, 'PayInvoiceLateFee');
+		if (!empty($late_fee_modifier)){
+		$late_fee_modifier 		= array_pop($late_fee_modifier);
+		$late_fee['status']				= true;
+		$late_fee['value']				= $late_fee_modifier->amount;
+		$late_fee['percentage'] 	= $late_fee_modifier->percentage;
+		$late_fee['amount']	 	= ($late_fee['percentage']) ? $i_helper->get_latefee_amount($late_fee['value'] , $subtotal ,$discount_amount,$tax_amount) : $late_fee['value'];
+				}
+		else {
+			$late_fee['status']	 = false;
+			$late_fee_percentage = false;
+			$late_fee['amount'] = 0.00;
+				
+		}
+		$pdf_view->assign('late_fee',			$late_fee);
+		$pdf_view->assign('tax_amount',			$tax_amount);
 		$pdf_view->assign('invoice',	 		$invoice);
 		$pdf_view->assign('rb_invoice', 		$rb_invoice);	
 		$pdf_view->assign('buyer', 				$buyer);
-		$pdf_view->assign('currency_symbol',	$f_helper->getCurrency($rb_invoice->currency, 'symbol'));
-		$pdf_view->assign('tax', 				$i_helper->get_tax($rb_invoice->invoice_id));
-		$pdf_view->assign('discount', 			$i_helper->get_discount($rb_invoice->invoice_id));
+		$pdf_view->assign('currency_symbol',		$f_helper->getCurrency($rb_invoice->currency, 'symbol'));
+		$pdf_view->assign('tax', 			$tax);
+		$pdf_view->assign('discount', 			$discount);
 		$pdf_view->assign('subtotal', 			$i_helper->get_subtotal($rb_invoice->invoice_id));
 		$pdf_view->assign('config_data',		PayInvoiceFactory::getHelper('config')->get());
 		$pdf_view->assign('status_list', 		PayInvoiceInvoice::getStatusList());
@@ -176,14 +210,46 @@ class plgPayinvoicePdfExport extends Rb_Plugin
 			
 		//get instances of Invoice and Buyer
 		$buyer			= PayInvoiceBuyer::getInstance($rb_invoice->buyer_id);
-	
+		$discount		= array();
+		$discount['value']= $i_helper->get_discount($rb_invoice->invoice_id);
+		$subtotal 		= $i_helper->get_subtotal($rb_invoice->invoice_id);
+		$tax 			= $i_helper->get_tax($rb_invoice->invoice_id);
+		$discount_modifier = Rb_EcommerceAPI::modifier_get($rb_invoice->invoice_id, 'PayInvoiceDiscount');
+		if (!empty($discount_modifier)){
+		$discount_modifier = array_pop($discount_modifier);
+		$discount['is_percent'] 	   = $discount_modifier->percentage;
+		$discount['amount']   = ($discount['is_percent']) ? $i_helper->get_discount_amount($subtotal , $discount['value']) :$discount['value'];
+		}
+		else {
+			$discount['is_percent'] = false;
+			$discount['amount'] = 0.00;	
+		}
+		//for get late fee amount if apply
+		$late_fee			= array();
+		$tax_amount			= $i_helper->get_tax_amount($subtotal , $discount['amount'] , $tax);
+		$late_fee_modifier = Rb_EcommerceAPI::modifier_get($rb_invoice->invoice_id, 'PayInvoiceLateFee');
+		if (!empty($late_fee_modifier)){
+		$late_fee_modifier 		= array_pop($late_fee_modifier);
+		$late_fee['status']				= true;
+		$late_fee['value']				= $late_fee_modifier->amount;
+		$late_fee['percentage'] 	= $late_fee_modifier->percentage;
+		$late_fee['amount']	 	= ($late_fee['percentage']) ? $i_helper->get_latefee_amount($late_fee['value'] , $subtotal ,$discount_amount,$tax_amount) : $late_fee['value'];
+				}
+		else {
+			$late_fee['status']	 = false;
+			$late_fee_percentage = false;
+			$late_fee['amount'] = 0.00;
+				
+		}
+		$pdf_view->assign('late_fee',			$late_fee);
+		$pdf_view->assign('tax_amount',			$tax_amount);
 		$pdf_view->assign('invoice',	 		$invoice);
 		$pdf_view->assign('rb_invoice', 		$rb_invoice);	
-		$pdf_view->assign('buyer', 				$buyer);
-		$pdf_view->assign('currency_symbol',	$f_helper->getCurrency($rb_invoice->currency, 'symbol'));
-		$pdf_view->assign('tax', 				$i_helper->get_tax($rb_invoice->invoice_id));
-		$pdf_view->assign('discount', 			$i_helper->get_discount($rb_invoice->invoice_id));
-		$pdf_view->assign('subtotal', 			$i_helper->get_subtotal($rb_invoice->invoice_id));
+		$pdf_view->assign('buyer', 			$buyer);
+		$pdf_view->assign('currency_symbol',		$f_helper->getCurrency($rb_invoice->currency, 'symbol'));
+		$pdf_view->assign('tax', 			$tax);
+		$pdf_view->assign('discount', 			$discount);
+		$pdf_view->assign('subtotal', 			$subtotal);
 		$pdf_view->assign('config_data',		PayInvoiceFactory::getHelper('config')->get());
 		$pdf_view->assign('status_list', 		PayInvoiceInvoice::getStatusList());
 		

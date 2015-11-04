@@ -70,10 +70,7 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 
 		$invoice = PayInvoiceInvoice::getInstance($itemId);
 		$form 	 = $invoice->getModelform()->getForm($invoice);
-		
-		//get title of the items from item table
 		$invoiceArray = $invoice->toArray();
-		$invoiceArray = $invoice->getItems($invoiceArray);
        
 		$this->assign('invoice', $invoice);
 		$this->assign('form',  $form);
@@ -132,7 +129,7 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 			$currency 						 = $helper->get('currency');
 			$terms							 = $helper->get('terms_and_conditions');
 			$binddata['rb_invoice']['currency']			 = $currency;
-			$invoiceArray['params']['late_fee_value']    	 = $helper->get('invoice_late_fee_amount');
+			$invoiceArray['params']['late_fee_value']    	  	 = $helper->get('invoice_late_fee_amount');
 			$invoiceArray['params']['late_fee_type']	 = $helper->get('invoice_late_fee_type');
 			$binddata['params'] 	=  array('terms_and_conditions' => $terms);
 			$form->bind($binddata);	

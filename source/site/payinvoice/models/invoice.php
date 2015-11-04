@@ -186,7 +186,7 @@ class PayInvoiceModelInvoice extends PayInvoiceModel
 			return $this;
 		}
 		
-		$sql = 'INSERT INTO `#__payinvoice_invoice_x_item` (`invoice_id`, `item_id`, `type`, `quantity`, `unit_cost`, `tax`, `line_total`) VALUES';		
+		$sql = 'INSERT INTO `#__payinvoice_invoice_x_item` (`invoice_id`, `item_id`, `title`,`type`, `quantity`, `unit_cost`, `tax`, `line_total`) VALUES';		
 		
 		$insert = array();
 		foreach($values as $value){
@@ -194,7 +194,7 @@ class PayInvoiceModelInvoice extends PayInvoiceModel
 				continue;
 			}
 			
-			$insert[] = '('.$pk.', '.$value['item_id'].', "'.$value['type'].'", '.$value['quantity'].', '.$value['unit_cost'].', '.$value['tax'].', '.$value['line_total'].')';
+			$insert[] = '('.$pk.', '.$value['item_id'].', "'.$value['title'].'", "'.$value['type'].'", '.$value['quantity'].', '.$value['unit_cost'].', '.$value['tax'].', '.$value['line_total'].')';
 		}
 		$sql .= implode(', ', $insert);
 		

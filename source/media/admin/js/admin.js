@@ -96,7 +96,7 @@ payinvoice.admin.grid = {
 
 payinvoice.admin.invoice = {
 		item : {
-			add : function (item_id, quantity, price, tax, total){
+			add : function (item_id, title, quantity, price, tax, total){
 						if(total == ''){
 							total = 0;
 						}
@@ -105,7 +105,7 @@ payinvoice.admin.invoice = {
 						var html = $('.payinvoice-invoice-item:first').html();
 						html = html.replace(/##counter##/g, counter);
 						html = html.replace(/##quantity##/g, quantity);
-						
+						html = html.replace(/##title##/g, title);
 						if(!isNaN(parseFloat(price))){
 							price = parseFloat(price).toFixed(2);
 						}
@@ -137,7 +137,7 @@ payinvoice.admin.invoice = {
 			}
 		},
 		
-			addtask : function (item_id, quantity, price, tax, total){
+			addtask : function (item_id, title, quantity, price, tax, total){
 				if(total == ''){
 					total = 0;
 				}
@@ -146,9 +146,8 @@ payinvoice.admin.invoice = {
 				var html = $('.payinvoice-invoice-task:first').html();
 			
 				html = html.replace(/##counter##/g, counter);
-								
 				html = html.replace(/##quantity##/g, quantity);
-				
+				html = html.replace(/##title##/g, title);
 				
 				if(!isNaN(parseFloat(price))){
 					price = parseFloat(price).toFixed(2);
@@ -210,7 +209,7 @@ payinvoice.admin.invoice = {
 					$('#payinvoice-invoice-total').val(parseFloat(total).toFixed(2));
 		},
 		
-		on_item_change : function(item_id,counter,element_id){
+		on_item_change : function(item_id, element_id){
 			
 			var item_id   = {'event_args' :{'item_id' : item_id ,'element_id' : element_id} };
 			var url	      = 'index.php?option=com_payinvoice&view=invoice&task=ajaxchangeitem';
@@ -222,7 +221,8 @@ payinvoice.admin.invoice = {
 			var tax			= data['tax'];
 			var line_total	= rate * 1 + rate * tax * 0.01;
 			var element_id	= data['element_id'];
-			
+			var title		= data['title'];
+			$('[id='+element_id+']').parent().parent().parent().find('.payinvoice-item-title').val(title);
 			$('[id='+element_id+']').parent().parent().parent().find('.payinvoice-item-price').val(rate);
 			$('[id='+element_id+']').parent().parent().parent().find('.payinvoice-item-tax').val(tax);
 			$('[id='+element_id+']').parent().parent().parent().find('.payinvoice-item-quantity').val('1');
@@ -254,6 +254,8 @@ payinvoice.admin.invoice = {
 			
 			cancel : function(){
 				//code to close the modal window
+				var id = $('#payinvoice-invoice-additem-row-counter').val();
+				$('#'+id+' option:first').attr('selected', 'true');
 				$('#payinvoice-invoice-additem').modal('hide');
 			}
 		},
@@ -261,7 +263,7 @@ payinvoice.admin.invoice = {
 			
 			var key 		= json['item_id'];
 			var title		= json['title'];
-			var element_id	= json['element_id'];alert(element_id);
+			var element_id		= json['element_id'];
 			var rate		= json['unit_cost'];
 			var tax			= json['tax'];
 			var line_total	= rate * 1 + rate * tax * 0.01;
@@ -271,7 +273,7 @@ payinvoice.admin.invoice = {
 			 .attr("value" , key)
 			 .attr("selected" , true)
 			 .text(title));
-			
+			$('[id='+element_id+']').parent().parent().parent().find('.payinvoice-item-title').val(title);
 			$('[id='+element_id+']').parent().parent().parent().find('.payinvoice-item-price').val(rate);
 			$('[id='+element_id+']').parent().parent().parent().find('.payinvoice-item-tax').val(tax);
 			$('[id='+element_id+']').parent().parent().parent().find('.payinvoice-item-quantity').val('1');

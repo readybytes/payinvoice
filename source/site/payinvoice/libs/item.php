@@ -22,6 +22,10 @@ class PayInvoiceItem extends PayInvoiceLib
 	protected $unit_cost	  	  = 0.00;
 	protected $tax	 	  	  = 0.00;
 	
+	//TODO: Remove and move to defines.php, add prefix payinvoice
+	const TYPE_TASK		  = 'task';	
+	const TYPE_ITEM		  = 'item';
+
 	function reset()
 	{
 		$this->item_id 	  	  = 0;
@@ -35,5 +39,13 @@ class PayInvoiceItem extends PayInvoiceLib
 	public static function getInstance($id = 0, $bindData = null, $dummy1 = null, $dummy2 = null)
 	{
 		return parent::getInstance('item', $id, $bindData);
+	}
+    	
+	public static function getItemType()
+	{
+		return array(
+		    	self::TYPE_TASK => JText::_('COM_PAYINVOICE_ITEM_TYPE_TASK'),
+			self::TYPE_ITEM => JText::_('COM_PAYINVOICE_ITEM_TYPE_ITEM'),
+		);
 	}
 }

@@ -17,6 +17,9 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
  */
 class PayInvoiceAdminControllerItem extends PayInvoiceController
 {
-	
+	public function delete()
+	{
+		
+	}
 	
 }

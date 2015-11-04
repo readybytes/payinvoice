@@ -129,7 +129,8 @@ class PayInvoiceModelBuyer extends PayInvoiceModel
 	    			$query->where("`tbl`.`buyer_id` IN( SELECT `id` FROM `#__users` 
 	    								                 WHERE `$key` $op '%{$val}%' || 
 	    								                 `name` $op '%{$val}%' || 
-	    								                 `email` $op '%{$val}%' )");
+	    								                 `email` $op '%{$val}%' ||
+	    								                 `id`	$op '%{$val}%' )");
 	    			continue;
 	    		}
 				$query->where("`$key` $op '$val'");

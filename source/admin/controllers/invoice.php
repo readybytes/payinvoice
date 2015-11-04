@@ -252,6 +252,8 @@ class PayInvoiceAdminControllerInvoice extends PayInvoiceController
 		$invoice ->setId(0);
 		//reset payinvoice invoice serial no.
 		$invoice->set('invoice_serial','');
+		//reset payinvoice processor id
+		$invoice->set('params->processor_id' , '');
 
 		$model			 = PayinvoiceFactory::getInstance('invoice', 'model');
 		$lastSerial		 = $model->getLastSerial();
