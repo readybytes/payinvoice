@@ -93,3 +93,35 @@ fieldset legend{
 .pp-pdf-top-margin-60{
 	margin-top:60px;
 }
+.invoice-paid{
+	transform:rotate(-45deg);
+	background-color: #85C51F;
+	color:#fff; padding:5px 0; 
+	position:absolute;
+	left:-70px; 
+	top:32px;  
+	width:150px; 
+	text-align:center;
+}
+.invoice-due{
+	transform:rotate(-45deg);  
+	background-color: #F89406;
+	color:#fff; 
+	padding:5px 0; 
+	position:absolute;
+	left:-70px; 
+	top:32px;  
+	width:150px; 
+	text-align:center;
+}
+.invoice-other-status{
+	transform:rotate(-45deg);  
+	background-color: #F89406;
+	color:#fff; 
+	padding:5px 0; 
+	position:absolute;
+	left:-70px; 
+	top:32px;  
+	width:150px; 
+	text-align:center;
+}

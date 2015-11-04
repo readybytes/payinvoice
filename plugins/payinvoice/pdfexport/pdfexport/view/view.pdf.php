@@ -102,14 +102,46 @@ class PayInvoiceAdminViewPdfExport extends PayInvoiceAdminBaseViewPdfExport
 		//get instances
 		$invoice	= PayInvoiceInvoice::getInstance($rb_invoice->object_id);
 		$buyer		= PayInvoiceBuyer::getInstance($rb_invoice->buyer_id);
-	
-		$this->assign('invoice',	 		$invoice);
+		$discount	= array();
+		$discount['value']  	= $i_helper->get_discount($rb_invoice->invoice_id);
+		$subtotal 	= $i_helper->get_subtotal($rb_invoice->invoice_id);
+		$tax 		= $i_helper->get_tax($rb_invoice->invoice_id);
+		$discount_modifier = Rb_EcommerceAPI::modifier_get($rb_invoice->invoice_id, 'PayInvoiceDiscount');
+		$discount_modifier = Rb_EcommerceAPI::modifier_get($rb_invoice->invoice_id, 'PayInvoiceDiscount');
+		if (!empty($discount_modifier)){
+		$discount_modifier = array_pop($discount_modifier);
+		$discount['is_percent'] 	   = $discount_modifier->percentage;
+		$discount['amount']   = ($discount['is_percent']) ? $i_helper->get_discount_amount($subtotal , $discount['value']) :$discount['value'];
+		}
+		else {
+			$discount['is_percent'] = false;
+			$discount['amount'] = 0.00;	
+		}
+						//for get late fee amount if apply
+		$tax_amount			= $i_helper->get_tax_amount($subtotal , $discount['amount'] , $tax);
+		$late_fee			= array();
+		$late_fee_modifier 		= Rb_EcommerceAPI::modifier_get($rb_invoice->invoice_id, 'PayInvoiceLateFee');
+		if (!empty($late_fee_modifier)){
+		$late_fee_modifier 		= array_pop($late_fee_modifier);
+		$late_fee['status']		= true;
+		$late_fee['value']		= $late_fee_modifier->amount;
+		$late_fee['percentage'] 	= $late_fee_modifier->percentage;
+		$late_fee['amount']	 	= ($late_fee['percentage']) ? $i_helper->get_latefee_amount($late_fee['value'] , $subtotal ,$discount['amount'],$tax_amount) : $late_fee['value'];
+				}
+		else {
+			$late_fee['status']	 = false;
+			$late_fee['amount'] = 0.00;
+				
+		}
+		$this->assign('late_fee',		$late_fee);
+		$this->assign('tax_amount',		$tax_amount);
+		$this->assign('invoice',	 	$invoice);
 		$this->assign('rb_invoice', 		$rb_invoice);	
-		$this->assign('buyer', 				$buyer);
+		$this->assign('buyer', 			$buyer);
 		$this->assign('currency_symbol',	$f_helper->getCurrency($rb_invoice->currency, 'symbol'));
-		$this->assign('tax', 				$i_helper->get_tax($rb_invoice->invoice_id));
-		$this->assign('discount', 			$i_helper->get_discount($rb_invoice->invoice_id));
-		$this->assign('subtotal', 			$i_helper->get_subtotal($rb_invoice->invoice_id));
+		$this->assign('tax', 			$tax);
+		$this->assign('discount', 		$discount);
+		$this->assign('subtotal', 		$subtotal);
 		$this->assign('config_data',		$this->getHelper('config')->get());
 		$this->assign('status_list', 		PayInvoiceInvoice::getStatusList());
 	}

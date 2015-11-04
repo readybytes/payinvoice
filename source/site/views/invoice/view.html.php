@@ -21,9 +21,7 @@ class PayInvoiceSiteViewInvoice extends PayInvoiceSiteBaseViewInvoice
 	public function display($tpl = null)
 	{
 		$itemid  = $this->getModel()->getId();
-		$invoice = PayInvoiceInvoice::getInstance($itemid);
-		$payinvoice_invoice = $invoice->toArray();	
-		$payinvoice_invoice = $invoice->getItems($payinvoice_invoice);
+		$payinvoice_invoice = PayInvoiceInvoice::getInstance($itemid)->toArray();
 		
 		// XITODO : use helper function
 		$rb_invoice	= $this->getHelper('invoice')->get_rb_invoice($itemid);
@@ -41,21 +39,21 @@ class PayInvoiceSiteViewInvoice extends PayInvoiceSiteBaseViewInvoice
 		$subtotal		   = $this->_helper->get_subtotal($rb_invoice['invoice_id']);
 		$tax			   = $this->_helper->get_tax($rb_invoice['invoice_id']);
 		
-		
-		$discount	   = $this->_helper->get_discount($rb_invoice['invoice_id']);
-		$discount_modifier = Rb_EcommerceAPI::modifier_get($rb_invoice['invoice_id'], 'PayInvoiceDiscount');
+		$discount		= array();
+		$discount['value']	= $this->_helper->get_discount($rb_invoice['invoice_id']);
+		$discount_modifier 	= Rb_EcommerceAPI::modifier_get($rb_invoice['invoice_id'], 'PayInvoiceDiscount');
 		if (!empty($discount_modifier)){
 			$discount_modifier = array_pop($discount_modifier);
-			$is_percent 	   = $discount_modifier->percentage;
+			$discount['is_percent'] 	   = $discount_modifier->percentage;
+			
 		}
 		else{
-			$is_percent 	   = false;
-			$discount_modifier = 0.00;
+			$discount['is_percent'] = false;
 		}
-		$discount_amount   = ($is_percent) ? $this->_helper->get_discount_amount($subtotal , $discount) : number_format($discount, 2);
-		$discount	   = ($is_percent) ? $discount.'%' : number_format($discount, 2);
+		$discount['amount']   = ($discount['is_percent']) ? $this->_helper->get_discount_amount($subtotal , $discount['value']) : number_format($discount['value'], 2);
+		
 		//get tax amount from given data
-		$tax_amount		   = $this->_helper->get_tax_amount($subtotal , $discount_amount , $tax);
+		$tax_amount		   = $this->_helper->get_tax_amount($subtotal , $discount['amount'] , $tax);
 		$valid       	= $this->getHelper('invoice')->is_valid_date($rb_invoice['issue_date'], $rb_invoice['due_date']);
 		if(!empty($payinvoice_invoice['params']['processor_id'])){
 			$processor	= PayInvoiceProcessor::getInstance($payinvoice_invoice['params']['processor_id'])->toArray();
@@ -63,35 +61,31 @@ class PayInvoiceSiteViewInvoice extends PayInvoiceSiteBaseViewInvoice
 		}
 		
 		//for due date over then late fee will be applied and make modifier
-		$late_fee   		= $payinvoice_invoice['params']['late_fee_value'];
-		$late_fee_percentage 	= $payinvoice_invoice['params']['late_fee_type'];
-		$late_fee_amount	= ($late_fee_percentage) ? $this->_helper->get_latefee_amount($late_fee , $subtotal ,$discount_amount,$tax_amount) : $late_fee;
-		if ((strtotime($current_date) > strtotime($due_date)) &&
-		    ($rb_invoice['status'] == PayInvoiceInvoice::STATUS_DUE) && 
-                    ($rb_invoice['status'] != PayInvoiceInvoice::STATUS_INPROCESS))
+		$late_fee				= array();
+		$late_fee['value']		= $payinvoice_invoice['params']['late_fee_value'];
+		$late_fee['percentage']	= $payinvoice_invoice['params']['late_fee_type'];
+		$late_fee['amount']	 	= ($late_fee['percentage']) ? $this->_helper->get_latefee_amount($late_fee['value'] , $subtotal ,$discount['amount'],$tax_amount) : $late_fee['value'];
+		if (strtotime($current_date) > strtotime($due_date) && $rb_invoice['status'] == PayInvoiceInvoice::STATUS_DUE && $rb_invoice['status'] != PayInvoiceInvoice::STATUS_INPROCESS )
 		{
-			$late_fee_status = true;
-			$this->_helper->create_modifier($rb_invoice['invoice_id'], 'PayInvoiceLateFee', $late_fee, 35 , $late_fee_percentage);
-			$invoice_id     = Rb_EcommerceAPI::invoice_update($rb_invoice['invoice_id'], $rb_invoice, true);
+			$this->_helper->create_modifier($rb_invoice['invoice_id'], 'PayInvoiceLateFee', $late_fee['value'], 55 , $late_fee['percentage']);
+			$invoice_id = Rb_EcommerceAPI::invoice_update($rb_invoice['invoice_id'], $rb_invoice, true);
 			$rb_invoice	= $this->getHelper('invoice')->get_rb_invoice($itemid);
 			
 		}
-		else 
-		{
-			$late_fee_status = false;
+		$late_fee_modifier = Rb_EcommerceAPI::modifier_get($rb_invoice['invoice_id'], 'PayInvoiceLateFee');
+		if (!empty($late_fee_modifier)){
+			$late_fee['status'] = true;
+		}
+		else {
+			$late_fee['status'] = false;
 		}
 				
 		//XITODO : Clean the code
 		
-		$this->assign('late_fee_status',	$late_fee_status);
-		$this->assign('late_fee_percent',	$late_fee_percentage);
 		$this->assign('late_fee',		$late_fee);
-		$this->assign('late_fee_amount',	$late_fee_amount);
-		$this->assign('is_percent' , 		$is_percent);
-		$this->assign('discount_amount' ,   $discount_amount);	
-		$this->assign('tax_amount',			$tax_amount);
+		$this->assign('discount' , 		$discount);
+		$this->assign('tax_amount',		$tax_amount);
 		$this->assign('tax', 			$tax);
-		$this->assign('discount', 		$discount);
 		$this->assign('subtotal', 		$subtotal);
 		$this->assign('buyer', 			PayInvoiceBuyer::getInstance($rb_invoice['buyer_id']));
 		$this->assign('payinvoice_invoice', $payinvoice_invoice);

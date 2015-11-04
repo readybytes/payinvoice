@@ -52,29 +52,34 @@ defined( '_JEXEC' ) or die( 'Restricted access' );?>
 				    			<td><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_SUBTOTAL');?></strong></td>
 				    			<td class="pull-right"><?php echo number_format($subtotal, 2);?></td>
 				    		</tr>
-				    		<?php if($is_percent){?>
+				    		<?php if($discount['is_percent']){?>
 				    		<tr>
-				    			<td><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_DISCOUNT')."(".$discount.")";?></strong></td>
-				    			<td class="pull-right"><?php echo number_format($discount_amount , 2);?></td>
+				    			<td><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_DISCOUNT')."(".$discount['value']."%)";?></strong></td>
+				    			<td class="pull-right"><?php echo " - ".number_format($discount['amount'] , 2);?></td>
+				    		</tr>
+				    		<?php }else if(!empty($discount['amount'])){?>
+				    		<tr>
+				    			<td><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_DISCOUNT');?></strong></td>
+				    			<td class="pull-right"><?php echo $discount['amount'];?></td>
 				    		</tr>
 				    		<?php }else{?>
 				    		<tr>
 				    			<td><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_DISCOUNT');?></strong></td>
-				    			<td class="pull-right"><?php echo " - ".$discount;?></td>
+				    			<td class="pull-right"><?php echo $discount['amount'];?></td>
 				    		</tr>
 				    		<?php }?>
 				    		<tr>
 				    			<td><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX')."(".number_format($tax,2)."%)";?></strong></td>
-				    			<td class="pull-right"><?php echo number_format($tax_amount , 2);?></td>
+				    			<td class="pull-right"><?php echo " + ".number_format($tax_amount , 2);?></td>
 				    		</tr>
-				    		<?php if ($late_fee_status && $rb_invoice['status'] == PayInvoiceInvoice::STATUS_DUE):?>
+				    		<?php if ($late_fee['status']):?>
 				    		<tr>
-				    			<?php if ($late_fee_percent){?>
-				    			<td><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_LATE_FEE')." (".$late_fee."%)";?></strong></td>
-				    			<td class="pull-right"><?php echo number_format($late_fee_amount, 2);?></td>
+				    			<?php if ($late_fee['percentage']){?>
+				    			<td><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_LATE_FEE')." (".$late_fee['value']."%)";?></strong></td>
+				    			<td class="pull-right"><?php echo number_format($late_fee['amount'], 2);?></td>
 				    			<?php }else{?>
 				    			<td><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_LATE_FEE');?></strong></td>
-				    			<td class="pull-right"><?php echo number_format($late_fee, 2);?></td>
+				    			<td class="pull-right"><?php echo number_format($late_fee['amount'], 2);?></td>
 				    			<?php }?>
 				    		</tr>
 				    		<?php endif;?>
@@ -84,17 +89,6 @@ defined( '_JEXEC' ) or die( 'Restricted access' );?>
 				    			<td><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TOTAL');?></strong></td>
 				    			<td class="pull-right"><strong><?php echo $currency." ".number_format($rb_invoice['total'], 2);?></strong></td>
 				    		</tr>
-							<?php if (!$late_fee_status && $rb_invoice['status'] == PayInvoiceInvoice::STATUS_DUE):?>
-				    		<tr>
-				    			<?php if ($late_fee_percent){?>
-				    			<td><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_LATE_FEE')." (".$late_fee."%)";?></strong></td>
-				    			<td class="pull-right"><?php echo number_format($late_fee_amount, 2);?></td>
-				    			<?php }else{?>
-				    			<td><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_LATE_FEE');?></strong></td>
-				    			<td class="pull-right"><?php echo $currency." ".number_format($late_fee, 2);?></td>
-				    			<?php }?>
-				    		</tr>
-				    		<?php endif;?>
 				        </table>
 				    </div>
 			</div>

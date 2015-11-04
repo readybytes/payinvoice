@@ -13,6 +13,10 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 
 class PayInvoiceModelItem extends PayInvoiceModel
 {
-
+	public $filterMatchOpeartor = array(
+	'type'	=> array('LIKE'),
+	);
+	
+    
 }
 class PayInvoiceModelformItem extends PayInvoiceModelform { }

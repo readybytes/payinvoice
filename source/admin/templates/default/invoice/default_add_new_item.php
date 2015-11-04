@@ -16,10 +16,9 @@ JHtml::_('behavior.keepalive');
 JHtml::_('behavior.formvalidation');
 ?>	
 
-<div id="payinvoice-invoice-additem" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="payinvoice-invoice-additem" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-body">
 			<form id="payinvoice-invoice-additem-form"action="<?php echo $uri; ?>" method="post"  class="rb-validate-form form-horizontal payinvoice-add-item-form">
-				<p class="lead"><?php echo JText::_('COM_PAYINVOICE_INVOICE_REUSABLE_ITEM_TEXT');?></p>
 				<table class="table table-hover">
 					<tr>
 						<td><?php echo JText::_('COM_PAYINVOICE_ITEM_TYPE');?></td>
@@ -53,7 +52,6 @@ JHtml::_('behavior.formvalidation');
 							</div>
 						</td>
 					</tr>
-							
 				</table>
 				<div class="row-fluid text-center">
 				<a href="#" role="button" class="btn btn-success" onclick="payinvoice.admin.invoice.addNewItem.save()"><?php echo JText::_("COM_PAYINVOICE_SAVE")?></a>

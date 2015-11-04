@@ -9,11 +9,21 @@
 
 // no direct access
 defined( '_JEXEC' ) or die( 'Restricted access' ); 
-
+?>
+<script type="text/javascript">
+(function($){
+	$(document).ready(function(){
+		$('.payinvoice-invoice-item:first').hide();
+	});	
+})(payinvoice.jQuery);	
+</script>
+<?php 
+$params = $invoice->getParams();
+$data = $invoice->toArray();
 	$items	= array();
 	$tasks	= array();
-	$tasks	= $invoiceArray['tasks'];
-	$items	= $invoiceArray['items'];
+	$tasks	= $data['tasks'];
+	$items	= $data['items'];
 
 ?>
 <!-- START : Task Table -->

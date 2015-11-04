@@ -110,11 +110,11 @@ class PayInvoiceInvoice extends PayInvoiceLib
 
 		if (empty($this->tasks))
 		{
-			$items = array_merge($this->items, $this->tasks);
+			$items = array_merge($this->items, (array)$this->tasks);
 		}
-		if (empty($this->items))
+		else if (empty($this->items))
 		{
-			$items = array_merge($this->tasks, $this->items);
+			$items = array_merge($this->tasks, (array)$this->items);
 		}
 		else {
 			$items = array_merge($this->items, $this->tasks);
@@ -197,7 +197,9 @@ class PayInvoiceInvoice extends PayInvoiceLib
 	{
 		return $this->invoice_serial;
 	}
-	//get title of the items and tasks from item table
+
+	//PI::TODO - remove if not required 
+        //get title of the items and tasks from item table
 	function getItems($invoiceArray){
 		if (!empty($invoiceArray['items']))
 			{	
