@@ -174,7 +174,7 @@ payinvoice.admin.invoice = {
 				$('#payinvoice-invoice-task-add').attr('counter', parseInt(counter) + 1);
 			
 				// apply validation on added item
-				$('.payinvoice-task-quantity, .payinvoice-task-price, .payinvoice-task-title, .payinvoice-task-tax').jqBootstrapValidation();						
+				$('.payinvoice-item-quantity, .payinvoice-item-price, .payinvoice-item-title, .payinvoice-item-tax').jqBootstrapValidation();						
 				
 				return false;
 			},
@@ -240,15 +240,16 @@ payinvoice.admin.invoice = {
 			},
 			
 			save : function(){
-				
-				var msgHtml = "<div id='payinvoice-msghtml' class='payinvoice-msghtml text-center text-warning'><h3><br/>Please do not refresh. Window will be closed automatically after adding new user!<br/></h3></div>";
-				$('#payinvoice-invoice-additem').prepend(msgHtml);
-				
-							
 				var data  = $('.payinvoice-add-item-form').serializeArray();
 				
 				var url		   = 'index.php?option=com_payinvoice&view=invoice&task=addNewItem';
-				payinvoice.ajax.go(url,data);	
+				
+				if (!$('#payinvoice-invoice-additem-form').find("input,textarea,select").jqBootstrapValidation("hasErrors")) {
+					payinvoice.ajax.go(url,data);
+				}else{
+					var msgHtml = "<div id='payinvoice-msghtml' class='payinvoice-msghtml text-center text-warning'><h3><br/>Please fill all the required details<br/></h3></div>";
+					$('#payinvoice-invoice-additem').prepend(msgHtml);
+				}
 				return false;
 			},
 			
@@ -260,13 +261,26 @@ payinvoice.admin.invoice = {
 			}
 		},
 		addNewItem_on_success : function(json){
-			
+			var type		= json['type'];
 			var key 		= json['item_id'];
 			var title		= json['title'];
 			var element_id		= json['element_id'];
 			var rate		= json['unit_cost'];
 			var tax			= json['tax'];
 			var line_total	= rate * 1 + rate * tax * 0.01;
+			
+			if(type == 'item'){
+				$('.payinvoice-invoice-item select')
+				 .append($("<option></option>")
+				 .attr("value" , key)
+				 .text(title));
+			}
+			if(type == 'task'){
+				$('.payinvoice-invoice-task select')
+				 .append($("<option></option>")
+				 .attr("value" , key)
+				 .text(title));
+			}
 			//code to add new item in selectbox
 			$('[id='+element_id+']')
 			 .append($("<option></option>")

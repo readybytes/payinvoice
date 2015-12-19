@@ -63,8 +63,8 @@ $data = $invoice->toArray();
 		<thead>
 		<tr>
 			<th class="span4"><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEMS');?></th>
-			<th class="span2"><?php echo JText::_('COM_PAYINVOICE_TASK_RATE');?></th>
-			<th class="span2"><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_HOURS');?></th>
+			<th class="span2"><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_UNIT_COST');?></th>
+			<th class="span2"><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_QUANTITY');?></th>
 			<th class="span2"><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX');?></th>
 			<th class="span2"><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_LINE_TOTAL');?></th>
 	    </tr>

@@ -12,6 +12,7 @@
 			description="COM_PAYINVOICE_ITEM_TYPE" 
 			type="radio"
 			default="0"
+			required="true"
 			class="btn-group">
 			<option value="item">Item</option>
  			<option value="task">Task</option>
@@ -20,9 +21,9 @@
 		<field 	name="title" 
 			type="text"
 			default=""			 
-			required="true"
 			label="COM_PAYINVOICE_ITEM_TITLE"
-			description="COM_PAYINVOICE_ITEM_TITLE">
+			description="COM_PAYINVOICE_ITEM_TITLE"
+			required="true">
 		</field>
 		<field  name="unit_cost"
 				type="decimal"

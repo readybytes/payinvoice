@@ -48,6 +48,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 		</tbody>
 	</table>
 	<?php endif;?>
+	<?php if (!empty($items)):?>
  	<table class="table table-striped pi-invoice-item-table-layout">
     	<thead>
 			<tr class="pi-invoice-item">
@@ -72,6 +73,7 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 		    <?php endforeach;?>
 		</tbody>
 	</table>
+	<?php endif;?>
 </div>
 </div>
 <?php 

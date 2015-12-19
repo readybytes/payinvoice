@@ -268,9 +268,10 @@ class PayInvoiceHelperInvoice extends JObject
 		$email_view 		= $email_controller->getView();
 		
 		$rb_invoice =  $this->get_rb_invoice($invoice_id);
+		$invoice 	=  PayInvoiceInvoice::getInstance($invoice_id)->toArray();
 		
 		$email_view->assign('rb_invoice', 	$rb_invoice);
-		$email_view->assign('invoice', 		PayInvoiceInvoice::getInstance($invoice_id)->toArray());
+		$email_view->assign('invoice', 		$invoice);
 		$email_view->assign('status_list', 	PayInvoiceInvoice::getStatusList());
 		$email_view->assign('config_data', 	PayInvoiceFactory::getHelper('config')->get());
 		$email_view->assign('buyer', 		PayInvoiceFactory::getHelper('buyer')->get($rb_invoice['buyer_id']));
@@ -279,9 +280,42 @@ class PayInvoiceHelperInvoice extends JObject
 		//$currency = $this->getHelper('format')->getCurrency($rb_invoice['currency'], 'symbol');
 		//$email_view->assign('currency', $currency);
 		
-		$email_view->assign('tax', 			$this->get_tax($rb_invoice['invoice_id']));
-		$email_view->assign('discount', 	$this->get_discount($rb_invoice['invoice_id']));
-		$email_view->assign('subtotal', 	$this->get_subtotal($rb_invoice['invoice_id']));
+		$subtotal		= $this->get_subtotal($rb_invoice['invoice_id']);
+		$tax			= $this->get_tax($rb_invoice['invoice_id']);
+		
+		//for discount amount and value
+		$discount		= array();
+		$discount['value']	= $this->get_discount($rb_invoice['invoice_id']);
+		$discount_modifier 	= Rb_EcommerceAPI::modifier_get($rb_invoice['invoice_id'], 'PayInvoiceDiscount');
+		if (!empty($discount_modifier)){
+			$discount_modifier = array_pop($discount_modifier);
+			$discount['is_percent'] 	   = $discount_modifier->percentage;
+			
+		}
+		else{
+			$discount['is_percent'] = false;
+		}
+		$discount['amount']   	= ($discount['is_percent']) ? $this->get_discount_amount($subtotal , $discount['value']) : number_format($discount['value'], 2);
+		//get tax amount from given data
+		$tax_amount		= $this->get_tax_amount($subtotal , $discount['amount'] , $tax);
+		
+		//for late fee if applied
+		$late_fee			= array();
+		$late_fee['value']		= $invoice['params']['late_fee_value'];
+		$late_fee['percentage']		= $invoice['params']['late_fee_type'];
+		$late_fee['amount']	 	= ($late_fee['percentage']) ? $this->get_latefee_amount($late_fee['value'] , $subtotal ,$discount['amount'],$tax_amount) : $late_fee['value'];
+		$late_fee_modifier = Rb_EcommerceAPI::modifier_get($rb_invoice['invoice_id'], 'PayInvoiceLateFee');
+		if (!empty($late_fee_modifier)){
+			$late_fee['status'] = true;
+		}
+		else {
+			$late_fee['status'] = false;
+		}
+		$email_view->assign('late_fee', 	$late_fee);
+		$email_view->assign('tax', 		$tax);
+		$email_view->assign('tax_amount', 	$tax_amount);
+		$email_view->assign('discount', 	$discount);
+		$email_view->assign('subtotal', 	$subtotal);
 		
         // md5 key generated for authentication		
 		$key	= md5($rb_invoice['created_date']);

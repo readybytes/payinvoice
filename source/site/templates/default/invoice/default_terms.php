@@ -12,20 +12,17 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 if(!empty($payinvoice_invoice['params']['terms_and_conditions'])): ?>  
 <div>
 	<p><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_TERMS_AND_CONDITIONS');?></strong></p>
+		<?php if(!empty(intval($late_fee['amount']))){?>
 	<span>Late Fee amount will be apply after due date :</span>
-    		<table>
-    			<tr>
     			<?php if ($late_fee['percentage']){?>
-    			<td><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_LATE_FEE')." (".$late_fee['value']."%) :-";?></strong></td>
-    			<td class="pull-right"><?php echo $currency." ".number_format($late_fee['amount'], 2);?></td>
-    			</tr>
+    			<span><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_LATE_FEE')." (".$late_fee['value']."%) :-";?></strong></span>
+    			<span><?php echo $currency." ".number_format($late_fee['amount'], 2);?></span>
+    			
     			<?php }else{?>
-    			<tr>
-    			<td><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_LATE_FEE');?></strong></td>
-    			<td class="pull-right"><?php echo $currency." ".number_format($late_fee['amount'], 2);?></td>
+    			<span><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_LATE_FEE');?></strong></span>
+    			<span><?php echo $currency." ".number_format($late_fee['amount'], 2);?></span>
     			<?php }?>
-    		</tr>
-    	   </table>
+    <?php }?>
 	<p><?php echo $payinvoice_invoice['params']['terms_and_conditions'];?></p>
 </div>
-<?php endif;
+<?php endif; 

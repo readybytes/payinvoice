@@ -44,8 +44,8 @@ JHtml::_('behavior.formvalidation');
 					<div class="controls"><?php echo $rb_invoice['issue_date'];?></div>								
 				</div>
 				<div class="control-group">
-					<strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_DUE_DATE');?></strong>
-					<div class="controls"><?php echo $rb_invoice['due_date'];?></div>								
+					<strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_PAID_DATE');?></strong>
+					<div class="controls"><?php echo $rb_invoice['paid_date'];?></div>								
 				</div>
 			</div>			
 		</div>
@@ -61,19 +61,52 @@ JHtml::_('behavior.formvalidation');
 		<!-- START : Total -->
 <div class="row-fluid">
 	<div class="span7"></div>
-	<div class="span4">
-		<dl class="dl-horizontal pull-right">
-		    <dt><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_SUBTOTAL');?></dt>
-		    <dd><?php echo $currency_symbol." ".$subtotal;?></dd>
-		    <dt><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_DISCOUNT');?></dt>
-		    <dd><?php echo $currency_symbol." ".$discount;?></dd>
-		    <dt><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX');?></dt>
-		    <dd><?php echo $tax." %";?></dd>
-		    <dt><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_PAYMENT_METHOD');?></dt>
-		    <dd><?php echo ucfirst($rb_invoice['processor_type']);?></dd><hr> 
-		    <dt><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TOTAL');?></dt>
-		    <dd><?php echo $currency_symbol." ".number_format($rb_invoice['total'], 2);?></dd>
-		 </dl>
+	<div class="span5 pull-right">
+		<table class="table">
+			<tr>
+		    		<td><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_SUBTOTAL');?></strong></td>
+		    		<td><?php echo $subtotal;?></td>
+		    	</tr>
+		    <?php if($discount['is_percent']){?>
+			<tr>
+    				<td><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_DISCOUNT')."(".$discount['value']."%)";?></strong></td>
+    				<td><?php echo " - ".number_format($discount['amount'] , 2);?></td>
+    			</tr>
+    			<?php }else if(!empty($discount['amount'])){?>
+    			<tr>
+    				<td><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_DISCOUNT');?></strong></td>
+    				<td><?php echo " - ".$discount['amount'];?></td>
+    			</tr>
+    			<?php }else{?>
+    			<tr>
+    				<td><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_DISCOUNT');?></strong></td>
+    				<td><?php echo $discount['amount'];?></td>
+    			</tr>
+    			<?php }?>
+		    <tr>
+		    	<td><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX')."(".number_format($tax,2)."%)";?></strong></td>
+		    	<td><?php echo number_format($tax_amount, 2);?></td>
+		    </tr>
+		    <?php if ($late_fee['status']):?>
+    			<tr>
+	    			<?php if ($late_fee['percentage']){?>
+	    			<td><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_LATE_FEE')." (".$late_fee['value']."%)";?></strong></td>
+	    			<td><?php echo number_format($late_fee['amount'], 2);?></td>
+	    			<?php }else{?>
+	    			<td><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_LATE_FEE');?></strong></td>
+	    			<td><?php echo number_format($late_fee['amount'], 2);?></td>
+	    			<?php }?>
+    			</tr>
+    			<?php endif;?>
+    			<tr>
+			    	<td><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_PAYMENT_METHOD');?></strong></td>
+			    	<td><?php echo ucfirst($rb_invoice['processor_type']);?></td>
+			</tr>
+			<tr>
+			    	<td><strong><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TOTAL');?></strong></td>
+			    	<td><strong><?php echo $currency_symbol." ".number_format($rb_invoice['total'], 2);?></strong></td>
+			</tr>
+		</table>
 	</div>
 </div>	
 <?php		

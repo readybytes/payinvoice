@@ -18,46 +18,34 @@ JHtml::_('behavior.formvalidation');
 
 <div id="payinvoice-invoice-additem" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-body">
-			<form id="payinvoice-invoice-additem-form"action="<?php echo $uri; ?>" method="post"  class="rb-validate-form form-horizontal payinvoice-add-item-form">
-				<table class="table table-hover">
-					<tr>
-						<td><?php echo JText::_('COM_PAYINVOICE_ITEM_TYPE');?></td>
-						<td>
+			<form id="payinvoice-invoice-additem-form" action="<?php echo $uri; ?>" method="post" class="rb-validate-form form-horizontal payinvoice-add-item-form">
+							<p class="lead"><?php echo JText::_('COM_PAYINVOICE_INVOICE_REUSABLE_ITEM_TEXT');?></p>
+					
 							<div class="control-group">
+								<div class="control-label"><?php echo $item_form->getLabel('type');?></div>
 								<div class="controls"><input type="text" id="payinvoice-invoice-additem-type" name="payinvoice_form[type]" value="0" readonly="readonly"></div>								
 							</div>
-						</td>
-					</tr>
-					<tr>
-						<td><?php echo JText::_('COM_PAYINVOICE_INVOICE_TITLE');?></td>
-						<td>
 							<div class="control-group">
-								<div class="controls"><?php echo $item_form->getInput('title'); ?></div>								
+								<div class="control-label"><?php echo $item_form->getLabel('title');?></div>
+								<div class="controls"><?php echo $item_form->getInput('title'); ?></div>
+								<p class="help-block"></p>								
 							</div>
-						</td>
-					</tr>
-					<tr>
-						<td><?php echo JText::_('COM_PAYINVOICE_ITEM_UNIT_COST');?></td>
-						<td>
+							
 							<div class="control-group">
-								<div class="controls"><?php echo $item_form->getInput('unit_cost'); ?></div>								
+								<div class="control-label"><?php echo $item_form->getLabel('unit_cost');?></div>
+								<div class="controls"><?php echo $item_form->getInput('unit_cost'); ?></div>
+								<p class="help-block"></p>								
 							</div>
-						</td>
-					</tr>
-					<tr>
-						<td><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX');?></td>
-						<td>
+						
 							<div class="control-group">
-								<div class="controls"><?php echo $item_form->getInput('tax'); ?></div>								
+								<div class="control-label"><?php echo $item_form->getLabel('tax');?></div>
+								<div class="controls"><?php echo $item_form->getInput('tax'); ?></div>
+								<p class="help-block"></p>								
 							</div>
-						</td>
-					</tr>
-				</table>
 				<div class="row-fluid text-center">
 				<a href="#" role="button" class="btn btn-success" onclick="payinvoice.admin.invoice.addNewItem.save()"><?php echo JText::_("COM_PAYINVOICE_SAVE")?></a>
 				<a href="#" role="button" class="btn btn-success" onclick="payinvoice.admin.invoice.addNewItem.cancel()"><?php echo JText::_("COM_PAYINVOICE_CANCEL")?></a>
 			</div>
-				<?php echo $item_form->getInput('buyer_id'); ?>
 			<input type="hidden" name="boxchecked" value="1" />	
 			<input type="hidden" name="element_id" value="0" id="payinvoice-invoice-additem-row-counter"/>
 			</form>

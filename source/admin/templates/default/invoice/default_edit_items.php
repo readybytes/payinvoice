@@ -51,7 +51,7 @@ $component_name = $this->_component->getNameSmall();
 
 		//add new item row in invoice		
 		$('#payinvoice-invoice-item-add').click(function(){			
-			payinvoice.admin.invoice.item.add('', '', '' , '', '0.00');
+			payinvoice.admin.invoice.item.add('0','', '', '' , '', '0.00');
 			return false;						
 		});
 
