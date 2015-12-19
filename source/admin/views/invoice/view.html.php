@@ -90,21 +90,42 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 			$rb_invoice['reference_no'] = $rb_invoice['serial'];
 			$form->bind(array('rb_invoice' => $rb_invoice)); 
 			
-			$discount	= $this->_helper->get_discount($rb_invoice['invoice_id']);
+			$subtotal		= $this->_helper->get_subtotal($rb_invoice['invoice_id']);
+			$discount		= array();
+			$discount['value']	= $this->_helper->get_discount($rb_invoice['invoice_id']);
+			$discount_modifier 	= Rb_EcommerceAPI::modifier_get($rb_invoice['invoice_id'], 'PayInvoiceDiscount');
+			if (!empty($discount_modifier)){
+				$discount_modifier = array_pop($discount_modifier);
+				$discount['is_percent'] 	   = $discount_modifier->percentage;
+			
+			}
+			else{
+				$discount['is_percent'] = false;
+			}
+			$discount['amount']   = ($discount['is_percent']) ? $this->_helper->get_discount_amount($subtotal , $discount['value']) : number_format($discount['value'], 2);
+			
 			$tax		= $this->_helper->get_tax($rb_invoice['invoice_id']);
+			$tax_amount		   = $this->_helper->get_tax_amount($subtotal , $discount['amount'] , $tax);
+			
 	 		$currency 	= $rb_invoice['currency'];
 	 		
-	 		//check whether discount is implemented in % and add % after discount-value if its implemented in %
-			$discount_modifier = Rb_EcommerceAPI::modifier_get($rb_invoice['invoice_id'], 'PayInvoiceDiscount');
-			if (!empty($discount_modifier)){
-			$discount_modifier = array_pop($discount_modifier);
-			$is_percent 	   = $discount_modifier->percentage;
+			$payinvoice_invoice		= $invoice->toArray();
+			$late_fee				= array();
+			$late_fee['value']		= $payinvoice_invoice['params']['late_fee_value'];
+			$late_fee['percentage']	= $payinvoice_invoice['params']['late_fee_type'];
+			$late_fee['amount']	 	= ($late_fee['percentage']) ? $this->_helper->get_latefee_amount($late_fee['value'] , (float) $subtotal , (float) $discount['amount'],$tax_amount) : $late_fee['value'];
+	 		
+			$late_fee_modifier = Rb_EcommerceAPI::modifier_get($rb_invoice['invoice_id'], 'PayInvoiceLateFee');
+			if (!empty($late_fee_modifier)){
+				$late_fee['status'] = true;
+				
 			}
 			else {
-				$is_percent = false;
-				$discount_modifier = 0.00;
+				$late_fee['status'] = false;
 			}
-			$discount		   = ($is_percent) ? $discount.'%' : number_format($discount, 2);
+			$this->assign('tax_amount', 		$tax_amount);
+			$this->assign('subtotal', 			$subtotal);
+			$this->assign('late_fee', 			$late_fee);
 	 		$this->assign('statusbutton', 		$this->_helper->get_status_button($rb_invoice['status']));
 	 		$this->assign('rb_invoice', 		$rb_invoice);
  	        $this->assign('currency_symbol', 	$this->getHelper('format')->getCurrency($currency, 'symbol'));
@@ -163,20 +184,19 @@ class PayInvoiceAdminViewInvoice extends PayInvoiceAdminBaseViewInvoice
 		$transaction   		= Rb_EcommerceAPI::transaction_get_records($filter);
 		
 		$processor	= PayInvoiceProcessor::getInstance($processor_id)->toArray();
-		$this->assign('processor_title', $processor['title']);
+		$this->assign('processor_title', 	$processor['title']);
 		$this->assign('invoiceArray', 		$invoiceArray);
-		$this->assign('discount', 			$discount);
-		$this->assign('tax', 				number_format($tax, 2));
+		$this->assign('discount', 		$discount);
+		$this->assign('tax', 			$tax);
 		$this->assign('rb_invoice_fields', 	$rb_invoice_fields);
-        $this->assign('processor_id', 		$processor_id);   
-        $this->assign('currency', 			$currency);
+        	$this->assign('processor_id', 		$processor_id);   
+        	$this->assign('currency', 		$currency);
 		$this->assign('invoice_params', 	$invoice_params_fields);
 		$this->assign('transactions', 		$transaction);
-		$this->assign('valid', 				$this->getHelper('invoice')->is_valid_date($rb_invoice['issue_date'], $rb_invoice['due_date']));
+		$this->assign('valid', 			$this->getHelper('invoice')->is_valid_date($rb_invoice['issue_date'], $rb_invoice['due_date']));
 		$this->assign('applicable', 		$this->getHelper('invoice')->is_applicable_date($rb_invoice));
-		$this->assign('buyer', 				PayInvoiceBuyer::getInstance($rb_invoice['buyer_id']));
-		$this->assign('config_data',        $this->getHelper('config')->get());
-		$this->assign('subtotal', 			number_format($this->_helper->get_subtotal($rb_invoice['invoice_id']), 2));
+		$this->assign('buyer', 			PayInvoiceBuyer::getInstance($rb_invoice['buyer_id']));
+		$this->assign('config_data',        	$this->getHelper('config')->get());
 		
 		//For Buyer Form
 		

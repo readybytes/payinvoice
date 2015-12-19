@@ -16,7 +16,6 @@ PRIMARY KEY (`item_id`)
 
 INSERT INTO `#__payinvoice_item`(`type`, `title`) VALUES ('task' , 'General'), ('task' , 'Meetings'), ('task' , 'Research');
 
-
 CREATE TABLE IF NOT EXISTS `#__payinvoice_invoice_x_item` (
  `invoice_id` int(11) NOT NULL, 
 `item_id` int(11) NOT NULL,

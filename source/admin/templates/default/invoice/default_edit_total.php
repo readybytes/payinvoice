@@ -33,7 +33,9 @@ defined( '_JEXEC' ) or die( 'Restricted access' );
 	  				   name="payinvoice_form[discount]"
 	  				   class="input-small"
 	  				   id="payinvoice-invoice-discount"
-	  				   value="<?php echo $discount;?>"
+	  				   value="<?php 
+	  				   $discount = ($discount['is_percent']) ? $discount['value'].'%' : number_format($discount['value'], 2);
+	  				   echo $discount;?>"
 	  				   data-validation-ajax-ajax="<?php echo Rb_Route::_('index.php?option=com_payinvoice&view=invoice&task=ajaxcheckdiscount');?>"/>
 	  			<i class="icon-question-sign icon-white payinvoice-cursor-pointer" title="<?php echo JText::_('COM_PAYINVOICE_DISCOUNT_LABEL_DESC');?>"></i>
 	  			

@@ -17,47 +17,30 @@ JHtml::_('behavior.formvalidation');
 ?>	
 <div class="row-fluid">
 <div class="container-fluid">
-	<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm">
+	<form action="<?php echo $uri; ?>" method="post" name="adminForm" id="adminForm" class="rb-validate-form form-horizontal payinvoice-add-item-form">
+		<div class="control-group">
+			<div class="control-label"><?php echo $form->getLabel('type');?></div>
+			<div class="controls"><?php echo $form->getInput('type'); ?></div>
+									
+		</div>
 		
-		<table class="table table-hover">
-			<tr>
-				<td><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TYPE');?></td>
-				<td>
-					<div class="control-group">
-						<div class="controls"><?php echo $form->getInput('type'); ?></div>								
-					</div>
-				</td>
-			</tr>
-				
-			<tr>
-				<td><?php echo JText::_('COM_PAYINVOICE_INVOICE_TITLE');?></td>
-				<td>
-					<div class="control-group">
-						
-						<div class="controls"><?php echo $form->getInput('title'); ?></div>								
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td><?php echo JText::_('COM_PAYINVOICE_ITEM_UNIT_COST');?></td>
-				<td>
-					<div class="control-group">
-						
-						<div class="controls"><?php echo $form->getInput('unit_cost'); ?></div>								
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td><?php echo JText::_('COM_PAYINVOICE_INVOICE_EDIT_ITEM_TAX');?></td>
-				<td>
-					<div class="control-group">
-						
-						<div class="controls"><?php echo $form->getInput('tax'); ?></div>								
-					</div>
-				</td>
-			</tr>
-					
-		</table>
+		<div class="control-group">
+			<div class="control-label"><?php echo $form->getLabel('title');?></div>
+			<div class="controls"><?php echo $form->getInput('title'); ?></div>
+										
+		</div>
+		
+		<div class="control-group">
+			<div class="control-label"><?php echo $form->getLabel('unit_cost');?></div>
+			<div class="controls"><?php echo $form->getInput('unit_cost'); ?></div>
+								
+		</div>
+	
+		<div class="control-group">
+			<div class="control-label"><?php echo $form->getLabel('tax');?></div>
+			<div class="controls"><?php echo $form->getInput('tax'); ?></div>
+								
+		</div>
 		<input type="hidden" name="task" value="save" />
 		<?php echo $form->getInput('item_id');?>
 	

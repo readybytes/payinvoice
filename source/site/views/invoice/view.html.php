@@ -30,11 +30,13 @@ class PayInvoiceSiteViewInvoice extends PayInvoiceSiteBaseViewInvoice
 		$currency  	= $formatHelper->getCurrency($rb_invoice['currency'], 'symbol');
 		
 		$createdDate	= new Rb_Date($rb_invoice['issue_date']);
-		$dueDate		= new Rb_Date($rb_invoice['due_date']);	
-		$created_date   = $formatHelper->date($createdDate);
-		$due_date		= $formatHelper->date($dueDate);
-		$current_date   = gmdate("d-m-Y");
+		$dueDate	= new Rb_Date($rb_invoice['due_date']);	
+		$current_date   = new Rb_Date('now');
 		
+		
+		$current_date 	= $current_date->toUnix();
+		$issueDate    	= $createdDate->toUnix();
+		$dueDate 	= $dueDate->toUnix();
 		//check whether discount is implemented in % and add % after discount-value if its implemented in %
 		$subtotal		   = $this->_helper->get_subtotal($rb_invoice['invoice_id']);
 		$tax			   = $this->_helper->get_tax($rb_invoice['invoice_id']);
@@ -61,11 +63,11 @@ class PayInvoiceSiteViewInvoice extends PayInvoiceSiteBaseViewInvoice
 		}
 		
 		//for due date over then late fee will be applied and make modifier
-		$late_fee				= array();
+		$late_fee			= array();
 		$late_fee['value']		= $payinvoice_invoice['params']['late_fee_value'];
-		$late_fee['percentage']	= $payinvoice_invoice['params']['late_fee_type'];
+		$late_fee['percentage']		= $payinvoice_invoice['params']['late_fee_type'];
 		$late_fee['amount']	 	= ($late_fee['percentage']) ? $this->_helper->get_latefee_amount($late_fee['value'] , $subtotal ,$discount['amount'],$tax_amount) : $late_fee['value'];
-		if (strtotime($current_date) > strtotime($due_date) && $rb_invoice['status'] == PayInvoiceInvoice::STATUS_DUE && $rb_invoice['status'] != PayInvoiceInvoice::STATUS_INPROCESS )
+		if ($current_date > $dueDate && $rb_invoice['status'] == PayInvoiceInvoice::STATUS_DUE && $rb_invoice['status'] != PayInvoiceInvoice::STATUS_INPROCESS )
 		{
 			$this->_helper->create_modifier($rb_invoice['invoice_id'], 'PayInvoiceLateFee', $late_fee['value'], 55 , $late_fee['percentage']);
 			$invoice_id = Rb_EcommerceAPI::invoice_update($rb_invoice['invoice_id'], $rb_invoice, true);
@@ -93,8 +95,8 @@ class PayInvoiceSiteViewInvoice extends PayInvoiceSiteBaseViewInvoice
 		$this->assign('statusbutton', 		$this->_helper->get_status_button($rb_invoice['status']));
 		$this->assign('currency', 		$currency);
 		$this->assign('config_data', 		$this->getHelper('config')->get());
-		$this->assign('created_date', 		$created_date);
-		$this->assign('due_date', 		$due_date);
+//		$this->assign('created_date', 		$created_date);
+//		$this->assign('due_date', 		$due_date);
 //		$this->assign('valid', 			$valid);
 		$this->assign('applicable', 		$this->getHelper('invoice')->is_applicable_date($rb_invoice));
 

@@ -85,6 +85,15 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 							</td>
 						</tr>
 						<tr>
+							<?php if ($status_list[$rb_invoice['status']] == JText::_('COM_PAYINVOICE_INVOICE_STATUS_PAID')){?>
+							<td style="background-color:#eee">
+									<?php echo JText::_('COM_PAYINVOICE_INVOICE_PAID_DATE');?>
+							</td>
+							<td style="text-align:right">
+									<?php 	$paidDate	= new Rb_Date($rb_invoice['paid_date']);
+											echo $this->getHelper('format')->date($paidDate);?>
+							</td>
+							<?php }else{?>
 							<td style="background-color:#eee">
 									<?php echo JText::_('COM_PAYINVOICE_INVOICE_DUE_DATE');?>
 							</td>
@@ -92,6 +101,7 @@ $config_data['company_phone']	= isset($config_data['company_phone']) 		? $config
 									<?php 	$dueDate	= new Rb_Date($rb_invoice['due_date']);
 											echo $this->getHelper('format')->date($dueDate);?>
 							</td>
+							<?php }?>
 						</tr>
 						<tr>
 							<td style="background-color:#eee">
