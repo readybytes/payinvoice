@@ -57,7 +57,7 @@ $component_name = $this->_component->getNameSmall();
 
 		//add new task row in invoice
 		$(document).on('click', '#payinvoice-invoice-task-add',function(){
-			payinvoice.admin.invoice.addtask('', '', '' , '', '0.00');
+			payinvoice.admin.invoice.addtask('0', '', '' , '', '0.00');
 			return false;			
 		});
 
